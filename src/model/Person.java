@@ -1,7 +1,5 @@
 package model;
-/*
- * Felix was here :D
- */
+
 public abstract class Person {
 
 	private String name, firstName, email;
