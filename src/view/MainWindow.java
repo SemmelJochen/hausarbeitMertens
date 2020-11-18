@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -52,6 +53,13 @@ public class MainWindow extends JFrame {
 		
 		contentPane = new ContentPane(new JLabel("Test") ,scrollpane);
 		this.setContentPane(contentPane);
+		
+		
+		ObserverButton undo = new ObserverJButton("Undo");
+		
+		
+		ObserverButton redo = new ObserverButton("Redo");
+		
 		
 	}
 	
