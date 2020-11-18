@@ -32,8 +32,6 @@ public class MainWindow extends JFrame {
 			}
 		});
 	}
-
-	//Nina
 	
 	/**
 	 * Create the frame.
