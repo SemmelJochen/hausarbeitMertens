@@ -5,16 +5,20 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.KeyStroke;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 public class MainWindow extends JFrame {
 
-	private ContentPanel contentPanel;
+	private ContentPane contentPane;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -38,15 +42,23 @@ public class MainWindow extends JFrame {
 		//this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 		this.setJMenuBar(buildMenuBar());
 		
-		contentPanel = new ContentPanel("test");
-		this.setContentPane(contentPanel);
+		TableModel dataModel = new AbstractTableModel() {
+	          public int getColumnCount() { return 10; }
+	          public int getRowCount() { return 10;}
+	          public Object getValueAt(int row, int col) { return new Integer(row*col); }
+	      };
+	      JTable table = new JTable(dataModel);
+	      JScrollPane scrollpane = new JScrollPane(table);
+		
+		contentPane = new ContentPane(new JLabel("Test") ,scrollpane);
+		this.setContentPane(contentPane);
 		
 	}
 	
 	public JMenuBar buildMenuBar() {
 		JMenuBar menuBar;
 		JMenu menu, submenu;
-		JMenuItem menuItem;
+		JMenuItem menuItem, subMenuItem;
 
 		//Create the menu bar.
 		menuBar = new JMenuBar();
@@ -56,34 +68,50 @@ public class MainWindow extends JFrame {
 		menu.setMnemonic(KeyEvent.VK_A);
 		menuBar.add(menu);
 
-		//a group of JMenuItems
-		menuItem = new JMenuItem("Übersicht", KeyEvent.VK_T);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
-		        KeyEvent.VK_1, ActionEvent.ALT_MASK));
-
-		menu.add(menuItem);
-
-		//a group of radio button menu items
-		ButtonGroup group = new ButtonGroup();		
-
-		//a submenu
-		menu.addSeparator();
-		submenu = new JMenu("A submenu");
-		submenu.setMnemonic(KeyEvent.VK_S);
-
-		menuItem = new JMenuItem("An item in the submenu");
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
-		        KeyEvent.VK_2, ActionEvent.ALT_MASK));
-		submenu.add(menuItem);
-
-		menuItem = new JMenuItem("Another item");
-		submenu.add(menuItem);
+		//add Übersicht menu
+		submenu = new JMenu("Übersicht");
+		subMenuItem = new JMenuItem("Studentenübersicht");
+		submenu.add(subMenuItem);
+		subMenuItem = new JMenuItem("Erstgutachterübersicht");
+		submenu.add(subMenuItem);
+		subMenuItem = new JMenuItem("Zweitgutachterübersicht");
+		submenu.add(subMenuItem);
 		menu.add(submenu);
 
-		//Build second menu in the menu bar.
+		//add G-Einsicht
+		menuItem = new JMenuItem("Gutachtereinsicht");
+		menu.add(menuItem);
+		
+		submenu = new JMenu("Diagramme");
+		subMenuItem = new JMenuItem("Diagramm 1");
+		submenu.add(subMenuItem);
+		subMenuItem = new JMenuItem("Diagramm 2");
+		submenu.add(subMenuItem);
+		subMenuItem = new JMenuItem("Diagramm 3");
+		submenu.add(subMenuItem);
+		menu.add(submenu);
+
+
+		//Build Edit menu in the menu bar.
 		menu = new JMenu("Edit");
 		menu.setMnemonic(KeyEvent.VK_N);
+		
+		//add edit action items 
+		menuItem = new JMenuItem("Save");
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_S, ActionEvent.META_MASK));
+		menu.add(menuItem);
+		menu.addSeparator();
+		menuItem = new JMenuItem("Undo");
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_Z, ActionEvent.META_MASK));
+		menu.add(menuItem);
+		menuItem = new JMenuItem("Redo");
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_Y, ActionEvent.META_MASK));
 
+		menu.add(menuItem);
+		
 		menuBar.add(menu);
 	
 		return menuBar;
