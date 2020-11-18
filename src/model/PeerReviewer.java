@@ -2,15 +2,15 @@ package model;
 
 import java.util.LinkedList;
 
-public class Surveyor extends Person {
+public class PeerReviewer extends Person {
 	
 	private int capacity;
-	private LinkedList<Student> surveys;
+	private LinkedList<Student> bachelorThesises;
 	
-	public Surveyor(String name, String firstName, String email, int capacity){
+	public PeerReviewer(String name, String firstName, String email, int capacity){
 		super(name, firstName, email);
 		this.capacity = capacity;
-		this.surveys = new LinkedList<>();
+		this.bachelorThesises = new LinkedList<>();
 	}
 	
 	public void setCapacity(int capacity) {
@@ -22,6 +22,6 @@ public class Surveyor extends Person {
 	}
 	
 	public void addSurvey(Student student) {
-		this.surveys.add(student);
+		this.bachelorThesises.add(student);
 	}
 }

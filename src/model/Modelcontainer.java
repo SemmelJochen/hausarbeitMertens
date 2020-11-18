@@ -2,12 +2,12 @@ package model;
 
 import java.util.ArrayList;
 
-public class Modelcontainer {
+public class ModelContainer {
 
 	// think about it -> maybe Hashset?
 	private ArrayList<Person> persons;
 	
-	public Modelcontainer() {
+	public ModelContainer() {
 		this.persons = new ArrayList<Person>();
 	}
 }
