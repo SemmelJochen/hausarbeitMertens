@@ -3,6 +3,7 @@ package view;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
@@ -17,9 +18,12 @@ import javax.swing.KeyStroke;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
+import controller.Controller;
+
 public class MainWindow extends JFrame {
 
 	private ContentPane contentPane;
+	private Controller controller;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -32,6 +36,10 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
+	}
+	
+	public void setController(Controller controller) {
+		this.controller = controller;
 	}
 	
 	/**
@@ -54,12 +62,30 @@ public class MainWindow extends JFrame {
 		contentPane = new ContentPane(new JLabel("Test") ,scrollpane);
 		this.setContentPane(contentPane);
 		
+		//this.buildComponents();
 		
-		ObserverButton undo = new ObserverJButton("Undo");
-		
+	}
+	
+	public void buildComponents() {
+		ObserverButton undo = new ObserverButton("Undo");
+		this.controller.addUndoButton(undo);
+		undo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.controller.undo();
+			}
+		});
 		
 		ObserverButton redo = new ObserverButton("Redo");
-		
+		this.controller.addRedoButton(redo);
+		redo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.controller.redo();
+			}
+		});
 		
 	}
 	
@@ -70,13 +96,13 @@ public class MainWindow extends JFrame {
 
 		//Create the menu bar.
 		menuBar = new JMenuBar();
-
+		
 		//Build the first menu.
 		menu = new JMenu("Ansicht");
 		menu.setMnemonic(KeyEvent.VK_A);
 		menuBar.add(menu);
 
-		//add Übersicht menu
+		//add Uebersicht menu
 		submenu = new JMenu("Übersicht");
 		subMenuItem = new JMenuItem("Studentenübersicht");
 		submenu.add(subMenuItem);

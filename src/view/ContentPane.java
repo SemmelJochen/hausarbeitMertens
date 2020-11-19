@@ -12,6 +12,7 @@ public class ContentPane extends JPanel {
 	
 	private JPanel header = new JPanel();
 	private JPanel content = new JPanel();
+	private MainWindow mainWindow;
 	
 	
 	//constructor for test purposes
@@ -26,6 +27,7 @@ public class ContentPane extends JPanel {
 		
 		this.add(this.header, BorderLayout.PAGE_START);
 		this.add(this.content, BorderLayout.CENTER);
+		
 	}
 	
 	//constructor for initialize the component with no content
@@ -46,6 +48,7 @@ public class ContentPane extends JPanel {
 		
 		this.add(this.header, BorderLayout.PAGE_START);
 		this.add(this.content, BorderLayout.CENTER);
+	
 	}
 	
 	public void setContent(Component c) {

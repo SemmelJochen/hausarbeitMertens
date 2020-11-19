@@ -3,6 +3,8 @@ package controller;
 import java.util.Observable;
 import java.util.Stack;
 
+import view.ObserverButton;
+
 public class ObservableCommandStack extends Observable {
 
 	private Stack<Command> commands;
@@ -24,4 +26,10 @@ public class ObservableCommandStack extends Observable {
 		
 		return command;
 	}
+	
+	public boolean isEmpty() {
+		return this.commands.isEmpty();
+	}
+	
+
 }
