@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 public class MainWindow extends JFrame {
@@ -44,11 +45,17 @@ public class MainWindow extends JFrame {
 		
 		TableModel dataModel = new AbstractTableModel() {
 	          public int getColumnCount() { return 10; }
-	          public int getRowCount() { return 10;}
+	          public int getRowCount() { return 100;}
 	          public Object getValueAt(int row, int col) { return new Integer(row*col); }
 	      };
 	      JTable table = new JTable(dataModel);
+	      table.setRowHeight(30);
+	      TableColumnModel column = table.getColumnModel();
+	      column.getColumns().asIterator().forEachRemaining(c -> c.setPreferredWidth(100));
+
 	      JScrollPane scrollpane = new JScrollPane(table);
+	      scrollpane.setPreferredSize(new Dimension(800, 600));
+	      
 		
 		contentPane = new ContentPane(new JLabel("Test") ,scrollpane);
 		this.setContentPane(contentPane);
