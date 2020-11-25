@@ -10,4 +10,8 @@ public class ModelContainer {
 	public ModelContainer() {
 		this.persons = new ArrayList<Person>();
 	}
+	
+	public ArrayList<Person> getPersons(){
+		return this.persons;
+	}
 }
