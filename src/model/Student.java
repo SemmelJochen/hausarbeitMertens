@@ -35,5 +35,8 @@ public class Student extends Person {
 		this.subject = subject;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return super.toString() + "\nstudent group: \t\t" + this.studentGroup + "\npraxis partner: \t" + this.praxisPartner + "\nsubject: \t\t" + this.subject;
+	}
 }

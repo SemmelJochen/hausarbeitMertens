@@ -5,14 +5,17 @@ import java.util.LinkedList;
 public class PeerReviewer extends Person {
 	
 	private int capacity;
-	private LinkedList<Student> bachelorThesises;
-	private String title;
+	private LinkedList<Student> firstBachelorThesises;
+	private LinkedList<Student> secondBachelorThesises;
+	private String title, remark;
 	
 	public PeerReviewer(String title, String name, String firstName, String email, int capacity){
 		super(name, firstName, email);
 		this.title = title;
 		this.capacity = capacity;
-		this.bachelorThesises = new LinkedList<>();
+		this.firstBachelorThesises = new LinkedList<>();
+		this.secondBachelorThesises = new LinkedList<>();
+		this.remark = remark;
 	}
 	
 	public void setCapacity(int capacity) {
@@ -23,8 +26,12 @@ public class PeerReviewer extends Person {
 		return this.capacity;
 	}
 	
-	public void addSurvey(Student student) {
-		this.bachelorThesises.add(student);
+	public void addFirstBachelorThesis(Student student) {
+		this.firstBachelorThesises.add(student);
+	}
+	
+	public void addSecondBachelorThesis(Student student) {
+		this.secondBachelorThesises.add(student);
 	}
 	
 	public void setTitle(String title) {
@@ -34,4 +41,13 @@ public class PeerReviewer extends Person {
 	public String getTitle() {
 		return this.title;
 	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
 }
