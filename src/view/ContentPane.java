@@ -27,7 +27,6 @@ public class ContentPane extends JPanel {
 		
 		this.add(this.header, BorderLayout.PAGE_START);
 		this.add(this.content, BorderLayout.CENTER);
-		
 	}
 	
 	//constructor for initialize the component with no content
@@ -58,6 +57,7 @@ public class ContentPane extends JPanel {
 	
 	public void setHeader(Component c) {
 		this.header.removeAll();
+		this.header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
 		this.header.add(c);
 	}
 }
