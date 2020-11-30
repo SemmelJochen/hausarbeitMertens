@@ -58,6 +58,9 @@ public class MainWindow extends JFrame {
 		students.add(new Student("Peter", "Günther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren"));
 		students.add(new Student("Schimmer", "Ralf", "schimmer@ralf.de", "WI62/19", "euronics", "Infrastrukturen"));
 		
+		List<PeerReviewer> reviewer = new ArrayList<PeerReviewer>();
+		reviewer.add(new PeerReviewer("Prof.", "Schmitz", "Karl", "karl@schmitz.de", 20));
+		
 		
 		TableData data = TableData.builder()
 				.withColumn("Vorname", students.stream().map(e -> e.getFirstName()).collect(Collectors.toList()))//
@@ -65,6 +68,7 @@ public class MainWindow extends JFrame {
 				.withColumn("Thema", students.stream().map(e -> e.getSubject()).collect(Collectors.toList()))//
 				.withColumn("Praxispartner", students.stream().map(e -> e.getPraxisPartner()).collect(Collectors.toList()))//
 				.withColumn("Studiengruppe", students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//
+				.withColumn("Kapazität vom Prüfer", reviewer.stream().map(e -> e.getCapacity()).collect(Collectors.toList()))//
 				.build();
 		
 		return data;
