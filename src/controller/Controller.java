@@ -56,7 +56,7 @@ public class Controller {
 				.withColumn("Vorname", students.stream().map(e -> e.getFirstName()).collect(Collectors.toList()))//
 				.withColumn("Nachname", students.stream().map(e -> e.getName()).collect(Collectors.toList()))//
 				.withColumn("Thema", students.stream().map(e -> e.getSubject()).collect(Collectors.toList()))//
-				.withColumn("Praxispartner", students.stream().map(e -> e.getPraxisPartner()).collect(Collectors.toList()))//
+				.withColumn("Praxispartner", students.stream().map(e -> e.getPracticePartner()).collect(Collectors.toList()))//
 				.withColumn("Studiengruppe", students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//
 				.withColumn("Kapazität vom Prüfer", reviewer.stream().map(e -> e.getCapacity()).collect(Collectors.toList()))//
 				.build();

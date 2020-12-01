@@ -1,13 +1,16 @@
 package model;
 
-public class Student extends Person {
+import java.io.Serializable;
 
-	private String studentGroup, praxisPartner, subject;
+public class Student extends Person implements Serializable {
+
+	private static final long serialVersionUID = 0xAABEL;
+	private String studentGroup, practicePartner, subject;
 	
-	public Student(String name, String firstName, String email, String studentGroup, String praxisPartner, String subject) {
+	public Student(String name, String firstName, String email, String studentGroup, String practicePartner, String subject) {
 		super(name, firstName, email);
 		this.studentGroup = studentGroup;
-		this.praxisPartner = praxisPartner;
+		this.practicePartner = practicePartner;
 		this.subject= subject;
 	}
 
@@ -19,12 +22,12 @@ public class Student extends Person {
 		this.studentGroup = studentGroup;
 	}
 
-	public String getPraxisPartner() {
-		return this.praxisPartner;
+	public String getPracticePartner() {
+		return this.practicePartner;
 	}
 
-	public void setPraxisPartner(String praxisPartner) {
-		this.praxisPartner = praxisPartner;
+	public void setPracticePartner(String praxisPartner) {
+		this.practicePartner = praxisPartner;
 	}
 
 	public String getSubject() {
@@ -37,6 +40,6 @@ public class Student extends Person {
 	
 	@Override
 	public String toString() {
-		return super.toString() + "\nstudent group: \t\t" + this.studentGroup + "\npraxis partner: \t" + this.praxisPartner + "\nsubject: \t\t" + this.subject;
+		return super.toString() + "\nstudent group: \t\t" + this.studentGroup + "\npraxis partner: \t" + this.practicePartner + "\nsubject: \t\t" + this.subject;
 	}
 }
