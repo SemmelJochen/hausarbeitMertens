@@ -10,12 +10,37 @@ import model.PeerReviewer;
 import model.Student;
 import model.TableData;
 import view.ContentPane;
+import view.Erstgutachteruebersicht;
 import view.MainWindow;
+import view.ObserverButton;
+import view.Studentenuebersicht;
+import view.TabbedPane;
 import view.Table;
+import view.Zweitgutachteruebersicht;
 
 public class Controller {
 	private Importer excelImporter;
 	private ObservableCommandStack undoStack, redoStack;
+	//private Studentenuebersicht studentenuebersicht;
+	private Erstgutachteruebersicht erstgutachteruebersicht;
+	private Zweitgutachteruebersicht zweitgutachteruebersicht;
+	private TabbedPane tabbedPane;
+	
+	/*public void setStudentenUebersicht(Studentenuebersicht studentenuebersicht) {
+		this.studentenuebersicht = studentenuebersicht;
+	}*/
+	
+	public void setErstgutachterUebersicht (Erstgutachteruebersicht erstgutachteruebersicht) {
+		this.erstgutachteruebersicht = erstgutachteruebersicht;
+	}
+	
+	public void setZweitgutachterUebersicht (Zweitgutachteruebersicht zweitgutachteruebersicht) {
+		this.zweitgutachteruebersicht = zweitgutachteruebersicht;
+	}	
+	
+	public void setTabbedPane(TabbedPane tabbedPane) {
+		this.tabbedPane = tabbedPane;
+	}
 	public void addUndoButton(ObserverButton ob) {
 		this.undoStack.addObserver(ob);
 	}
@@ -71,11 +96,27 @@ public class Controller {
 	public static void main(String[] args) {
 		MainWindow window = new MainWindow();
 		Controller controller = new Controller();
+		TabbedPane tabbedPane = new TabbedPane();
 		
-		Table table = new Table(controller.createSampleTableData());
-		ContentPane contentPane = new ContentPane(new JLabel("DemoDataTable") ,table.getContent());
+		//Studentenuebersicht studentenuebersicht = new Studentenuebersicht();
+		//Erstgutachteruebersicht erstgutachteruebersicht = new Erstgutachteruebersicht();
+		//Zweitgutachteruebersicht zweitgutachteruebersicht = new Zweitgutachteruebersicht();
 		
-		window.setContentPane(contentPane);
+		//Table table = new Table(controller.createSampleTableData());
+		//ContentPane contentPane = new ContentPane(new JLabel("DemoDataTable") ,table.getContent());
+		
+		//Table table1 = new Table(studentenuebersicht.studentenUebersicht());
+		//ContentPane contentPane = new ContentPane(new JLabel("Studentenübersicht") ,table1.getContent());
+		
+		//Table table2 = new Table(erstgutachteruebersicht.erstgutachterUebersicht());
+		//ContentPane contentPane = new ContentPane(new JLabel("Erstgutachterübersicht") ,table2.getContent());
+		
+		//Table table3 = new Table(zweitgutachteruebersicht.zweitgutachterUebersicht());
+		//ContentPane contentPane = new ContentPane(new JLabel("Zweitgutachterübersicht") ,table3.getContent());
+		
+		tabbedPane.setStudentTable();
+		//window.setContentPane(contentPane);
+		tabbedPane.setVisible(true);
 		window.setVisible(true);
 	}
 }

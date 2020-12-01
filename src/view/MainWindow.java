@@ -31,6 +31,7 @@ public class MainWindow extends JFrame {
 	public MainWindow() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(new Dimension(1280, 720));
+		
 		//this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 		this.setJMenuBar(buildMenuBar());
 	}
@@ -49,12 +50,12 @@ public class MainWindow extends JFrame {
 		menuBar.add(menu);
 
 		//add Uebersicht menu
-		submenu = new JMenu("Ãœbersicht");
-		subMenuItem = new JMenuItem("StudentenÃ¼bersicht");
+		submenu = new JMenu("Übersicht");
+		subMenuItem = new JMenuItem("Studentenübersicht");
 		submenu.add(subMenuItem);
-		subMenuItem = new JMenuItem("ErstgutachterÃ¼bersicht");
+		subMenuItem = new JMenuItem("Erstgutachterübersicht");
 		submenu.add(subMenuItem);
-		subMenuItem = new JMenuItem("ZweitgutachterÃ¼bersicht");
+		subMenuItem = new JMenuItem("Zweitgutachterübersicht");
 		submenu.add(subMenuItem);
 		menu.add(submenu);
 
@@ -82,11 +83,11 @@ public class MainWindow extends JFrame {
 		        KeyEvent.VK_S, ActionEvent.META_MASK));
 		menu.add(menuItem);
 		menu.addSeparator();
-		menuItem = new JMenuItem("Undo");
+		menuItem = new JMenuItem("Undo");  //Action Listener einfuegen
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(
 		        KeyEvent.VK_Z, ActionEvent.META_MASK));
 		menu.add(menuItem);
-		menuItem = new JMenuItem("Redo");
+		menuItem = new JMenuItem("Redo");  //Action Listener einfuegen
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(
 		        KeyEvent.VK_Y, ActionEvent.META_MASK));
 
