@@ -20,21 +20,6 @@ import model.Student;
 import model.TableData;
 
 public class MainWindow extends JFrame {
-
-	private ContentPane contentPane;
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainWindow frame = new MainWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	
 	/**
 	 * Create the frame.
@@ -44,36 +29,7 @@ public class MainWindow extends JFrame {
 		this.setSize(new Dimension(1280, 720));
 		//this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 		this.setJMenuBar(buildMenuBar());
-		
-		Table table = new Table(createSampleTableData());
-		
-		contentPane = new ContentPane(new JLabel("Data") ,table.getContent());
-		this.setContentPane(contentPane);
-		
 	}
-	
-	public TableData createSampleTableData(){
-		List<Student> students = new ArrayList<Student>();
-		students.add(new Student("Kalle", "Heino", "kalle@heino.de", "WI62/19", "zeb", "Netzwerke"));
-		students.add(new Student("Peter", "Günther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren"));
-		students.add(new Student("Schimmer", "Ralf", "schimmer@ralf.de", "WI62/19", "euronics", "Infrastrukturen"));
-		
-		List<PeerReviewer> reviewer = new ArrayList<PeerReviewer>();
-		reviewer.add(new PeerReviewer("Prof.", "Schmitz", "Karl", "karl@schmitz.de", 20));
-		
-		
-		TableData data = TableData.builder()
-				.withColumn("Vorname", students.stream().map(e -> e.getFirstName()).collect(Collectors.toList()))//
-				.withColumn("Nachname", students.stream().map(e -> e.getName()).collect(Collectors.toList()))//
-				.withColumn("Thema", students.stream().map(e -> e.getSubject()).collect(Collectors.toList()))//
-				.withColumn("Praxispartner", students.stream().map(e -> e.getPraxisPartner()).collect(Collectors.toList()))//
-				.withColumn("Studiengruppe", students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//
-				.withColumn("Kapazität vom Prüfer", reviewer.stream().map(e -> e.getCapacity()).collect(Collectors.toList()))//
-				.build();
-		
-		return data;
-	}
-	
 	
 	public JMenuBar buildMenuBar() {
 		JMenuBar menuBar;

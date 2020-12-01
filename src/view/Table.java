@@ -1,12 +1,10 @@
 package view;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.util.List;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JViewport;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumnModel;
 
@@ -30,6 +28,7 @@ public class Table {
 		column.getColumns().asIterator().forEachRemaining(c -> c.setPreferredWidth(100));
 		
 	}
+	
 	public JScrollPane getContent() {
 		JScrollPane pane = new JScrollPane(this.table);
 		pane.setPreferredSize(new Dimension(800, 600));
@@ -60,6 +59,7 @@ public class Table {
 		}
 
 		public Object getValueAt(int row, int col) {
+			//outofBounds handling??
 			return this.data[col].get(row);
 		}
 
