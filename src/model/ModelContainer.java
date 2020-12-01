@@ -1,17 +1,13 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ModelContainer {
 
-	// think about it -> maybe Hashset?
-	private ArrayList<Person> persons;
+	private HashMap<Integer, PeerReviewer> peerReviewer;
 	
-	public ModelContainer() {
-		this.persons = new ArrayList<Person>();
-	}
+	private HashMap<String, Integer> mappingNameToKey;
 	
-	public ArrayList<Person> getPersons(){
-		return this.persons;
-	}
+	
+		
 }

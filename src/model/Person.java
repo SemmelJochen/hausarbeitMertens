@@ -3,7 +3,7 @@ package model;
 /*
  * Felix was here 
  */
-public abstract class Person {
+public class Person {
 
 	private String name, firstName, email;
 	
@@ -35,6 +35,12 @@ public abstract class Person {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	@Override
+	public String toString() {
+		return "name: \t\t\t" + this.name + "\nfirstname \t\t" + this.firstName + "\nemail: \t\t\t" + this.email;
+		
 	}
 	
 }
