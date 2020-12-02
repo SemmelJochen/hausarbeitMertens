@@ -7,8 +7,13 @@ import java.util.Map;
 public class ModelContainer {
 
 	private HashMap<String, PeerReviewer> peerReviewers;
+	private static final ModelContainer modelcontainer = new ModelContainer();
 	
-	public ModelContainer() {
+	public static ModelContainer getModelcontainerInstance() {
+		return modelcontainer;
+	}
+	
+	private ModelContainer() {
 		this.peerReviewers = new HashMap<String, PeerReviewer>();
 	}
 	
@@ -29,9 +34,16 @@ public class ModelContainer {
 		while (it.hasNext()) {
 			Map.Entry pair = (Map.Entry) it.next();
 			System.out.println(pair.getKey() + "\n" + pair.getValue());
-			((PeerReviewer) pair.getValue()).printStudents();
+			
+			PeerReviewer p = (PeerReviewer) pair.getValue();
+			p.printStudents();
+			
 			System.out.println("");
 			it.remove(); // avoids a ConcurrentModificationException
 		}
+	}
+	
+	public void load(ModelContainer modelcontainer) {
+		
 	}
 }
