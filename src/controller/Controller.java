@@ -25,23 +25,7 @@ public class Controller {
 
 	private Importer csvImporter;
 	private ObservableCommandStack undoStack, redoStack;
-	private StudentOverview studentOverview;
-	private FirstReviewerOverview firstReviewer;
-	private SecondReviewerOverview secondReviewer;
-	private TabbedPane tabbedPane;
 	private MainWindow window;
-
-	public void setStudentOverview(StudentOverview studentOverview) {
-		this.studentOverview = studentOverview;
-	}
-
-	public void setFirstReviewer(FirstReviewerOverview firstReviewer) {
-		this.firstReviewer = firstReviewer;
-	}
-
-	public void setSecondReviewer(SecondReviewerOverview secondReviewer) {
-		this.secondReviewer = secondReviewer;
-	}	
 	
 	public void addUndoMenuItem(ObserverMenuItem ob) {
 		this.undoStack.addObserver(ob);
