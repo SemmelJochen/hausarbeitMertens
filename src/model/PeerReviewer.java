@@ -77,6 +77,15 @@ public class PeerReviewer extends Person implements Serializable {
 			System.out.println(student);
 			System.out.println("");
 		}
+		this.printSecondStudents();
 		System.out.println("-----------------------------------");
+	}
+	
+	private void printSecondStudents() {
+		System.out.println("secondBachelorThesises:\n");
+		for(Student student: this.secondBachelorThesises) {
+			System.out.println(student);
+			System.out.println("");
+		}
 	}
 }
