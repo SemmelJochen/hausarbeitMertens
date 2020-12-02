@@ -23,7 +23,8 @@ import view.views.SecondReviewerOverview;
 import view.views.StudentOverview;
 
 public class Controller {
-	private Importer excelImporter;
+
+	private Importer csvImporter;
 	private ObservableCommandStack undoStack, redoStack;
 	private StudentOverview studentOverview;
 	private FirstReviewerOverview firstReviewer;
@@ -56,7 +57,7 @@ public class Controller {
 	}
 
 	public Controller() {
-		this.excelImporter = new Importer();
+		this.csvImporter = new Importer();
 		this.undoStack = new ObservableCommandStack();
 		this.redoStack = new ObservableCommandStack();
 

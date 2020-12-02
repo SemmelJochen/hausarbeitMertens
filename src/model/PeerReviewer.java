@@ -1,23 +1,24 @@
 package model;
 
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class PeerReviewer extends Person implements Serializable {
 	
 	private static final long serialVersionUID = 0xAFFEL;
 	private int capacity;
-	private LinkedList<Student> firstBachelorThesises;
-	private LinkedList<Student> secondBachelorThesises;
-	private String title, remark;
+	private List<Student> firstBachelorThesises;
+	private List<Student> secondBachelorThesises;
+	private String title;
 	
 	public PeerReviewer(String title, String name, String firstName, String email, int capacity){
 		super(name, firstName, email);
 		this.title = title;
 		this.capacity = capacity;
-		this.firstBachelorThesises = new LinkedList<>();
-		this.secondBachelorThesises = new LinkedList<>();
-		this.remark = remark;
+		this.firstBachelorThesises = new ArrayList<>();
+		this.secondBachelorThesises = new ArrayList<>();
 	}
 	
 	public void setCapacity(int capacity) {
@@ -32,6 +33,18 @@ public class PeerReviewer extends Person implements Serializable {
 		this.firstBachelorThesises.add(student);
 	}
 	
+	public void addFirstBachelorThesis(List<Student> students) {
+		for(Student s: students) {
+			this.firstBachelorThesises.add(s);
+		}
+	}
+
+	public void addSecondBachelorThesis(List<Student> students) {
+		for(Student s: students) {
+			this.secondBachelorThesises.add(s);
+		}
+	}
+	
 	public void addSecondBachelorThesis(Student student) {
 		this.secondBachelorThesises.add(student);
 	}
@@ -43,13 +56,27 @@ public class PeerReviewer extends Person implements Serializable {
 	public String getTitle() {
 		return this.title;
 	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
+	
+	public List<Student> getFirstBachelorThesis(){
+		return this.firstBachelorThesises;
 	}
 	
+	public List<Student> getSecondBachelorThesis(){
+		return this.secondBachelorThesises;
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + "\ntitle: \t\t\t" + this.title + "\ncapacity: \t\t" + this.capacity;
+		
+	}
+	
+	public void printStudents() {
+		System.out.println("firstBachelorThesises:\n");
+		for(Student student: this.firstBachelorThesises) {
+			System.out.println(student);
+			System.out.println("");
+		}
+		System.out.println("-----------------------------------");
+	}
 }
