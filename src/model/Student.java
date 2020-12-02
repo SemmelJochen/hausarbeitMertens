@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
-
+/*
+ * TODO: add remark
+ */
 public class Student extends Person implements Serializable {
 
 	private static final long serialVersionUID = 0xAABEL;
