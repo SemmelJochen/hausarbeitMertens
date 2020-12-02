@@ -1,10 +1,8 @@
 package view.components;
 
-import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JButton;
 import javax.swing.JMenuItem;
 
 import controller.ObservableCommandStack;

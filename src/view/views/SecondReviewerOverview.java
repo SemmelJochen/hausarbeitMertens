@@ -1,16 +1,33 @@
 package view.views;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
 import model.PeerReviewer;
 import model.Student;
 import model.TableData;
+import view.components.ContentPane;
 
-public class SecondReviewerOverview {
+public class SecondReviewerOverview extends ContentPane {
 
-	public TableData secondReviewerOverview(){
+	public SecondReviewerOverview(){
+		super();
+		
+		JTabbedPane tPane = new JTabbedPane();
+		JPanel panel3 = new JPanel();
+		tPane.addTab("Zweitgutachter", panel3);
+
+		this.setHeader(new JLabel("Zweitgutachterübersicht"));
+		this.setContent(buildComponents());
+	}
+	
+	public Component buildComponents() {
 		List<Student> students = new ArrayList<Student>();
 		students.add(new Student("Kalle", "Heino", "kalle@heino.de", "WI62/19", "zeb", "Netzwerke"));
 		students.add(new Student("Peter", "Gï¿½nther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren"));
@@ -29,7 +46,7 @@ public class SecondReviewerOverview {
 				.withColumn("Erstgutachter", reviewer.stream().map(e -> e.getFirstName()+" "+e.getName()).collect(Collectors.toList()))//
 				.build();
 		
-		return secondreviewer;
+		return null;
 	}
 	
 }

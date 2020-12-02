@@ -16,21 +16,6 @@ public class ContentPane extends JPanel {
 	private JPanel content = new JPanel();
 	private MainWindow mainWindow;
 	
-	
-	//constructor for test purposes
-	public ContentPane(String title) {
-		//TODO add MigLayout -- external Lib
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-		JLabel siteTitle = new JLabel(title);
-		header.add(siteTitle);
-		content.add(new JButton("Test"));
-		
-		
-		this.add(this.header, BorderLayout.PAGE_START);
-		this.add(this.content, BorderLayout.CENTER);
-	}
-	
 	//constructor for initialize the component with no content
 	public ContentPane() {
 		super();
