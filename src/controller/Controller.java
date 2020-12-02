@@ -19,7 +19,8 @@ import view.Table;
 import view.Zweitgutachteruebersicht;
 
 public class Controller {
-	private Importer excelImporter;
+
+	private Importer csvImporter;
 	private ObservableCommandStack undoStack, redoStack;
 	//private Studentenuebersicht studentenuebersicht;
 	private Erstgutachteruebersicht erstgutachteruebersicht;
@@ -49,7 +50,7 @@ public class Controller {
 	}
 
 	public Controller() {
-		this.excelImporter = new Importer();
+		this.csvImporter = new Importer();
 		this.undoStack = new ObservableCommandStack();
 		this.redoStack = new ObservableCommandStack();
 	}
