@@ -62,6 +62,14 @@ public class MainWindow extends JFrame {
 		// add Uebersicht menu
 		submenu = new JMenu("Uebersicht");
 		subMenuItem = new JMenuItem("Studentenuebersicht");
+		subMenuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.setContentPane(new StudentOverview());
+				
+			}
+		});
 		submenu.add(subMenuItem);
 		subMenuItem = new JMenuItem("Erstgutachteruebersicht");
 		subMenuItem.addActionListener(new ActionListener() {
@@ -73,6 +81,14 @@ public class MainWindow extends JFrame {
 		});
 		submenu.add(subMenuItem);
 		subMenuItem = new JMenuItem("Zweitgutachteruebersicht");
+		subMenuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.setContentPane(new FirstReviewerOverview());
+				
+			}
+		});
 		submenu.add(subMenuItem);
 		menu.add(submenu);
 

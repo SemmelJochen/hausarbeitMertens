@@ -15,7 +15,6 @@ import model.TableData;
 
 import view.components.ContentPane;
 import view.components.ObserverMenuItem;
-import view.components.TabbedPane;
 import view.components.Table;
 import view.views.FirstReviewerOverview;
 import view.views.MainWindow;
@@ -42,12 +41,8 @@ public class Controller {
 
 	public void setSecondReviewer(SecondReviewerOverview secondReviewer) {
 		this.secondReviewer = secondReviewer;
-	}
-
-	public void setTabbedPane(TabbedPane tabbedPane) {
-		this.tabbedPane = tabbedPane;
-	}
-
+	}	
+	
 	public void addUndoMenuItem(ObserverMenuItem ob) {
 		this.undoStack.addObserver(ob);
 	}
