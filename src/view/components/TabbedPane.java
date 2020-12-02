@@ -1,4 +1,4 @@
-package view;
+package view.components;
 
 import java.awt.Component;
 
@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import view.views.StudentOverview;
 
 public class TabbedPane extends JTabbedPane {
 
@@ -33,7 +35,7 @@ public class TabbedPane extends JTabbedPane {
 		StudentOverview studentOverview = new StudentOverview();
 		
 		Table table1 = new Table(studentOverview.studentsOverview());
-		ContentPane contentPane = new ContentPane(new JLabel("Studentenübersicht") ,table1.getContent());
+		ContentPane contentPane = new ContentPane(new JLabel("Studentenï¿½bersicht") ,table1.getContent());
 		
 		tab.add(contentPane);
 	}

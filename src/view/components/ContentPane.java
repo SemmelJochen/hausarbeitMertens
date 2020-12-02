@@ -1,4 +1,4 @@
-package view;
+package view.components;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -7,6 +7,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import view.views.MainWindow;
 
 public class ContentPane extends JPanel {
 	
@@ -31,6 +33,7 @@ public class ContentPane extends JPanel {
 	
 	//constructor for initialize the component with no content
 	public ContentPane() {
+		super();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		this.add(this.header, BorderLayout.PAGE_START);
