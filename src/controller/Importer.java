@@ -40,17 +40,22 @@ public class Importer {
 			while (line != null) {
 				if (i > 3) {
 					Student student = this.newStudent(line);
-					PeerReviewer peerReviewer = this.newPeerReviewer(line);
-					peerReviewer.addFirstBachelorThesis(student);
-
-					modelContainer.putPeerReviewer(peerReviewer);
+					PeerReviewer firstPeerReviewer = this.newFirstPeerReviewer(line);
+					PeerReviewer secondPeerReviewer = this.newSecondPeerReviewer(line);
+					firstPeerReviewer.addFirstBachelorThesis(student);
+					modelContainer.putPeerReviewer(firstPeerReviewer);
+					
+					if(secondPeerReviewer != null) {
+						secondPeerReviewer.addSecondBachelorThesis(student);
+						modelContainer.putPeerReviewer(secondPeerReviewer);
+					}
 				} else {
 					i++;
 				}
 				line = br.readLine();
 			}
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -60,9 +65,24 @@ public class Importer {
 		return new Student(names[1], names[0], "", entries[1], entries[2], entries[3]);
 	}
 
-	public PeerReviewer newPeerReviewer(String line) {
+	public PeerReviewer newFirstPeerReviewer(String line) {
 		String[] entries = line.split(";");
 		String[] peerReviewerString = entries[4].split(" ");
+		
+		return this.createPeerReviewer(peerReviewerString);
+		
+	}
+	
+	public PeerReviewer newSecondPeerReviewer(String line) {
+		String[] entries = line.split(";");
+		System.out.println(entries[5]);
+		String[] peerReviewerString = entries[5].split(" ");
+		if(peerReviewerString.length == 1) return null;
+		
+		return this.createPeerReviewer(peerReviewerString);
+	}
+	
+	private PeerReviewer createPeerReviewer(String[] peerReviewerString) {
 		if (peerReviewerString[0].equals("Dr.")) {
 			return new PeerReviewer(peerReviewerString[0], peerReviewerString[3], peerReviewerString[2], "", -1);
 		}
@@ -70,13 +90,12 @@ public class Importer {
 			return new PeerReviewer(peerReviewerString[0] + " " + peerReviewerString[1], peerReviewerString[3],
 					peerReviewerString[2], "", -1);
 		}
-
 		return new PeerReviewer("", peerReviewerString[1], peerReviewerString[0], "", -1);
 	}
 
 	public static void main(String[] args) {
 		Importer imp = new Importer();
-		ModelContainer m = new ModelContainer();
+		ModelContainer m = ModelContainer.getModelcontainerInstance();
 		imp.importCsvInModelContainer(m);
 		m.printPeerReviewers();
 		
