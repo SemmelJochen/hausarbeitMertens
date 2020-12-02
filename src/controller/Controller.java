@@ -1,51 +1,55 @@
 package controller;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import model.PeerReviewer;
 import model.Student;
 import model.TableData;
-import view.ContentPane;
-import view.FirstReviewer;
-import view.MainWindow;
-import view.ObserverMenuItem;
-import view.SecondReviewer;
-import view.StudentOverview;
-import view.TabbedPane;
-import view.Table;
+
+import view.components.ContentPane;
+import view.components.ObserverMenuItem;
+import view.components.TabbedPane;
+import view.components.Table;
+import view.views.FirstReviewerOverview;
+import view.views.MainWindow;
+import view.views.SecondReviewerOverview;
+import view.views.StudentOverview;
 
 public class Controller {
 
 	private Importer csvImporter;
 	private ObservableCommandStack undoStack, redoStack;
 	private StudentOverview studentOverview;
-	private FirstReviewer firstReviewer;
-	private SecondReviewer secondReviewer;
+	private FirstReviewerOverview firstReviewer;
+	private SecondReviewerOverview secondReviewer;
 	private TabbedPane tabbedPane;
 	
 	public void setStudentOverview(StudentOverview studentOverview) {
 		this.studentOverview = studentOverview;
 	}
 	
-	public void setFirstReviewer (FirstReviewer firstReviewer) {
+	public void setFirstReviewer (FirstReviewerOverview firstReviewer) {
 		this.firstReviewer = firstReviewer;
 	}
 	
-	public void setSecondReviewer (SecondReviewer secondReviewer) {
+	public void setSecondReviewer (SecondReviewerOverview secondReviewer) {
 		this.secondReviewer = secondReviewer;
 	}	
 	
 	public void setTabbedPane(TabbedPane tabbedPane) {
 		this.tabbedPane = tabbedPane;
 	}
-	public void addUndoButton(ObserverMenuItem ob) {
+	public void addUndoMenuItem(ObserverMenuItem ob) {
 		this.undoStack.addObserver(ob);
 	}
-	public void addRedoButton(ObserverMenuItem ob) {
+	public void addRedoMenuItem(ObserverMenuItem ob) {
 		this.redoStack.addObserver(ob);
 	}
 
@@ -100,8 +104,8 @@ public class Controller {
 		TabbedPane tabbedPane = new TabbedPane();
 		
 		StudentOverview studentOverview = new StudentOverview();
-		FirstReviewer firstReviewer = new FirstReviewer();
-		SecondReviewer secondReviewer = new SecondReviewer();
+		FirstReviewerOverview firstReviewer = new FirstReviewerOverview();
+		SecondReviewerOverview secondReviewer = new SecondReviewerOverview();
 		
 		Table table = new Table(controller.createSampleTableData());
 		ContentPane contentPane = new ContentPane(new JLabel("DemoDataTable") ,table.getContent());

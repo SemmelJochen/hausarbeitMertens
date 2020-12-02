@@ -1,4 +1,4 @@
-package view;
+package view.views;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +8,12 @@ import model.PeerReviewer;
 import model.Student;
 import model.TableData;
 
-public class FirstReviewer {
+public class FirstReviewerOverview {
 
 	public TableData firstReviewerOverview(){
 		List<Student> students = new ArrayList<Student>();
 		students.add(new Student("Kalle", "Heino", "kalle@heino.de", "WI62/19", "zeb", "Netzwerke"));
-		students.add(new Student("Peter", "Günther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren"));
+		students.add(new Student("Peter", "Gï¿½nther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren"));
 		students.add(new Student("Schimmer", "Ralf", "schimmer@ralf.de", "WI62/19", "euronics", "Infrastrukturen"));
 		
 		List<PeerReviewer> reviewer = new ArrayList<PeerReviewer>();
@@ -25,7 +25,7 @@ public class FirstReviewer {
 				.withColumn("Vorname", reviewer.stream().map(e -> e.getFirstName()).collect(Collectors.toList()))//
 				.withColumn("Nachname", reviewer.stream().map(e -> e.getName()).collect(Collectors.toList()))//
 				.withColumn("E-Mail", reviewer.stream().map(e -> e.getEmail()).collect(Collectors.toList()))//
-				.withColumn("Kapazität", reviewer.stream().map(e -> e.getCapacity()).collect(Collectors.toList()))//
+				.withColumn("Kapazitï¿½t", reviewer.stream().map(e -> e.getCapacity()).collect(Collectors.toList()))//
 				.withColumn("Zweitgutachter", reviewer.stream().map(e -> e.getFirstName()+" "+e.getName()).collect(Collectors.toList()))//
 				.build();
 		

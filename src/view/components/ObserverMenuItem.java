@@ -1,4 +1,4 @@
-package view;
+package view.components;
 
 import java.awt.event.ActionListener;
 import java.util.Observable;

@@ -1,4 +1,4 @@
-package view;
+package view.views;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class StudentOverview {
 	public TableData studentsOverview(){
 		List<Student> students = new ArrayList<Student>();
 		students.add(new Student("Kalle", "Heino", "kalle@heino.de", "WI62/19", "zeb", "Netzwerke"));
-		students.add(new Student("Peter", "Günther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren"));
+		students.add(new Student("Peter", "Gï¿½nther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren"));
 		students.add(new Student("Schimmer", "Ralf", "schimmer@ralf.de", "WI62/19", "euronics", "Infrastrukturen"));
 		
 		List<PeerReviewer> reviewer = new ArrayList<PeerReviewer>();
