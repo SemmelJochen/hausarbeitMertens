@@ -51,12 +51,12 @@ public class MainWindow extends JFrame {
 		menuBar.add(menu);
 
 		//add Uebersicht menu
-		submenu = new JMenu("�bersicht");
-		subMenuItem = new JMenuItem("Studenten�bersicht");
+		submenu = new JMenu("Uebersicht");
+		subMenuItem = new JMenuItem("Studentenuebersicht");
 		submenu.add(subMenuItem);
-		subMenuItem = new JMenuItem("Erstgutachter�bersicht");
+		subMenuItem = new JMenuItem("Erstgutachteruebersicht");
 		submenu.add(subMenuItem);
-		subMenuItem = new JMenuItem("Zweitgutachter�bersicht");
+		subMenuItem = new JMenuItem("Zweitgutachteruebersicht");
 		submenu.add(subMenuItem);
 		menu.add(submenu);
 

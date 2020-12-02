@@ -8,9 +8,9 @@ import model.PeerReviewer;
 import model.Student;
 import model.TableData;
 
-public class Zweitgutachteruebersicht {
+public class SecondReviewer {
 
-	public TableData zweitgutachterUebersicht(){
+	public TableData secondReviewerOverview(){
 		List<Student> students = new ArrayList<Student>();
 		students.add(new Student("Kalle", "Heino", "kalle@heino.de", "WI62/19", "zeb", "Netzwerke"));
 		students.add(new Student("Peter", "Günther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren"));

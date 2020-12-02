@@ -8,9 +8,9 @@ import model.PeerReviewer;
 import model.Student;
 import model.TableData;
 
-public class Studentenuebersicht {
+public class StudentOverview {
 
-	public TableData studentenUebersicht(){
+	public TableData studentsOverview(){
 		List<Student> students = new ArrayList<Student>();
 		students.add(new Student("Kalle", "Heino", "kalle@heino.de", "WI62/19", "zeb", "Netzwerke"));
 		students.add(new Student("Peter", "Günther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren"));
