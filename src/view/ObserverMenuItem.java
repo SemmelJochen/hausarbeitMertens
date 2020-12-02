@@ -5,13 +5,14 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
+import javax.swing.JMenuItem;
 
 import controller.ObservableCommandStack;
 
-public class ObserverButton extends JButton implements Observer {
+public class ObserverMenuItem extends JMenuItem implements Observer {
 
-	public ObserverButton(String titel) {
-		//super(title);
+	public ObserverMenuItem(String title) {
+		super(title);
 		
 		this.setEnabled(false);		
 	}

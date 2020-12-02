@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class PeerReviewer extends Person {
+public class PeerReviewer extends Person implements Serializable {
 	
+	private static final long serialVersionUID = 0xAFFEL;
 	private int capacity;
 	private LinkedList<Student> firstBachelorThesises;
 	private LinkedList<Student> secondBachelorThesises;

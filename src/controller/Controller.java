@@ -12,7 +12,7 @@ import model.TableData;
 import view.ContentPane;
 import view.Erstgutachteruebersicht;
 import view.MainWindow;
-import view.ObserverButton;
+import view.ObserverMenuItem;
 import view.Studentenuebersicht;
 import view.TabbedPane;
 import view.Table;
@@ -41,10 +41,10 @@ public class Controller {
 	public void setTabbedPane(TabbedPane tabbedPane) {
 		this.tabbedPane = tabbedPane;
 	}
-	public void addUndoButton(ObserverButton ob) {
+	public void addUndoButton(ObserverMenuItem ob) {
 		this.undoStack.addObserver(ob);
 	}
-	public void addRedoButton(ObserverButton ob) {
+	public void addRedoButton(ObserverMenuItem ob) {
 		this.redoStack.addObserver(ob);
 	}
 
@@ -106,13 +106,13 @@ public class Controller {
 		//ContentPane contentPane = new ContentPane(new JLabel("DemoDataTable") ,table.getContent());
 		
 		//Table table1 = new Table(studentenuebersicht.studentenUebersicht());
-		//ContentPane contentPane = new ContentPane(new JLabel("Studentenübersicht") ,table1.getContent());
+		//ContentPane contentPane = new ContentPane(new JLabel("Studentenï¿½bersicht") ,table1.getContent());
 		
 		//Table table2 = new Table(erstgutachteruebersicht.erstgutachterUebersicht());
-		//ContentPane contentPane = new ContentPane(new JLabel("Erstgutachterübersicht") ,table2.getContent());
+		//ContentPane contentPane = new ContentPane(new JLabel("Erstgutachterï¿½bersicht") ,table2.getContent());
 		
 		//Table table3 = new Table(zweitgutachteruebersicht.zweitgutachterUebersicht());
-		//ContentPane contentPane = new ContentPane(new JLabel("Zweitgutachterübersicht") ,table3.getContent());
+		//ContentPane contentPane = new ContentPane(new JLabel("Zweitgutachterï¿½bersicht") ,table3.getContent());
 		
 		tabbedPane.setStudentTable();
 		//window.setContentPane(contentPane);

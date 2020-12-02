@@ -40,6 +40,7 @@ public class MainWindow extends JFrame {
 		JMenuBar menuBar;
 		JMenu menu, submenu;
 		JMenuItem menuItem, subMenuItem;
+		ObserverMenuItem oMenuItem;
 
 		//Create the menu bar.
 		menuBar = new JMenuBar();
@@ -50,12 +51,12 @@ public class MainWindow extends JFrame {
 		menuBar.add(menu);
 
 		//add Uebersicht menu
-		submenu = new JMenu("Übersicht");
-		subMenuItem = new JMenuItem("Studentenübersicht");
+		submenu = new JMenu("ï¿½bersicht");
+		subMenuItem = new JMenuItem("Studentenï¿½bersicht");
 		submenu.add(subMenuItem);
-		subMenuItem = new JMenuItem("Erstgutachterübersicht");
+		subMenuItem = new JMenuItem("Erstgutachterï¿½bersicht");
 		submenu.add(subMenuItem);
-		subMenuItem = new JMenuItem("Zweitgutachterübersicht");
+		subMenuItem = new JMenuItem("Zweitgutachterï¿½bersicht");
 		submenu.add(subMenuItem);
 		menu.add(submenu);
 
@@ -83,15 +84,15 @@ public class MainWindow extends JFrame {
 		        KeyEvent.VK_S, ActionEvent.META_MASK));
 		menu.add(menuItem);
 		menu.addSeparator();
-		menuItem = new JMenuItem("Undo");  //Action Listener einfuegen
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+		oMenuItem = new ObserverMenuItem("Undo");  //Action Listener einfuegen
+		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(
 		        KeyEvent.VK_Z, ActionEvent.META_MASK));
-		menu.add(menuItem);
-		menuItem = new JMenuItem("Redo");  //Action Listener einfuegen
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+		menu.add(oMenuItem);
+		oMenuItem = new ObserverMenuItem("Redo");  //Action Listener einfuegen
+		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(
 		        KeyEvent.VK_Y, ActionEvent.META_MASK));
 
-		menu.add(menuItem);
+		menu.add(oMenuItem);
 		
 		menuBar.add(menu);
 	
