@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
 
 import model.PeerReviewer;
 import model.Student;
@@ -18,7 +19,6 @@ public class FirstReviewerOverview extends ContentPane {
 		super();
 
 		this.setHeader(new JLabel("Erstgutachterübersicht"));
-	
 		this.setContent(buildComponents());
 	}
 	public Component buildComponents() {
@@ -40,7 +40,8 @@ public class FirstReviewerOverview extends ContentPane {
 				.withColumn("Zweitgutachter", reviewer.stream().map(e -> e.getFirstName()+" "+e.getName()).collect(Collectors.toList()))//
 				.build();
 		
-		return null;	
+		JTabbedPane tPane = new JTabbedPane();
+		return tPane;	
 	}
 	
 	

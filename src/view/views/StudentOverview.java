@@ -23,7 +23,7 @@ public class StudentOverview extends ContentPane {
 		JPanel panel2 = new JPanel();
 		tPane.addTab("Studenten", panel2);
 
-		this.setHeader(new JLabel("Studentenübersicht"));
+		this.setHeader(new JLabel("Studentenï¿½bersicht"));
 		this.setContent(buildComponents());
 		
 	}
@@ -49,7 +49,8 @@ public class StudentOverview extends ContentPane {
 				.withColumn("Zweitgutachter", reviewer.stream().map(e -> e.getFirstName()+" "+e.getName()).collect(Collectors.toList()))//
 				.build();
 		
-		return null;
+		JTabbedPane tPane = new JTabbedPane();
+		return tPane;
 	}
 	
 }

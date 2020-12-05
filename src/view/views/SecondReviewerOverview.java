@@ -23,7 +23,7 @@ public class SecondReviewerOverview extends ContentPane {
 		JPanel panel3 = new JPanel();
 		tPane.addTab("Zweitgutachter", panel3);
 
-		this.setHeader(new JLabel("Zweitgutachterübersicht"));
+		this.setHeader(new JLabel("Zweitgutachterï¿½bersicht"));
 		this.setContent(buildComponents());
 	}
 	
@@ -46,7 +46,8 @@ public class SecondReviewerOverview extends ContentPane {
 				.withColumn("Erstgutachter", reviewer.stream().map(e -> e.getFirstName()+" "+e.getName()).collect(Collectors.toList()))//
 				.build();
 		
-		return null;
+		JTabbedPane tPane = new JTabbedPane();
+		return tPane;
 	}
 	
 }
