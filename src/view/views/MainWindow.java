@@ -1,37 +1,24 @@
 package view.views;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.swing.Icon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-import model.PeerReviewer;
-import model.Student;
-import model.TableData;
+
 import view.components.ObserverMenuItem;
-import controller.Controller;
 
 public class MainWindow extends JFrame {
 
-	private JOptionPane exitDialog = new JOptionPane("The only way to close this dialog is by\n"
-			+ "pressing one of the following buttons.\n" + "Do you understand?", JOptionPane.QUESTION_MESSAGE,
-			JOptionPane.YES_NO_OPTION);
+	private JOptionPane exitDialog = new JOptionPane("Möchten Sie speichern, bevor Sie das Programm schließen ?\n",
+			JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
 
 	/**
 	 * Create the frame.
@@ -73,7 +60,7 @@ public class MainWindow extends JFrame {
 		submenu.add(subMenuItem);
 		subMenuItem = new JMenuItem("Erstgutachteruebersicht");
 		subMenuItem.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MainWindow.this.setContentPane(new FirstReviewerOverview());
@@ -126,7 +113,7 @@ public class MainWindow extends JFrame {
 
 		return menuBar;
 	}
-	
+
 	public int showWarningMessage() {
 		String[] buttonLabels = new String[] { "Yes", "No", "Cancel" };
 		String defaultOption = buttonLabels[0];

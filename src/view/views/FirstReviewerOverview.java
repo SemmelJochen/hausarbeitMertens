@@ -5,11 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-
 import model.PeerReviewer;
 import model.Student;
 import model.TableData;
@@ -19,15 +14,11 @@ public class FirstReviewerOverview extends ContentPane {
 
 	public FirstReviewerOverview(){
 		super();
-		
-		JTabbedPane tPane = new JTabbedPane();
-		JPanel panel1 = new JPanel();
-		tPane.addTab("Erstgutachter", panel1);
 
-		this.setHeader(new JLabel("Erstgutachterübersicht"));
+		this.setHeader(new JLabel("ErstgutachterÃ¼bersicht"));
+	
 		this.setContent(buildComponents());
 	}
-	
 	public Component buildComponents() {
 		List<Student> students = new ArrayList<Student>();
 		students.add(new Student("Kalle", "Heino", "kalle@heino.de", "WI62/19", "zeb", "Netzwerke"));
@@ -49,6 +40,8 @@ public class FirstReviewerOverview extends ContentPane {
 		
 		return null;	
 	}
+	
+	
 	
 	
 }
