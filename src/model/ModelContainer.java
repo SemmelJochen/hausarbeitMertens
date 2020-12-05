@@ -1,11 +1,14 @@
 package model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class ModelContainer {
+public class ModelContainer implements Serializable {
 
+
+	private static final long serialVersionUID = 0xCAFEL;
 	private HashMap<String, PeerReviewer> peerReviewers;
 	private static final ModelContainer modelcontainer = new ModelContainer();
 	

@@ -6,7 +6,7 @@ import java.io.Serializable;
  */
 public class Student extends Person implements Serializable {
 
-	private static final long serialVersionUID = 0xAABEL;
+	private static final long serialVersionUID = 0xBAFFL;
 	private String studentGroup, practicePartner, subject;
 	
 	public Student(String name, String firstName, String email, String studentGroup, String practicePartner, String subject) {

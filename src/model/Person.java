@@ -1,10 +1,10 @@
 package model;
 
-/*
- * Felix was here 
- */
-public class Person {
+import java.io.Serializable;
 
+public class Person implements Serializable {
+
+	private static final long serialVersionUID = 0xDADAL;
 	private String name, firstName, email;
 	
 	public Person(String name, String firstName, String email) {

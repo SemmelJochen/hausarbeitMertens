@@ -12,6 +12,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.UIManager;
 
 import view.components.ObserverMenuItem;
 
@@ -27,8 +28,6 @@ public class MainWindow extends JFrame {
 		super();
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setSize(new Dimension(1280, 720));
-
-		// this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 		this.setJMenuBar(buildMenuBar());
 	}
 
@@ -114,19 +113,18 @@ public class MainWindow extends JFrame {
 		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.META_MASK));
 
 		menu.add(oMenuItem);
-
 		menuBar.add(menu);
 
 		return menuBar;
 	}
 
 	public int showWarningMessage() {
-		String[] buttonLabels = new String[] { "Yes", "No", "Cancel" };
+		String[] buttonLabels = new String[] { "Ja", "Nein", "Abbrechen" };
 		String defaultOption = buttonLabels[0];
-		Icon icon = null;
+		Icon icon = UIManager.getIcon("FileView.hardDriveIcon");
 
 		return JOptionPane.showOptionDialog(this,
-				"There's still something unsaved.\n" + "Do you want to save before exiting?", "Warning",
+				"Möchten Sie speichern, bevor Sie das Programm schließen ?\n", "Warnung",
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icon, buttonLabels, defaultOption);
 	}
 

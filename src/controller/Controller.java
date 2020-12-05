@@ -2,6 +2,10 @@ package controller;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,10 +13,10 @@ import java.util.stream.Collectors;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import model.ModelContainer;
 import model.PeerReviewer;
 import model.Student;
 import model.TableData;
-
 import view.components.ContentPane;
 import view.components.ObserverMenuItem;
 import view.components.Table;
@@ -26,6 +30,8 @@ public class Controller {
 	private Importer csvImporter;
 	private ObservableCommandStack undoStack, redoStack;
 	private MainWindow window;
+	private ModelContainer modelContainer;
+	
 	
 	public void addUndoMenuItem(ObserverMenuItem ob) {
 		this.undoStack.addObserver(ob);
@@ -127,6 +133,45 @@ public class Controller {
 	private boolean hasUnsavedData() {
 		// TODO check if there's still something unsaved
 		return true;
+	}
+	public void save(String filePath) {
+		if(!filePath.endsWith(".mrtns")) {
+			filePath += ".mrtns";
+		}
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream(filePath);
+			oos = new ObjectOutputStream(fos);
+			//TODO write output oos.writeObject(this.modelContainer);
+			oos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	      
+		
+	}
+	public void load(String filePath) {
+		if(!filePath.endsWith(".mrtns")) {
+			filePath += ".mrtns";
+		}
+		FileInputStream fis;
+		ObjectInputStream ois;
+		try {
+			fis = new FileInputStream(filePath);
+			ois = new ObjectInputStream(fis);
+			//TODO handleLoad action
+			ois.close();
+			fis.close();
+			
+			/**
+			 * TODO add other actions to do from here 
+			 * - clear MainWindow contentPane and add new content
+			 * - new modelContainer
+			 */
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {
