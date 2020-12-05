@@ -13,15 +13,12 @@ import model.PeerReviewer;
 import model.Student;
 import model.TableData;
 import view.components.ContentPane;
+import view.components.Table;
 
 public class StudentOverview extends ContentPane {
 
 	public StudentOverview(){
 		super();
-		
-		JTabbedPane tPane = new JTabbedPane();
-		JPanel panel2 = new JPanel();
-		tPane.addTab("Studenten", panel2);
 
 		this.setHeader(new JLabel("Studenten�bersicht"));
 		this.setContent(buildComponents());
@@ -48,8 +45,9 @@ public class StudentOverview extends ContentPane {
 				.withColumn("Erstgutachter", reviewer.stream().map(e -> e.getFirstName()+" "+ e.getName()).collect(Collectors.toList()))//
 				.withColumn("Zweitgutachter", reviewer.stream().map(e -> e.getFirstName()+" "+e.getName()).collect(Collectors.toList()))//
 				.build();
-		
+		Table table = new Table(student);
 		JTabbedPane tPane = new JTabbedPane();
+		tPane.addTab("Studenten", table.getContent());
 		return tPane;
 	}
 	

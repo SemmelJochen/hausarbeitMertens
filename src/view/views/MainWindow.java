@@ -53,7 +53,9 @@ public class MainWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.setVisible(false);
 				MainWindow.this.setContentPane(new StudentOverview());
+				MainWindow.this.setVisible(true);
 				
 			}
 		});
@@ -63,7 +65,9 @@ public class MainWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.setVisible(false);
 				MainWindow.this.setContentPane(new FirstReviewerOverview());
+				MainWindow.this.setVisible(true);
 			}
 		});
 		submenu.add(subMenuItem);
@@ -72,7 +76,9 @@ public class MainWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainWindow.this.setContentPane(new FirstReviewerOverview());
+				MainWindow.this.setVisible(false);
+				MainWindow.this.setContentPane(new SecondReviewerOverview());
+				MainWindow.this.setVisible(true);
 				
 			}
 		});

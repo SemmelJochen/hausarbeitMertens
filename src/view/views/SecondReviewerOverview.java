@@ -13,6 +13,7 @@ import model.PeerReviewer;
 import model.Student;
 import model.TableData;
 import view.components.ContentPane;
+import view.components.Table;
 
 public class SecondReviewerOverview extends ContentPane {
 
@@ -46,7 +47,10 @@ public class SecondReviewerOverview extends ContentPane {
 				.withColumn("Erstgutachter", reviewer.stream().map(e -> e.getFirstName()+" "+e.getName()).collect(Collectors.toList()))//
 				.build();
 		
+		Table table = new Table(secondreviewer);
+		
 		JTabbedPane tPane = new JTabbedPane();
+		tPane.addTab("Zweitgutachter", table.getContent());
 		return tPane;
 	}
 	
