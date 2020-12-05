@@ -1,12 +1,10 @@
 package view.components;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.util.List;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JViewport;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumnModel;
 
