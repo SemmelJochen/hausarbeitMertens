@@ -19,19 +19,15 @@ public class SecondReviewerOverview extends ContentPane {
 
 	public SecondReviewerOverview(){
 		super();
-		
-		JTabbedPane tPane = new JTabbedPane();
-		JPanel panel3 = new JPanel();
-		tPane.addTab("Zweitgutachter", panel3);
 
-		this.setHeader(new JLabel("Zweitgutachter�bersicht"));
+		this.setHeader(new JLabel("Zweitgutachteruebersicht"));
 		this.setContent(buildComponents());
 	}
 	
 	public Component buildComponents() {
 		List<Student> students = new ArrayList<Student>();
 		students.add(new Student("Kalle", "Heino", "kalle@heino.de", "WI62/19", "zeb", "Netzwerke"));
-		students.add(new Student("Peter", "G�nther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren"));
+		students.add(new Student("Peter", "Guenther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren"));
 		students.add(new Student("Schimmer", "Ralf", "schimmer@ralf.de", "WI62/19", "euronics", "Infrastrukturen"));
 		
 		List<PeerReviewer> reviewer = new ArrayList<PeerReviewer>();
@@ -43,14 +39,13 @@ public class SecondReviewerOverview extends ContentPane {
 				.withColumn("Vorname", reviewer.stream().map(e -> e.getFirstName()).collect(Collectors.toList()))//
 				.withColumn("Nachname", reviewer.stream().map(e -> e.getName()).collect(Collectors.toList()))//
 				.withColumn("E-Mail", reviewer.stream().map(e -> e.getEmail()).collect(Collectors.toList()))//
-				.withColumn("Kapazit�t", reviewer.stream().map(e -> e.getCapacity()).collect(Collectors.toList()))//
+				.withColumn("Kapazitaet", reviewer.stream().map(e -> e.getCapacity()).collect(Collectors.toList()))//
 				.withColumn("Erstgutachter", reviewer.stream().map(e -> e.getFirstName()+" "+e.getName()).collect(Collectors.toList()))//
 				.build();
 		
 		Table table = new Table(secondreviewer);
-		
-		JTabbedPane tPane = new JTabbedPane();
-		tPane.addTab("Zweitgutachter", table.getContent());
-		return tPane;
+		JPanel panel = new JPanel();
+		panel.add(table.getContent());
+		return panel;
 	}
 }

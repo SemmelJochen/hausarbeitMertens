@@ -20,9 +20,8 @@ public class StudentOverview extends ContentPane {
 	public StudentOverview(){
 		super();
 
-		this.setHeader(new JLabel("Studenten�bersicht"));
+		this.setHeader(new JLabel("Studentenuebersicht"));
 		this.setContent(buildComponents());
-		
 	}
 	
 	public Component buildComponents() {
@@ -44,11 +43,12 @@ public class StudentOverview extends ContentPane {
 				.withColumn("Praxispartner", students.stream().map(e -> e.getPracticePartner()).collect(Collectors.toList()))//
 				.withColumn("Erstgutachter", reviewer.stream().map(e -> e.getFirstName()+" "+ e.getName()).collect(Collectors.toList()))//
 				.withColumn("Zweitgutachter", reviewer.stream().map(e -> e.getFirstName()+" "+e.getName()).collect(Collectors.toList()))//
-				.build();
+				.build();	
+
 		Table table = new Table(student);
-		JTabbedPane tPane = new JTabbedPane();
-		tPane.addTab("Studenten", table.getContent());
-		return tPane;
+		JPanel panel = new JPanel();
+		panel.add(table.getContent());
+		return panel;
 	}
 	
 }

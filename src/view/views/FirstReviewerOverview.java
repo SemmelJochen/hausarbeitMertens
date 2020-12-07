@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import model.PeerReviewer;
@@ -19,7 +20,7 @@ public class FirstReviewerOverview extends ContentPane {
 	public FirstReviewerOverview(){
 		super();
 
-		this.setHeader(new JLabel("Erstgutachterübersicht"));
+		this.setHeader(new JLabel("Erstgutachteruebersicht"));
 		this.setContent(buildComponents());
 	}
 	public Component buildComponents() {
@@ -42,13 +43,9 @@ public class FirstReviewerOverview extends ContentPane {
 				.build();
 		
 		Table table = new Table(firstReviewer);
-		JTabbedPane tPane = new JTabbedPane();
-		tPane.add("Erstgutachter", table.getContent());
-		return tPane;	
+		JPanel panel = new JPanel();
+		panel.add(table.getContent());
+		return panel;
 	}
-	
-	
-	
-	
 }
 
