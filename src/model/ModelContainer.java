@@ -10,6 +10,7 @@ public class ModelContainer implements Serializable {
 
 	private static final long serialVersionUID = 0xCAFEL;
 	private HashMap<String, PeerReviewer> peerReviewers;
+	private HashMap<String, Student> students;
 	private static final ModelContainer modelcontainer = new ModelContainer();
 	
 	public static ModelContainer getModelcontainerInstance() {
@@ -30,6 +31,11 @@ public class ModelContainer implements Serializable {
 		}else {
 			this.peerReviewers.put(key, peerReviewer);
 		}
+	}
+	
+	public void putStudent(Student student) {
+		String key = student.getFirstName() + student.getName();
+		if(this.students.get(key) == null) this.students.put(key, student);
 	}
 	
 	public void printPeerReviewers() {
