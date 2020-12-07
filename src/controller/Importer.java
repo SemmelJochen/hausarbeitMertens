@@ -87,12 +87,4 @@ public class Importer {
 		}
 		return new PeerReviewer("", peerReviewerString[1], peerReviewerString[0], "", -1);
 	}
-
-	public static void main(String[] args) {
-		Importer imp = new Importer();
-		ModelContainer m = ModelContainer.getModelcontainerInstance();
-		imp.importCsvInModelContainer(m);
-		m.printPeerReviewers();
-		
-	}
 }
