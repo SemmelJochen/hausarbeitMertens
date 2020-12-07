@@ -19,6 +19,7 @@ public class ModelContainer implements Serializable {
 	
 	private ModelContainer() {
 		this.peerReviewers = new HashMap<String, PeerReviewer>();
+		this.students = new HashMap<String, Student>();
 	}
 	
 	public void putPeerReviewer(PeerReviewer peerReviewer) {
@@ -34,8 +35,13 @@ public class ModelContainer implements Serializable {
 	}
 	
 	public void putStudent(Student student) {
+		System.out.println(student);
 		String key = student.getFirstName() + student.getName();
-		if(this.students.get(key) == null) this.students.put(key, student);
+		if(this.students.get(key) == null) { 
+			System.out.println(key);
+			System.out.println(student);
+			this.students.put(key, student);
+		}
 	}
 	
 	public void printPeerReviewers() {
