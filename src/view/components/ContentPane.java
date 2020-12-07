@@ -2,6 +2,7 @@ package view.components;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Graphics;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;

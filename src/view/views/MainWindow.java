@@ -1,5 +1,6 @@
 package view.views;
 
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -88,8 +89,18 @@ public class MainWindow extends JFrame {
 		menuItem = new JMenuItem("Gutachtereinsicht");
 		menu.add(menuItem);
 
+		// add menu for diagramms
 		submenu = new JMenu("Diagramme");
 		subMenuItem = new JMenuItem("Diagramm 1");
+		subMenuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.setVisible(false);
+				MainWindow.this.setContentPane(new DiagrammOverview());
+				MainWindow.this.setVisible(true);
+			}
+		});
 		submenu.add(subMenuItem);
 		subMenuItem = new JMenuItem("Diagramm 2");
 		submenu.add(subMenuItem);

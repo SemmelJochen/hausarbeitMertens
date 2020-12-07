@@ -53,5 +53,4 @@ public class SecondReviewerOverview extends ContentPane {
 		tPane.addTab("Zweitgutachter", table.getContent());
 		return tPane;
 	}
-	
 }
