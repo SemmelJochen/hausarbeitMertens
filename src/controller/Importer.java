@@ -13,6 +13,7 @@ import model.Student;
 public class Importer {
 
 	private JFileChooser fileChooser;
+	private File file;
 
 	public Importer() {
 		this.fileChooser = new JFileChooser();
@@ -20,16 +21,14 @@ public class Importer {
 
 	public void chooseFile() {
 		this.fileChooser.showOpenDialog(null);
+		this.file = this.fileChooser.getSelectedFile();
 	}
 	
 	/*
 	 * the parameter modelContainer is changed after running the method!
 	 */
 	public void importCsvInModelContainer(ModelContainer modelContainer) {
-		this.chooseFile();
-		File file = this.fileChooser.getSelectedFile();
-
-		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(this.file))) {
 			int i = 0;
 			String line = br.readLine();
 			while (line != null) {
@@ -38,12 +37,15 @@ public class Importer {
 					PeerReviewer firstPeerReviewer = this.newFirstPeerReviewer(line);
 					PeerReviewer secondPeerReviewer = this.newSecondPeerReviewer(line);
 					firstPeerReviewer.addFirstBachelorThesis(student);
-					modelContainer.putPeerReviewer(firstPeerReviewer);
 					
 					if(secondPeerReviewer != null) {
 						secondPeerReviewer.addSecondBachelorThesis(student);
 						modelContainer.putPeerReviewer(secondPeerReviewer);
 					}
+					
+					modelContainer.putPeerReviewer(firstPeerReviewer);
+					modelContainer.putStudent(student);
+					
 				} else {
 					i++;
 				}
@@ -61,17 +63,13 @@ public class Importer {
 	}
 
 	public PeerReviewer newFirstPeerReviewer(String line) {
-		String[] entries = line.split(";");
-		String[] peerReviewerString = entries[4].split(" ");
-		
+		String[] peerReviewerString = line.split(";")[4].split(" ");
 		return this.createPeerReviewer(peerReviewerString);
 		
 	}
 	
 	public PeerReviewer newSecondPeerReviewer(String line) {
-		String[] entries = line.split(";");
-		System.out.println(entries[5]);
-		String[] peerReviewerString = entries[5].split(" ");
+		String[] peerReviewerString =line.split(";")[5].split(" ");
 		if(peerReviewerString.length == 1) return null;
 		
 		return this.createPeerReviewer(peerReviewerString);
@@ -86,5 +84,13 @@ public class Importer {
 					peerReviewerString[2], "", -1);
 		}
 		return new PeerReviewer("", peerReviewerString[1], peerReviewerString[0], "", -1);
+	}
+
+	public static void main(String[] args) {
+		Importer imp = new Importer();
+		ModelContainer m = ModelContainer.getModelcontainerInstance();
+		imp.importCsvInModelContainer(m);
+		m.printPeerReviewers();
+		
 	}
 }
