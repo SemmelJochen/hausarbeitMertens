@@ -59,7 +59,9 @@ public class Importer {
 	public Student newStudent(String line) {
 		String[] entries = line.split(";");
 		String[] names = entries[0].split(", ");
-		return new Student(names[1], names[0], "", entries[1], entries[2], entries[3]);
+		Student ret = new Student(names[1], names[0], "", entries[1], entries[2], entries[3]);
+		System.out.println(ret);
+		return ret;
 	}
 
 	public PeerReviewer newFirstPeerReviewer(String line) {
@@ -76,19 +78,28 @@ public class Importer {
 	}
 	
 	private PeerReviewer createPeerReviewer(String[] peerReviewerString) {
-		if (peerReviewerString[0].equals("Dr.")) {
-			return new PeerReviewer(peerReviewerString[0], peerReviewerString[3], peerReviewerString[2], "", -1);
+		int i = 0;
+		String title = "";
+		while(peerReviewerString[i].contains(".") && i < peerReviewerString.length) {
+			title += peerReviewerString[i] + " ";
+			i++;
 		}
-		if (peerReviewerString[0].equals("Prof.")) {
-			return new PeerReviewer(peerReviewerString[0] + " " + peerReviewerString[1], peerReviewerString[3],
-					peerReviewerString[2], "", -1);
+		title = title.trim();
+		
+		String firstnames = "";
+		while(i < peerReviewerString.length-1) {
+			firstnames += peerReviewerString[i] + " ";
+			i++;
 		}
-		return new PeerReviewer("", peerReviewerString[1], peerReviewerString[0], "", -1);
+		firstnames = firstnames.trim();
+		
+		return new PeerReviewer(title, firstnames, peerReviewerString[peerReviewerString.length-1], "", -1);
 	}
 
 	public static void main(String[] args) {
 		Importer imp = new Importer();
 		ModelContainer m = ModelContainer.getModelcontainerInstance();
+		imp.chooseFile();
 		imp.importCsvInModelContainer(m);
 		m.printPeerReviewers();
 		
