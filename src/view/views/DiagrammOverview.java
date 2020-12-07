@@ -16,7 +16,6 @@ public class DiagrammOverview extends ContentPane {
 		super();
 		Diagramm diagramm = new Diagramm();
 		
-		
 		this.setHeader(new JLabel("Diagramm und so"));
 		this.setContent(diagramm);
 		diagramm.repaint();

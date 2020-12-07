@@ -1,6 +1,7 @@
 package view.components;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -25,14 +26,14 @@ public class Diagramm extends JComponent {
 
 	public Diagramm() {
 		super();
-		this.setSize(300, 300);
+		this.setPreferredSize(new Dimension(500, 500));
 		this.repaint();
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		drawPie((Graphics2D) g, new Rectangle(0, 0, 100, 100), slices);
+		drawPie((Graphics2D) g, new Rectangle(150, 50, 300, 300), slices);
 	}
 
 	public void drawPie(Graphics2D g, Rectangle area, Slice[] slices) {
