@@ -31,13 +31,17 @@ public class ContentPane extends JPanel {
 	}
 
 	public void setContent(Component c) {
+		this.content.setVisible(false);
 		this.content.removeAll();
 		this.content.add(c);
+		this.content.setVisible(true);
 	}
 
 	public void setHeader(Component c) {
+		this.header.setVisible(false);
 		this.header.removeAll();
 		this.header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
 		this.header.add(c);
+		this.header.setVisible(true);
 	}
 }
