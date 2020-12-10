@@ -45,7 +45,6 @@ public class Importer {
 					
 					modelContainer.putPeerReviewer(firstPeerReviewer);
 					modelContainer.putStudent(student);
-					
 				} else {
 					i++;
 				}
@@ -94,14 +93,5 @@ public class Importer {
 		firstnames = firstnames.trim();
 		
 		return new PeerReviewer(title, firstnames, peerReviewerString[peerReviewerString.length-1], "", -1);
-	}
-
-	public static void main(String[] args) {
-		Importer imp = new Importer();
-		ModelContainer m = ModelContainer.getModelcontainerInstance();
-		imp.chooseFile();
-		imp.importCsvInModelContainer(m);
-		m.printPeerReviewers();
-		
 	}
 }
