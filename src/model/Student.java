@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+
 /*
  * TODO: add remark
  */
@@ -8,12 +9,13 @@ public class Student extends Person implements Serializable {
 
 	private static final long serialVersionUID = 0xBAFFL;
 	private String studentGroup, practicePartner, subject;
-	
-	public Student(String name, String firstName, String email, String studentGroup, String practicePartner, String subject) {
+
+	public Student(String name, String firstName, String email, String studentGroup, String practicePartner,
+			String subject) {
 		super(name, firstName, email);
 		this.studentGroup = studentGroup;
 		this.practicePartner = practicePartner;
-		this.subject= subject;
+		this.subject = subject;
 	}
 
 	public String getStudentGroup() {
@@ -39,9 +41,10 @@ public class Student extends Person implements Serializable {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	
+
 	@Override
 	public String toString() {
-		return super.toString() + "\nstudent group: \t\t" + this.studentGroup + "\npraxis partner: \t" + this.practicePartner + "\nsubject: \t\t" + this.subject;
+		return super.toString() + "\nstudent group: \t\t" + this.studentGroup + "\npraxis partner: \t"
+				+ this.practicePartner + "\nsubject: \t\t" + this.subject;
 	}
 }

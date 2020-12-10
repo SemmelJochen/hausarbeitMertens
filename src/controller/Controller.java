@@ -22,6 +22,7 @@ import view.components.ObserverMenuItem;
 import view.components.Table;
 import view.views.FirstReviewerOverview;
 import view.views.MainWindow;
+import view.views.Overview;
 import view.views.SecondReviewerOverview;
 import view.views.StudentOverview;
 
@@ -30,9 +31,8 @@ public class Controller {
 	private Importer csvImporter;
 	private ObservableCommandStack undoStack, redoStack;
 	private MainWindow window;
-	private ModelContainer modelContainer;
-	
-	
+	private ModelContainer modelContainer = ModelContainer.getModelcontainerInstance();
+
 	public void addUndoMenuItem(ObserverMenuItem ob) {
 		this.undoStack.addObserver(ob);
 	}
@@ -49,7 +49,7 @@ public class Controller {
 	}
 
 	public void run() {
-		this.window = new MainWindow();
+		this.window = new MainWindow(this);
 
 		// add lister to listen to window close operation
 		this.window.addWindowListener(new WindowAdapter() {
@@ -59,13 +59,10 @@ public class Controller {
 			}
 		});
 
-		StudentOverview studentOverview = new StudentOverview();
-		FirstReviewerOverview firstReviewer = new FirstReviewerOverview();
-		SecondReviewerOverview secondReviewer = new SecondReviewerOverview();
+//		Table table = new Table(this.createSampleTableData());
+		Overview overview = new Overview();
 
-		Table table = new Table(this.createSampleTableData());
-		ContentPane contentPane = new ContentPane(new JLabel("DemoDataTable"), table.getContent());
-		window.setContentPane(contentPane);
+		window.setContentPane(overview);
 		window.setVisible(true);
 	}
 
@@ -134,8 +131,9 @@ public class Controller {
 		// TODO check if there's still something unsaved
 		return true;
 	}
+
 	public void save(String filePath) {
-		if(!filePath.endsWith(".mrtns")) {
+		if (!filePath.endsWith(".mrtns")) {
 			filePath += ".mrtns";
 		}
 		FileOutputStream fos;
@@ -143,16 +141,16 @@ public class Controller {
 		try {
 			fos = new FileOutputStream(filePath);
 			oos = new ObjectOutputStream(fos);
-			//TODO write output oos.writeObject(this.modelContainer);
+			// TODO write output oos.writeObject(this.modelContainer);
 			oos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	      
-		
+
 	}
+
 	public void load(String filePath) {
-		if(!filePath.endsWith(".mrtns")) {
+		if (!filePath.endsWith(".mrtns")) {
 			filePath += ".mrtns";
 		}
 		FileInputStream fis;
@@ -160,22 +158,30 @@ public class Controller {
 		try {
 			fis = new FileInputStream(filePath);
 			ois = new ObjectInputStream(fis);
-			//TODO handleLoad action
+			// TODO handleLoad action
 			ois.close();
 			fis.close();
-			
+
 			/**
-			 * TODO add other actions to do from here 
-			 * - clear MainWindow contentPane and add new content
-			 * - new modelContainer
+			 * TODO add other actions to do from here - clear MainWindow contentPane and add
+			 * new content - new modelContainer
 			 */
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	public void runImport() {
+		this.csvImporter.importCsvInModelContainer(this.modelContainer);
+	}
+
+	public void runExport() {
+
+	}
+
 	public static void main(String[] args) {
 		Controller controller = new Controller();
 		controller.run();
 	}
+
 }

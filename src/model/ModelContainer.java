@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class ModelContainer implements Serializable {
@@ -42,6 +43,14 @@ public class ModelContainer implements Serializable {
 			System.out.println(student);
 			this.students.put(key, student);
 		}
+	}
+	
+	public HashMap<String, Student> getStudents(){
+		return this.students;
+	}
+	
+	public HashMap<String, PeerReviewer> getPeerReviewer(){
+		return this.peerReviewers;
 	}
 	
 	public void printPeerReviewers() {
