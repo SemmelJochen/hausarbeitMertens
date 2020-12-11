@@ -65,6 +65,10 @@ public class PeerReviewer extends Person implements Serializable {
 		return this.secondBachelorThesises;
 	}
 	
+	public int getCountFirstBachelorThesises() {
+		return this.firstBachelorThesises.size();
+	}
+	
 	@Override
 	public String toString() {
 		return super.toString() + "\ntitle: \t\t\t" + this.title + "\ncapacity: \t\t" + this.capacity;
