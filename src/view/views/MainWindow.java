@@ -1,6 +1,5 @@
 package view.views;
 
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,21 +14,24 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
+import controller.Controller;
 import view.components.ObserverMenuItem;
 
 public class MainWindow extends JFrame {
 
 	private JOptionPane exitDialog = new JOptionPane("Möchten Sie speichern, bevor Sie das Programm schließen ?\n",
 			JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
-
+	private Controller controller;
 	/**
 	 * Create the frame.
 	 */
-	public MainWindow() {
+	public MainWindow(Controller c) {
 		super();
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setSize(new Dimension(1280, 720));
 		this.setJMenuBar(buildMenuBar());
+		
+		this.controller = c;
 	}
 
 	public JMenuBar buildMenuBar() {
@@ -38,10 +40,38 @@ public class MainWindow extends JFrame {
 		JMenuItem menuItem, subMenuItem;
 		ObserverMenuItem oMenuItem;
 
-		// Create the menu bar.
+		// Create the File bar.
 		menuBar = new JMenuBar();
 
-		// Build the first menu.
+		menu = new JMenu("Datei");
+		menu.setMnemonic(KeyEvent.VK_A);
+		menuBar.add(menu);
+		
+		//create submenu 
+		menuItem = new JMenuItem("Import");
+//		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
+		menuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.controller.runImport();
+			}
+		});
+		menu.add(menuItem);
+		
+		menuItem = new JMenuItem("Export");
+//		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
+		menuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.controller.runExport();
+			}
+		});
+		menu.add(menuItem);
+		
+		
+		// Build the Ansicht menu.
 		menu = new JMenu("Ansicht");
 		menu.setMnemonic(KeyEvent.VK_A);
 		menuBar.add(menu);
@@ -109,7 +139,7 @@ public class MainWindow extends JFrame {
 		menu.add(submenu);
 
 		// Build Edit menu in the menu bar.
-		menu = new JMenu("Edit");
+		menu = new JMenu("Bearbeiten");
 		menu.setMnemonic(KeyEvent.VK_N);
 
 		// add edit action items
