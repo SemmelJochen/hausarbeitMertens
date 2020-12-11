@@ -23,7 +23,7 @@ public class Importer {
 		this.fileChooser.showOpenDialog(null);
 		this.file = this.fileChooser.getSelectedFile();
 	}
-	
+
 	/*
 	 * the parameter modelContainer is changed after running the method!
 	 */
@@ -39,15 +39,15 @@ public class Importer {
 					Student student = this.newStudent(line);
 					PeerReviewer firstPeerReviewer = this.newFirstPeerReviewer(line);
 					PeerReviewer secondPeerReviewer = this.newSecondPeerReviewer(line);
-					firstPeerReviewer.addFirstBachelorThesis(student);
+					firstPeerReviewer.addBachelorThesisAsFirstReviewer(student);
 					student.setFirstPeerReviewer(firstPeerReviewer);
 					
 					if(secondPeerReviewer != null) {
-						secondPeerReviewer.addSecondBachelorThesis(student);
+						secondPeerReviewer.addBachelorThesisAsSecondReviewer(student);
 						modelContainer.putPeerReviewer(secondPeerReviewer);
 						student.setSecondPeerReviewer(secondPeerReviewer);
 					}
-					
+
 					modelContainer.putPeerReviewer(firstPeerReviewer);
 					modelContainer.addStudent(student);
 				} else {
@@ -70,26 +70,26 @@ public class Importer {
 	public PeerReviewer newFirstPeerReviewer(String line) {
 		String[] peerReviewerString = line.split(";")[4].split(" ");
 		return this.createPeerReviewer(peerReviewerString);
-		
+
 	}
-	
+
 	public PeerReviewer newSecondPeerReviewer(String line) {
 		String[] peerReviewerString = line.split(";")[5].split(" ");
 		if(peerReviewerString.length == 1) return null;
 		return this.createPeerReviewer(peerReviewerString);
 	}
-	
+
 	private PeerReviewer createPeerReviewer(String[] peerReviewerString) {
 		int i = 0;
 		String title = "";
-		while(peerReviewerString[i].contains(".") && i < peerReviewerString.length) {
+		while (peerReviewerString[i].contains(".") && i < peerReviewerString.length) {
 			title += peerReviewerString[i] + " ";
 			i++;
 		}
 		title = title.trim();
-		
+
 		String firstnames = "";
-		while(i < peerReviewerString.length-1) {
+		while (i < peerReviewerString.length - 1) {
 			firstnames += peerReviewerString[i] + " ";
 			i++;
 		}

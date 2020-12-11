@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 public class ModelContainer implements Serializable {
 
@@ -29,8 +28,8 @@ public class ModelContainer implements Serializable {
 		PeerReviewer existingPeerReviewer = this.peerReviewers.get(key);
 		
 		if(existingPeerReviewer != null) {
-			existingPeerReviewer.addFirstBachelorThesis(peerReviewer.getFirstBachelorThesis());
-			existingPeerReviewer.addSecondBachelorThesis(peerReviewer.getSecondBachelorThesis());
+			existingPeerReviewer.addBachelorThesesAsFirstReviewer(peerReviewer.getFirstBachelorThesis());
+			existingPeerReviewer.addBachelorThesesAsSecondReviewer(peerReviewer.getSecondBachelorThesis());
 		}else {
 			this.peerReviewers.put(key, peerReviewer);
 		}
