@@ -1,9 +1,11 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 public class ModelContainer implements Serializable {
 
@@ -44,6 +46,14 @@ public class ModelContainer implements Serializable {
 		}
 	}
 	
+	public Student getStudent(String key){
+		return this.students.get(key);
+	}
+	
+	public PeerReviewer getPeerReviewer(String key){
+		return this.peerReviewers.get(key);
+	}
+	
 	public void printPeerReviewers() {
 		Iterator it = peerReviewers.entrySet().iterator();
 		while (it.hasNext()) {
@@ -58,7 +68,25 @@ public class ModelContainer implements Serializable {
 		}
 	}
 	
+	public ArrayList<PeerReviewer> getPeerReviewers(){
+		ArrayList<PeerReviewer> result = new ArrayList<PeerReviewer>();
+		Set<String> keySet = this.peerReviewers.keySet();
+		for(String key: keySet) {
+			result.add(this.getPeerReviewer(key));
+		}
+		return result;
+	}
+	
+	public ArrayList<Student> getStudens(){
+		ArrayList<Student> result = new ArrayList<Student>();
+		Set<String> keySet = this.peerReviewers.keySet();
+		for(String key: keySet) {
+			result.add(this.getStudent(key));
+		}
+		return result;
+	}
+	
 	public void load(ModelContainer modelcontainer) {
-		
+		// TODO
 	}
 }
