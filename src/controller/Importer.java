@@ -19,16 +19,19 @@ public class Importer {
 		this.fileChooser = new JFileChooser();
 	}
 
-	public void chooseFile() {
-		this.fileChooser.showOpenDialog(null);
+	public boolean chooseFile() {
+		if(JFileChooser.CANCEL_OPTION == this.fileChooser.showOpenDialog(null)){
+			return false;
+		}
 		this.file = this.fileChooser.getSelectedFile();
+		return true;
 	}
 
 	/*
 	 * the parameter modelContainer is changed after running the method!
 	 */
 	public void importCsvInModelContainer(ModelContainer modelContainer) {
-		this.chooseFile();
+		if(!this.chooseFile()) return;
 		BufferedReader br;
 		try {
 			br = new BufferedReader(new FileReader(this.file));
