@@ -1,52 +1,43 @@
 package view.views;
 
-import java.awt.Component;
-
 import javax.swing.JTabbedPane;
 
 import view.components.ContentPane;
 
 public class Overview extends ContentPane {
 
-	private StudentOverview studentOverview;
-	private FirstReviewerOverview firstReviewer;
-	private SecondReviewerOverview secondReviewer;
-	private MainWindow mainWindow;
-
-	public void setMainWindow(MainWindow mainWindow) {
-		this.mainWindow = mainWindow;
-	}
-
-	public void setStudentOverview(StudentOverview studentOverview) {
-		this.studentOverview = studentOverview;
-	}
-
-	public void setFirstReviewer(FirstReviewerOverview firstReviewer) {
-		this.firstReviewer = firstReviewer;
-	}
-
-	public void setSecondReviewer(SecondReviewerOverview secondReviewer) {
-		this.secondReviewer = secondReviewer;
-	}
-
+	//final tab ids for references
+	public static final int STUDENT_TAB_ID = 0;
+	public static final int FIRSTREVIEWER_TAB_ID = 1;
+	public static final int SECONDREVIEWER_TAB_ID = 2;
+	
+	private JTabbedPane tPane = new JTabbedPane();
+	
+	
+	
 	public Overview() {
 		super();
-
-		this.setContent(buildTab());
-	}
-
-	public Component buildTab() {
-
 		StudentOverview student = new StudentOverview();
 		FirstReviewerOverview first = new FirstReviewerOverview();
 		SecondReviewerOverview second = new SecondReviewerOverview();
-
-		JTabbedPane tPane = new JTabbedPane();
-
-		tPane.add("Student", student.buildComponents());
-		tPane.add("Erstgutachter", first.buildComponents());
-		tPane.add("Zweitgutachter", second.buildComponents());
-		return tPane;
+		
+		tPane.add(student.buildComponents(), STUDENT_TAB_ID);
+		tPane.setTitleAt(STUDENT_TAB_ID, "Student");
+		
+		tPane.add(first.buildComponents(), FIRSTREVIEWER_TAB_ID);
+		tPane.setTitleAt(FIRSTREVIEWER_TAB_ID, "Erstgutachter");
+		
+		tPane.add(second.buildComponents(), SECONDREVIEWER_TAB_ID);
+		tPane.setTitleAt(SECONDREVIEWER_TAB_ID, "Zweitgutachter");
+		
+		this.setContent(tPane);
 	}
+	
+	public void setActiveTab(int tabId) {
+		tPane.setSelectedIndex(tabId);
+	}
+	
+	
+
 
 }
