@@ -11,11 +11,9 @@ public class DiagramOverview extends ContentPane {
 	
 	public DiagramOverview() {
 		super();
-		PieChart diagramm = new PieChart();
+		PieChart pieChart = new PieChart();
 		
-		this.setHeader(new JLabel("Diagramm und so"));
-		this.setContent(diagramm);
-		diagramm.repaint();
-		diagramm.setVisible(true);
+		this.setHeader(new JLabel("Anzahl der Bachelorthesen eines Dozenten relativ zu allen Thesen"));
+		this.setContent(pieChart);
 	}
 }
