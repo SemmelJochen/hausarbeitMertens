@@ -127,7 +127,7 @@ public class MainWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MainWindow.this.setVisible(false);
-				MainWindow.this.setContentPane(new DiagrammOverview());
+				MainWindow.this.setContentPane(new DiagramOverview());
 				MainWindow.this.setVisible(true);
 			}
 		});
