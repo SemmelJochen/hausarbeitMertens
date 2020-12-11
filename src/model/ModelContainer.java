@@ -70,7 +70,7 @@ public class ModelContainer implements Serializable {
 	}
 	
 	public ArrayList<PeerReviewer> getPeerReviewers(){
-		return (ArrayList<PeerReviewer>) this.peerReviewers.values();
+		return new ArrayList<PeerReviewer>(peerReviewers.values());
 	}
 	
 	public ArrayList<Student> getStudens(){
