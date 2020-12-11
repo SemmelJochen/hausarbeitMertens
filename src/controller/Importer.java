@@ -49,7 +49,7 @@ public class Importer {
 					}
 					
 					modelContainer.putPeerReviewer(firstPeerReviewer);
-					modelContainer.putStudent(student);
+					modelContainer.addStudent(student);
 				} else {
 					i++;
 				}
