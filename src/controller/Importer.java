@@ -28,7 +28,10 @@ public class Importer {
 	 * the parameter modelContainer is changed after running the method!
 	 */
 	public void importCsvInModelContainer(ModelContainer modelContainer) {
-		try (BufferedReader br = new BufferedReader(new FileReader(this.file))) {
+		this.chooseFile();
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader(this.file));
 			int i = 0;
 			String line = br.readLine();
 			while (line != null) {
