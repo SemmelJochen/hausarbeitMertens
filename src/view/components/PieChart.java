@@ -63,6 +63,7 @@ public class PieChart extends JComponent {
 		if (this.slices.isEmpty()) {
 			// TODO: Exeptionhandling if list is empty
 			System.out.println("EMPTY");
+			return;
 		}
 		super.paintComponent(g);
 		drawPie((Graphics2D) g, new Rectangle(150, 50, 350, 350));
@@ -90,7 +91,9 @@ public class PieChart extends JComponent {
 	public HashMap<Color, String> getSlices() {
 		HashMap<Color, String> result = new HashMap<Color, String>();
 		for (int i = 0; i < this.slices.size(); i++) {
-			result.put(this.slices.get(i).getColor(), this.slices.get(i).getName());
+			if (this.slices.get(i).getValue() > 0) {
+				result.put(this.slices.get(i).getColor(), this.slices.get(i).getName());
+			}
 		}
 		return result;
 	}
