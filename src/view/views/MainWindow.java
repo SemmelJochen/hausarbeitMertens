@@ -22,6 +22,7 @@ public class MainWindow extends JFrame {
 	private JOptionPane exitDialog = new JOptionPane("Möchten Sie speichern, bevor Sie das Programm schließen ?\n",
 			JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
 	private Controller controller;
+	private Overview overview;
 	/**
 	 * Create the frame.
 	 */
@@ -32,6 +33,12 @@ public class MainWindow extends JFrame {
 		this.setJMenuBar(buildMenuBar());
 		
 		this.controller = c;
+		buildInitialView();
+	}
+	
+	public void buildInitialView() {
+		this.overview = new Overview();
+		this.setContentPane(overview);
 	}
 
 	public JMenuBar buildMenuBar() {
@@ -83,9 +90,9 @@ public class MainWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainWindow.this.setVisible(false);
-				MainWindow.this.setContentPane(new Overview());
-				MainWindow.this.setVisible(true);
+//				MainWindow.this.setVisible(false);
+				MainWindow.this.overview.setActiveTab(Overview.STUDENT_TAB_ID);
+//				MainWindow.this.setVisible(true);
 				
 			}
 		});
@@ -95,9 +102,9 @@ public class MainWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainWindow.this.setVisible(false);
-				MainWindow.this.setContentPane(new Overview());
-				MainWindow.this.setVisible(true);
+//				MainWindow.this.setVisible(false);
+				MainWindow.this.overview.setActiveTab(Overview.FIRSTREVIEWER_TAB_ID);
+//				MainWindow.this.setVisible(true);
 			}
 		});
 		submenu.add(subMenuItem);
@@ -106,9 +113,9 @@ public class MainWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainWindow.this.setVisible(false);
-				MainWindow.this.setContentPane(new Overview());
-				MainWindow.this.setVisible(true);
+//				MainWindow.this.setVisible(false);
+				MainWindow.this.overview.setActiveTab(Overview.SECONDREVIEWER_TAB_ID);
+//				MainWindow.this.setVisible(true);
 				
 			}
 		});

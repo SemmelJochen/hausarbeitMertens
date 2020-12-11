@@ -60,9 +60,7 @@ public class Controller {
 		});
 
 //		Table table = new Table(this.createSampleTableData());
-		Overview overview = new Overview();
-
-		window.setContentPane(overview);
+		
 		window.setVisible(true);
 	}
 
