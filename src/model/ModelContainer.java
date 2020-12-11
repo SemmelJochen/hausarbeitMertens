@@ -12,7 +12,7 @@ public class ModelContainer implements Serializable {
 
 	private static final long serialVersionUID = 0xCAFEL;
 	private HashMap<String, PeerReviewer> peerReviewers;
-	private HashMap<String, Student> students;
+	private ArrayList<Student>students;
 	private static final ModelContainer modelcontainer = new ModelContainer();
 	
 	public static ModelContainer getModelcontainerInstance() {
@@ -21,7 +21,7 @@ public class ModelContainer implements Serializable {
 	
 	private ModelContainer() {
 		this.peerReviewers = new HashMap<String, PeerReviewer>();
-		this.students = new HashMap<String, Student>();
+		this.students = new ArrayList<Student>();
 	}
 	
 	public void putPeerReviewer(PeerReviewer peerReviewer) {
@@ -36,25 +36,19 @@ public class ModelContainer implements Serializable {
 		}
 	}
 	
-	public void putStudent(Student student) {
-		System.out.println(student);
-		String key = student.getFirstName() + student.getName();
-		if(this.students.get(key) == null) { 
-			System.out.println(key);
-			System.out.println(student);
-			this.students.put(key, student);
-		}
+	public void addStudent(Student student) {
+		this.students.add(student);
 	}
 	
-	public Student getStudent(String key){
-		return this.students.get(key);
+	public Student getStudent(int i){
+		return this.students.get(i);
 	}
 	
 	public PeerReviewer getPeerReviewer(String key){
 		return this.peerReviewers.get(key);
 	}
 	
-	public void printPeerReviewers() {
+	public void printPeerReview() {
 		Iterator it = peerReviewers.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry pair = (Map.Entry) it.next();
@@ -68,22 +62,19 @@ public class ModelContainer implements Serializable {
 		}
 	}
 	
-	public ArrayList<PeerReviewer> getPeerReviewers(){
-		ArrayList<PeerReviewer> result = new ArrayList<PeerReviewer>();
-		Set<String> keySet = this.peerReviewers.keySet();
-		for(String key: keySet) {
-			result.add(this.getPeerReviewer(key));
+	public void printPeerReviewers() {
+		ArrayList<PeerReviewer> r = (ArrayList<PeerReviewer>) this.peerReviewers.values();
+		for(PeerReviewer peerReviewer: r) {
+			
 		}
-		return result;
+	}
+	
+	public ArrayList<PeerReviewer> getPeerReviewers(){
+		return (ArrayList<PeerReviewer>) this.peerReviewers.values();
 	}
 	
 	public ArrayList<Student> getStudens(){
-		ArrayList<Student> result = new ArrayList<Student>();
-		Set<String> keySet = this.peerReviewers.keySet();
-		for(String key: keySet) {
-			result.add(this.getStudent(key));
-		}
-		return result;
+		return this.students;
 	}
 	
 	public void load(ModelContainer modelcontainer) {

@@ -40,10 +40,12 @@ public class Importer {
 					PeerReviewer firstPeerReviewer = this.newFirstPeerReviewer(line);
 					PeerReviewer secondPeerReviewer = this.newSecondPeerReviewer(line);
 					firstPeerReviewer.addFirstBachelorThesis(student);
+					student.setFirstPeerReviewer(firstPeerReviewer);
 					
 					if(secondPeerReviewer != null) {
 						secondPeerReviewer.addSecondBachelorThesis(student);
 						modelContainer.putPeerReviewer(secondPeerReviewer);
+						student.setSecondPeerReviewer(secondPeerReviewer);
 					}
 					
 					modelContainer.putPeerReviewer(firstPeerReviewer);
@@ -61,9 +63,8 @@ public class Importer {
 	public Student newStudent(String line) {
 		String[] entries = line.split(";");
 		String[] names = entries[0].split(", ");
-		Student ret = new Student(names[1], names[0], "", entries[1], entries[2], entries[3]);
-		System.out.println(ret);
-		return ret;
+		Student result = new Student(names[1], names[0], "", entries[1], entries[2], entries[3]);
+		return result;
 	}
 
 	public PeerReviewer newFirstPeerReviewer(String line) {
@@ -73,9 +74,8 @@ public class Importer {
 	}
 	
 	public PeerReviewer newSecondPeerReviewer(String line) {
-		String[] peerReviewerString =line.split(";")[5].split(" ");
+		String[] peerReviewerString = line.split(";")[5].split(" ");
 		if(peerReviewerString.length == 1) return null;
-		
 		return this.createPeerReviewer(peerReviewerString);
 	}
 	
@@ -94,7 +94,6 @@ public class Importer {
 			i++;
 		}
 		firstnames = firstnames.trim();
-		
-		return new PeerReviewer(title, firstnames, peerReviewerString[peerReviewerString.length-1], "", -1);
+		return new PeerReviewer(title, peerReviewerString[peerReviewerString.length-1], firstnames, "", -1);
 	}
 }
