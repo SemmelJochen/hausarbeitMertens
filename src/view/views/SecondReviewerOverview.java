@@ -30,7 +30,7 @@ public class SecondReviewerOverview extends JPanel {
 	}
 
 	public void refreshTableData() {
-		List<PeerReviewer> secondReviewer = ModelContainer.getModelcontainerInstance().getPeerReviewers();
+		List<PeerReviewer> secondReviewer = ModelContainer.getInstance().getPeerReviewers();
 		this.tableData = TableData.builder()
 				.withColumn("Titel", secondReviewer.stream().map(e -> e.getTitle()).collect(Collectors.toList()))//
 				.withColumn("Vorname", secondReviewer.stream().map(e -> e.getFirstName()).collect(Collectors.toList()))//

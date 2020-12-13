@@ -51,7 +51,7 @@ public class PieChart extends JComponent {
 	}
 
 	private void createSliceData() {
-		for (PeerReviewer peerReviewer : ModelContainer.getModelcontainerInstance().getPeerReviewers()) {
+		for (PeerReviewer peerReviewer : ModelContainer.getInstance().getPeerReviewers()) {
 			this.slices.add(new Slice(peerReviewer.getCountFirstBachelorThesises(),
 					new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)),
 					peerReviewer.getFirstName() + " " + peerReviewer.getName()));

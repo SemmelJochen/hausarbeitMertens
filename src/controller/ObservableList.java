@@ -15,6 +15,10 @@ public class ObservableList<E> extends Observable implements List<E> {
 	public ObservableList() {
 		this.list = new ArrayList<E>();
 	}
+	
+	public ObservableList(Collection<? extends E> c) {
+		this.list = new ArrayList<E>(c);
+	}
 
 	@Override
 	public int size() {

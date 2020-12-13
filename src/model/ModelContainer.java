@@ -13,14 +13,20 @@ import java.util.Map;
 import controller.ObservableList;
 
 public class ModelContainer implements Externalizable {
-
+	/**
+	 * we use Externalizable instead of Serializable because we use ObservableLists
+	 * and Maps. Since those are not Serializable and PropertyChangeSupport doesnt
+	 * directly work for Lists, we write our own custom serialize methods. To do
+	 * that, we convert the ObservaleLists to normal lists, when saving. And when
+	 * loading we do this operation backwards.
+	 */
 	private static final long serialVersionUID = 0xCAFEL;
 	private HashMap<String, PeerReviewer> peerReviewers;
 	private ObservableList<Student> students;
 
 	private static final ModelContainer MODELCONTAINER = new ModelContainer();
 
-	public static ModelContainer getModelcontainerInstance() {
+	public static ModelContainer getInstance() {
 		return MODELCONTAINER;
 	}
 
@@ -95,15 +101,20 @@ public class ModelContainer implements Externalizable {
 		this.students = (ObservableList<Student>) students;
 	}
 
+	// due to serialisation we need to resolve the singleton on read
+	public Object readResolve() {
+		return getInstance();
+	}
+
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
-		// TODO Auto-generated method stub
-		
+		out.writeObject(new ArrayList<Student>(this.students));
+		out.writeObject(this.peerReviewers);
 	}
 
 	@Override
 	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-		// TODO Auto-generated method stub
-		
+		this.students = new ObservableList<Student>((List<Student>) in.readObject());
+		this.peerReviewers = (HashMap<String, PeerReviewer>) in.readObject();
 	}
 }

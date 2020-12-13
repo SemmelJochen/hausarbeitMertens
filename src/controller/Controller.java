@@ -26,7 +26,7 @@ public class Controller {
 	private Importer csvImporter;
 	private ObservableCommandStack undoStack, redoStack;
 	private MainWindow window;
-	private ModelContainer modelContainer = ModelContainer.getModelcontainerInstance();
+	private ModelContainer modelContainer = ModelContainer.getInstance();
 
 	public void addUndoMenuItem(ObserverMenuItem ob) {
 		this.undoStack.addObserver(ob);
@@ -138,8 +138,11 @@ public class Controller {
 		try {
 			fos = new FileOutputStream(filePath);
 			oos = new ObjectOutputStream(fos);
-			// TODO write output oos.writeObject(this.modelContainer);
+			//call our custom write method
+			this.modelContainer.writeExternal(oos);
+			oos.flush();
 			oos.close();
+			fos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -147,6 +150,7 @@ public class Controller {
 	}
 
 	public void load(String filePath) {
+		this.window.setVisible(false);
 		if (!filePath.endsWith(".mrtns")) {
 			filePath += ".mrtns";
 		}
@@ -155,7 +159,7 @@ public class Controller {
 		try {
 			fis = new FileInputStream(filePath);
 			ois = new ObjectInputStream(fis);
-			// TODO handleLoad action
+			this.modelContainer.readExternal(ois);
 			ois.close();
 			fis.close();
 
@@ -166,6 +170,9 @@ public class Controller {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		this.window.buildInitialView();
+		this.window.appendDataChangeListeners();
+		this.window.setVisible(true);
 	}
 
 	public void runImport() {

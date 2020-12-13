@@ -30,7 +30,7 @@ public class StudentOverview extends JPanel {
 	}
 
 	public void refreshTableData() {
-		List<Student> students = ModelContainer.getModelcontainerInstance().getStudens();
+		List<Student> students = ModelContainer.getInstance().getStudens();
 		this.tableData = TableData.builder()
 				.withColumn("Studiengruppe",
 						students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//
@@ -44,7 +44,7 @@ public class StudentOverview extends JPanel {
 						.map(e -> e.getFirstPeerReviewer().getFirstName() + " " + e.getFirstPeerReviewer().getName())
 						.collect(Collectors.toList()))//
 				.withColumn("Zweitgutachter", students.stream()
-						.map(e -> e.getSecondPeerReviewer().getFirstName() + " " + e.getSecondPeerReviewer().getName())
+							.map(e -> e.getSecondPeerReviewer().getFirstName() + " " + e.getSecondPeerReviewer().getName())
 						.collect(Collectors.toList()))//
 				.build();
 	}
