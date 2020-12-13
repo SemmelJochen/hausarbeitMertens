@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.Icon;
 import javax.swing.JFrame;
@@ -15,6 +17,7 @@ import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
 import controller.Controller;
+import model.ModelContainer;
 import view.components.ObserverMenuItem;
 
 public class MainWindow extends JFrame {
@@ -34,6 +37,11 @@ public class MainWindow extends JFrame {
 		
 		this.controller = c;
 		buildInitialView();
+		addDataChangeListeners();
+	}
+	
+	public void addDataChangeListeners() {
+		this.controller.addDataChangeObserver(this.overview);
 	}
 	
 	public void buildInitialView() {

@@ -1,54 +1,57 @@
 package view.views;
 
-import java.awt.Component;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.stream.Collectors;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import javax.swing.JScrollPane;
 
-import model.PeerReviewer;
+import model.ModelContainer;
 import model.Student;
 import model.TableData;
-import view.components.ContentPane;
 import view.components.Table;
 
-public class StudentOverview extends ContentPane {
+public class StudentOverview extends JPanel {
 
-	public StudentOverview(){
+	private TableData tableData;
+	private Table table;
+
+	public StudentOverview() {
 		super();
-
-		this.setHeader(new JLabel("Studentenuebersicht"));
-		this.setContent(buildComponents());
+		this.add(buildTable());
 	}
-	
-	public Component buildComponents() {
-		List<Student> students = new ArrayList<Student>();
-		students.add(new Student("Kalle", "Heino", "kalle@heino.de", "WI62/19", "zeb", "Netzwerke"));
-		students.add(new Student("Peter", "G�nther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren"));
-		students.add(new Student("Schimmer", "Ralf", "schimmer@ralf.de", "WI62/19", "euronics", "Infrastrukturen"));
-		
-		List<PeerReviewer> reviewer = new ArrayList<PeerReviewer>();
-		reviewer.add(new PeerReviewer("Prof.", "Schmitz", "Karl", "karl@schmitz.de", 20));
-		
-		
-		TableData student = TableData.builder()
-				.withColumn("Studiengruppe", students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//
+
+	public JScrollPane buildTable() {
+		refreshTableData();
+
+		table = new Table(tableData);
+		return table.getContent();
+	}
+
+	public void refreshTableData() {
+		List<Student> students = ModelContainer.getModelcontainerInstance().getStudens();
+		this.tableData = TableData.builder()
+				.withColumn("Studiengruppe",
+						students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//
 				.withColumn("Vorname", students.stream().map(e -> e.getFirstName()).collect(Collectors.toList()))//
 				.withColumn("Nachname", students.stream().map(e -> e.getName()).collect(Collectors.toList()))//
 				.withColumn("E-Mail", students.stream().map(e -> e.getEmail()).collect(Collectors.toList()))//
 				.withColumn("Thema", students.stream().map(e -> e.getSubject()).collect(Collectors.toList()))//
-				.withColumn("Praxispartner", students.stream().map(e -> e.getPracticePartner()).collect(Collectors.toList()))//
-				.withColumn("Erstgutachter", reviewer.stream().map(e -> e.getFirstName()+" "+ e.getName()).collect(Collectors.toList()))//
-				.withColumn("Zweitgutachter", reviewer.stream().map(e -> e.getFirstName()+" "+e.getName()).collect(Collectors.toList()))//
-				.build();	
-
-		Table table = new Table(student);
-		JPanel panel = new JPanel();
-		panel.add(table.getContent());
-		return panel;
+				.withColumn("Praxispartner",
+						students.stream().map(e -> e.getPracticePartner()).collect(Collectors.toList()))//
+				.withColumn("Erstgutachter", students.stream()
+						.map(e -> e.getFirstPeerReviewer().getFirstName() + " " + e.getFirstPeerReviewer().getName())
+						.collect(Collectors.toList()))//
+				.withColumn("Zweitgutachter", students.stream()
+						.map(e -> e.getSecondPeerReviewer().getFirstName() + " " + e.getSecondPeerReviewer().getName())
+						.collect(Collectors.toList()))//
+				.build();
 	}
 	
+	public void update(Observable o, Object arg) {
+		refreshTableData();
+		this.table.refreshData(tableData);
+	}
+
 }

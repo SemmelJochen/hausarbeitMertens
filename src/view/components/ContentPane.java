@@ -14,7 +14,7 @@ public class ContentPane extends JPanel {
 
 	// constructor for initialize the component with no content
 	public ContentPane() {
-		//create new window with no content (empty panel)
+		// create new window with no content (empty panel)
 		this(new JPanel(), new JPanel());
 	}
 

@@ -1,10 +1,13 @@
 package view.views;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.JTabbedPane;
 
 import view.components.ContentPane;
 
-public class Overview extends ContentPane {
+public class Overview extends ContentPane implements Observer {
 
 	//final tab ids for references
 	public static final int STUDENT_TAB_ID = 0;
@@ -12,22 +15,24 @@ public class Overview extends ContentPane {
 	public static final int SECONDREVIEWER_TAB_ID = 2;
 	
 	private JTabbedPane tPane = new JTabbedPane();
-	
+	private StudentOverview studentOverview;
+	private FirstReviewerOverview firstReviewerOverview;
+	private SecondReviewerOverview secondReviewerOverview;
 	
 	
 	public Overview() {
 		super();
-		StudentOverview student = new StudentOverview();
-		FirstReviewerOverview first = new FirstReviewerOverview();
-		SecondReviewerOverview second = new SecondReviewerOverview();
+		this.studentOverview = new StudentOverview();
+		this.firstReviewerOverview = new FirstReviewerOverview();
+		this.secondReviewerOverview = new SecondReviewerOverview();
 		
-		tPane.add(student.buildComponents(), STUDENT_TAB_ID);
+		tPane.add(this.studentOverview, STUDENT_TAB_ID);
 		tPane.setTitleAt(STUDENT_TAB_ID, "Student");
 		
-		tPane.add(first.buildComponents(), FIRSTREVIEWER_TAB_ID);
+		tPane.add(this.firstReviewerOverview, FIRSTREVIEWER_TAB_ID);
 		tPane.setTitleAt(FIRSTREVIEWER_TAB_ID, "Erstgutachter");
 		
-		tPane.add(second.buildComponents(), SECONDREVIEWER_TAB_ID);
+		tPane.add(this.secondReviewerOverview, SECONDREVIEWER_TAB_ID);
 		tPane.setTitleAt(SECONDREVIEWER_TAB_ID, "Zweitgutachter");
 		
 		this.setContent(tPane);
@@ -35,6 +40,14 @@ public class Overview extends ContentPane {
 	
 	public void setActiveTab(int tabId) {
 		tPane.setSelectedIndex(tabId);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		this.firstReviewerOverview.update(o, arg);
+		this.secondReviewerOverview.update(o, arg);
+		this.studentOverview.update(o, arg);
+		
 	}
 	
 	

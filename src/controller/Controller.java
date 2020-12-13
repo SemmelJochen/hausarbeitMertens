@@ -2,29 +2,24 @@ package controller;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 import java.util.stream.Collectors;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import model.ModelContainer;
 import model.PeerReviewer;
 import model.Student;
 import model.TableData;
-import view.components.ContentPane;
 import view.components.ObserverMenuItem;
-import view.components.Table;
-import view.views.FirstReviewerOverview;
 import view.views.MainWindow;
-import view.views.Overview;
-import view.views.SecondReviewerOverview;
-import view.views.StudentOverview;
 
 public class Controller {
 
@@ -39,6 +34,10 @@ public class Controller {
 
 	public void addRedoMenuItem(ObserverMenuItem ob) {
 		this.redoStack.addObserver(ob);
+	}
+
+	public void addDataChangeObserver(Observer o) {
+		this.modelContainer.getStudens().addObserver(o);
 	}
 
 	public Controller() {
@@ -60,7 +59,7 @@ public class Controller {
 		});
 
 //		Table table = new Table(this.createSampleTableData());
-		
+
 		window.setVisible(true);
 	}
 
@@ -171,6 +170,7 @@ public class Controller {
 
 	public void runImport() {
 		this.csvImporter.importCsvInModelContainer(this.modelContainer);
+		// notify observers that database changed
 	}
 
 	public void runExport() {

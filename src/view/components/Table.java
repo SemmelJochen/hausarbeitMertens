@@ -23,11 +23,16 @@ public class Table {
 
 		// style the table
 		this.table.setRowHeight(30);
-		
+
 		TableColumnModel column = this.table.getColumnModel();
 		column.getColumns().asIterator().forEachRemaining(c -> c.setPreferredWidth(100));
-		
+
 	}
+	
+	public void refreshData(TableData tableData) {
+		this.model.updateData(tableData);
+	}
+
 	public JScrollPane getContent() {
 		JScrollPane pane = new JScrollPane(this.table);
 		pane.setPreferredSize(new Dimension(800, 600));
@@ -37,7 +42,6 @@ public class Table {
 	class CustomTableModel extends AbstractTableModel {
 
 		private String[] columnNames;
-//	    private Object[][] data; 
 		private List<Object>[] data;
 
 		public CustomTableModel(TableData tableData) {
@@ -65,6 +69,11 @@ public class Table {
 		public void setValueAt(String value, int row, int col) {
 			this.data[col].set(row, value);
 			fireTableCellUpdated(row, col);
+		}
+		
+		public void updateData(TableData tableData) {
+			this.data = tableData.getContent();
+			this.fireTableDataChanged();
 		}
 
 	}
