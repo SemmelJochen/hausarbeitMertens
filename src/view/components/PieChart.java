@@ -6,41 +6,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.swing.JComponent;
 
 import model.ModelContainer;
 import model.PeerReviewer;
 
-class Slice {
-	private double value;
-	private Color color;
-	private String dozent;
-
-	public Slice(double value, Color color, String name) {
-		this.value = value;
-		this.color = color;
-		this.dozent = name;
-	}
-
-	public double getValue() {
-		return this.value;
-	}
-
-	public Color getColor() {
-		return this.color;
-	}
-
-	public String getName() {
-		return this.dozent;
-	}
-}
-
 public class PieChart extends JComponent {
 
 	private static final long serialVersionUID = 1534531035L;
-	ArrayList<Slice> slices;
+	public ArrayList<Slice> slices;
 
 	public PieChart() {
 		super();
@@ -52,9 +27,12 @@ public class PieChart extends JComponent {
 
 	private void createSliceData() {
 		for (PeerReviewer peerReviewer : ModelContainer.getInstance().getPeerReviewers()) {
-			this.slices.add(new Slice(peerReviewer.getCountFirstBachelorThesises(),
+			Slice slice = new Slice(peerReviewer.getCountFirstBachelorThesises(),
 					new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)),
-					peerReviewer.getFirstName() + " " + peerReviewer.getName()));
+					peerReviewer.getFirstName() + " " + peerReviewer.getName());
+
+			if (slice.getValue() > 0)
+				this.slices.add(slice);
 		}
 	}
 
@@ -88,13 +66,7 @@ public class PieChart extends JComponent {
 		}
 	}
 
-	public HashMap<Color, String> getSlices() {
-		HashMap<Color, String> result = new HashMap<Color, String>();
-		for (int i = 0; i < this.slices.size(); i++) {
-			if (this.slices.get(i).getValue() > 0) {
-				result.put(this.slices.get(i).getColor(), this.slices.get(i).getName());
-			}
-		}
-		return result;
+	public ArrayList<Slice> getSlices() {
+		return this.slices;
 	}
 }

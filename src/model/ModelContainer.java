@@ -60,20 +60,6 @@ public class ModelContainer implements Externalizable {
 		return this.peerReviewers.get(key);
 	}
 
-	public void printPeerReview() {
-		Iterator it = peerReviewers.entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry) it.next();
-			System.out.println(pair.getKey() + "\n" + pair.getValue());
-
-			PeerReviewer p = (PeerReviewer) pair.getValue();
-			p.printStudents();
-
-			System.out.println("");
-			it.remove(); // avoids a ConcurrentModificationException
-		}
-	}
-
 	public void printPeerReviewers() {
 		ArrayList<PeerReviewer> r = (ArrayList<PeerReviewer>) this.peerReviewers.values();
 		for (PeerReviewer peerReviewer : r) {
