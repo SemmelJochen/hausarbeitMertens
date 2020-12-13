@@ -11,22 +11,25 @@ public class Student extends Person implements Serializable {
 	private String studentGroup, practicePartner, subject;
 	private PeerReviewer firstPeerReviewer;
 	private PeerReviewer secondPeerReviewer;
+	private String remark;
 
 	public Student(String name, String firstName, String email, String studentGroup, String practicePartner,
-			String subject, PeerReviewer firstPeerReviewer, PeerReviewer secondPeerReviewer) {
+			String subject, PeerReviewer firstPeerReviewer, PeerReviewer secondPeerReviewer, String remark) {
 		super(name, firstName, email);
 		this.studentGroup = studentGroup;
 		this.practicePartner = practicePartner;
 		this.subject = subject;
 		this.firstPeerReviewer = firstPeerReviewer;
 		this.secondPeerReviewer = secondPeerReviewer;
+		this.remark = remark;
 	}
 	public Student(String name, String firstName, String email, String studentGroup, String practicePartner,
-			String subject) {
+			String subject, String remark) {
 		super(name, firstName, email);
 		this.studentGroup = studentGroup;
 		this.practicePartner = practicePartner;
 		this.subject = subject;
+		this.remark = remark;
 	}
 
 	public PeerReviewer getFirstPeerReviewer() {
@@ -51,6 +54,14 @@ public class Student extends Person implements Serializable {
 
 	public void setStudentGroup(String studentGroup) {
 		this.studentGroup = studentGroup;
+	}
+	
+	public String getRemark() {
+		return this.remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public String getPracticePartner() {
