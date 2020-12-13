@@ -20,7 +20,7 @@ public class Importer {
 	}
 
 	public boolean chooseFile() {
-		if(JFileChooser.CANCEL_OPTION == this.fileChooser.showOpenDialog(null)){
+		if (JFileChooser.CANCEL_OPTION == this.fileChooser.showOpenDialog(null)) {
 			return false;
 		}
 		this.file = this.fileChooser.getSelectedFile();
@@ -31,7 +31,8 @@ public class Importer {
 	 * the parameter modelContainer is changed after running the method!
 	 */
 	public void importCsvInModelContainer(ModelContainer modelContainer) {
-		if(!this.chooseFile()) return;
+		if (!this.chooseFile())
+			return;
 		BufferedReader br;
 		try {
 			br = new BufferedReader(new FileReader(this.file));
@@ -44,8 +45,8 @@ public class Importer {
 					PeerReviewer secondPeerReviewer = this.newSecondPeerReviewer(line);
 					firstPeerReviewer.addBachelorThesisAsFirstReviewer(student);
 					student.setFirstPeerReviewer(firstPeerReviewer);
-					
-					if(secondPeerReviewer != null) {
+
+					if (secondPeerReviewer != null) {
 						secondPeerReviewer.addBachelorThesisAsSecondReviewer(student);
 						modelContainer.putPeerReviewer(secondPeerReviewer);
 						student.setSecondPeerReviewer(secondPeerReviewer);
@@ -64,21 +65,31 @@ public class Importer {
 	}
 
 	public Student newStudent(String line) {
-		String[] entries = line.split(";");
+		String[] entries = line.split(";");		
 		String[] names = entries[0].split(", ");
+		
+		if (names.length == 1) {
+			return new Student("", "", "", "", "", "");
+		}
+
 		Student result = new Student(names[1], names[0], "", entries[1], entries[2], entries[3]);
 		return result;
 	}
 
 	public PeerReviewer newFirstPeerReviewer(String line) {
 		String[] peerReviewerString = line.split(";")[4].split(" ");
+		if (peerReviewerString.length == 1) {
+			return new PeerReviewer("", "", "", "", -1);
+		}
 		return this.createPeerReviewer(peerReviewerString);
 
 	}
 
 	public PeerReviewer newSecondPeerReviewer(String line) {
 		String[] peerReviewerString = line.split(";")[5].split(" ");
-		if(peerReviewerString.length == 1) return null;
+		if (peerReviewerString.length == 1) {
+			return new PeerReviewer("", "", "", "", -1);
+		}
 		return this.createPeerReviewer(peerReviewerString);
 	}
 
@@ -97,6 +108,6 @@ public class Importer {
 			i++;
 		}
 		firstnames = firstnames.trim();
-		return new PeerReviewer(title, peerReviewerString[peerReviewerString.length-1], firstnames, "", -1);
+		return new PeerReviewer(title, peerReviewerString[peerReviewerString.length - 1], firstnames, "", -1);
 	}
 }
