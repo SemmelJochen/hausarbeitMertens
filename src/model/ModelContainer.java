@@ -6,10 +6,10 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import controller.ObservableHashMap;
 import controller.ObservableList;
 
 public class ModelContainer implements Externalizable {
@@ -21,7 +21,7 @@ public class ModelContainer implements Externalizable {
 	 * loading we do this operation backwards.
 	 */
 	private static final long serialVersionUID = 0xCAFEL;
-	private HashMap<String, PeerReviewer> peerReviewers;
+	private ObservableHashMap<String, PeerReviewer> peerReviewers;
 	private ObservableList<Student> students;
 
 	private static final ModelContainer MODELCONTAINER = new ModelContainer();
@@ -31,7 +31,7 @@ public class ModelContainer implements Externalizable {
 	}
 
 	private ModelContainer() {
-		this.peerReviewers = new HashMap<String, PeerReviewer>();
+		this.peerReviewers = new ObservableHashMap<String, PeerReviewer>();
 		this.students = new ObservableList<Student>();
 
 	}
@@ -60,13 +60,6 @@ public class ModelContainer implements Externalizable {
 		return this.peerReviewers.get(key);
 	}
 
-	public void printPeerReviewers() {
-		ArrayList<PeerReviewer> r = (ArrayList<PeerReviewer>) this.peerReviewers.values();
-		for (PeerReviewer peerReviewer : r) {
-
-		}
-	}
-
 	public ArrayList<PeerReviewer> getPeerReviewers() {
 		return new ArrayList<PeerReviewer>(peerReviewers.values());
 	}
@@ -77,10 +70,6 @@ public class ModelContainer implements Externalizable {
 
 	public void load(ModelContainer modelcontainer) {
 		// TODO
-	}
-
-	public void setPeerReviewers(HashMap<String, PeerReviewer> peerReviewers) {
-		this.peerReviewers = peerReviewers;
 	}
 
 	public void setStudents(List<Student> students) {
@@ -95,12 +84,12 @@ public class ModelContainer implements Externalizable {
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		out.writeObject(new ArrayList<Student>(this.students));
-		out.writeObject(this.peerReviewers);
+		out.writeObject(new HashMap<String, PeerReviewer>(this.peerReviewers.convertToHashMap()));
 	}
 
 	@Override
 	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-		this.students = new ObservableList<Student>((List<Student>) in.readObject());
-		this.peerReviewers = (HashMap<String, PeerReviewer>) in.readObject();
+		this.students = new ObservableList<Student>((ArrayList<Student>) in.readObject());
+		this.peerReviewers = new ObservableHashMap<String, PeerReviewer>((HashMap<String, PeerReviewer>) in.readObject());
 	}
 }
