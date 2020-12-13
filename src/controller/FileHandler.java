@@ -108,7 +108,6 @@ public class FileHandler {
 	public Student newStudent(String line) {
 		String[] entries = line.split(";");		
 		String[] names = entries[0].split(", ");
-		
 		if (names.length == 1) {
 			return new Student("", "", "", "", "", "", "");
 		}
@@ -124,7 +123,6 @@ public class FileHandler {
 			return new PeerReviewer("", "", "", "", -1);
 		}
 		return this.createPeerReviewer(peerReviewerString);
-
 	}
 
 	public PeerReviewer newSecondPeerReviewer(String line) {
