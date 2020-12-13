@@ -64,7 +64,7 @@ public class ModelContainer implements Externalizable {
 		return new ArrayList<PeerReviewer>(peerReviewers.values());
 	}
 
-	public ObservableList<Student> getStudens() {
+	public ObservableList<Student> getStudents() {
 		return this.students;
 	}
 
