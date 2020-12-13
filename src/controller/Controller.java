@@ -177,7 +177,6 @@ public class Controller {
 
 	public void runImport() {
 		this.csvImporter.importCsvInModelContainer(this.modelContainer);
-		// notify observers that database changed
 	}
 
 	public void runExport() {

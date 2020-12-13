@@ -21,8 +21,6 @@ import view.components.ObserverMenuItem;
 
 public class MainWindow extends JFrame {
 
-	private JOptionPane exitDialog = new JOptionPane("Möchten Sie speichern, bevor Sie das Programm schließen ?\n",
-			JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
 	private Controller controller;
 	private Overview overview;
 	/**
