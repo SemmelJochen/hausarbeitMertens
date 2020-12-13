@@ -40,20 +40,18 @@ public class DiagramOverview extends ContentPane {
 		JPanel legend = new JPanel();
 		ArrayList<Slice> slices = this.pieChart.getSlices();
 
-		GridLayout layout = new GridLayout();
-		layout.setVgap(3);
-		layout.setColumns(2);
-		layout.setRows(slices.size());
+		BoxLayout layout = new BoxLayout(legend, BoxLayout.Y_AXIS);
 		legend.setLayout(layout);
 
 		for (Slice slice : slices) {
 
 			JPanel legendElement = new JPanel();
-			legendElement.setPreferredSize(new Dimension(300, 30));
+			legendElement.setLayout(new BoxLayout(legendElement, BoxLayout.X_AXIS));
 			legendElement.add(new BulletPoint(slice.getColor()));
 			
-			JLabel peerReviewerName = this.getJLabel(slice.getName());
-			peerReviewerName.setHorizontalTextPosition(SwingConstants.LEFT);		
+			JLabel peerReviewerName = new JLabel(slice.getName());
+			peerReviewerName.setPreferredSize(new Dimension(250, 30));
+			
 			peerReviewerName.addMouseListener(new MouseAdapter() {
 
 				public void mouseEntered(MouseEvent event) {
@@ -84,14 +82,6 @@ public class DiagramOverview extends ContentPane {
 		return legend;
 	}
 
-	private JLabel getJLabel(String name) {
-		JLabel result = new JLabel(name);
-		result.setBorder(new EmptyBorder(0, 30, 0, 0));
-		result.setHorizontalAlignment(SwingConstants.RIGHT);
-		result.setHorizontalTextPosition(SwingConstants.RIGHT);
-		return result;
-	}
-
 	class BulletPoint extends JComponent {
 
 		private Color color;
@@ -99,7 +89,7 @@ public class DiagramOverview extends ContentPane {
 		public BulletPoint(Color color) {
 			super();
 			this.color = color;
-			this.setPreferredSize(new Dimension(30, 30));
+			this.setPreferredSize(new Dimension(40, 30));
 		}
 
 		@Override
