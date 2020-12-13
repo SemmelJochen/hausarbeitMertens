@@ -1,46 +1,33 @@
 package view.components;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
-
-import model.ModelContainer;
-import model.PeerReviewer;
 
 public class PieChart extends JComponent {
 
 	private static final long serialVersionUID = 1534531035L;
-	public ArrayList<Slice> slices;
+	private List<Slice> slices;
 
-	public PieChart() {
+	public PieChart(List<Slice> slices, Dimension dimension) {
 		super();
-		this.slices = new ArrayList<Slice>();
-		this.createSliceData();
-		this.setPreferredSize(new Dimension(500, 500));
+		this.slices = slices;
+		this.setPreferredSize(dimension);
 		this.repaint();
 	}
 
-	private void createSliceData() {
-		for (PeerReviewer peerReviewer : ModelContainer.getInstance().getPeerReviewers()) {
-			Slice slice = new Slice(peerReviewer.getCountFirstBachelorThesises(),
-					new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)),
-					peerReviewer.getFirstName() + " " + peerReviewer.getName());
-
-			if (slice.getValue() > 0)
-				this.slices.add(slice);
-		}
+	public void udateSlices(List<Slice> slices) {
+		this.slices = slices;
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		if (this.slices.isEmpty()) {
 			// TODO: Exeptionhandling if list is empty
-			System.out.println("EMPTY");
 			return;
 		}
 		super.paintComponent(g);
@@ -66,7 +53,7 @@ public class PieChart extends JComponent {
 		}
 	}
 
-	public ArrayList<Slice> getSlices() {
+	public List<Slice> getSlices() {
 		return this.slices;
 	}
 }

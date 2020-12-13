@@ -40,4 +40,8 @@ public class Slice extends JComponent {
 	public void setIsBrighter(boolean isBrighter) {
 		this.isBrighter = isBrighter;
 	}
+	
+	public void updateValue(int value) {
+		this.value = value;
+	}
 }

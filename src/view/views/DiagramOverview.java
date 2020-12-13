@@ -3,32 +3,32 @@ package view.views;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 
+import model.ModelContainer;
 import view.components.ContentPane;
 import view.components.PieChart;
 import view.components.Slice;
 
-public class DiagramOverview extends ContentPane {
+public class DiagramOverview extends ContentPane implements Observer {
 
 	private static final long serialVersionUID = 57267L;
-	PieChart pieChart;
+	private PieChart pieChart;
 
 	public DiagramOverview() {
 		super();
-		this.pieChart = new PieChart();
+
+		this.pieChart = new PieChart(createSliceData(), new Dimension(500, 500));
 		JPanel content = new JPanel();
 		content.add(this.buildLegend());
 		content.add(pieChart);
@@ -38,7 +38,7 @@ public class DiagramOverview extends ContentPane {
 
 	public JPanel buildLegend() {
 		JPanel legend = new JPanel();
-		ArrayList<Slice> slices = this.pieChart.getSlices();
+		List<Slice> slices = this.pieChart.getSlices();
 
 		BoxLayout layout = new BoxLayout(legend, BoxLayout.Y_AXIS);
 		legend.setLayout(layout);
@@ -48,14 +48,14 @@ public class DiagramOverview extends ContentPane {
 			JPanel legendElement = new JPanel();
 			legendElement.setLayout(new BoxLayout(legendElement, BoxLayout.X_AXIS));
 			legendElement.add(new BulletPoint(slice.getColor()));
-			
+
 			JLabel peerReviewerName = new JLabel(slice.getName());
 			peerReviewerName.setPreferredSize(new Dimension(250, 30));
-			
+
 			peerReviewerName.addMouseListener(new MouseAdapter() {
 
 				public void mouseEntered(MouseEvent event) {
-					ArrayList<Slice> slices = pieChart.getSlices();
+					List<Slice> slices = pieChart.getSlices();
 					for (int i = 0; i < slices.size(); i++) {
 						if (slices.get(i).getName().equals(peerReviewerName.getText())) {
 							slices.get(i).setIsBrighter(true);
@@ -65,7 +65,7 @@ public class DiagramOverview extends ContentPane {
 				}
 
 				public void mouseExited(MouseEvent event) {
-					ArrayList<Slice> slices = pieChart.getSlices();
+					List<Slice> slices = pieChart.getSlices();
 					for (int i = 0; i < slices.size(); i++) {
 						if (slices.get(i).getName().equals(peerReviewerName.getText())) {
 							slices.get(i).setIsBrighter(false);
@@ -80,6 +80,22 @@ public class DiagramOverview extends ContentPane {
 			legend.setAlignmentX(LEFT_ALIGNMENT);
 		}
 		return legend;
+	}
+
+	public List<Slice> createSliceData() {
+		List<Slice> slices = new ArrayList<Slice>();
+		ModelContainer.getInstance().getPeerReviewers().forEach(peerReviewer -> {
+			slices.add(new Slice(peerReviewer.getCountFirstBachelorThesises(),
+					new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)),
+					peerReviewer.getFirstName() + " " + peerReviewer.getName()));
+		});
+		return slices;
+	}
+
+
+	@Override
+	public void update(Observable o, Object arg) {
+		this.pieChart.udateSlices(createSliceData());
 	}
 
 	class BulletPoint extends JComponent {
@@ -99,4 +115,5 @@ public class DiagramOverview extends ContentPane {
 			g.fillArc(15, 7, 15, 15, 0, 360);
 		}
 	}
+
 }
