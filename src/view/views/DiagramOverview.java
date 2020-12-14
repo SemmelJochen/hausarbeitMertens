@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import model.ModelContainer;
 import view.components.ContentPane;
+import view.components.PieChartLegend;
 import view.components.PieChart;
 import view.components.Slice;
 
@@ -24,62 +25,18 @@ public class DiagramOverview extends ContentPane implements Observer {
 
 	private static final long serialVersionUID = 57267L;
 	private PieChart pieChart;
+	private PieChartLegend legend;
 
 	public DiagramOverview() {
 		super();
-
-		this.pieChart = new PieChart(createSliceData(), new Dimension(500, 500));
+		List<Slice> sliceData = createSliceData();
+		this.pieChart = new PieChart(sliceData, new Dimension(500, 500));
+		this.legend = new PieChartLegend(sliceData, this.pieChart);
 		JPanel content = new JPanel();
-		content.add(this.buildLegend());
+		content.add(legend);
 		content.add(pieChart);
 		this.setHeader(new JLabel("Anzahl der Bachelorthesen eines Dozenten relativ zu allen Thesen"));
 		this.setContent(content);
-	}
-
-	public JPanel buildLegend() {
-		JPanel legend = new JPanel();
-		List<Slice> slices = this.pieChart.getSlices();
-
-		BoxLayout layout = new BoxLayout(legend, BoxLayout.Y_AXIS);
-		legend.setLayout(layout);
-
-		for (Slice slice : slices) {
-
-			JPanel legendElement = new JPanel();
-			legendElement.setLayout(new BoxLayout(legendElement, BoxLayout.X_AXIS));
-			legendElement.add(new BulletPoint(slice.getColor()));
-			
-			JLabel peerReviewerName = new JLabel(slice.getName() + " - " + slice.getValue());
-			peerReviewerName.setPreferredSize(new Dimension(250, 30));
-
-			peerReviewerName.addMouseListener(new MouseAdapter() {
-
-				public void mouseEntered(MouseEvent event) {
-					List<Slice> slices = pieChart.getSlices();
-					for (int i = 0; i < slices.size(); i++) {
-						if (peerReviewerName.getText().contains(slices.get(i).getName())) {
-							slices.get(i).setIsBrighter(true);
-						}
-					}
-					pieChart.repaint();
-				}
-
-				public void mouseExited(MouseEvent event) {
-					List<Slice> slices = pieChart.getSlices();
-					for (int i = 0; i < slices.size(); i++) {
-						if (peerReviewerName.getText().contains(slices.get(i).getName())) {
-							slices.get(i).setIsBrighter(false);
-						}
-					}
-					pieChart.repaint();
-				}
-			});
-			legendElement.add(peerReviewerName);
-
-			legend.add(legendElement);
-			legend.setAlignmentX(LEFT_ALIGNMENT);
-		}
-		return legend;
 	}
 
 	public List<Slice> createSliceData() {
@@ -95,25 +52,10 @@ public class DiagramOverview extends ContentPane implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		this.pieChart.udateSlices(createSliceData());
+		List<Slice> updatedSlices = createSliceData();
+		this.pieChart.udateSlices(updatedSlices);
+		this.legend.updateLegend(updatedSlices);
 	}
 
-	class BulletPoint extends JComponent {
-
-		private Color color;
-
-		public BulletPoint(Color color) {
-			super();
-			this.color = color;
-			this.setPreferredSize(new Dimension(40, 30));
-		}
-
-		@Override
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.setColor(this.color);
-			g.fillArc(15, 7, 15, 15, 0, 360);
-		}
-	}
 
 }
