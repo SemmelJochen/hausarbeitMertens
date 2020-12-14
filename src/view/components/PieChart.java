@@ -22,6 +22,8 @@ public class PieChart extends JComponent {
 
 	public void udateSlices(List<Slice> slices) {
 		this.slices = slices;
+		this.revalidate();
+		this.repaint();
 	}
 
 	@Override
