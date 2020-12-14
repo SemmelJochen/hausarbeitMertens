@@ -25,6 +25,7 @@ public class MainWindow extends JFrame {
 	private Controller controller;
 	private Overview overview;
 	private DiagramOverview diagramOverview;
+	private SpecificReviewerOverview reviewerOverview;
 
 	/**
 	 * Create the frame.
@@ -48,11 +49,13 @@ public class MainWindow extends JFrame {
 	public void appendDataChangeListeners() {
 		this.controller.addDataChangeObserver(this.overview);
 		this.controller.addDataChangeObserver(this.diagramOverview);
+		this.controller.addDataChangeObserver(this.reviewerOverview);
 	}
 
 	public void createViews() {
 		this.overview = new Overview();
 		this.diagramOverview = new DiagramOverview();
+		this.reviewerOverview = new SpecificReviewerOverview();
 	}
 
 	public void buildInitialView() {
@@ -139,6 +142,14 @@ public class MainWindow extends JFrame {
 
 		// add G-Einsicht
 		menuItem = new JMenuItem("Gutachtereinsicht");
+		menuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.setCurrentlyVisible(MainWindow.this.reviewerOverview);
+				
+			}
+		});
 		menu.add(menuItem);
 
 		// add menu for diagramms

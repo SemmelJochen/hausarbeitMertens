@@ -12,10 +12,10 @@ public class PeerReviewer extends Person implements Serializable {
 	private List<Student> secondReviewerRoles;
 	private String title;
 
-	public PeerReviewer(String title, String name, String firstName, String email, Integer capacity) {
+	public PeerReviewer(String title, String name, String firstName, String email, int capacity) {
 		super(name, firstName, email);
 		this.title = title;
-		this.capacity = (capacity != null) ? capacity : 10; // default capacity
+		this.capacity = (capacity !=  -1) ? capacity : 10; // default capacity
 		this.firstReviewerRoles = new ArrayList<>();
 		this.secondReviewerRoles = new ArrayList<>();
 	}
