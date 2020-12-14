@@ -48,8 +48,8 @@ public class DiagramOverview extends ContentPane implements Observer {
 			JPanel legendElement = new JPanel();
 			legendElement.setLayout(new BoxLayout(legendElement, BoxLayout.X_AXIS));
 			legendElement.add(new BulletPoint(slice.getColor()));
-
-			JLabel peerReviewerName = new JLabel(slice.getName());
+			
+			JLabel peerReviewerName = new JLabel(slice.getName() + " - " + slice.getValue());
 			peerReviewerName.setPreferredSize(new Dimension(250, 30));
 
 			peerReviewerName.addMouseListener(new MouseAdapter() {
@@ -57,7 +57,7 @@ public class DiagramOverview extends ContentPane implements Observer {
 				public void mouseEntered(MouseEvent event) {
 					List<Slice> slices = pieChart.getSlices();
 					for (int i = 0; i < slices.size(); i++) {
-						if (slices.get(i).getName().equals(peerReviewerName.getText())) {
+						if (peerReviewerName.getText().contains(slices.get(i).getName())) {
 							slices.get(i).setIsBrighter(true);
 						}
 					}
@@ -67,7 +67,7 @@ public class DiagramOverview extends ContentPane implements Observer {
 				public void mouseExited(MouseEvent event) {
 					List<Slice> slices = pieChart.getSlices();
 					for (int i = 0; i < slices.size(); i++) {
-						if (slices.get(i).getName().equals(peerReviewerName.getText())) {
+						if (peerReviewerName.getText().contains(slices.get(i).getName())) {
 							slices.get(i).setIsBrighter(false);
 						}
 					}

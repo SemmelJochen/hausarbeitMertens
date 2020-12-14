@@ -23,7 +23,7 @@ import view.views.MainWindow;
 
 public class Controller {
 
-	private Importer csvImporter;
+	private FileHandler csvImporter;
 	private ObservableCommandStack undoStack, redoStack;
 	private MainWindow window;
 	private ModelContainer modelContainer = ModelContainer.getInstance();
@@ -37,11 +37,11 @@ public class Controller {
 	}
 
 	public void addDataChangeObserver(Observer o) {
-		this.modelContainer.getStudens().addObserver(o);
+		this.modelContainer.getStudents().addObserver(o);
 	}
 
 	public Controller() {
-		this.csvImporter = new Importer();
+		this.csvImporter = new FileHandler();
 		this.undoStack = new ObservableCommandStack();
 		this.redoStack = new ObservableCommandStack();
 
@@ -83,9 +83,9 @@ public class Controller {
 	 */
 	public TableData createSampleTableData() {
 		List<Student> students = new ArrayList<Student>();
-		students.add(new Student("Kalle", "Heino", "kalle@heino.de", "WI62/19", "zeb", "Netzwerke"));
-		students.add(new Student("Peter", "Guenther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren"));
-		students.add(new Student("Schimmer", "Ralf", "schimmer@ralf.de", "WI62/19", "euronics", "Infrastrukturen"));
+		students.add(new Student("Kalle", "Heino", "kalle@heino.de", "WI62/19", "zeb", "Netzwerke", "LOL"));
+		students.add(new Student("Peter", "Guenther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren", ":O"));
+		students.add(new Student("Schimmer", "Ralf", "schimmer@ralf.de", "WI62/19", "euronics", "Infrastrukturen", "GJE"));
 
 		List<PeerReviewer> reviewer = new ArrayList<PeerReviewer>();
 		reviewer.add(new PeerReviewer("Prof.", "Schmitz", "Karl", "karl@schmitz.de", 20));
@@ -100,6 +100,8 @@ public class Controller {
 						students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//
 				.withColumn("Kapazitaet vom Pruefer",
 						reviewer.stream().map(e -> e.getCapacity()).collect(Collectors.toList()))//
+				.withColumn("Bemerkung",
+						students.stream().map(e -> e.getRemark()).collect(Collectors.toList()))//
 				.build();
 
 		return data;
@@ -180,7 +182,7 @@ public class Controller {
 	}
 
 	public void runExport() {
-
+		this.csvImporter.exportToCsv();
 	}
 
 	public static void main(String[] args) {

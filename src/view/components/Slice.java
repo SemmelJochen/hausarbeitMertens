@@ -24,7 +24,7 @@ public class Slice extends JComponent {
 
 	public Color getColor() {
 		if(this.isBrighter) {
-			return this.color.brighter();
+			return this.color.brighter().brighter();
 		}
 		return this.color;
 	}

@@ -30,7 +30,7 @@ public class StudentOverview extends JPanel {
 	}
 
 	public void refreshTableData() {
-		List<Student> students = ModelContainer.getInstance().getStudens();
+		List<Student> students = ModelContainer.getInstance().getStudents();
 		this.tableData = TableData.builder()
 				.withColumn("Studiengruppe",
 						students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//
