@@ -5,9 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.ModelContainer;
 import model.PeerReviewer;
@@ -24,10 +24,24 @@ public class FileHandler {
 		this.header = new String[4];
 	}
 
-	public boolean chooseFile() {
-		if (JFileChooser.CANCEL_OPTION == this.fileChooser.showOpenDialog(null)) {
+	public boolean chooseFile(DialogType dialogType) {
+		int result = 0;
+		FileNameExtensionFilter xmlFilter = new FileNameExtensionFilter("CSV-Dateien (*.csv)", "csv");
+		this.fileChooser.addChoosableFileFilter(xmlFilter);
+		this.fileChooser.setFileFilter(xmlFilter);
+		
+		if (dialogType == DialogType.IMPORT) {
+			result = this.fileChooser.showOpenDialog(null);
+		} else if (dialogType == DialogType.EXPORT) {
+			result = this.fileChooser.showSaveDialog(null);
+		}
+
+		if (result == JFileChooser.CANCEL_OPTION) {
 			return false;
 		}
+		
+		//JFileChooser.APPROVE_OPTION
+		//unreachable code for the CANCEL_OPTION
 		this.file = this.fileChooser.getSelectedFile();
 		return true;
 	}
@@ -36,7 +50,7 @@ public class FileHandler {
 	 * the parameter modelContainer is changed after running the method!
 	 */
 	public void importCsvInModelContainer(ModelContainer modelContainer) {
-		if (!this.chooseFile())
+		if (!this.chooseFile(DialogType.IMPORT))
 			return;
 		BufferedReader br;
 		try {
@@ -69,49 +83,45 @@ public class FileHandler {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void exportToCsv() {
-		if (!this.chooseFile())
+		if (!this.chooseFile(DialogType.EXPORT))
 			return;
 		ObservableList<Student> students = ModelContainer.getInstance().getStudents();
 		FileWriter writer;
-		try{
+		try {
 			writer = new FileWriter(this.file);
-			for(int i = 0; i < this.header.length; i++) {
+			for (int i = 0; i < this.header.length; i++) {
 				writer.append(this.header[i]);
 				writer.append(System.lineSeparator());
 			}
-			
+
 			String seperator = ";";
-	        for (Student student : students) {
-	            writer.append(
-	            		student.getName() + ", " + student.getFirstName() + seperator +
-	            		student.getStudentGroup() + seperator + 
-	            		student.getPracticePartner() + seperator +
-	            		student.getStudentGroup() + seperator +
-	            		this.createPeerReviewerStringForWriting(student.getFirstPeerReviewer()) + seperator +
-	            		this.createPeerReviewerStringForWriting(student.getSecondPeerReviewer()) + seperator +
-	            		student.getRemark()
-	            );
-	            writer.append(System.lineSeparator());
-	        }
-	        writer.flush();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+			for (Student student : students) {
+				writer.append(student.getName() + ", " + student.getFirstName() + seperator + student.getStudentGroup()
+						+ seperator + student.getPracticePartner() + seperator + student.getStudentGroup() + seperator
+						+ this.createPeerReviewerStringForWriting(student.getFirstPeerReviewer()) + seperator
+						+ this.createPeerReviewerStringForWriting(student.getSecondPeerReviewer()) + seperator
+						+ student.getRemark());
+				writer.append(System.lineSeparator());
+			}
+			writer.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	private String createPeerReviewerStringForWriting(PeerReviewer peerReviewer) {
 		return peerReviewer.getTitle() + " " + peerReviewer.getFirstName() + " " + peerReviewer.getName();
 	}
 
 	public Student newStudent(String line) {
-		String[] entries = line.split(";");		
+		String[] entries = line.split(";");
 		String[] names = entries[0].split(", ");
 		if (names.length == 1) {
 			return new Student("", "", "", "", "", "", "");
 		}
-		if(entries.length == 7) {
+		if (entries.length == 7) {
 			return new Student(names[1], names[0], "", entries[1], entries[2], entries[3], entries[6]);
 		}
 		return new Student(names[1], names[0], "", entries[1], entries[2], entries[3], "");
@@ -149,5 +159,9 @@ public class FileHandler {
 		}
 		firstnames = firstnames.trim();
 		return new PeerReviewer(title, peerReviewerString[peerReviewerString.length - 1], firstnames, "", -1);
+	}
+
+	enum DialogType {
+		IMPORT, EXPORT;
 	}
 }

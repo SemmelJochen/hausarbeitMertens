@@ -23,7 +23,7 @@ import view.views.MainWindow;
 
 public class Controller {
 
-	private FileHandler csvImporter;
+	private FileHandler csvHandler;
 	private ObservableCommandStack undoStack, redoStack;
 	private MainWindow window;
 	private ModelContainer modelContainer = ModelContainer.getInstance();
@@ -41,7 +41,7 @@ public class Controller {
 	}
 
 	public Controller() {
-		this.csvImporter = new FileHandler();
+		this.csvHandler = new FileHandler();
 		this.undoStack = new ObservableCommandStack();
 		this.redoStack = new ObservableCommandStack();
 
@@ -178,11 +178,11 @@ public class Controller {
 	}
 
 	public void runImport() {
-		this.csvImporter.importCsvInModelContainer(this.modelContainer);
+		this.csvHandler.importCsvInModelContainer(this.modelContainer);
 	}
 
 	public void runExport() {
-		this.csvImporter.exportToCsv();
+		this.csvHandler.exportToCsv();
 	}
 
 	public static void main(String[] args) {
