@@ -43,6 +43,7 @@ public class PieChartLegend extends JPanel {
 			
 			JLabel peerReviewerName = new JLabel(slice.getName() + " - " + slice.getValue());
 			peerReviewerName.setPreferredSize(new Dimension(250, 30));
+			
 			peerReviewerName.addMouseListener(new MouseAdapter() {
 
 				public void mouseEntered(MouseEvent event) {

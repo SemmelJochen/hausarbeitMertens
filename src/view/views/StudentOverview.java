@@ -24,7 +24,6 @@ public class StudentOverview extends JPanel {
 
 	public JScrollPane buildTable() {
 		refreshTableData();
-
 		table = new Table(tableData);
 		return table.getContent();
 	}
