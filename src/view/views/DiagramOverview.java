@@ -2,23 +2,18 @@ package view.views;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.BoxLayout;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.ModelContainer;
 import view.components.ContentPane;
-import view.components.PieChartLegend;
 import view.components.PieChart;
+import view.components.PieChartLegend;
 import view.components.Slice;
 
 public class DiagramOverview extends ContentPane implements Observer {
