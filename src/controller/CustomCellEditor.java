@@ -128,6 +128,9 @@ public class CustomCellEditor extends AbstractCellEditor implements TableCellEdi
 		if (column == StudentColumn.SUBJECT) {
 			newStudent.setSubject((String) data.getValue());
 		}
+		if (column == StudentColumn.REMARK) {
+			newStudent.setRemark((String) data.getValue());
+		}
 
 		this.backfireChangesToModel(student, newStudent);
 	}

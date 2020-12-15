@@ -68,13 +68,11 @@ public class ModelContainer implements Externalizable {
 	}
 	
 	public void updateReviewer(PeerReviewer oldReviewer, PeerReviewer newReviewer) {
-		System.out.println("changing reviewer value " + oldReviewer.toString() + newReviewer.toString());
 		String key = this.peerReviewers.getKey(oldReviewer);
 		this.peerReviewers.replace(key, newReviewer);
 	}
 	
 	public void updateStudent(Student oldStudent, Student newStudent) {
-		System.out.println("changing student value " + oldStudent.toString() + newStudent.toString());
 		int index = this.students.indexOf(oldStudent);
 		this.students.set(index, newStudent);
 	}

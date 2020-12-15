@@ -26,7 +26,7 @@ public class MainWindow extends JFrame {
 	private Overview overview;
 	private DiagramOverview diagramOverview;
 	private Diagram2 diagram2;
-	private SpecificReviewerOverview reviewerOverview;
+	private DetailedReviewerOvewview reviewerOverview;
 
 	/**
 	 * Create the frame.
@@ -55,15 +55,16 @@ public class MainWindow extends JFrame {
 	}
 
 	public void appendReviewerDataChangeListeners() {
+		this.controller.appendReviewerChangeListeners(this.overview);
 		this.controller.appendReviewerChangeListeners(this.diagram2);
-		this.controller.appendStudentChangeListeners(this.reviewerOverview);
+		this.controller.appendReviewerChangeListeners(this.reviewerOverview);
 	}
 
 	public void createViews() {
 		this.overview = new Overview();
 		this.diagramOverview = new DiagramOverview();
 		this.diagram2 = new Diagram2();
-		this.reviewerOverview = new SpecificReviewerOverview();
+		this.reviewerOverview = new DetailedReviewerOvewview();
 	}
 
 	public void buildInitialView() {
@@ -125,24 +126,13 @@ public class MainWindow extends JFrame {
 			}
 		});
 		submenu.add(subMenuItem);
-		subMenuItem = new JMenuItem("Erstgutachteruebersicht");
+		subMenuItem = new JMenuItem("Gutachteruebersicht");
 		subMenuItem.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainWindow.this.overview.setActiveTab(Overview.FIRSTREVIEWER_TAB_ID);
+				MainWindow.this.overview.setActiveTab(Overview.REVIEWER_TAB_ID);
 				MainWindow.this.setCurrentlyVisible(MainWindow.this.overview);
-			}
-		});
-		submenu.add(subMenuItem);
-		subMenuItem = new JMenuItem("Zweitgutachteruebersicht");
-		subMenuItem.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				MainWindow.this.overview.setActiveTab(Overview.SECONDREVIEWER_TAB_ID);
-				MainWindow.this.setCurrentlyVisible(MainWindow.this.overview);
-
 			}
 		});
 		submenu.add(subMenuItem);

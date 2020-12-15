@@ -12,13 +12,13 @@ import model.ModelContainer;
 import view.components.ContentPane;
 import view.components.ReviewerComboBox;
 
-public class SpecificReviewerOverview extends ContentPane implements Observer {
+public class DetailedReviewerOvewview extends ContentPane implements Observer {
 
 	private ReviewerComboBox comboBox;
 	private JTabbedPane tabbedPane;
 	private JPanel contentPane;
 
-	public SpecificReviewerOverview() {
+	public DetailedReviewerOvewview() {
 		super();
 		this.contentPane = new JPanel();
 		this.comboBox = new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
@@ -28,7 +28,7 @@ public class SpecificReviewerOverview extends ContentPane implements Observer {
 
 	}
 
-	public SpecificReviewerOverview(Component header, Component content) {
+	public DetailedReviewerOvewview(Component header, Component content) {
 		super(header, content);
 	}
 	

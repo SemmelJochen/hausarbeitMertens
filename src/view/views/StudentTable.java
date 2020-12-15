@@ -15,12 +15,12 @@ import model.StudentColumn;
 import model.TableData;
 import view.components.Table;
 
-public class StudentOverview extends JPanel {
+public class StudentTable extends JPanel {
 
-	private TableData tableData;
+	private TableData<Student> tableData;
 	private Table table;
 
-	public StudentOverview() {
+	public StudentTable() {
 		super();
 		this.add(buildTable());
 	}
@@ -31,6 +31,7 @@ public class StudentOverview extends JPanel {
 		return table.getContent();
 	}
 
+	@SuppressWarnings("unchecked")
 	public void refreshTableData() {
 		List<Student> students = ModelContainer.getInstance().getStudents();
 		this.tableData = newTableData()
@@ -45,6 +46,8 @@ public class StudentOverview extends JPanel {
 						students.stream().map(e -> e.getSubject()).collect(Collectors.toList()))//
 				.withColumn(StudentColumn.PRACTICE_PARTNER,
 						students.stream().map(e -> e.getPracticePartner()).collect(Collectors.toList()))//
+				.withColumn(StudentColumn.REMARK,
+						students.stream().map(e -> e.getRemark()).collect(Collectors.toList()))//
 				.withColumn(StudentColumn.FIRST_REVIEWER, students.stream()
 						.map(e -> e.getFirstPeerReviewer().getFirstName() + " " + e.getFirstPeerReviewer().getName())
 						.collect(Collectors.toList()))//

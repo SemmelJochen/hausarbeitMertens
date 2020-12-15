@@ -15,12 +15,12 @@ import model.ReviewerColumn;
 import model.TableData;
 import view.components.Table;
 
-public class FirstReviewerOverview extends JPanel {
+public class ReviewerTable extends JPanel {
 
 	private TableData tableData;
 	private Table table;
 
-	public FirstReviewerOverview() {
+	public ReviewerTable() {
 		super();
 		this.add(buildTable());
 	}
@@ -32,6 +32,7 @@ public class FirstReviewerOverview extends JPanel {
 		return table.getContent();
 	}
 
+	@SuppressWarnings("unchecked")
 	public void refreshTableData() {
 		List<PeerReviewer> firstReviewer = ModelContainer.getInstance().getPeerReviewers();
 		this.tableData = newTableData()

@@ -1,11 +1,14 @@
 package view.components;
 
+import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import controller.CustomCellEditor;
@@ -22,7 +25,18 @@ public class Table implements TableModelListener {
 		super();
 		// insert data into the tablemodel and create a table
 		this.model = new CustomTableModel(tableData);
-		this.table = new JTable(this.model);
+		this.table = new JTable(this.model) {
+			// make column fit to its content
+			@Override
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+				Component component = super.prepareRenderer(renderer, row, column);
+				int rendererWidth = component.getPreferredSize().width;
+				TableColumn tableColumn = getColumnModel().getColumn(column);
+				tableColumn.setPreferredWidth(
+						(int) Math.max(rendererWidth + getIntercellSpacing().getWidth(), tableColumn.getPreferredWidth()));
+				return component;
+			}
+		};
 		this.cellEditor = new CustomCellEditor();
 
 		this.table.setCellSelectionEnabled(true);
@@ -35,7 +49,7 @@ public class Table implements TableModelListener {
 
 		TableColumnModel column = this.table.getColumnModel();
 		column.getColumns().asIterator().forEachRemaining(c -> c.setCellEditor(this.cellEditor));
-		column.getColumns().asIterator().forEachRemaining(c -> c.setPreferredWidth(100));
+//		column.getColumns().asIterator().forEachRemaining(c -> c.setPreferredWidth(100));
 
 	}
 
