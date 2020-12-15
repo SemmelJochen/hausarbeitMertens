@@ -8,8 +8,10 @@ public class StudentChangeCommand implements Command {
 	private Pair<Object, Object> data;
 	private String columnName;
 	
-	public StudentChangeCommand() {
-		
+	public StudentChangeCommand(CustomCellEditor customCellEditor, Pair<Object, Object> data, String columnName) {
+		this.customCellEditor = customCellEditor;
+		this.data = data;
+		this.columnName = columnName;
 	}
 
 	@Override
