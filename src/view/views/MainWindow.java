@@ -25,6 +25,7 @@ public class MainWindow extends JFrame {
 	private Controller controller;
 	private Overview overview;
 	private DiagramOverview diagramOverview;
+	private Diagram2 diagram2;
 	private SpecificReviewerOverview reviewerOverview;
 
 	/**
@@ -49,12 +50,14 @@ public class MainWindow extends JFrame {
 	public void appendDataChangeListeners() {
 		this.controller.addDataChangeObserver(this.overview);
 		this.controller.addDataChangeObserver(this.diagramOverview);
+		this.controller.addDataChangeObserver(this.diagram2);
 		this.controller.addDataChangeObserver(this.reviewerOverview);
 	}
 
 	public void createViews() {
 		this.overview = new Overview();
 		this.diagramOverview = new DiagramOverview();
+		this.diagram2 = new Diagram2();
 		this.reviewerOverview = new SpecificReviewerOverview();
 	}
 
@@ -164,6 +167,14 @@ public class MainWindow extends JFrame {
 		});
 		submenu.add(subMenuItem);
 		subMenuItem = new JMenuItem("Diagramm 2");
+		subMenuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.setCurrentlyVisible(MainWindow.this.diagram2);
+				
+			}
+		});
 		submenu.add(subMenuItem);
 		subMenuItem = new JMenuItem("Diagramm 3");
 		submenu.add(subMenuItem);
