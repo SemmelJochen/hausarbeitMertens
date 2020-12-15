@@ -23,6 +23,7 @@ public class Controller {
 
 	public Controller() {
 		this.csvHandler = new FileHandler();
+		this.csvHandler = new FileHandler();
 		this.commandController = new CommandController();
 
 	}
