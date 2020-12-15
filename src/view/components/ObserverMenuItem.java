@@ -25,7 +25,4 @@ public class ObserverMenuItem extends JMenuItem implements Observer {
 			this.setEnabled(false);
 		}		
 	}
-	
-	
-
 }

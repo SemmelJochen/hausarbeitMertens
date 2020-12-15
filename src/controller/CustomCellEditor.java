@@ -41,6 +41,7 @@ public class CustomCellEditor extends AbstractCellEditor implements TableCellEdi
 			} else if (model.getMetaData().get(row) instanceof Student) {
 				Pair<Object, Object> data = model.getDataAt(row, col);
 				String columnName = model.getColumnName(col);
+//				blabla.addtoListe und so
 				this.updateStudent(data, columnName);
 
 			} else {
