@@ -21,11 +21,10 @@ public class DetailedReviewerOverview extends ContentPane implements Observer {
 	public DetailedReviewerOverview() {
 		super();
 		this.contentPane = new JPanel();
-		//this.comboBox = new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
+		this.comboBox = new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
 		
 		this.setHeader(new JLabel("Gutachtereinsicht"));
-//		this.setContent(comboBox);
-
+		this.setContent(comboBox);
 	}
 
 	public DetailedReviewerOverview(Component header, Component content) {
@@ -36,7 +35,4 @@ public class DetailedReviewerOverview extends ContentPane implements Observer {
 	public void update(Observable o, Object arg) {
 		this.comboBox.updateComboBoxModel(ModelContainer.getInstance().getPeerReviewers());
 	}
-
-	
-
 }

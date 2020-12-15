@@ -25,7 +25,6 @@ public class Controller {
 		this.csvHandler = new FileHandler();
 		this.csvHandler = new FileHandler();
 		this.commandController = new CommandController();
-
 	}
 	
 	public void addUndoMenuItem(ObserverMenuItem ob) {
