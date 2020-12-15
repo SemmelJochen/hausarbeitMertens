@@ -1,6 +1,9 @@
 package view.components;
 
 import java.awt.Component;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,22 +15,27 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import model.PeerReviewer;
 
-public class ReviewerComboBox extends JComboBox<PeerReviewer> {
+public class ReviewerComboBox extends JComboBox<PeerReviewer> implements PropertyChangeListener{
 
 	private ReviewerComboBoxModel comboBoxModel;
 	private ReviewerListCellRenderer comboBoxRenderer;
+	private PropertyChangeSupport propertyChangeSupport;
+	private PeerReviewer selectedPeerReviewer;
 
 	public ReviewerComboBox() {
 		this(new ArrayList<PeerReviewer>());
 	}
-	
+
 	public ReviewerComboBox(ArrayList<PeerReviewer> reviewerData) {
 		this.comboBoxModel = new ReviewerComboBoxModel();
 		this.comboBoxRenderer = new ReviewerListCellRenderer();
+		this.selectedPeerReviewer = new PeerReviewer("", "", "", "", -1);
 		this.setModel(this.comboBoxModel);
 		this.setRenderer(this.comboBoxRenderer);
 
 		this.updateComboBoxModel(reviewerData);
+		this.propertyChangeSupport = new PropertyChangeSupport(this.selectedPeerReviewer);
+		this.comboBoxModel.addPropertyChangeListener(this);
 	}
 
 	public void updateComboBoxModel(ArrayList<PeerReviewer> reviewerData) {
@@ -35,6 +43,17 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> {
 		this.updateUI();
 	}
 
+	public PeerReviewer getSelectedPeerReviewer() {
+		return this.selectedPeerReviewer;
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		System.out.println("set PeerReviewer");
+		this.selectedPeerReviewer = (PeerReviewer) this.comboBoxModel.getSelectedItem();
+		
+	}
+	
 	class ReviewerListCellRenderer extends BasicComboBoxRenderer {
 
 		public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
@@ -43,8 +62,8 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> {
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
 			if (value != null) {
-				int cap = ((PeerReviewer) value).getCapacity();
-				String name = ((PeerReviewer) value).getFirstName() + " " + ((PeerReviewer) value).getName();
+				int cap = (((PeerReviewer) value).getCapacity());
+				String name = (((PeerReviewer) value).getFirstName() + " " + ((PeerReviewer) value).getName());
 				String capacity = Integer.toString(cap);
 				if (cap < 0) {
 					capacity = "( " + capacity + ")";
@@ -52,19 +71,19 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> {
 				setText(name + " - " + capacity);
 
 			}
-
 			return this;
 		}
-
 	}
 
 	class ReviewerComboBoxModel implements MutableComboBoxModel<PeerReviewer> {
 
 		private List<PeerReviewer> entries;
-		int index = -1;
+		private int index = -1;
+		private PropertyChangeSupport propertyChangeSupport;
 
 		public ReviewerComboBoxModel() {
 			this(new ArrayList<PeerReviewer>());
+			this.propertyChangeSupport = new PropertyChangeSupport(this.index);
 		}
 
 		public ReviewerComboBoxModel(ArrayList<PeerReviewer> entries) {
@@ -149,8 +168,10 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> {
 			} else {
 				this.index = -1;
 			}
-
 		}
-
+		
+		public void addPropertyChangeListener(PropertyChangeListener listener) {
+			this.propertyChangeSupport.addPropertyChangeListener(listener);
+		}
 	}
 }

@@ -2,6 +2,8 @@ package view.views;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +23,7 @@ import view.components.PieChartLegend;
 import view.components.ReviewerComboBox;
 import view.components.Slice;
 
-public class Diagram2 extends ContentPane implements Observer {
+public class Diagram2 extends ContentPane implements Observer, PropertyChangeListener {
 
 	private ReviewerComboBox reviewerComboBox;
 	private PieChart pieChart;
@@ -30,6 +32,8 @@ public class Diagram2 extends ContentPane implements Observer {
 	public Diagram2() {
 		super();
 		this.reviewerComboBox = new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
+		this.reviewerComboBox.addPropertyChangeListener(this);
+		
 		List<Slice> sliceData = createSliceData();
 		this.pieChart = new PieChart(sliceData, new Dimension(500, 500));
 		this.legend = new PieChartLegend(sliceData, this.pieChart);
@@ -67,18 +71,24 @@ public class Diagram2 extends ContentPane implements Observer {
 					new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)), 
 					key));
 		}
-		
 		return slices;
 	}
-
 
 	@Override
 	public void update(Observable o, Object arg) {
 		this.reviewerComboBox.updateComboBoxModel(ModelContainer.getInstance().getPeerReviewers());
+		this.update();
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		System.out.println("update Piechart");
+		this.update();
+	}
+	
+	private void update() {
 		List<Slice> updatedSlices = createSliceData();
 		this.pieChart.udateSlices(updatedSlices);
 		this.legend.updateLegend(updatedSlices);
 	}
-
-
 }
