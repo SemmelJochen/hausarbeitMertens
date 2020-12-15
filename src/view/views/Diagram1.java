@@ -16,13 +16,13 @@ import view.components.PieChart;
 import view.components.PieChartLegend;
 import view.components.Slice;
 
-public class DiagramOverview extends ContentPane implements Observer {
+public class Diagram1 extends ContentPane implements Observer {
 
 	private static final long serialVersionUID = 57267L;
 	private PieChart pieChart;
 	private PieChartLegend legend;
 
-	public DiagramOverview() {
+	public Diagram1() {
 		super();
 		List<Slice> sliceData = createSliceData();
 		this.pieChart = new PieChart(sliceData, new Dimension(500, 500));
@@ -37,13 +37,15 @@ public class DiagramOverview extends ContentPane implements Observer {
 	public List<Slice> createSliceData() {
 		List<Slice> slices = new ArrayList<Slice>();
 		ModelContainer.getInstance().getPeerReviewers().forEach(peerReviewer -> {
-			slices.add(new Slice(peerReviewer.getCountFirstBachelorThesises(),
-					new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)),
-					peerReviewer.getFirstName() + " " + peerReviewer.getName()));
+			if (peerReviewer.getCountFirstBachelorThesises() > 0) {
+				slices.add(new Slice(peerReviewer.getCountFirstBachelorThesises(),
+						new Color((int) (Math.random() * 255), (int) (Math.random() * 255),
+								(int) (Math.random() * 255)),
+						peerReviewer.getFirstName() + " " + peerReviewer.getName()));
+			}
 		});
 		return slices;
 	}
-
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -51,6 +53,5 @@ public class DiagramOverview extends ContentPane implements Observer {
 		this.pieChart.udateSlices(updatedSlices);
 		this.legend.updateLegend(updatedSlices);
 	}
-
 
 }
