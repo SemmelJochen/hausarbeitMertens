@@ -30,6 +30,4 @@ public class ObservableCommandStack extends Observable {
 	public boolean isEmpty() {
 		return this.commands.isEmpty();
 	}
-	
-
 }
