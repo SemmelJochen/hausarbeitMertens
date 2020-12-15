@@ -48,11 +48,19 @@ public class PieChart extends JComponent {
 		int startAngle = 0;
 		for (int i = 0; i < slices.size(); i++) {
 			startAngle = (int) (curValue * 360 / total);
-			int arcAngle = (int) (slices.get(i).getValue() * 360 / total);
+			int arcAngle = this.round(slices.get(i).getValue() * 360 / total);
 			g.setColor(slices.get(i).getColor());
 			g.fillArc(area.x, area.y, area.width, area.height, startAngle, arcAngle);
 			curValue += slices.get(i).getValue();
 		}
+	}
+	
+	private int round(double toRound) {
+		if((toRound - (int) toRound) * 10 >= 5) {
+			//mind 0.5
+			return (int) (toRound + 1);
+		}
+		return (int) toRound;
 	}
 
 	public List<Slice> getSlices() {
