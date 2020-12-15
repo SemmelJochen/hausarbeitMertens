@@ -17,16 +17,22 @@ import view.views.MainWindow;
 public class Controller {
 
 	private FileHandler csvHandler;
-	private ObservableCommandStack undoStack, redoStack;
 	private MainWindow window;
+	private CommandController commandController;
 	private ModelContainer modelContainer = ModelContainer.getInstance();
 
+	public Controller() {
+		this.csvHandler = new FileHandler();
+		this.commandController = new CommandController();
+
+	}
+	
 	public void addUndoMenuItem(ObserverMenuItem ob) {
-		this.undoStack.addObserver(ob);
+		this.commandController.getUndoStack().addObserver(ob);
 	}
 
 	public void addRedoMenuItem(ObserverMenuItem ob) {
-		this.redoStack.addObserver(ob);
+		this.commandController.getRedoStack().addObserver(ob);
 	}
 
 	public void appendStudentChangeListeners(Observer o) {
@@ -34,13 +40,6 @@ public class Controller {
 	}
 	public void appendReviewerChangeListeners(Observer o) {
 		this.modelContainer.addStudentDataChangeObserver(o);
-	}
-
-	public Controller() {
-		this.csvHandler = new FileHandler();
-		this.undoStack = new ObservableCommandStack();
-		this.redoStack = new ObservableCommandStack();
-
 	}
 
 	public void run() {
@@ -57,18 +56,6 @@ public class Controller {
 //		Table table = new Table(this.createSampleTableData());
 
 		window.setVisible(true);
-	}
-
-	public void redo() {
-		Command command = this.redoStack.pop();
-		command.execute();
-		this.undoStack.add(command);
-	}
-
-	public void undo() {
-		Command command = this.undoStack.pop();
-		command.undo();
-		this.redoStack.add(command);
 	}
 
 	private void handleClose() {
@@ -148,6 +135,14 @@ public class Controller {
 
 	public void runExport() {
 		this.csvHandler.exportToCsv();
+	}
+	
+	public void redo() {
+		this.commandController.redo();
+	}
+
+	public void undo() {
+		this.commandController.undo();
 	}
 
 	public static void main(String[] args) {

@@ -40,6 +40,7 @@ public class MainWindow extends JFrame {
 		this.buildInitialView();
 		this.appendStudentDataChangeListeners();
 		this.appendReviewerDataChangeListeners();
+		this.setResizable(false);
 	}
 
 	public void setCurrentlyVisible(ContentPane cPane) {
@@ -218,8 +219,23 @@ public class MainWindow extends JFrame {
 		menu.addSeparator();
 		oMenuItem = new ObserverMenuItem("Undo"); // Action Listener einfuegen
 		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.META_MASK));
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					MainWindow.this.controller.undo();
+			}
+		});
 		menu.add(oMenuItem);
 		oMenuItem = new ObserverMenuItem("Redo"); // Action Listener einfuegen
+		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.META_MASK));
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					MainWindow.this.controller.redo();
+			}
+		});
 		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.META_MASK));
 
 		menu.add(oMenuItem);
