@@ -12,23 +12,23 @@ import model.ModelContainer;
 import view.components.ContentPane;
 import view.components.ReviewerComboBox;
 
-public class DetailedReviewerOvewview extends ContentPane implements Observer {
+public class DetailedReviewerOverview extends ContentPane implements Observer {
 
 	private ReviewerComboBox comboBox;
 	private JTabbedPane tabbedPane;
 	private JPanel contentPane;
 
-	public DetailedReviewerOvewview() {
+	public DetailedReviewerOverview() {
 		super();
 		this.contentPane = new JPanel();
-		this.comboBox = new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
+		//this.comboBox = new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
 		
 		this.setHeader(new JLabel("Gutachtereinsicht"));
-		this.setContent(comboBox);
+//		this.setContent(comboBox);
 
 	}
 
-	public DetailedReviewerOvewview(Component header, Component content) {
+	public DetailedReviewerOverview(Component header, Component content) {
 		super(header, content);
 	}
 	

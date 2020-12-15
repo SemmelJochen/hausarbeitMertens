@@ -1,7 +1,7 @@
 package model;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TableData<T> {
 	private List<Object>[] data;

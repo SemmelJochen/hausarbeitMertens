@@ -26,7 +26,7 @@ public class MainWindow extends JFrame {
 	private Overview overview;
 	private Diagram1 diagram1;
 	private Diagram2 diagram2;
-	private DetailedReviewerOvewview reviewerOverview;
+	private DetailedReviewerOverview reviewerOverview;
 
 	/**
 	 * Create the frame.
@@ -64,7 +64,7 @@ public class MainWindow extends JFrame {
 		this.overview = new Overview();
 		this.diagram1 = new Diagram1();
 		this.diagram2 = new Diagram2();
-		this.reviewerOverview = new DetailedReviewerOvewview();
+		this.reviewerOverview = new DetailedReviewerOverview();
 	}
 
 	public void buildInitialView() {

@@ -3,8 +3,6 @@ package controller;
 import java.util.Observable;
 import java.util.Stack;
 
-import view.components.ObserverMenuItem;
-
 public class ObservableCommandStack extends Observable {
 
 	private Stack<Command> commands;
