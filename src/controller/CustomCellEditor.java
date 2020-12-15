@@ -74,7 +74,7 @@ public class CustomCellEditor extends AbstractCellEditor implements TableCellEdi
 		}
 	}
 
-	private void updatePeerReviewer(Pair<Object, Object> data, String columnName) {
+	void updatePeerReviewer(Pair<Object, Object> data, String columnName) {
 		ReviewerColumn column = ReviewerColumn.getEnumForValue(columnName);
 		PeerReviewer reviewer = (PeerReviewer) data.getKey();
 		PeerReviewer newReviewer = reviewer.clone();
@@ -97,7 +97,7 @@ public class CustomCellEditor extends AbstractCellEditor implements TableCellEdi
 		this.backfireChangesToModel(reviewer, newReviewer);
 	}
 
-	private void updateStudent(Pair<Object, Object> data, String columnName) {
+	void updateStudent(Pair<Object, Object> data, String columnName) {
 		StudentColumn column = StudentColumn.getEnumForValue(columnName);
 		Student student = (Student) data.getKey();
 		Student newStudent = student.clone();
