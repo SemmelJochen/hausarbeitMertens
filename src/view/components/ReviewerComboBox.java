@@ -15,12 +15,12 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import model.PeerReviewer;
 
-public class ReviewerComboBox extends JComboBox<PeerReviewer> implements PropertyChangeListener{
+public class ReviewerComboBox extends JComboBox<PeerReviewer> implements PropertyChangeListener {
 
 	private ReviewerComboBoxModel comboBoxModel;
 	private ReviewerListCellRenderer comboBoxRenderer;
-	private PropertyChangeSupport propertyChangeSupport;
 	private PeerReviewer selectedPeerReviewer;
+	private PropertyChangeSupport propertyChangeSupport;
 
 	public ReviewerComboBox() {
 		this(new ArrayList<PeerReviewer>());
@@ -28,14 +28,14 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 
 	public ReviewerComboBox(ArrayList<PeerReviewer> reviewerData) {
 		this.comboBoxModel = new ReviewerComboBoxModel();
+		this.comboBoxModel.addPropertyChangeListener(this);
+
 		this.comboBoxRenderer = new ReviewerListCellRenderer();
 		this.selectedPeerReviewer = new PeerReviewer("", "", "", "", -1);
+		this.propertyChangeSupport = new PropertyChangeSupport(this.selectedPeerReviewer);
 		this.setModel(this.comboBoxModel);
 		this.setRenderer(this.comboBoxRenderer);
-
 		this.updateComboBoxModel(reviewerData);
-		this.propertyChangeSupport = new PropertyChangeSupport(this.selectedPeerReviewer);
-		this.comboBoxModel.addPropertyChangeListener(this);
 	}
 
 	public void updateComboBoxModel(ArrayList<PeerReviewer> reviewerData) {
@@ -46,14 +46,23 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 	public PeerReviewer getSelectedPeerReviewer() {
 		return this.selectedPeerReviewer;
 	}
+	
+	private void setSelectedPeerReviewer(PeerReviewer p) {
+		PeerReviewer oldValue = this.selectedPeerReviewer;
+		this.selectedPeerReviewer = p;
+		this.propertyChangeSupport.firePropertyChange("peerReviewer", oldValue, p);
+	}
+
+	public void addCustomPropertyChangeListener(PropertyChangeListener l) {
+		this.propertyChangeSupport.addPropertyChangeListener(l);
+	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		System.out.println("set PeerReviewer");
-		this.selectedPeerReviewer = (PeerReviewer) this.comboBoxModel.getSelectedItem();
-		
+		this.setSelectedPeerReviewer((PeerReviewer) this.comboBoxModel.getSelectedItem());
+
 	}
-	
+
 	class ReviewerListCellRenderer extends BasicComboBoxRenderer {
 
 		public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
@@ -90,7 +99,7 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 			super();
 			this.entries = entries;
 			if (entries.size() > 0) {
-				this.index = 1;
+				this.setIndex(1);
 			}
 		}
 
@@ -98,7 +107,7 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 		public void setSelectedItem(Object obj) {
 			for (PeerReviewer r : this.entries) {
 				if (r.equals(obj)) {
-					this.index = this.entries.indexOf(r);
+					this.setIndex(this.entries.indexOf(r));
 					break;
 				}
 			}
@@ -107,7 +116,7 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 		@Override
 		public Object getSelectedItem() {
 			if (index >= 0) {
-				return this.entries.get(this.index);
+				return this.entries.get(this.getIndex());
 			} else {
 				return null;
 			}
@@ -129,7 +138,6 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 
 		@Override
 		public void addListDataListener(ListDataListener l) {
-
 		}
 
 		@Override
@@ -145,7 +153,6 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 		@Override
 		public void removeElement(Object obj) {
 			this.entries.remove(obj);
-
 		}
 
 		@Override
@@ -169,7 +176,17 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 				this.index = -1;
 			}
 		}
-		
+
+		private int getIndex() {
+			return index;
+		}
+
+		private void setIndex(int index) {
+			int oldIndex = this.index;
+			this.index = index;
+			this.propertyChangeSupport.firePropertyChange("index",oldIndex, index);
+		}
+
 		public void addPropertyChangeListener(PropertyChangeListener listener) {
 			this.propertyChangeSupport.addPropertyChangeListener(listener);
 		}

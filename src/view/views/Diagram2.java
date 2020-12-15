@@ -32,7 +32,7 @@ public class Diagram2 extends ContentPane implements Observer, PropertyChangeLis
 	public Diagram2() {
 		super();
 		this.reviewerComboBox = new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
-		this.reviewerComboBox.addPropertyChangeListener(this);
+		this.reviewerComboBox.addCustomPropertyChangeListener(this);
 		
 		List<Slice> sliceData = createSliceData();
 		this.pieChart = new PieChart(sliceData, new Dimension(500, 500));
@@ -82,7 +82,6 @@ public class Diagram2 extends ContentPane implements Observer, PropertyChangeLis
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		System.out.println("update Piechart");
 		this.update();
 	}
 	
