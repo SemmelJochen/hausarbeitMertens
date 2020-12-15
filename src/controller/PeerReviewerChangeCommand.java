@@ -16,7 +16,7 @@ public class PeerReviewerChangeCommand implements Command {
 
 	@Override
 	public void undo() {
-		this.customCellEditor.updatePeerReviewer(new Pair<Object, Object>(data.getValue(), data.getKey()), columnName);
+		this.customCellEditor.UndoUpdatePeerReviewer(new Pair<Object, Object>(data.getKey(), data.getValue()), columnName);
 		
 	}
 

@@ -11,6 +11,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+import controller.CommandController;
 import controller.CustomCellEditor;
 import model.CustomTableModel;
 import model.TableData;
@@ -21,7 +22,7 @@ public class Table implements TableModelListener {
 	private CustomCellEditor cellEditor;
 	private JTable table;
 
-	public Table(TableData<?> tableData) {
+	public Table(TableData<?> tableData, CommandController commandController) {
 		super();
 		// insert data into the tablemodel and create a table
 		this.model = new CustomTableModel(tableData);
@@ -37,7 +38,7 @@ public class Table implements TableModelListener {
 				return component;
 			}
 		};
-		this.cellEditor = new CustomCellEditor();
+		this.cellEditor = new CustomCellEditor(commandController);
 
 		this.table.setCellSelectionEnabled(true);
 		this.table.setCellEditor(this.cellEditor);

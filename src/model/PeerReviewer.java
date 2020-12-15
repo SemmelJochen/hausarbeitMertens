@@ -7,6 +7,7 @@ import java.util.List;
 public class PeerReviewer extends Person implements Serializable {
 
 	private static final long serialVersionUID = 0xAFFEL;
+	
 	private int capacity;
 	private List<Student> firstReviewerRoles;
 	private List<Student> secondReviewerRoles;
@@ -60,11 +61,11 @@ public class PeerReviewer extends Person implements Serializable {
 		return this.title;
 	}
 
-	public List<Student> getFirstBachelorThesis() {
+	public List<Student> getFirstPeerReviewerRoles() {
 		return this.firstReviewerRoles;
 	}
 
-	public List<Student> getSecondBachelorThesis() {
+	public List<Student> getSecondPeerReviewerRoles() {
 		return this.secondReviewerRoles;
 	}
 
@@ -98,5 +99,15 @@ public class PeerReviewer extends Person implements Serializable {
 
 	public PeerReviewer clone() {
 		return new PeerReviewer(this);
+	}
+	
+	@Override
+	public boolean equals(Object pObject) {
+		PeerReviewer peerReviewer = (PeerReviewer) pObject;
+		return super.equals(peerReviewer) &&
+				this.capacity == peerReviewer.getCapacity() &&
+				this.title.equals(peerReviewer.getTitle()) &&
+				this.firstReviewerRoles.equals(peerReviewer.getFirstPeerReviewerRoles()) &&
+				this.secondReviewerRoles.equals(peerReviewer.getSecondPeerReviewerRoles());
 	}
 }

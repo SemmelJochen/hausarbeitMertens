@@ -144,6 +144,10 @@ public class Controller {
 	public void undo() {
 		this.commandController.undo();
 	}
+	
+	public CommandController getCommandController() {
+		return this.commandController;
+	}
 
 	public static void main(String[] args) {
 		Controller controller = new Controller();

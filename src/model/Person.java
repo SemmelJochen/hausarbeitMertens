@@ -40,7 +40,12 @@ public class Person implements Serializable {
 	@Override
 	public String toString() {
 		return "name: \t\t\t" + this.name + "\nfirstname \t\t" + this.firstName + "\nemail: \t\t\t" + this.email;
-		
 	}
-	
+
+	public boolean equals(Object person) {
+		Person persontoCheck = (Person) person;
+		return this.name.equals(persontoCheck.getName()) &&
+				this.firstName.equals(persontoCheck.getFirstName()) &&
+				this.email.equals(persontoCheck.getEmail());
+	}
 }

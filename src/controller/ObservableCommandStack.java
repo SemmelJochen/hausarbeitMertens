@@ -13,14 +13,14 @@ public class ObservableCommandStack extends Observable {
 	
 	public void add (Command command) {
 		this.commands.add(command);
-		this.setChanged();
-		this.notifyAll();
+//		this.setChanged();
+//		this.notifyAll();
 	}
 	
 	public Command pop() {
 		Command command = this.commands.pop();
-		this.setChanged();
-		this.notifyAll();
+//		this.setChanged();
+//		this.notifyAll();
 		
 		return command;
 	}

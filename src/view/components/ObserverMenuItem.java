@@ -12,14 +12,14 @@ public class ObserverMenuItem extends JMenuItem implements Observer {
 	public ObserverMenuItem(String title) {
 		super(title);
 		
-		this.setEnabled(false);		
+		this.setEnabled(true);		
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		ObservableCommandStack os = (ObservableCommandStack) o;
-		if(!os.isEmpty()) {
+		if(true) {
 			this.setEnabled(true);
 		}else {
 			this.setEnabled(false);

@@ -40,8 +40,8 @@ public class ModelContainer implements Externalizable {
 		PeerReviewer existingPeerReviewer = this.peerReviewers.get(key);
 
 		if (existingPeerReviewer != null) {
-			existingPeerReviewer.addBachelorThesesAsFirstReviewer(peerReviewer.getFirstBachelorThesis());
-			existingPeerReviewer.addBachelorThesesAsSecondReviewer(peerReviewer.getSecondBachelorThesis());
+			existingPeerReviewer.addBachelorThesesAsFirstReviewer(peerReviewer.getFirstPeerReviewerRoles());
+			existingPeerReviewer.addBachelorThesesAsSecondReviewer(peerReviewer.getSecondPeerReviewerRoles());
 		} else {
 			this.peerReviewers.put(key, peerReviewer);
 		}
@@ -73,7 +73,15 @@ public class ModelContainer implements Externalizable {
 	}
 	
 	public void updateStudent(Student oldStudent, Student newStudent) {
+		System.out.println(oldStudent);
+		System.out.println();
+		System.out.println(newStudent);
 		int index = this.students.indexOf(oldStudent);
+		System.out.println("--------------------------");
+		for(Student s: this.students) {
+			if(s.getFirstName().equals("Josua"))
+			System.out.println(s);
+		}
 		this.students.set(index, newStudent);
 	}
 	// due to serialisation we need to resolve the singleton on read

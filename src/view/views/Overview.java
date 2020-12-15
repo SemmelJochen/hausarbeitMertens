@@ -5,6 +5,7 @@ import java.util.Observer;
 
 import javax.swing.JTabbedPane;
 
+import controller.CommandController;
 import view.components.ContentPane;
 
 public class Overview extends ContentPane implements Observer {
@@ -18,10 +19,10 @@ public class Overview extends ContentPane implements Observer {
 	private ReviewerTable reviewerTab;
 	
 	
-	public Overview() {
+	public Overview(CommandController commandController) {
 		super();
-		this.studentTab = new StudentTable();
-		this.reviewerTab = new ReviewerTable();
+		this.studentTab = new StudentTable(commandController);
+		this.reviewerTab = new ReviewerTable(commandController);
 		
 		tPane.add(this.studentTab, STUDENT_TAB_ID);
 		tPane.setTitleAt(STUDENT_TAB_ID, "Student");

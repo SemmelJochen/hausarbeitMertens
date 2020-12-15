@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import controller.CommandController;
 import model.ModelContainer;
 import model.Student;
 import model.StudentColumn;
@@ -20,14 +21,14 @@ public class StudentTable extends JPanel {
 	private TableData<Student> tableData;
 	private Table table;
 
-	public StudentTable() {
+	public StudentTable(CommandController commandController) {
 		super();
-		this.add(buildTable());
+		this.add(buildTable(commandController));
 	}
 
-	public JScrollPane buildTable() {
+	public JScrollPane buildTable(CommandController commandController) {
 		refreshTableData();
-		table = new Table(tableData);
+		table = new Table(tableData, commandController);
 		return table.getContent();
 	}
 

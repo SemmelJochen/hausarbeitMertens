@@ -15,13 +15,20 @@ import model.Person;
 import model.ReviewerColumn;
 import model.Student;
 import model.StudentColumn;
+import view.components.ReviewerComboBox;
 
 public class CustomCellEditor extends AbstractCellEditor implements TableCellEditor {
 
 	private JTable table;
 	private int row, col;
+	private CommandController commandController;
 
 	private JTextField editor = new JTextField();
+	
+	public CustomCellEditor(CommandController commandController) {
+		super();
+		this.commandController = commandController;
+	}
 
 	@Override
 	public Object getCellEditorValue() {
@@ -36,13 +43,12 @@ public class CustomCellEditor extends AbstractCellEditor implements TableCellEdi
 				// find reviewer item and update it
 				Pair<Object, Object> data = model.getDataAt(row, col);
 				String columnName = model.getColumnName(col);
-				this.updatePeerReviewer(data, columnName);
+				this.commandController.execute(new PeerReviewerChangeCommand(this, data, columnName));
 
 			} else if (model.getMetaData().get(row) instanceof Student) {
 				Pair<Object, Object> data = model.getDataAt(row, col);
 				String columnName = model.getColumnName(col);
-//				blabla.addtoListe und so
-				this.updateStudent(data, columnName);
+				this.commandController.execute(new StudentChangeCommand(this, data, columnName));
 
 			} else {
 				try {
@@ -76,33 +82,58 @@ public class CustomCellEditor extends AbstractCellEditor implements TableCellEdi
 	}
 
 	void updatePeerReviewer(Pair<Object, Object> data, String columnName) {
-		ReviewerColumn column = ReviewerColumn.getEnumForValue(columnName);
 		PeerReviewer reviewer = (PeerReviewer) data.getKey();
-		PeerReviewer newReviewer = reviewer.clone();
-		if (column == ReviewerColumn.CAPACITY) {
-			newReviewer.setCapacity((int) data.getValue());
-		}
-		if (column == ReviewerColumn.E_MAIL) {
-			newReviewer.setEmail((String) data.getValue());
-		}
-		if (column == ReviewerColumn.FIRSTNAME) {
-			newReviewer.setFirstName((String) data.getValue());
-		}
-		if (column == ReviewerColumn.LASTNAME) {
-			newReviewer.setName((String) data.getValue());
-		}
-		if (column == ReviewerColumn.TITLE) {
-			newReviewer.setTitle((String) data.getValue());
-		}
+		PeerReviewer newReviewer = this.tmp(reviewer, data.getValue(), columnName);
 
 		this.backfireChangesToModel(reviewer, newReviewer);
 	}
+	
+	void UndoUpdatePeerReviewer(Pair<Object, Object> data, String columnName) {
+		PeerReviewer reviewer = (PeerReviewer) data.getKey();
+		PeerReviewer newReviewer = this.tmp(reviewer, data.getValue(), columnName);
+
+		this.backfireChangesToModel(newReviewer, reviewer);
+	}
+	
+	private PeerReviewer tmp(PeerReviewer reviewer, Object data, String columnName) {
+		ReviewerColumn column = ReviewerColumn.getEnumForValue(columnName);
+		PeerReviewer newReviewer = reviewer.clone();
+		if (column == ReviewerColumn.CAPACITY) {
+			newReviewer.setCapacity((int) data);
+		}
+		if (column == ReviewerColumn.E_MAIL) {
+			newReviewer.setEmail((String) data);
+		}
+		if (column == ReviewerColumn.FIRSTNAME) {
+			newReviewer.setFirstName((String) data);
+		}
+		if (column == ReviewerColumn.LASTNAME) {
+			newReviewer.setName((String) data);
+		}
+		if (column == ReviewerColumn.TITLE) {
+			newReviewer.setTitle((String) data);
+		}
+		
+		return newReviewer;
+	}
 
 	void updateStudent(Pair<Object, Object> data, String columnName) {
-		StudentColumn column = StudentColumn.getEnumForValue(columnName);
 		Student student = (Student) data.getKey();
-		Student newStudent = student.clone();
+		Student newStudent = this.tmp(student, data.getValue(), columnName);
 
+		this.backfireChangesToModel(student, newStudent);
+	}
+	
+	void UndoUpdateStudent(Pair<Object, Object> data, String columnName) {
+		Student student = (Student) data.getKey();
+		Student newStudent = this.tmp(student, data.getValue(), columnName);
+
+		this.backfireChangesToModel(newStudent, student);
+	}
+	
+	private Student tmp(Student student, Object data, String columnName) {
+		StudentColumn column = StudentColumn.getEnumForValue(columnName);
+		Student newStudent = student.clone();
 		if (column == StudentColumn.FIRST_REVIEWER) {
 			// TODO findOrCreateNewPeerReviewer
 			// newStudent.getFirstPeerReviewer().setFirstName(firstName);
@@ -112,28 +143,27 @@ public class CustomCellEditor extends AbstractCellEditor implements TableCellEdi
 			// newStudent.getFirstPeerReviewer().setFirstName(firstName);
 		}
 		if (column == StudentColumn.E_MAIL) {
-			newStudent.setEmail((String) data.getValue());
+			newStudent.setEmail((String) data);
 		}
 		if (column == StudentColumn.FIRSTNAME) {
-			newStudent.setFirstName((String) data.getValue());
+			newStudent.setFirstName((String) data);
 		}
 		if (column == StudentColumn.LASTNAME) {
-			newStudent.setName((String) data.getValue());
+			newStudent.setName((String) data);
 		}
 		if (column == StudentColumn.PRACTICE_PARTNER) {
-			newStudent.setPracticePartner((String) data.getValue());
+			newStudent.setPracticePartner((String) data);
 		}
 		if (column == StudentColumn.STUDENT_GROUP) {
-			newStudent.setStudentGroup((String) data.getValue());
+			newStudent.setStudentGroup((String) data);
 		}
 		if (column == StudentColumn.SUBJECT) {
-			newStudent.setSubject((String) data.getValue());
+			newStudent.setSubject((String) data);
 		}
 		if (column == StudentColumn.REMARK) {
-			newStudent.setRemark((String) data.getValue());
+			newStudent.setRemark((String) data);
 		}
-
-		this.backfireChangesToModel(student, newStudent);
+		
+		return newStudent;
 	}
-
 }

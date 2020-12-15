@@ -90,5 +90,16 @@ public class Student extends Person implements Serializable {
 
 	public Student clone() {
 		return new Student(this);
+	}   
+	
+	@Override
+	public boolean equals(Object student) {
+		Student studentToCheck = (Student) student;
+		return super.equals(studentToCheck) &&
+				this.getStudentGroup().equals(studentToCheck.getStudentGroup()) &&
+				this.getPracticePartner().equals(studentToCheck.getPracticePartner()) &&
+				this.getSubject().equals(studentToCheck.getSubject()) &&
+				this.firstPeerReviewer.equals(studentToCheck.getFirstPeerReviewer()) &&
+				this.secondPeerReviewer.equals(studentToCheck.getSecondPeerReviewer());
 	}
 }

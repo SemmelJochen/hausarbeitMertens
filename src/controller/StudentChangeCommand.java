@@ -16,8 +16,7 @@ public class StudentChangeCommand implements Command {
 
 	@Override
 	public void undo() {
-		this.customCellEditor.updateStudent(new Pair<Object, Object>(data.getValue(), data.getKey()), columnName);
-		
+		this.customCellEditor.UndoUpdateStudent(new Pair<Object, Object>(data.getKey(), data.getValue()), columnName);
 	}
 
 	@Override

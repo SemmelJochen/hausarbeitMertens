@@ -62,7 +62,7 @@ public class MainWindow extends JFrame {
 	}
 
 	public void createViews() {
-		this.overview = new Overview();
+		this.overview = new Overview(this.controller.getCommandController());
 		this.diagram1 = new Diagram1();
 		this.diagram2 = new Diagram2();
 		this.reviewerOverview = new DetailedReviewerOverview();
@@ -219,17 +219,19 @@ public class MainWindow extends JFrame {
 		menu.addSeparator();
 		oMenuItem = new ObserverMenuItem("Undo"); // Action Listener einfuegen
 		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.META_MASK));
-		menuItem.addActionListener(new ActionListener() {
+		oMenuItem.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+					System.out.println("undo");
 					MainWindow.this.controller.undo();
 			}
 		});
 		menu.add(oMenuItem);
+		
 		oMenuItem = new ObserverMenuItem("Redo"); // Action Listener einfuegen
 		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.META_MASK));
-		menuItem.addActionListener(new ActionListener() {
+		oMenuItem.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {

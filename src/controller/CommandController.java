@@ -17,6 +17,11 @@ public class CommandController {
 		return this.redoStack;
 	}
 	
+	public void execute(Command command) {
+		command.execute();
+		this.undoStack.add(command);
+	}
+	
 	public void redo() {
 		Command command = this.redoStack.pop();
 		command.execute();
