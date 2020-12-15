@@ -6,8 +6,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Observer;
 
 import controller.ObservableHashMap;
 import controller.ObservableList;
@@ -67,15 +66,18 @@ public class ModelContainer implements Externalizable {
 	public ObservableList<Student> getStudents() {
 		return this.students;
 	}
-
-	public void load(ModelContainer modelcontainer) {
-		// TODO
+	
+	public void updateReviewer(PeerReviewer oldReviewer, PeerReviewer newReviewer) {
+		System.out.println("changing reviewer value " + oldReviewer.toString() + newReviewer.toString());
+		String key = this.peerReviewers.getKey(oldReviewer);
+		this.peerReviewers.replace(key, newReviewer);
 	}
-
-	public void setStudents(List<Student> students) {
-		this.students = (ObservableList<Student>) students;
+	
+	public void updateStudent(Student oldStudent, Student newStudent) {
+		System.out.println("changing student value " + oldStudent.toString() + newStudent.toString());
+		int index = this.students.indexOf(oldStudent);
+		this.students.set(index, newStudent);
 	}
-
 	// due to serialisation we need to resolve the singleton on read
 	public Object readResolve() {
 		return getInstance();
@@ -91,5 +93,22 @@ public class ModelContainer implements Externalizable {
 	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
 		this.students = new ObservableList<Student>((ArrayList<Student>) in.readObject());
 		this.peerReviewers = new ObservableHashMap<String, PeerReviewer>((HashMap<String, PeerReviewer>) in.readObject());
+	}
+	
+	
+	public void addReviewerDataChangeObserver(Observer o) {
+		this.peerReviewers.addObserver(o);
+	}
+	
+	public void addStudentDataChangeObserver(Observer o) {
+		this.students.addObserver(o);
+	}
+	
+	public void removeStudentDataChangeObserver(Observer o) {
+		this.students.deleteObserver(o);
+	}
+	
+	public void removeReviewerDataChangeObserver(Observer o) {
+		this.peerReviewers.deleteObserver(o);
 	}
 }

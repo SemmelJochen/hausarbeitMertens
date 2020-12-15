@@ -23,13 +23,15 @@ public class Student extends Person implements Serializable {
 		this.secondPeerReviewer = secondPeerReviewer;
 		this.remark = remark;
 	}
+
 	public Student(String name, String firstName, String email, String studentGroup, String practicePartner,
 			String subject, String remark) {
-		super(name, firstName, email);
-		this.studentGroup = studentGroup;
-		this.practicePartner = practicePartner;
-		this.subject = subject;
-		this.remark = remark;
+		this(name, firstName, email, studentGroup, practicePartner, subject, null, null, remark);
+	}
+
+	private Student(Student s) {
+		this(s.getName(), s.getFirstName(), s.getEmail(), s.getStudentGroup(), s.getPracticePartner(), s.getSubject(),
+				s.getFirstPeerReviewer(), s.getSecondPeerReviewer(), s.getRemark());
 	}
 
 	public PeerReviewer getFirstPeerReviewer() {
@@ -55,7 +57,7 @@ public class Student extends Person implements Serializable {
 	public void setStudentGroup(String studentGroup) {
 		this.studentGroup = studentGroup;
 	}
-	
+
 	public String getRemark() {
 		return this.remark;
 	}
@@ -84,5 +86,9 @@ public class Student extends Person implements Serializable {
 	public String toString() {
 		return super.toString() + "\nstudent group: \t\t" + this.studentGroup + "\npraxis partner: \t"
 				+ this.practicePartner + "\nsubject: \t\t" + this.subject;
+	}
+
+	public Student clone() {
+		return new Student(this);
 	}
 }

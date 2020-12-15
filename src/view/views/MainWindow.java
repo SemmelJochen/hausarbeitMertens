@@ -21,7 +21,7 @@ import view.components.ContentPane;
 import view.components.ObserverMenuItem;
 
 public class MainWindow extends JFrame {
-	
+
 	private Controller controller;
 	private Overview overview;
 	private DiagramOverview diagramOverview;
@@ -38,20 +38,25 @@ public class MainWindow extends JFrame {
 		this.setJMenuBar(buildMenuBar());
 		this.controller = c;
 		this.buildInitialView();
-		this.appendDataChangeListeners();
+		this.appendStudentDataChangeListeners();
+		this.appendReviewerDataChangeListeners();
 	}
-	
+
 	public void setCurrentlyVisible(ContentPane cPane) {
 		this.setContentPane(cPane);
 		this.revalidate();
 		this.repaint();
 	}
 
-	public void appendDataChangeListeners() {
-		this.controller.addDataChangeObserver(this.overview);
-		this.controller.addDataChangeObserver(this.diagramOverview);
-		this.controller.addDataChangeObserver(this.diagram2);
-		this.controller.addDataChangeObserver(this.reviewerOverview);
+	public void appendStudentDataChangeListeners() {
+		this.controller.appendStudentChangeListeners(this.overview);
+		this.controller.appendStudentChangeListeners(this.diagramOverview);
+
+	}
+
+	public void appendReviewerDataChangeListeners() {
+		this.controller.appendReviewerChangeListeners(this.diagram2);
+		this.controller.appendStudentChangeListeners(this.reviewerOverview);
 	}
 
 	public void createViews() {
@@ -146,11 +151,11 @@ public class MainWindow extends JFrame {
 		// add G-Einsicht
 		menuItem = new JMenuItem("Gutachtereinsicht");
 		menuItem.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MainWindow.this.setCurrentlyVisible(MainWindow.this.reviewerOverview);
-				
+
 			}
 		});
 		menu.add(menuItem);
@@ -168,11 +173,11 @@ public class MainWindow extends JFrame {
 		submenu.add(subMenuItem);
 		subMenuItem = new JMenuItem("Diagramm 2");
 		subMenuItem.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MainWindow.this.setCurrentlyVisible(MainWindow.this.diagram2);
-				
+
 			}
 		});
 		submenu.add(subMenuItem);

@@ -1,46 +1,45 @@
 package view.components;
 
 import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.List;
 
-import javax.swing.BoxLayout;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SpringLayout;
-import javax.swing.table.AbstractTableModel;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumnModel;
 
-import controller.ObservableList;
-import model.ModelContainer;
-import model.Student;
+import controller.CustomCellEditor;
+import model.CustomTableModel;
 import model.TableData;
 
-public class Table {
+public class Table implements TableModelListener {
 
 	private CustomTableModel model;
+	private CustomCellEditor cellEditor;
 	private JTable table;
 
-	public Table(TableData tableData) {
+	public Table(TableData<?> tableData) {
 		super();
 		// insert data into the tablemodel and create a table
 		this.model = new CustomTableModel(tableData);
 		this.table = new JTable(this.model);
+		this.cellEditor = new CustomCellEditor();
+
+		this.table.setCellSelectionEnabled(true);
+		this.table.setCellEditor(this.cellEditor);
+		this.table.getModel().addTableModelListener(this);
 		// style the table
+
+		this.table.setAutoCreateRowSorter(true);
 		this.table.setRowHeight(30);
 
 		TableColumnModel column = this.table.getColumnModel();
+		column.getColumns().asIterator().forEachRemaining(c -> c.setCellEditor(this.cellEditor));
 		column.getColumns().asIterator().forEachRemaining(c -> c.setPreferredWidth(100));
 
 	}
 
-	public void refreshData(TableData tableData) {
+	public void refreshData(TableData<?> tableData) {
 		this.model.updateData(tableData);
 	}
 
@@ -50,42 +49,11 @@ public class Table {
 		return pane;
 	}
 
-	class CustomTableModel extends AbstractTableModel {
+	public JTable getTableRef() {
+		return this.table;
+	}
 
-		private String[] columnNames;
-		private List<Object>[] data;
-
-		public CustomTableModel(TableData tableData) {
-			this.columnNames = tableData.getColumnNames();
-			this.data = tableData.getContent();
-		}
-
-		public int getColumnCount() {
-			return this.data.length;
-		}
-
-		public int getRowCount() {
-			return this.data[0].size();
-		}
-
-		public String getColumnName(int col) {
-			return this.columnNames[col];
-		}
-
-		public Object getValueAt(int row, int col) {
-			return this.data[col].get(row);
-		}
-
-		// data change event
-		public void setValueAt(String value, int row, int col) {
-			this.data[col].set(row, value);
-			fireTableCellUpdated(row, col);
-			//TODO: change model, too
-		}
-
-		public void updateData(TableData tableData) {
-			this.data = tableData.getContent();
-			this.fireTableDataChanged();
-		}
+	@Override
+	public void tableChanged(TableModelEvent e) {
 	}
 }

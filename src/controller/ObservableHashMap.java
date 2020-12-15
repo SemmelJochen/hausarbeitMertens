@@ -36,6 +36,16 @@ public class ObservableHashMap<K, V> extends Observable implements Map<K, V> {
 	public boolean containsValue(Object value) {
 		return this.map.containsValue(value);
 	}
+	
+	public K getKey(Object value) {
+		K key = null;
+		for (Entry<K, V> entry : this.map.entrySet()) {
+            if (entry.getValue().equals(value)) {
+            	key = entry.getKey();
+            }
+		}
+		return key;
+	}
 
 	@Override
 	public V get(Object key) {

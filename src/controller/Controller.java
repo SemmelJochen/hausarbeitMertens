@@ -2,22 +2,15 @@ package controller;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observer;
-import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 
 import model.ModelContainer;
-import model.PeerReviewer;
-import model.Student;
-import model.TableData;
 import view.components.ObserverMenuItem;
 import view.views.MainWindow;
 
@@ -36,8 +29,11 @@ public class Controller {
 		this.redoStack.addObserver(ob);
 	}
 
-	public void addDataChangeObserver(Observer o) {
-		this.modelContainer.getStudents().addObserver(o);
+	public void appendStudentChangeListeners(Observer o) {
+		this.modelContainer.addStudentDataChangeObserver(o);
+	}
+	public void appendReviewerChangeListeners(Observer o) {
+		this.modelContainer.addStudentDataChangeObserver(o);
 	}
 
 	public Controller() {
@@ -73,38 +69,6 @@ public class Controller {
 		Command command = this.undoStack.pop();
 		command.undo();
 		this.redoStack.add(command);
-	}
-
-	/**
-	 * temporary method to fill data
-	 * 
-	 * @return {@link TableData}
-	 * @deprecated
-	 */
-	public TableData createSampleTableData() {
-		List<Student> students = new ArrayList<Student>();
-		students.add(new Student("Kalle", "Heino", "kalle@heino.de", "WI62/19", "zeb", "Netzwerke", "LOL"));
-		students.add(new Student("Peter", "Guenther", "peter@guenther.de", "WI62/19", "Microsoft", "Datenstrutkuren", ":O"));
-		students.add(new Student("Schimmer", "Ralf", "schimmer@ralf.de", "WI62/19", "euronics", "Infrastrukturen", "GJE"));
-
-		List<PeerReviewer> reviewer = new ArrayList<PeerReviewer>();
-		reviewer.add(new PeerReviewer("Prof.", "Schmitz", "Karl", "karl@schmitz.de", 20));
-
-		TableData data = TableData.builder()
-				.withColumn("Vorname", students.stream().map(e -> e.getFirstName()).collect(Collectors.toList()))//
-				.withColumn("Nachname", students.stream().map(e -> e.getName()).collect(Collectors.toList()))//
-				.withColumn("Thema", students.stream().map(e -> e.getSubject()).collect(Collectors.toList()))//
-				.withColumn("Praxispartner",
-						students.stream().map(e -> e.getPracticePartner()).collect(Collectors.toList()))//
-				.withColumn("Studiengruppe",
-						students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//
-				.withColumn("Kapazitaet vom Pruefer",
-						reviewer.stream().map(e -> e.getCapacity()).collect(Collectors.toList()))//
-				.withColumn("Bemerkung",
-						students.stream().map(e -> e.getRemark()).collect(Collectors.toList()))//
-				.build();
-
-		return data;
 	}
 
 	private void handleClose() {
@@ -173,7 +137,8 @@ public class Controller {
 			e.printStackTrace();
 		}
 		this.window.buildInitialView();
-		this.window.appendDataChangeListeners();
+		this.window.appendStudentDataChangeListeners();
+		this.window.appendReviewerDataChangeListeners();
 		this.window.setVisible(true);
 	}
 

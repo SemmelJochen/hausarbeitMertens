@@ -15,9 +15,13 @@ public class PeerReviewer extends Person implements Serializable {
 	public PeerReviewer(String title, String name, String firstName, String email, int capacity) {
 		super(name, firstName, email);
 		this.title = title;
-		this.capacity = (capacity !=  -1) ? capacity : 10; // default capacity
+		this.capacity = capacity;
 		this.firstReviewerRoles = new ArrayList<>();
 		this.secondReviewerRoles = new ArrayList<>();
+	}
+
+	private PeerReviewer(PeerReviewer p) {
+		this(p.getTitle(), p.getName(), p.getFirstName(), p.getEmail(), p.getCapacity());
 	}
 
 	public void setCapacity(int capacity) {
@@ -90,5 +94,9 @@ public class PeerReviewer extends Person implements Serializable {
 			System.out.println(student);
 			System.out.println("");
 		}
+	}
+
+	public PeerReviewer clone() {
+		return new PeerReviewer(this);
 	}
 }

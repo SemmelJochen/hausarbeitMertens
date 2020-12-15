@@ -1,5 +1,7 @@
 package view.views;
 
+import static model.TableData.newTableData;
+
 import java.util.List;
 import java.util.Observable;
 import java.util.stream.Collectors;
@@ -9,12 +11,13 @@ import javax.swing.JScrollPane;
 
 import model.ModelContainer;
 import model.PeerReviewer;
+import model.ReviewerColumn;
 import model.TableData;
-import view.components.Table;
+import view.components.Table;;
 
 public class SecondReviewerOverview extends JPanel {
 
-	private TableData tableData;
+	private TableData<PeerReviewer> tableData;
 	private Table table;
 
 	public SecondReviewerOverview() {
@@ -31,16 +34,18 @@ public class SecondReviewerOverview extends JPanel {
 
 	public void refreshTableData() {
 		List<PeerReviewer> secondReviewer = ModelContainer.getInstance().getPeerReviewers();
-		this.tableData = TableData.builder()
-				.withColumn("Titel", secondReviewer.stream().map(e -> e.getTitle()).collect(Collectors.toList()))//
-				.withColumn("Vorname", secondReviewer.stream().map(e -> e.getFirstName()).collect(Collectors.toList()))//
-				.withColumn("Nachname", secondReviewer.stream().map(e -> e.getName()).collect(Collectors.toList()))//
-				.withColumn("E-Mail", secondReviewer.stream().map(e -> e.getEmail()).collect(Collectors.toList()))//
-				.withColumn("Kapazitaet",
+		this.tableData = newTableData()
+				.withColumn(ReviewerColumn.TITLE,
+						secondReviewer.stream().map(e -> e.getTitle()).collect(Collectors.toList()))//
+				.withColumn(ReviewerColumn.FIRSTNAME,
+						secondReviewer.stream().map(e -> e.getFirstName()).collect(Collectors.toList()))//
+				.withColumn(ReviewerColumn.LASTNAME,
+						secondReviewer.stream().map(e -> e.getName()).collect(Collectors.toList()))//
+				.withColumn(ReviewerColumn.E_MAIL,
+						secondReviewer.stream().map(e -> e.getEmail()).collect(Collectors.toList()))//
+				.withColumn(ReviewerColumn.CAPACITY,
 						secondReviewer.stream().map(e -> e.getCapacity()).collect(Collectors.toList()))//
-				.withColumn("Erstgutachter",
-						secondReviewer.stream().map(e -> e.getFirstName() + " " + e.getName())
-								.collect(Collectors.toList()))//
+				.withMetaData(secondReviewer)//
 				.build();
 
 	}
