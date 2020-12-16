@@ -26,11 +26,11 @@ public class ReviewerTable extends JPanel {
 		this.add(buildTable(commandController));
 	}
 
-	public JScrollPane buildTable(CommandController commandController) {
+	public JPanel buildTable(CommandController commandController) {
 		refreshTableData();
 
 		table = new Table(tableData, commandController);
-		return table.getContent();
+		return table;
 	}
 
 	@SuppressWarnings("unchecked")

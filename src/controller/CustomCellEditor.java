@@ -41,7 +41,6 @@ public class CustomCellEditor extends AbstractCellEditor implements TableCellEdi
             }
 			if (e instanceof KeyEvent) {
                 KeyEvent ke = (KeyEvent) e;
-                System.out.println(ke.isMetaDown());
                 return ke.isMetaDown();
             }
 		}
