@@ -1,6 +1,9 @@
 package controller;
 
 import java.awt.Component;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.EventObject;
 
 import javax.swing.AbstractCellEditor;
 import javax.swing.JTable;
@@ -15,7 +18,6 @@ import model.Person;
 import model.ReviewerColumn;
 import model.Student;
 import model.StudentColumn;
-import view.components.ReviewerComboBox;
 
 public class CustomCellEditor extends AbstractCellEditor implements TableCellEditor {
 
@@ -30,6 +32,22 @@ public class CustomCellEditor extends AbstractCellEditor implements TableCellEdi
 		this.commandController = commandController;
 	}
 
+	@Override
+	public boolean isCellEditable(EventObject e) {
+		if(super.isCellEditable(e)) {
+			if (e instanceof MouseEvent) {
+                MouseEvent me = (MouseEvent) e;
+                return me.getClickCount() >= 2;
+            }
+			if (e instanceof KeyEvent) {
+                KeyEvent ke = (KeyEvent) e;
+                System.out.println(ke.isMetaDown());
+                return ke.isMetaDown();
+            }
+		}
+		return false;
+	}
+	
 	@Override
 	public Object getCellEditorValue() {
 		System.out.println("cell editor value: " + this.editor.getText());
