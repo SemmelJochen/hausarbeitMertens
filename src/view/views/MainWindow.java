@@ -190,10 +190,14 @@ public class MainWindow extends JFrame {
 				JFileChooser chooser = new JFileChooser();
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("Dozentendatei (.mrtns)", "mrtns");
 				chooser.setFileFilter(filter);
-				int returnVal = chooser.showSaveDialog(MainWindow.this);
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					System.out.println("You chose to save this file: " + chooser.getSelectedFile().getAbsolutePath());
-					MainWindow.this.controller.save(chooser.getSelectedFile().getAbsolutePath());
+				if(MainWindow.this.controller.hasSaveFilePath()) {
+					MainWindow.this.controller.saveDefault();
+				}else {
+					int returnVal = chooser.showSaveDialog(MainWindow.this);
+					if (returnVal == JFileChooser.APPROVE_OPTION) {
+						System.out.println("You chose to save this file: " + chooser.getSelectedFile().getAbsolutePath());
+						MainWindow.this.controller.save(chooser.getSelectedFile().getAbsolutePath());
+					}
 				}
 			}
 		});

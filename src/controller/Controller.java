@@ -20,13 +20,14 @@ public class Controller {
 	private MainWindow window;
 	private CommandController commandController;
 	private ModelContainer modelContainer = ModelContainer.getInstance();
+	private String filePath;
 
 	public Controller() {
 		this.csvHandler = new FileHandler();
 		this.csvHandler = new FileHandler();
 		this.commandController = new CommandController();
 	}
-	
+
 	public void addUndoMenuItem(ObserverMenuItem ob) {
 		this.commandController.getUndoStack().addObserver(ob);
 	}
@@ -38,6 +39,7 @@ public class Controller {
 	public void appendStudentChangeListeners(Observer o) {
 		this.modelContainer.addStudentDataChangeObserver(o);
 	}
+
 	public void appendReviewerChangeListeners(Observer o) {
 		this.modelContainer.addStudentDataChangeObserver(o);
 	}
@@ -81,8 +83,17 @@ public class Controller {
 		// TODO check if there's still something unsaved
 		return true;
 	}
+	
+	public boolean hasSaveFilePath() {
+		if(this.filePath != null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 
 	public void save(String filePath) {
+		this.filePath = filePath;
 		if (!filePath.endsWith(".mrtns")) {
 			filePath += ".mrtns";
 		}
@@ -91,7 +102,7 @@ public class Controller {
 		try {
 			fos = new FileOutputStream(filePath);
 			oos = new ObjectOutputStream(fos);
-			//call our custom write method
+			// call our custom write method
 			this.modelContainer.writeExternal(oos);
 			oos.flush();
 			oos.close();
@@ -102,7 +113,12 @@ public class Controller {
 
 	}
 
+	public void saveDefault() {
+		this.save(this.filePath);
+	}
+
 	public void load(String filePath) {
+		this.filePath = filePath;
 		this.window.setVisible(false);
 		if (!filePath.endsWith(".mrtns")) {
 			filePath += ".mrtns";
@@ -136,7 +152,7 @@ public class Controller {
 	public void runExport() {
 		this.csvHandler.exportToCsv();
 	}
-	
+
 	public void redo() {
 		this.commandController.redo();
 	}
@@ -144,7 +160,7 @@ public class Controller {
 	public void undo() {
 		this.commandController.undo();
 	}
-	
+
 	public CommandController getCommandController() {
 		return this.commandController;
 	}
