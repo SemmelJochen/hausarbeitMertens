@@ -34,7 +34,7 @@ public class MainWindow extends JFrame {
 	public MainWindow(Controller c) {
 		super();
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		this.setSize(new Dimension(1280, 800));
+		this.setSize(new Dimension(1280, 1000));
 		this.setJMenuBar(buildMenuBar());
 		this.controller = c;
 		this.buildInitialView();
