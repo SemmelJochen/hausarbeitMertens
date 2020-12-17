@@ -65,16 +65,17 @@ public class FileHandler {
 
 					if (!firstPeerReviewer.isDummy()) {
 						firstPeerReviewer.addBachelorThesisAsFirstReviewer(student);
+						modelContainer.putPeerReviewer(firstPeerReviewer);
 					}
 					student.setFirstPeerReviewer(firstPeerReviewer);
 
 					if (!secondPeerReviewer.isDummy()) {
 						secondPeerReviewer.addBachelorThesisAsSecondReviewer(student);
+						modelContainer.putPeerReviewer(secondPeerReviewer);
 					}
 					student.setSecondPeerReviewer(secondPeerReviewer);
 
-					modelContainer.putPeerReviewer(secondPeerReviewer);
-					modelContainer.putPeerReviewer(firstPeerReviewer);
+					
 					modelContainer.addStudent(student);
 				} else {
 					this.header[i] = line;
