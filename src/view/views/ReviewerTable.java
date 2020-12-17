@@ -48,10 +48,11 @@ public class ReviewerTable extends JPanel {
 				.withColumn(ReviewerColumn.CAPACITY,
 						firstReviewer.stream().map(e -> e.getCapacity()).collect(Collectors.toList()))//
 				.withMetaData(firstReviewer)//
+				.withType(PeerReviewer.class)//
 				.build();
 	}
 
-	public void update(Observable o, Object arg) {
+	public void update() {
 		refreshTableData();
 		this.table.refreshData(tableData);
 	}

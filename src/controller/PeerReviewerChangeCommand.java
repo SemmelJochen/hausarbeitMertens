@@ -1,28 +1,29 @@
 package controller;
 
 import model.Pair;
+import view.components.Table;
 
 public class PeerReviewerChangeCommand implements Command {
 
-	private CustomCellEditor customCellEditor;
+	private Table table;
 	private Pair<Object, Object> data;
 	private String columnName;
 	
-	public PeerReviewerChangeCommand(CustomCellEditor customCellEditor, Pair<Object, Object> data, String columnName) {
-		this.customCellEditor = customCellEditor;
+	public PeerReviewerChangeCommand(Table table, Pair<Object, Object> data, String columnName) {
+		this.table = table;
 		this.data = data;
 		this.columnName = columnName;
 	}
 
 	@Override
 	public void undo() {
-		this.customCellEditor.UndoUpdatePeerReviewer(new Pair<Object, Object>(data.getKey(), data.getValue()), columnName);
+		this.table.getController().undoPeerReviewerUpdate(new Pair<Object, Object>(data.getKey(), data.getValue()), columnName);
 		
 	}
 
 	@Override
 	public void execute() {
-		this.customCellEditor.updatePeerReviewer(this.data, this.columnName);
+		this.table.getController().updatePeerReviewer(this.data, this.columnName);
 		
 	}
 }

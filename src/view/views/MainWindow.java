@@ -60,6 +60,18 @@ public class MainWindow extends JFrame {
 		this.controller.appendReviewerChangeListeners(this.diagram2);
 		this.controller.appendReviewerChangeListeners(this.reviewerOverview);
 	}
+	
+	public void removeStudentDataChangeListeners() {
+		this.controller.removeStudentChangeListeners(this.overview);
+		this.controller.removeStudentChangeListeners(this.diagram1);
+
+	}
+
+	public void removeReviewerDataChangeListeners() {
+		this.controller.removeReviewerChangeListeners(this.overview);
+		this.controller.removeReviewerChangeListeners(this.diagram2);
+		this.controller.removeReviewerChangeListeners(this.reviewerOverview);
+	}
 
 	public void createViews() {
 		this.overview = new Overview(this.controller.getCommandController());
