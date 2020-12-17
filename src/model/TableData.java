@@ -7,6 +7,7 @@ public class TableData<T> {
 	private List<Object>[] data;
 	private List<T> metaData;
 	private String[] columnNames;
+	private ColumnEditorType[] columnTypes;
 	private Class<?> type;
 
 	private TableData(Builder<T> builder) {
@@ -14,12 +15,21 @@ public class TableData<T> {
 		this.data = builder.columns.toArray(data);
 		this.columnNames = new String[builder.columnNames.size()];
 		this.columnNames = builder.columnNames.toArray(columnNames);
+		this.columnTypes = new ColumnEditorType[builder.columnTypes.size()];
 		this.metaData = builder.metaData;
 		this.type = builder.type;
 	}
 
+	/**
+	 * 
+	 * @return Pair with columnName and ColumnType
+	 */
 	public String[] getColumnNames() {
 		return this.columnNames;
+	}
+	
+	public ColumnEditorType[] getColumnTypes() {
+		return null;
 	}
 
 	public List<Object>[] getContent() {
@@ -51,16 +61,23 @@ public class TableData<T> {
 	public static final class Builder<T> {
 		private List<List<Object>> columns = new ArrayList<List<Object>>();
 		private List<String> columnNames = new ArrayList<String>();
+		private List<ColumnEditorType> columnTypes = new ArrayList<ColumnEditorType>();
 		private List<T> metaData = new ArrayList<T>();
 		private Class<?> type;
 
 		private Builder() {
 		}
 
-		public Builder<T> withColumn(Column columnName, List<Object> data) {
+		public Builder<T> withColumn(Column columnName, List<Object> data, ColumnEditorType columnType) {
 			this.columnNames.add(columnName.getValue());
+			this.columnTypes.add(columnType);
 			this.columns.add(data);
 			return this;
+		}
+		
+		//used for default editor columns
+		public Builder<T> withColumn(Column columnName, List<Object> data ) {
+			return withColumn(columnName, data, ColumnEditorType.CUSTOM_EDITOR);
 		}
 		
 		public Builder<T> withMetaData(List<T> metaData){
@@ -86,9 +103,7 @@ public class TableData<T> {
 				while (l.size() < max) {
 					l.add(null);
 				}
-
 			}
-
 		}
 
 		public Builder withType(Class<?> clazz) {
