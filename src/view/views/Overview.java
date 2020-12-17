@@ -33,7 +33,7 @@ public class Overview extends ContentPane implements Observer {
 		tPane.add(this.reviewerTab, REVIEWER_TAB_ID);
 		tPane.setTitleAt(REVIEWER_TAB_ID, "Gutachter");
 		
-		this.setHeader(new JLabel("Uebersicht"));
+		this.setHeader("Uebersicht");
 		this.setContent(tPane);
 	}
 	

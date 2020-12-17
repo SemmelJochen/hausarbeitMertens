@@ -43,7 +43,7 @@ public class Diagram2 extends ContentPane implements Observer, PropertyChangeLis
 		content.add(this.legend);
 		content.add(this.pieChart);
 		
-		this.setHeader(new JLabel("Wer arbeitet mit wem :O"));
+		this.setHeader("Wer arbeitet mit wem :O");
 		this.setContent(content);
 	}
 
