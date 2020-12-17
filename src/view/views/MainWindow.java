@@ -123,7 +123,6 @@ public class MainWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				MainWindow.this.overview.setActiveTab(Overview.STUDENT_TAB_ID);
 				MainWindow.this.setCurrentlyVisible(MainWindow.this.overview);
-
 			}
 		});
 		submenu.add(subMenuItem);
@@ -255,7 +254,7 @@ public class MainWindow extends JFrame {
 		String defaultOption = buttonLabels[0];
 		Icon icon = UIManager.getIcon("FileView.hardDriveIcon");
 
-		return JOptionPane.showOptionDialog(this, "Möchten Sie speichern, bevor Sie das Programm schließen ?\n",
+		return JOptionPane.showOptionDialog(this, "Moechten Sie speichern, bevor Sie das Programm schliessen ?\n",
 				"Warnung", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icon, buttonLabels,
 				defaultOption);
 	}

@@ -1,8 +1,11 @@
 package view.views;
 
+import java.awt.Component;
+import java.awt.Font;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
 import controller.CommandController;
@@ -30,7 +33,7 @@ public class Overview extends ContentPane implements Observer {
 		tPane.add(this.reviewerTab, REVIEWER_TAB_ID);
 		tPane.setTitleAt(REVIEWER_TAB_ID, "Gutachter");
 		
-		
+		this.setHeader(new JLabel("Uebersicht"));
 		this.setContent(tPane);
 	}
 	
