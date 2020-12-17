@@ -13,6 +13,7 @@ public class PeerReviewer extends Person implements Serializable {
 	private List<Student> secondReviewerRoles;
 	private String title;
 	private List<Student> requested;
+	private String subjects;
 
 	public PeerReviewer(String title, String name, String firstName, String email, int capacity) {
 		super(name, firstName, email);
@@ -21,6 +22,7 @@ public class PeerReviewer extends Person implements Serializable {
 		this.firstReviewerRoles = new ArrayList<>();
 		this.secondReviewerRoles = new ArrayList<>();
 		this.requested = new ArrayList<>();
+		this.subjects = "";
 	}
 
 	private PeerReviewer(PeerReviewer p) {
@@ -84,6 +86,23 @@ public class PeerReviewer extends Person implements Serializable {
 		return this.firstReviewerRoles.size() + this.secondReviewerRoles.size();
 	}
 
+	public List<Student> getRequested() {
+		return requested;
+	}
+
+	public void setRequested(List<Student> requested) {
+		this.requested = requested;
+	}
+
+	public String getSubjects() {
+		return subjects;
+	}
+
+	public void setSubjects(String subjects) {
+		this.subjects = subjects;
+	}
+
+	
 	@Override
 	public String toString() {
 		return super.toString() + "\ntitle: \t\t\t" + this.title + "\ncapacity: \t\t" + this.capacity;
@@ -126,7 +145,10 @@ public class PeerReviewer extends Person implements Serializable {
 		return new PeerReviewer("", "", "", "", -1);
 	}
 	
-	public int getLoad() {
+	public double getLoad() {
+		if(this.capacity < 0) {
+			return 1;
+		}
 		return this.getBachelorThesisesCount() / this.capacity;
 	}
 	
@@ -141,7 +163,7 @@ public class PeerReviewer extends Person implements Serializable {
 	}
 	
 	public int getFreeReviews() {
-		if(this.capacity == -1) {
+		if(this.capacity < 0) {
 			return 0;
 		}
 		return this.capacity - this.getBachelorThesisesCount();

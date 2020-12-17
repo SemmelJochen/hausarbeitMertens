@@ -36,7 +36,7 @@ public class Overview extends ContentPane implements Observer {
 		tPane.add(this.reviewerTab, REVIEWER_TAB_ID);
 		tPane.setTitleAt(REVIEWER_TAB_ID, "Gutachter");
 		
-		this.setHeader("Uebersicht");
+		this.setHeader("Gesamtuebersicht");
 		this.setContent(tPane);
 	}
 	

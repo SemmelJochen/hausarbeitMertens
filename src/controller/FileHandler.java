@@ -122,10 +122,10 @@ public class FileHandler {
 		String[] entries = line.split(";");
 		String[] names = entries[0].split(", ");
 		if (names.length == 1) {
-			return new Student("", "", "", "", "", "", "");
+			return Student.createDummy();
 		}
 		if (entries.length == 7) {
-			return new Student(names[1], names[0], "", entries[1], entries[2], entries[3], entries[6]);
+			return new Student(names[0], names[1], "", entries[1], entries[2], entries[3], entries[6]);
 		}
 		return new Student(names[1], names[0], "", entries[1], entries[2], entries[3], "");
 	}
@@ -133,7 +133,7 @@ public class FileHandler {
 	public PeerReviewer newFirstPeerReviewer(String line) {
 		String[] peerReviewerString = line.split(";")[4].split(" ");
 		if (peerReviewerString.length == 1) {
-			return new PeerReviewer("", "", "", "", -1);
+			return PeerReviewer.createDummy();
 		}
 		return this.createPeerReviewer(peerReviewerString);
 	}
@@ -141,7 +141,7 @@ public class FileHandler {
 	public PeerReviewer newSecondPeerReviewer(String line) {
 		String[] peerReviewerString = line.split(";")[5].split(" ");
 		if (peerReviewerString.length == 1) {
-			return new PeerReviewer("", "", "", "", -1);
+			return PeerReviewer.createDummy();
 		}
 		return this.createPeerReviewer(peerReviewerString);
 	}

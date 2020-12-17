@@ -21,7 +21,7 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 
 	private ReviewerComboBox comboBox;
 	private JLabel subjects;
-	
+
 	private JTabbedPane tPane = new JTabbedPane();
 	private ReducedTable reviews;
 	private ReducedTable firstReviews;
@@ -35,21 +35,22 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 		this.creatingTables(commandController);
 		this.subjects = new JLabel("");
 
-		this.fillingTPane();		
-		
+		this.fillingTPane();
+
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		
+
 		JPanel overlay = new JPanel();
 		overlay.add(this.comboBox);
 		overlay.add(this.subjects);
-		
+
 		panel.add(overlay);
 		panel.add(this.tPane);
-		
+
+		this.setHeader("Detailansicht");
 		this.setContent(panel);
 	}
-	
+
 	@Override
 	public void update(Observable o, Object arg) {
 		this.comboBox.updateComboBoxModel(ModelContainer.getInstance().getPeerReviewers());
@@ -61,51 +62,56 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		this.update();
-		this.subjects.setText("Auslastung: " + this.comboBox.getSelectedPeerReviewer().getLoad());
+		this.subjects.setText(this.getLabelText());
 		this.subjects.revalidate();
 		this.subjects.repaint();
 	}
-	
+
+	private String getLabelText() {
+		return "Auslastung: " + (int) (this.comboBox.getSelectedPeerReviewer().getLoad() * 100) + "% - " +
+				this.comboBox.getSelectedPeerReviewer().getSubjects();
+	}
+
 	private void update() {
-		
+
 		ArrayList<Student> allStudents = new ArrayList<>();
 		allStudents.addAll(this.comboBox.getSelectedPeerReviewer().getFirstPeerReviewerRoles());
 		allStudents.addAll(this.comboBox.getSelectedPeerReviewer().getSecondPeerReviewerRoles());
-		
+
 		this.reviews.setList(allStudents);
 		this.firstReviews.setList(this.comboBox.getSelectedPeerReviewer().getFirstPeerReviewerRoles());
 		this.secondReviews.setList(this.comboBox.getSelectedPeerReviewer().getSecondPeerReviewerRoles());
-		
+
 		ArrayList<Student> freeStudents = new ArrayList<>();
-		for(Student student: ModelContainer.getInstance().getStudents()) {
-			if(student.getFirstPeerReviewer().isDummy()) {
+		for (Student student : ModelContainer.getInstance().getStudents()) {
+			if (student.getFirstPeerReviewer().isDummy()) {
 				freeStudents.add(student);
 			}
 		}
 		this.askingStudents.setList(freeStudents);
-		
+
 		this.reviews.update();
 		this.firstReviews.update();
 		this.secondReviews.update();
 		this.askingStudents.update();
 	}
-	
+
 	private void creatingTables(CommandController commandController) {
 		this.firstReviews = new FirstRoleTable(commandController, new ArrayList<Student>());
 		this.secondReviews = new SecondRolesTable(commandController, new ArrayList<Student>());
 		this.askingStudents = new FreeStudents(commandController, new ArrayList<Student>());
 		this.reviews = new AllRolesTable(commandController, new ArrayList<Student>());
 	}
-	
+
 	private void fillingTPane() {
 		this.tPane.add(this.reviews, 0);
 		this.tPane.add(this.firstReviews, 1);
 		this.tPane.add(this.secondReviews, 2);
 		this.tPane.add(this.askingStudents, 3);
-		
+
 		this.tPane.setTitleAt(0, "Alle Gutachten");
 		this.tPane.setTitleAt(1, "Erstgutachten");
 		this.tPane.setTitleAt(2, "Zweitgutachten");
-		this.tPane.setTitleAt(3, "Freie Gutachten");	
+		this.tPane.setTitleAt(3, "Freie Gutachten");
 	}
 }

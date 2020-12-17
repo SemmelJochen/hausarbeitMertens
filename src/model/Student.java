@@ -102,4 +102,8 @@ public class Student extends Person implements Serializable {
 				this.firstPeerReviewer.equals(studentToCheck.getFirstPeerReviewer()) &&
 				this.secondPeerReviewer.equals(studentToCheck.getSecondPeerReviewer());
 	}
+	
+	public static Student createDummy() {
+		return new Student("", "", "", "", "", "", "");
+	}
 }
