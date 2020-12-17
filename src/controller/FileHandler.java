@@ -67,14 +67,15 @@ public class FileHandler {
 						firstPeerReviewer.addBachelorThesisAsFirstReviewer(student);
 						modelContainer.putPeerReviewer(firstPeerReviewer);
 					}
-					student.setFirstPeerReviewer(firstPeerReviewer.getFirstName() + firstPeerReviewer.getName());
+					String key = firstPeerReviewer.getFirstName() + firstPeerReviewer.getName();
+					student.setFirstPeerReviewer(key);
 
 					if (!secondPeerReviewer.isDummy()) {
 						secondPeerReviewer.addBachelorThesisAsSecondReviewer(student);
 						modelContainer.putPeerReviewer(secondPeerReviewer);
 					}
-					student.setSecondPeerReviewer(secondPeerReviewer.getFirstName() + secondPeerReviewer.getName());
-
+					key = secondPeerReviewer.getFirstName() + secondPeerReviewer.getName();
+					student.setSecondPeerReviewer(key);
 					
 					modelContainer.addStudent(student);
 				} else {
