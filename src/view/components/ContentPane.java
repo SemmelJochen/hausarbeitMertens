@@ -50,21 +50,16 @@ public class ContentPane extends JPanel {
 		this.header.removeAll();
 		this.header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
 		this.header.add(c);
-		this.header.setFont(new Font("Arial", 0, 44));
-		//this.designHeader();
+		this.designHeader();
 		this.header.setVisible(true);
 	}
 	
 	public void designHeader() {
-		//Font font = new Font("Arial", Font.BOLD, 44);
-		//this.header.setFont(new Font("Arial", Font.BOLD, 44));
-
-		//JLabel text = new JLabel();
-		//text.setLocation(15, 15);
-		//text.setSize(500, 150);
-		//text.setForeground(Color.red);
-		//text.setFont(font);
-		//this.header.add(text);
-		//this.header.setVisible(true);
+		JLabel text = new JLabel("Header");
+		text.setLocation(15, 15);
+		text.setSize(500, 150);
+		text.setForeground(Color.black);
+		text.setFont(new Font("Arial", Font.BOLD, 38));
+		this.header.add(text);
 	}
 }
