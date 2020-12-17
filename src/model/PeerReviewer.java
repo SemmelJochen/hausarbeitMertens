@@ -12,6 +12,7 @@ public class PeerReviewer extends Person implements Serializable {
 	private List<Student> firstReviewerRoles;
 	private List<Student> secondReviewerRoles;
 	private String title;
+	private List<Student> requested;
 
 	public PeerReviewer(String title, String name, String firstName, String email, int capacity) {
 		super(name, firstName, email);
@@ -60,7 +61,15 @@ public class PeerReviewer extends Person implements Serializable {
 	public String getTitle() {
 		return this.title;
 	}
-
+	
+	public void requestAsSecondPeerReviewer(Student s) {
+		this.requested.add(s);
+	}
+	
+	public void acceptRequest(Student s) {
+		this.secondReviewerRoles.add(s);
+		this.requested.remove(s);
+	}
 	public List<Student> getFirstPeerReviewerRoles() {
 		return this.firstReviewerRoles;
 	}
