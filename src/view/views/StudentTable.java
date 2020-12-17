@@ -56,10 +56,11 @@ public class StudentTable extends JPanel {
 						.map(e -> e.getSecondPeerReviewer().getFirstName() + " " + e.getSecondPeerReviewer().getName())
 						.collect(Collectors.toList()))//
 				.withMetaData(students)//
+				.withType(Student.class)//
 				.build();
 	}
 
-	public void update(Observable o, Object arg) {
+	public void update() {
 		refreshTableData();
 		this.table.refreshData(tableData);
 	}

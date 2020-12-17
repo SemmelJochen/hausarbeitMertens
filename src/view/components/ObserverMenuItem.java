@@ -17,9 +17,8 @@ public class ObserverMenuItem extends JMenuItem implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
 		ObservableCommandStack os = (ObservableCommandStack) o;
-		if(true) {
+		if(!os.isEmpty()) {
 			this.setEnabled(true);
 		}else {
 			this.setEnabled(false);

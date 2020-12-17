@@ -41,7 +41,13 @@ public class Controller {
 	}
 
 	public void appendReviewerChangeListeners(Observer o) {
-		this.modelContainer.addStudentDataChangeObserver(o);
+		this.modelContainer.addReviewerDataChangeObserver(o);
+	}
+	public void removeReviewerChangeListeners(Observer o) {
+		this.modelContainer.removeReviewerDataChangeObserver(o);
+	}
+	public void removeStudentChangeListeners(Observer o) {
+		this.modelContainer.removeStudentDataChangeObserver(o);
 	}
 
 	public void run() {
@@ -50,13 +56,9 @@ public class Controller {
 		// add lister to listen to window close operation
 		this.window.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent winEvt) {
-				// TODO when closing the window, save the data
 				handleClose();
 			}
 		});
-
-//		Table table = new Table(this.createSampleTableData());
-
 		window.setVisible(true);
 	}
 
@@ -118,8 +120,9 @@ public class Controller {
 	}
 
 	public void load(String filePath) {
+		this.window.removeStudentDataChangeListeners();
+		this.window.removeReviewerDataChangeListeners();
 		this.filePath = filePath;
-		this.window.setVisible(false);
 		if (!filePath.endsWith(".mrtns")) {
 			filePath += ".mrtns";
 		}
@@ -131,18 +134,14 @@ public class Controller {
 			this.modelContainer.readExternal(ois);
 			ois.close();
 			fis.close();
-
-			/**
-			 * TODO add other actions to do from here - clear MainWindow contentPane and add
-			 * new content - new modelContainer
-			 */
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		this.window.buildInitialView();
 		this.window.appendStudentDataChangeListeners();
 		this.window.appendReviewerDataChangeListeners();
-		this.window.setVisible(true);
+		this.window.revalidate();
+		this.window.repaint();
 	}
 
 	public void runImport() {

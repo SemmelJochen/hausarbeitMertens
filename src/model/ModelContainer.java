@@ -62,6 +62,11 @@ public class ModelContainer implements Externalizable {
 	public ArrayList<PeerReviewer> getPeerReviewers() {
 		return new ArrayList<PeerReviewer>(peerReviewers.values());
 	}
+	
+	public void removePeerReviewer(PeerReviewer p) {
+		String key = p.getFirstName() + p.getName();
+		this.peerReviewers.remove(key);
+	}
 
 	public ObservableList<Student> getStudents() {
 		return this.students;
@@ -116,5 +121,16 @@ public class ModelContainer implements Externalizable {
 	
 	public void removeReviewerDataChangeObserver(Observer o) {
 		this.peerReviewers.deleteObserver(o);
+	}
+	
+	public void fireChange() {
+		this.peerReviewers.hasChanged();
+		this.peerReviewers.notifyObservers();
+		this.students.hasChanged();
+		this.students.notifyObservers();
+	}
+
+	public void removeStudent(Student studentToRemove) {
+		this.students.remove(studentToRemove);
 	}
 }

@@ -122,6 +122,10 @@ public class PeerReviewer extends Person implements Serializable {
 				this.secondReviewerRoles.equals(peerReviewer.getSecondPeerReviewerRoles());
 	}
 	
+	public static PeerReviewer createDummy() {
+		return new PeerReviewer("", "", "", "", -1);
+	}
+	
 	public int getLoad() {
 		return this.getBachelorThesisesCount() / this.capacity;
 	}

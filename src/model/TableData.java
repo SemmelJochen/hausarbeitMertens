@@ -7,6 +7,7 @@ public class TableData<T> {
 	private List<Object>[] data;
 	private List<T> metaData;
 	private String[] columnNames;
+	private Class<?> type;
 
 	private TableData(Builder<T> builder) {
 		this.data = new ArrayList[builder.columns.size()];
@@ -14,6 +15,7 @@ public class TableData<T> {
 		this.columnNames = new String[builder.columnNames.size()];
 		this.columnNames = builder.columnNames.toArray(columnNames);
 		this.metaData = builder.metaData;
+		this.type = builder.type;
 	}
 
 	public String[] getColumnNames() {
@@ -26,6 +28,10 @@ public class TableData<T> {
 	
 	public List<T> getMetaData(){
 		return this.metaData;
+	}
+	
+	public Class<?> getType() {
+		return this.type;
 	}
 
 	/**
@@ -46,6 +52,7 @@ public class TableData<T> {
 		private List<List<Object>> columns = new ArrayList<List<Object>>();
 		private List<String> columnNames = new ArrayList<String>();
 		private List<T> metaData = new ArrayList<T>();
+		private Class<?> type;
 
 		private Builder() {
 		}
@@ -82,6 +89,11 @@ public class TableData<T> {
 
 			}
 
+		}
+
+		public Builder withType(Class<?> clazz) {
+			this.type = clazz;
+			return this;
 		}
 	}
 

@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
 import controller.CommandController;
+import controller.ObservableHashMap;
+import controller.ObservableList;
+import model.PeerReviewer;
 import view.components.ContentPane;
 
 public class Overview extends ContentPane implements Observer {
@@ -43,8 +46,10 @@ public class Overview extends ContentPane implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		this.reviewerTab.update(o, arg);
-		this.studentTab.update(o, arg);
+		System.out.println("changed");
+		this.reviewerTab.update();
+		this.studentTab.update();
+		
 	}
 	
 	

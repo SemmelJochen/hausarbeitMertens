@@ -10,11 +10,14 @@ public class CustomTableModel extends AbstractTableModel {
 	private String[] columnNames;
 	private List<?> metaData;
 	private List<Object>[] data;
+	private Class<?> type;
 
 	public CustomTableModel(TableData<?> tableData) {
 		this.columnNames = tableData.getColumnNames();
 		this.data = tableData.getContent();
 		this.metaData = tableData.getMetaData();
+		this.type = tableData.getType();
+		super.fireTableDataChanged();
 	}
 
 	public int getColumnCount() {
@@ -28,16 +31,28 @@ public class CustomTableModel extends AbstractTableModel {
 	public String getColumnName(int col) {
 		return this.columnNames[col];
 	}
+	
+	public String[] getColumnnNames() {
+		return this.columnNames;
+	}
 
 	public Object getValueAt(int row, int col) {
 		return this.data[col].get(row);
 	}
-
+	
+	public boolean hasData() {
+		return this.data.length > 0;
+	}
+	
+	public Class<?> getType() {
+		return this.type;
+	}
+	
 	/**
 	 * 
 	 * @param row
 	 * @param col
-	 * @return firstObject returns the metaData object and second the value in table
+	 * @return   firstObject returns the metaData object and second the value that changed
 	 */
 	public Pair<Object, Object> getDataAt(int row, int col) {
 		return new Pair<Object, Object>(this.metaData.get(row), this.data[col].get(row));
@@ -54,7 +69,11 @@ public class CustomTableModel extends AbstractTableModel {
 	}
 
 	public void updateData(TableData<?> tableData) {
+		for(List<Object> l : this.data) {
+			l.clear();
+		}
 		this.data = tableData.getContent();
+		this.metaData = tableData.getMetaData();
 		super.fireTableDataChanged();
 	}
 
