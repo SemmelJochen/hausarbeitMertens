@@ -2,6 +2,7 @@ package view.components;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Font;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -42,6 +43,11 @@ public class ContentPane extends JPanel {
 		this.header.removeAll();
 		this.header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
 		this.header.add(c);
+		this.desginHeader();
 		this.header.setVisible(true);
+	}
+	
+	private void desginHeader() {
+//		this.header.setFont(new Font());
 	}
 }

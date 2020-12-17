@@ -29,7 +29,7 @@ public class FileHandler {
 		FileNameExtensionFilter xmlFilter = new FileNameExtensionFilter("CSV-Dateien (*.csv)", "csv");
 		this.fileChooser.addChoosableFileFilter(xmlFilter);
 		this.fileChooser.setFileFilter(xmlFilter);
-		
+
 		if (dialogType == DialogType.IMPORT) {
 			result = this.fileChooser.showOpenDialog(null);
 		} else if (dialogType == DialogType.EXPORT) {
@@ -39,9 +39,9 @@ public class FileHandler {
 		if (result == JFileChooser.CANCEL_OPTION) {
 			return false;
 		}
-		
-		//JFileChooser.APPROVE_OPTION
-		//unreachable code for the CANCEL_OPTION
+
+		// JFileChooser.APPROVE_OPTION
+		// unreachable code for the CANCEL_OPTION
 		this.file = this.fileChooser.getSelectedFile();
 		return true;
 	}
@@ -62,15 +62,18 @@ public class FileHandler {
 					Student student = this.newStudent(line);
 					PeerReviewer firstPeerReviewer = this.newFirstPeerReviewer(line);
 					PeerReviewer secondPeerReviewer = this.newSecondPeerReviewer(line);
-					firstPeerReviewer.addBachelorThesisAsFirstReviewer(student);
+
+					if (!firstPeerReviewer.isDummy()) {
+						firstPeerReviewer.addBachelorThesisAsFirstReviewer(student);
+					}
 					student.setFirstPeerReviewer(firstPeerReviewer);
 
-					if (secondPeerReviewer != null) {
+					if (!secondPeerReviewer.isDummy()) {
 						secondPeerReviewer.addBachelorThesisAsSecondReviewer(student);
-						modelContainer.putPeerReviewer(secondPeerReviewer);
-						student.setSecondPeerReviewer(secondPeerReviewer);
 					}
+					student.setSecondPeerReviewer(secondPeerReviewer);
 
+					modelContainer.putPeerReviewer(secondPeerReviewer);
 					modelContainer.putPeerReviewer(firstPeerReviewer);
 					modelContainer.addStudent(student);
 				} else {

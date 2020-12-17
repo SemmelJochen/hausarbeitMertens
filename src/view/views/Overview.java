@@ -42,7 +42,6 @@ public class Overview extends ContentPane implements Observer {
 	public void update(Observable o, Object arg) {
 		this.reviewerTab.update(o, arg);
 		this.studentTab.update(o, arg);
-		
 	}
 	
 	

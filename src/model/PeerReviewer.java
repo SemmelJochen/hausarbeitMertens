@@ -20,6 +20,7 @@ public class PeerReviewer extends Person implements Serializable {
 		this.capacity = capacity;
 		this.firstReviewerRoles = new ArrayList<>();
 		this.secondReviewerRoles = new ArrayList<>();
+		this.requested = new ArrayList<>();
 	}
 
 	private PeerReviewer(PeerReviewer p) {
@@ -79,8 +80,8 @@ public class PeerReviewer extends Person implements Serializable {
 		return this.secondReviewerRoles;
 	}
 
-	public int getCountFirstBachelorThesises() {
-		return this.firstReviewerRoles.size();
+	public int getBachelorThesisesCount() {
+		return this.firstReviewerRoles.size() + this.secondReviewerRoles.size();
 	}
 
 	@Override
@@ -119,5 +120,26 @@ public class PeerReviewer extends Person implements Serializable {
 				this.title.equals(peerReviewer.getTitle()) &&
 				this.firstReviewerRoles.equals(peerReviewer.getFirstPeerReviewerRoles()) &&
 				this.secondReviewerRoles.equals(peerReviewer.getSecondPeerReviewerRoles());
+	}
+	
+	public int getLoad() {
+		return this.getBachelorThesisesCount() / this.capacity;
+	}
+	
+	public boolean isDummy() {
+		return super.isDummy() &&
+				this.firstReviewerRoles.isEmpty() &&
+				this.secondReviewerRoles.isEmpty() &&
+				this.requested.isEmpty() &&
+				this.capacity == -1 &&
+				this.title.equals("");
+				
+	}
+	
+	public int getFreeReviews() {
+		if(this.capacity == -1) {
+			return 0;
+		}
+		return this.capacity - this.getBachelorThesisesCount();
 	}
 }

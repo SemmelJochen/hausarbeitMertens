@@ -26,7 +26,7 @@ public class MainWindow extends JFrame {
 	private Overview overview;
 	private Diagram1 diagram1;
 	private Diagram2 diagram2;
-	private DetailedReviewerOverview reviewerOverview;
+	private DetailedPeerReviewerOverview reviewerOverview;
 
 	/**
 	 * Create the frame.
@@ -34,7 +34,7 @@ public class MainWindow extends JFrame {
 	public MainWindow(Controller c) {
 		super();
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		this.setSize(new Dimension(1280, 720));
+		this.setSize(new Dimension(1280, 800));
 		this.setJMenuBar(buildMenuBar());
 		this.controller = c;
 		this.buildInitialView();
@@ -65,7 +65,7 @@ public class MainWindow extends JFrame {
 		this.overview = new Overview(this.controller.getCommandController());
 		this.diagram1 = new Diagram1();
 		this.diagram2 = new Diagram2();
-		this.reviewerOverview = new DetailedReviewerOverview();
+		this.reviewerOverview = new DetailedPeerReviewerOverview(this.controller.getCommandController());
 	}
 
 	public void buildInitialView() {

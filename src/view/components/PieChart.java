@@ -33,7 +33,7 @@ public class PieChart extends JComponent {
 			return;
 		}
 		super.paintComponent(g);
-		drawPie((Graphics2D) g, new Rectangle(150, 50, 350, 350));
+		drawPie((Graphics2D) g, new Rectangle(150, 50, 400, 400));
 	}
 
 	public void drawPie(Graphics2D g, Rectangle area) {

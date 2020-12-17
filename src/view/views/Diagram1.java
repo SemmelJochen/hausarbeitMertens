@@ -25,7 +25,7 @@ public class Diagram1 extends ContentPane implements Observer {
 	public Diagram1() {
 		super();
 		List<Slice> sliceData = createSliceData();
-		this.pieChart = new PieChart(sliceData, new Dimension(500, 500));
+		this.pieChart = new PieChart(sliceData, new Dimension(600, 600));
 		this.legend = new PieChartLegend(sliceData, this.pieChart);
 		JPanel content = new JPanel();
 		content.add(legend);
@@ -37,8 +37,8 @@ public class Diagram1 extends ContentPane implements Observer {
 	public List<Slice> createSliceData() {
 		List<Slice> slices = new ArrayList<Slice>();
 		ModelContainer.getInstance().getPeerReviewers().forEach(peerReviewer -> {
-			if (peerReviewer.getCountFirstBachelorThesises() > 0) {
-				slices.add(new Slice(peerReviewer.getCountFirstBachelorThesises(),
+			if (peerReviewer.getBachelorThesisesCount() > 0) {
+				slices.add(new Slice(peerReviewer.getBachelorThesisesCount(),
 						new Color((int) (Math.random() * 255), (int) (Math.random() * 255),
 								(int) (Math.random() * 255)),
 						peerReviewer.getFirstName() + " " + peerReviewer.getName()));

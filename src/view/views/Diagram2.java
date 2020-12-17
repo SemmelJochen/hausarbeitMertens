@@ -35,7 +35,7 @@ public class Diagram2 extends ContentPane implements Observer, PropertyChangeLis
 		this.reviewerComboBox.addCustomPropertyChangeListener(this);
 		
 		List<Slice> sliceData = createSliceData();
-		this.pieChart = new PieChart(sliceData, new Dimension(500, 500));
+		this.pieChart = new PieChart(sliceData, new Dimension(600, 600));
 		this.legend = new PieChartLegend(sliceData, this.pieChart);
 		
 		JPanel content = new JPanel();

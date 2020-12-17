@@ -71,13 +71,9 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
 			if (value != null) {
-				int cap = (((PeerReviewer) value).getCapacity());
 				String name = (((PeerReviewer) value).getFirstName() + " " + ((PeerReviewer) value).getName());
-				String capacity = Integer.toString(cap);
-				if (cap < 0) {
-					capacity = "( " + capacity + ")";
-				}
-				setText(name + " - " + capacity);
+				int freeReviews = (((PeerReviewer) value).getFreeReviews());
+				setText(name + " - " + freeReviews);
 
 			}
 			return this;

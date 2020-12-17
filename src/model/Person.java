@@ -48,4 +48,10 @@ public class Person implements Serializable {
 				this.firstName.equals(persontoCheck.getFirstName()) &&
 				this.email.equals(persontoCheck.getEmail());
 	}
+
+	public boolean isDummy() {
+		return this.name.equals("") &&
+				this.firstName.equals("") &&
+				this.email.equals("");
+	}
 }
