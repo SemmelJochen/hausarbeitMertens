@@ -1,27 +1,21 @@
 package view.components;
 
-import java.util.Observable;
-import java.util.Observer;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JMenuItem;
 
-import controller.ObservableCommandStack;
-
-public class ObserverMenuItem extends JMenuItem implements Observer {
+public class ObserverMenuItem extends JMenuItem implements PropertyChangeListener {
 
 	public ObserverMenuItem(String title) {
 		super(title);
 		
-		this.setEnabled(true);		
+		this.setEnabled(false);		
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		ObservableCommandStack os = (ObservableCommandStack) o;
-		if(!os.isEmpty()) {
-			this.setEnabled(true);
-		}else {
-			this.setEnabled(false);
-		}		
+	public void propertyChange(PropertyChangeEvent evt) {
+		System.out.println("Hello World");
+		this.setEnabled(!(boolean) evt.getNewValue());
 	}
 }

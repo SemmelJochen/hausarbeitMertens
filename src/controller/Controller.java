@@ -28,14 +28,6 @@ public class Controller {
 		this.commandController = new CommandController();
 	}
 
-	public void addUndoMenuItem(ObserverMenuItem ob) {
-		this.commandController.getUndoStack().addObserver(ob);
-	}
-
-	public void addRedoMenuItem(ObserverMenuItem ob) {
-		this.commandController.getRedoStack().addObserver(ob);
-	}
-
 	public void appendStudentChangeListeners(Observer o) {
 		this.modelContainer.addStudentDataChangeObserver(o);
 	}

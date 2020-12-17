@@ -36,8 +36,8 @@ public class MainWindow extends JFrame {
 		super();
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setSize(new Dimension(1280, 1000));
-		this.setJMenuBar(buildMenuBar());
 		this.controller = c;
+		this.setJMenuBar(buildMenuBar());
 		this.buildInitialView();
 		this.appendStudentDataChangeListeners();
 		this.appendReviewerDataChangeListeners();
@@ -271,6 +271,7 @@ public class MainWindow extends JFrame {
 		menu.addSeparator();
 		oMenuItem = new ObserverMenuItem("Undo"); // Action Listener einfuegen
 		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.META_MASK));
+		this.controller.getCommandController().getUndoStack().addPropertyChangeListener(oMenuItem);
 		oMenuItem.addActionListener(new ActionListener() {
 
 			@Override
@@ -283,6 +284,7 @@ public class MainWindow extends JFrame {
 		
 		oMenuItem = new ObserverMenuItem("Redo"); // Action Listener einfuegen
 		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.META_MASK));
+		this.controller.getCommandController().getRedoStack().addPropertyChangeListener(oMenuItem);
 		oMenuItem.addActionListener(new ActionListener() {
 
 			@Override
@@ -290,7 +292,6 @@ public class MainWindow extends JFrame {
 					MainWindow.this.controller.redo();
 			}
 		});
-		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.META_MASK));
 
 		menu.add(oMenuItem);
 		menuBar.add(menu);
