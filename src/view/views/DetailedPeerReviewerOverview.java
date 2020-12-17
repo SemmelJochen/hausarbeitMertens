@@ -19,11 +19,16 @@ import view.components.ReviewerComboBox;
 
 public class DetailedPeerReviewerOverview extends ContentPane implements Observer, PropertyChangeListener {
 
+	public static final int ALLREVIEWS_TAB_ID = 0;
+	public static final int FIRSTREVIEWRROLE_TAB_ID = 1;
+	public static final int SECONDREVIEWERROLE_TAB_ID = 2;
+	public static final int ASKINGSTUDENTS_TAB_ID = 3;
+	
 	private ReviewerComboBox comboBox;
 	private JLabel subjects;
 
 	private JTabbedPane tPane = new JTabbedPane();
-	private ReducedTable reviews;
+	private ReducedTable allReviews;
 	private ReducedTable firstReviews;
 	private ReducedTable secondReviews;
 	private ReducedTable askingStudents;
@@ -68,50 +73,57 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 	}
 
 	private String getLabelText() {
-		return "Auslastung: " + (int) (this.comboBox.getSelectedPeerReviewer().getLoad() * 100) + "% - " +
-				this.comboBox.getSelectedPeerReviewer().getSubjects();
+		return "Auslastung: " + (int) (this.comboBox.getSelectedPeerReviewer().getLoad() * 100) + "% - "
+				+ this.comboBox.getSelectedPeerReviewer().getSubjects();
 	}
 
 	private void update() {
 
-		ArrayList<Student> allStudents = new ArrayList<>();
-		allStudents.addAll(this.comboBox.getSelectedPeerReviewer().getFirstPeerReviewerRoles());
-		allStudents.addAll(this.comboBox.getSelectedPeerReviewer().getSecondPeerReviewerRoles());
+		ArrayList<Student> allStudents = this.getAllStudents();
+		ArrayList<Student> askingStudents = this.getAskingStudents();
 
-		this.reviews.setList(allStudents);
+		this.allReviews.setList(allStudents);
 		this.firstReviews.setList(this.comboBox.getSelectedPeerReviewer().getFirstPeerReviewerRoles());
 		this.secondReviews.setList(this.comboBox.getSelectedPeerReviewer().getSecondPeerReviewerRoles());
+		this.askingStudents.setList(askingStudents);
 
-		ArrayList<Student> freeStudents = new ArrayList<>();
-		for (Student student : ModelContainer.getInstance().getStudents()) {
-			if (student.getFirstPeerReviewer().isDummy()) {
-				freeStudents.add(student);
-			}
-		}
-		this.askingStudents.setList(freeStudents);
-
-		this.reviews.update();
+		this.allReviews.update();
 		this.firstReviews.update();
 		this.secondReviews.update();
 		this.askingStudents.update();
 	}
 
+	private ArrayList<Student> getAskingStudents() {
+		ArrayList<Student> askingStudents = new ArrayList<Student>();
+		for (Student student : this.comboBox.getSelectedPeerReviewer().getRequested()) {
+			askingStudents.add(student);
+		}
+		return askingStudents;
+	}
+
+	private ArrayList<Student> getAllStudents() {
+		ArrayList<Student> allStudents = new ArrayList<Student>();
+		allStudents.addAll(this.comboBox.getSelectedPeerReviewer().getFirstPeerReviewerRoles());
+		allStudents.addAll(this.comboBox.getSelectedPeerReviewer().getSecondPeerReviewerRoles());
+		return allStudents;
+	}
+
 	private void creatingTables(CommandController commandController) {
-		this.firstReviews = new FirstRoleTable(commandController, new ArrayList<Student>());
-		this.secondReviews = new SecondRolesTable(commandController, new ArrayList<Student>());
-		this.askingStudents = new FreeStudents(commandController, new ArrayList<Student>());
-		this.reviews = new AllRolesTable(commandController, new ArrayList<Student>());
+		this.firstReviews = new FirstRoleTable(commandController);
+		this.secondReviews = new SecondRolesTable(commandController);
+		this.askingStudents = new FreeStudents(commandController);
+		this.allReviews = new AllRolesTable(commandController);
 	}
 
 	private void fillingTPane() {
-		this.tPane.add(this.reviews, 0);
-		this.tPane.add(this.firstReviews, 1);
-		this.tPane.add(this.secondReviews, 2);
-		this.tPane.add(this.askingStudents, 3);
+		this.tPane.add(this.allReviews, ALLREVIEWS_TAB_ID);
+		this.tPane.add(this.firstReviews, FIRSTREVIEWRROLE_TAB_ID);
+		this.tPane.add(this.secondReviews, SECONDREVIEWERROLE_TAB_ID);
+		this.tPane.add(this.askingStudents, ASKINGSTUDENTS_TAB_ID);
 
-		this.tPane.setTitleAt(0, "Alle Gutachten");
-		this.tPane.setTitleAt(1, "Erstgutachten");
-		this.tPane.setTitleAt(2, "Zweitgutachten");
-		this.tPane.setTitleAt(3, "Freie Gutachten");
+		this.tPane.setTitleAt(ALLREVIEWS_TAB_ID, "Alle Gutachten");
+		this.tPane.setTitleAt(FIRSTREVIEWRROLE_TAB_ID, "Erstgutachten");
+		this.tPane.setTitleAt(SECONDREVIEWERROLE_TAB_ID, "Zweitgutachten");
+		this.tPane.setTitleAt(ASKINGSTUDENTS_TAB_ID, "Anfragende Studenten");
 	}
 }

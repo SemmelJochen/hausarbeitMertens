@@ -15,8 +15,8 @@ import view.components.Table;
 
 public class AllRolesTable extends ReducedTable {
 
-	public AllRolesTable(CommandController commandController, List<Student> students) {
-		super(commandController, students);
+	public AllRolesTable(CommandController commandController) {
+		super(commandController);
 	}
 
 	@SuppressWarnings("unchecked")

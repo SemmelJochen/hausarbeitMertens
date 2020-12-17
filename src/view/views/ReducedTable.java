@@ -1,7 +1,7 @@
 package view.views;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 import javax.swing.JPanel;
 
@@ -17,9 +17,9 @@ public abstract class ReducedTable extends JPanel {
 	protected Table table;
 	protected List<Student> students;
 
-	public ReducedTable(CommandController commandController, List<Student> students) {
+	public ReducedTable(CommandController commandController) {
 		super();
-		this.students = students;
+		this.students = new ArrayList<Student>();
 		this.add(buildTable(commandController));
 	}
 

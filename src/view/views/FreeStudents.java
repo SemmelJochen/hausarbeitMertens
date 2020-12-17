@@ -19,8 +19,8 @@ import view.components.Table;
 
 public class FreeStudents extends ReducedTable {
 
-	public FreeStudents(CommandController commandController, List<Student> students) {
-		super(commandController, students);
+	public FreeStudents(CommandController commandController) {
+		super(commandController);
 	}
 
 	@SuppressWarnings("unchecked")

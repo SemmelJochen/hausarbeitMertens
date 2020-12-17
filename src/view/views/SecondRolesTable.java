@@ -16,8 +16,8 @@ import view.components.Table;
 public class SecondRolesTable extends ReducedTable {
 
 
-	public SecondRolesTable(CommandController commandController, List<Student> students) {
-		super(commandController, students);
+	public SecondRolesTable(CommandController commandController) {
+		super(commandController);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -25,7 +25,7 @@ public class SecondRolesTable extends ReducedTable {
 	public void refreshTableData() {
 		this.tableData = newTableData()
 				.withColumn(StudentColumn.STUDENT_GROUP,
-						students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//
+						this.students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//
 				.withColumn(StudentColumn.FIRSTNAME,
 						students.stream().map(e -> e.getFirstName()).collect(Collectors.toList()))//
 				.withColumn(StudentColumn.LASTNAME,

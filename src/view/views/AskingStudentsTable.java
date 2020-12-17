@@ -11,8 +11,8 @@ import model.StudentColumn;
 
 public class AskingStudentsTable extends ReducedTable{
 
-	public AskingStudentsTable(CommandController commandController, List<Student> students) {
-		super(commandController, students);
+	public AskingStudentsTable(CommandController commandController) {
+		super(commandController);
 	}
 
 	@SuppressWarnings("unchecked")
