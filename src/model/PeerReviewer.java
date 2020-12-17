@@ -70,6 +70,7 @@ public class PeerReviewer extends Person implements Serializable {
 		this.secondReviewerRoles.add(s);
 		this.requested.remove(s);
 	}
+	
 	public List<Student> getFirstPeerReviewerRoles() {
 		return this.firstReviewerRoles;
 	}
