@@ -9,18 +9,18 @@ public class Student extends Person implements Serializable {
 
 	private static final long serialVersionUID = 0xBAFFL;
 	private String studentGroup, practicePartner, subject;
-	private PeerReviewer firstPeerReviewer;
-	private PeerReviewer secondPeerReviewer;
+	private String firstPeerReviewerKey;
+	private String secondPeerReviewerKey;
 	private String remark;
 
 	public Student(String name, String firstName, String email, String studentGroup, String practicePartner,
-			String subject, PeerReviewer firstPeerReviewer, PeerReviewer secondPeerReviewer, String remark) {
+			String subject, String firstPeerReviewerKey, String secondPeerReviewerKey, String remark) {
 		super(name, firstName, email);
 		this.studentGroup = studentGroup;
 		this.practicePartner = practicePartner;
 		this.subject = subject;
-		this.firstPeerReviewer = firstPeerReviewer;
-		this.secondPeerReviewer = secondPeerReviewer;
+		this.firstPeerReviewerKey = firstPeerReviewerKey;
+		this.secondPeerReviewerKey = secondPeerReviewerKey;
 		this.remark = remark;
 	}
 
@@ -34,20 +34,20 @@ public class Student extends Person implements Serializable {
 				s.getFirstPeerReviewer(), s.getSecondPeerReviewer(), s.getRemark());
 	}
 
-	public PeerReviewer getFirstPeerReviewer() {
-		return this.firstPeerReviewer;
+	public String getFirstPeerReviewer() {
+		return this.firstPeerReviewerKey;
 	}
 
-	public void setFirstPeerReviewer(PeerReviewer firstPeerReviewer) {
-		this.firstPeerReviewer = firstPeerReviewer;
+	public void setFirstPeerReviewer(String firstPeerReviewerKey) {
+		this.firstPeerReviewerKey = firstPeerReviewerKey;
 	}
 
-	public PeerReviewer getSecondPeerReviewer() {
-		return this.secondPeerReviewer;
+	public String getSecondPeerReviewer() {
+		return this.secondPeerReviewerKey;
 	}
 
-	public void setSecondPeerReviewer(PeerReviewer secondPeerReviewer) {
-		this.secondPeerReviewer = secondPeerReviewer;
+	public void setSecondPeerReviewer(String secondPeerReviewerKey) {
+		this.secondPeerReviewerKey = secondPeerReviewerKey;
 	}
 
 	public String getStudentGroup() {
@@ -99,8 +99,8 @@ public class Student extends Person implements Serializable {
 				this.getStudentGroup().equals(studentToCheck.getStudentGroup()) &&
 				this.getPracticePartner().equals(studentToCheck.getPracticePartner()) &&
 				this.getSubject().equals(studentToCheck.getSubject()) &&
-				this.firstPeerReviewer.equals(studentToCheck.getFirstPeerReviewer()) &&
-				this.secondPeerReviewer.equals(studentToCheck.getSecondPeerReviewer());
+				this.firstPeerReviewerKey.equals(studentToCheck.getFirstPeerReviewer()) &&
+				this.secondPeerReviewerKey.equals(studentToCheck.getSecondPeerReviewer());
 	}
 	
 	public static Student createDummy() {

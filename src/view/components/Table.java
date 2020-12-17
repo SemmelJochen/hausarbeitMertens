@@ -5,7 +5,6 @@ import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -24,16 +23,12 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import controller.CommandController;
-import controller.CustomCellEditor;
 import controller.PeerReviewerAddCommand;
 import controller.StudentAddCommand;
 import controller.TableController;
 import model.CustomTableModel;
-import model.ModelContainer;
 import model.PeerReviewer;
-import model.ReviewerColumn;
 import model.Student;
-import model.StudentColumn;
 import model.TableData;
 
 public class Table extends JPanel implements TableModelListener {
@@ -53,7 +48,7 @@ public class Table extends JPanel implements TableModelListener {
 		this.cellEditor = new CustomCellEditor(this);
 		
 		this.table = new JTable(this.model) {
-			// make column fit to its content
+			// make columns fit to its content
 			@Override
 			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 				Component component = super.prepareRenderer(renderer, row, column);
@@ -64,15 +59,16 @@ public class Table extends JPanel implements TableModelListener {
 				return component;
 			}
 		};
+		
+		// prevent unauthorised actions
 		this.table.getTableHeader().setReorderingAllowed(false);
 		this.table.setCellSelectionEnabled(true);
 		this.table.setCellEditor(this.cellEditor);
 		this.table.getModel().addTableModelListener(this);
+		
 		// style the table
-
 		this.table.setAutoCreateRowSorter(false);
 		this.table.setRowHeight(30);
-
 		TableColumnModel column = this.table.getColumnModel();
 		column.getColumns().asIterator().forEachRemaining(c -> c.setCellEditor(this.cellEditor));
 
@@ -204,12 +200,12 @@ public class Table extends JPanel implements TableModelListener {
 			student.setSubject((String) entries[4]);
 			student.setPracticePartner((String) entries[5]);
 			student.setRemark((String) entries[6]);
-			student.setFirstPeerReviewer(PeerReviewer.createDummy());
-			student.setSecondPeerReviewer(PeerReviewer.createDummy());
+			student.setFirstPeerReviewer("");
+			student.setSecondPeerReviewer("");
 			Table.this.getController().executeDataUpdate(new StudentAddCommand(this, student));
 		}
 		if(this.model.getType() == PeerReviewer.class) {
-			PeerReviewer reviewer = new PeerReviewer("","","","", -1);
+			PeerReviewer reviewer = PeerReviewer.createDummy();
 			reviewer.setTitle((String) entries[0]);
 			reviewer.setFirstName((String)entries[1]);
 			reviewer.setName((String) entries[2]);
