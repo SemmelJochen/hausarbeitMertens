@@ -27,7 +27,7 @@ public class DetailedReviewerOverview extends ContentPane implements Observer {
 		this.setContent(comboBox);
 	}
 
-	public DetailedReviewerOverview(Component header, Component content) {
+	public DetailedReviewerOverview(JLabel header, Component content) {
 		super(header, content);
 	}
 	
