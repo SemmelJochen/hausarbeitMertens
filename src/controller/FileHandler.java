@@ -68,14 +68,14 @@ public class FileHandler {
 						modelContainer.putPeerReviewer(firstPeerReviewer);
 					}
 					String key = firstPeerReviewer.getFirstName() + firstPeerReviewer.getName();
-					student.setFirstPeerReviewer(key);
+					student.setFirstPeerReviewerKey(key);
 
 					if (!secondPeerReviewer.isDummy()) {
 						secondPeerReviewer.addBachelorThesisAsSecondReviewer(student);
 						modelContainer.putPeerReviewer(secondPeerReviewer);
 					}
 					key = secondPeerReviewer.getFirstName() + secondPeerReviewer.getName();
-					student.setSecondPeerReviewer(key);
+					student.setSecondPeerReviewerKey(key);
 					
 					modelContainer.addStudent(student);
 				} else {
@@ -105,8 +105,8 @@ public class FileHandler {
 			for (Student student : students) {
 				writer.append(student.getName() + ", " + student.getFirstName() + seperator + student.getStudentGroup()
 						+ seperator + student.getPracticePartner() + seperator + student.getStudentGroup() + seperator
-						+ this.createPeerReviewerStringForWriting(student.getFirstPeerReviewer()) + seperator
-						+ this.createPeerReviewerStringForWriting(student.getSecondPeerReviewer()) + seperator
+						+ this.createPeerReviewerStringForWriting(ModelContainer.getInstance().getPeerReviewer(student.getFirstPeerReviewerKey())) + seperator
+						+ this.createPeerReviewerStringForWriting(ModelContainer.getInstance().getPeerReviewer(student.getSecondPeerReviewerKey())) + seperator
 						+ student.getRemark());
 				writer.append(System.lineSeparator());
 			}

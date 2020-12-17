@@ -60,7 +60,7 @@ public class Overview extends ContentPane implements Observer {
 	private ArrayList<Student> getFreeStudents(){
 		ArrayList<Student> freeStudents = new ArrayList<>();
 		for (Student student : ModelContainer.getInstance().getStudents()) {
-			if (student.getFirstPeerReviewer().isBlank()) {
+			if (student.getFirstPeerReviewerKey().isBlank()) {
 				freeStudents.add(student);
 			}
 		}

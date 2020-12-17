@@ -26,27 +26,27 @@ public class Student extends Person implements Serializable {
 
 	public Student(String name, String firstName, String email, String studentGroup, String practicePartner,
 			String subject, String remark) {
-		this(name, firstName, email, studentGroup, practicePartner, subject, null, null, remark);
+		this(name, firstName, email, studentGroup, practicePartner, subject, "", "", remark);
 	}
 
 	private Student(Student s) {
 		this(s.getName(), s.getFirstName(), s.getEmail(), s.getStudentGroup(), s.getPracticePartner(), s.getSubject(),
-				s.getFirstPeerReviewer(), s.getSecondPeerReviewer(), s.getRemark());
+				s.getFirstPeerReviewerKey(), s.getSecondPeerReviewerKey(), s.getRemark());
 	}
 
-	public String getFirstPeerReviewer() {
+	public String getFirstPeerReviewerKey() {
 		return this.firstPeerReviewerKey;
 	}
 
-	public void setFirstPeerReviewer(String firstPeerReviewerKey) {
+	public void setFirstPeerReviewerKey(String firstPeerReviewerKey) {
 		this.firstPeerReviewerKey = firstPeerReviewerKey;
 	}
 
-	public String getSecondPeerReviewer() {
+	public String getSecondPeerReviewerKey() {
 		return this.secondPeerReviewerKey;
 	}
 
-	public void setSecondPeerReviewer(String secondPeerReviewerKey) {
+	public void setSecondPeerReviewerKey(String secondPeerReviewerKey) {
 		this.secondPeerReviewerKey = secondPeerReviewerKey;
 	}
 
@@ -99,8 +99,8 @@ public class Student extends Person implements Serializable {
 				this.getStudentGroup().equals(studentToCheck.getStudentGroup()) &&
 				this.getPracticePartner().equals(studentToCheck.getPracticePartner()) &&
 				this.getSubject().equals(studentToCheck.getSubject()) &&
-				this.firstPeerReviewerKey.equals(studentToCheck.getFirstPeerReviewer()) &&
-				this.secondPeerReviewerKey.equals(studentToCheck.getSecondPeerReviewer());
+				this.firstPeerReviewerKey.equals(studentToCheck.getFirstPeerReviewerKey()) &&
+				this.secondPeerReviewerKey.equals(studentToCheck.getSecondPeerReviewerKey());
 	}
 	
 	public static Student createDummy() {

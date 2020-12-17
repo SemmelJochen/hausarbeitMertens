@@ -201,8 +201,8 @@ public class Table extends JPanel implements TableModelListener {
 			student.setSubject((String) entries[4]);
 			student.setPracticePartner((String) entries[5]);
 			student.setRemark((String) entries[6]);
-			student.setFirstPeerReviewer("");
-			student.setSecondPeerReviewer("");
+			student.setFirstPeerReviewerKey("");
+			student.setSecondPeerReviewerKey("");
 			Table.this.getController().executeDataUpdate(new StudentAddCommand(this, student));
 		}
 		if(this.model.getType() == PeerReviewer.class) {

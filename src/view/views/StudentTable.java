@@ -50,10 +50,10 @@ public class StudentTable extends JPanel {
 				.withColumn(StudentColumn.REMARK,
 						students.stream().map(e -> e.getRemark()).collect(Collectors.toList()))//
 				.withColumn(StudentColumn.FIRST_REVIEWER, students.stream()
-						.map(e -> e.getFirstPeerReviewer())
+						.map(e -> e.getFirstPeerReviewerKey())
 						.collect(Collectors.toList()))//
 				.withColumn(StudentColumn.SECOND_REVIEWER, students.stream()
-						.map(e -> e.getSecondPeerReviewer())
+						.map(e -> e.getSecondPeerReviewerKey())
 						.collect(Collectors.toList()))//
 				.withMetaData(students)//
 				.withType(Student.class)//
