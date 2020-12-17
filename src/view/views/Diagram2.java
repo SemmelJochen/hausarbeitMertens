@@ -25,9 +25,9 @@ import view.components.Slice;
 
 public class Diagram2 extends ContentPane implements Observer, PropertyChangeListener {
 
-	private ReviewerComboBox reviewerComboBox;
-	private PieChart pieChart;
-	private PieChartLegend legend;
+	protected ReviewerComboBox reviewerComboBox;
+	protected PieChart pieChart;
+	protected PieChartLegend legend;
 
 	public Diagram2() {
 		super();
@@ -56,8 +56,8 @@ public class Diagram2 extends ContentPane implements Observer, PropertyChangeLis
 		
 		HashMap<String, Integer> result = new HashMap<String, Integer>();
 		for(Student student: mertens.getFirstPeerReviewerRoles()) {
-			PeerReviewer tmp = ModelContainer.getInstance().getPeerReviewer(student.getSecondPeerReviewerKey());
-			String key = tmp.getFirstName() + " " + tmp.getName();
+			PeerReviewer secondPeerReviewer = ModelContainer.getInstance().getPeerReviewer(student.getSecondPeerReviewerKey());
+			String key = secondPeerReviewer.getFirstName() + " " + secondPeerReviewer.getName();
 			if(result.get(key) == null){
 				result.put(key, 1);
 			}else {

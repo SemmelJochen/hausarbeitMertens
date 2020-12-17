@@ -34,7 +34,7 @@ public class ModelContainer implements Externalizable {
 		this.students = new ObservableList<Student>();
 
 	}
-
+	
 	public void putPeerReviewer(PeerReviewer peerReviewer) {
 		String key = peerReviewer.getFirstName() + peerReviewer.getName();
 		PeerReviewer existingPeerReviewer = this.peerReviewers.get(key);
@@ -75,6 +75,11 @@ public class ModelContainer implements Externalizable {
 	public void updateReviewer(PeerReviewer oldReviewer, PeerReviewer newReviewer) {
 		String key = this.peerReviewers.getKey(oldReviewer);
 		this.peerReviewers.replace(key, newReviewer);
+	}
+	
+	public void clear() {
+		this.peerReviewers.clear();
+		this.students.clear();
 	}
 	
 	public void updateStudent(Student oldStudent, Student newStudent) {

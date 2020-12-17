@@ -26,6 +26,7 @@ public class MainWindow extends JFrame {
 	private Overview overview;
 	private Diagram1 diagram1;
 	private Diagram2 diagram2;
+	private Diagram3 diagram3;
 	private DetailedPeerReviewerOverview reviewerOverview;
 
 	/**
@@ -52,12 +53,16 @@ public class MainWindow extends JFrame {
 	public void appendStudentDataChangeListeners() {
 		this.controller.appendStudentChangeListeners(this.overview);
 		this.controller.appendStudentChangeListeners(this.diagram1);
+		this.controller.appendStudentChangeListeners(this.diagram2);
+		this.controller.appendStudentChangeListeners(this.diagram3);
 
 	}
 
 	public void appendReviewerDataChangeListeners() {
 		this.controller.appendReviewerChangeListeners(this.overview);
+		this.controller.appendReviewerChangeListeners(this.diagram1);
 		this.controller.appendReviewerChangeListeners(this.diagram2);
+		this.controller.appendReviewerChangeListeners(this.diagram3);
 		this.controller.appendReviewerChangeListeners(this.reviewerOverview);
 	}
 	
@@ -77,6 +82,7 @@ public class MainWindow extends JFrame {
 		this.overview = new Overview(this.controller.getCommandController());
 		this.diagram1 = new Diagram1();
 		this.diagram2 = new Diagram2();
+		this.diagram3 = new Diagram3();
 		this.reviewerOverview = new DetailedPeerReviewerOverview(this.controller.getCommandController());
 	}
 
@@ -99,7 +105,7 @@ public class MainWindow extends JFrame {
 		menuBar.add(menu);
 
 		// create submenu
-		menuItem = new JMenuItem("Import");
+		menuItem = new JMenuItem("Importiere");
 //		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
 		menuItem.addActionListener(new ActionListener() {
 
@@ -110,13 +116,36 @@ public class MainWindow extends JFrame {
 		});
 		menu.add(menuItem);
 
-		menuItem = new JMenuItem("Export");
+		menuItem = new JMenuItem("Exportiere");
 //		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
 		menuItem.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MainWindow.this.controller.runExport();
+			}
+		});
+		menu.add(menuItem);
+		
+		menuItem = new JMenuItem("Lösche alle Daten");
+//		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int result = MainWindow.this.showWarningMessage("Moechten Sie wirklich alle Daten loeschen?\n");
+					switch (result) {
+					case JOptionPane.YES_OPTION:
+						// TODO save
+						MainWindow.this.controller.clear();
+						break;
+
+					case JOptionPane.NO_OPTION:
+						break;
+
+					case JOptionPane.CANCEL_OPTION:
+						break;
+					}
 			}
 		});
 		menu.add(menuItem);
@@ -184,6 +213,14 @@ public class MainWindow extends JFrame {
 		});
 		submenu.add(subMenuItem);
 		subMenuItem = new JMenuItem("Diagramm 3");
+		subMenuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.setCurrentlyVisible(MainWindow.this.diagram3);
+				
+			}
+		});
 		submenu.add(subMenuItem);
 		menu.add(submenu);
 
@@ -261,12 +298,12 @@ public class MainWindow extends JFrame {
 		return menuBar;
 	}
 
-	public int showWarningMessage() {
+	public int showWarningMessage(String message) {
 		String[] buttonLabels = new String[] { "Ja", "Nein", "Abbrechen" };
 		String defaultOption = buttonLabels[0];
 		Icon icon = UIManager.getIcon("FileView.hardDriveIcon");
 
-		return JOptionPane.showOptionDialog(this, "Moechten Sie speichern, bevor Sie das Programm schliessen ?\n",
+		return JOptionPane.showOptionDialog(this, message,
 				"Warnung", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icon, buttonLabels,
 				defaultOption);
 	}

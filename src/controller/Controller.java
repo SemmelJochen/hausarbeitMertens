@@ -49,6 +49,10 @@ public class Controller {
 	public void removeStudentChangeListeners(Observer o) {
 		this.modelContainer.removeStudentDataChangeObserver(o);
 	}
+	
+	public void clear() {
+		this.modelContainer.clear();
+	}
 
 	public void run() {
 		this.window = new MainWindow(this);
@@ -64,7 +68,7 @@ public class Controller {
 
 	private void handleClose() {
 		if (this.hasUnsavedData()) {
-			int message = window.showWarningMessage();
+			int message = window.showWarningMessage("Moechten Sie speichern, bevor Sie das Programm schliessen ?\n");
 			switch (message) {
 			case JOptionPane.YES_OPTION:
 				// TODO save
