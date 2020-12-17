@@ -67,13 +67,13 @@ public class FileHandler {
 						firstPeerReviewer.addBachelorThesisAsFirstReviewer(student);
 						modelContainer.putPeerReviewer(firstPeerReviewer);
 					}
-					student.setFirstPeerReviewer(firstPeerReviewer);
+					student.setFirstPeerReviewer(firstPeerReviewer.getFirstName() + firstPeerReviewer.getName());
 
 					if (!secondPeerReviewer.isDummy()) {
 						secondPeerReviewer.addBachelorThesisAsSecondReviewer(student);
 						modelContainer.putPeerReviewer(secondPeerReviewer);
 					}
-					student.setSecondPeerReviewer(secondPeerReviewer);
+					student.setSecondPeerReviewer(secondPeerReviewer.getFirstName() + secondPeerReviewer.getName());
 
 					
 					modelContainer.addStudent(student);

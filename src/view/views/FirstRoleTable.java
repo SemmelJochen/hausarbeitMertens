@@ -41,7 +41,7 @@ public class FirstRoleTable extends ReducedTable {
 				.withColumn(StudentColumn.REMARK,
 						students.stream().map(e -> e.getRemark()).collect(Collectors.toList()))//
 				.withColumn(StudentColumn.SECOND_REVIEWER, students.stream()
-						.map(e -> e.getSecondPeerReviewer().getFirstName() + " " + e.getSecondPeerReviewer().getName())
+						.map(e -> e.getSecondPeerReviewer())
 						.collect(Collectors.toList()))//
 				.withMetaData(students)//
 				.build();

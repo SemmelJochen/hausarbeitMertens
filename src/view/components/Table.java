@@ -23,6 +23,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import controller.CommandController;
+import controller.CustomCellEditor;
 import controller.PeerReviewerAddCommand;
 import controller.StudentAddCommand;
 import controller.TableController;

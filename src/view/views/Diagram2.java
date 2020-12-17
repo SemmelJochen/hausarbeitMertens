@@ -56,7 +56,7 @@ public class Diagram2 extends ContentPane implements Observer, PropertyChangeLis
 		
 		HashMap<String, Integer> result = new HashMap<String, Integer>();
 		for(Student student: mertens.getFirstPeerReviewerRoles()) {
-			PeerReviewer tmp = student.getSecondPeerReviewer();
+			PeerReviewer tmp = ModelContainer.getInstance().getPeerReviewer(student.getSecondPeerReviewer());
 			String key = tmp.getFirstName() + " " + tmp.getName();
 			if(result.get(key) == null){
 				result.put(key, 1);
