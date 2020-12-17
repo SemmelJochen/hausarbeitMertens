@@ -33,9 +33,8 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 		this.comboBox = new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
 		this.comboBox.addCustomPropertyChangeListener(this);
 		this.creatingTables(commandController);
-		
 		this.subjects = new JLabel("");
-		
+
 		this.fillingTPane();		
 		
 		JPanel panel = new JPanel();
