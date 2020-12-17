@@ -50,17 +50,22 @@ public class TableData<T> {
 
 	public static final class Builder<T> {
 		private List<List<Object>> columns = new ArrayList<List<Object>>();
-		private List<String> columnNames = new ArrayList<String>();
+		private List<Pair<String, ColumnEditorType>> columnNames = new ArrayList<Pair<String, ColumnEditorType>>();
 		private List<T> metaData = new ArrayList<T>();
 		private Class<?> type;
 
 		private Builder() {
 		}
 
-		public Builder<T> withColumn(Column columnName, List<Object> data) {
-			this.columnNames.add(columnName.getValue());
+		public Builder<T> withColumn(Column columnName, List<Object> data, ColumnEditorType columnType) {
+			this.columnNames.add(new Pair<String, ColumnEditorType>(columnName.getValue(), columnType));
 			this.columns.add(data);
 			return this;
+		}
+		
+		//used for default editor columns
+		public Builder<T> withColumn(Column columnName, List<Object> data ) {
+			return withColumn(columnName, data, ColumnEditorType.CUSTOM_EDITOR);
 		}
 		
 		public Builder<T> withMetaData(List<T> metaData){
