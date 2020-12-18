@@ -36,40 +36,15 @@ public class FileHandler {
 		this.fileChooser = new JFileChooser();
 		this.header = new String[4];
 	}
-
-	/*
-	 * the method returns false if the dialog gets canceled
-	 * 
-	 * depending on the dialogType it is
-	 */
-	public boolean chooseFile(DialogType dialogType) {
-		int result = 0;
-		FileNameExtensionFilter xmlFilter = new FileNameExtensionFilter("CSV-Dateien (*.csv)", "csv");
-		this.fileChooser.addChoosableFileFilter(xmlFilter);
-		this.fileChooser.setFileFilter(xmlFilter);
-
-		if (dialogType == DialogType.IMPORT) {
-			result = this.fileChooser.showOpenDialog(null);
-		} else if (dialogType == DialogType.EXPORT) {
-			result = this.fileChooser.showSaveDialog(null);
-		}
-
-		if (result == JFileChooser.CANCEL_OPTION) {
-			return false;
-		}
-
-		// JFileChooser.APPROVE_OPTION
-		// unreachable code for the CANCEL_OPTION
-		this.file = this.fileChooser.getSelectedFile();
-		return true;
+	
+	public void setFile(File file) {
+		this.file = file;
 	}
 
 	/*
 	 * the parameter modelContainer is changed after running the method!
 	 */
 	public void importCsvInModelContainer(ModelContainer modelContainer) {
-		if (!this.chooseFile(DialogType.IMPORT))
-			return;
 		BufferedReader br;
 		try {
 			br = new BufferedReader(new FileReader(this.file));
@@ -108,8 +83,6 @@ public class FileHandler {
 	}
 
 	public void exportToCsv() {
-		if (!this.chooseFile(DialogType.EXPORT))
-			return;
 		ObservableList<Student> students = ModelContainer.getInstance().getStudents();
 		FileWriter writer;
 		try {
@@ -185,9 +158,5 @@ public class FileHandler {
 		}
 		firstnames = firstnames.trim();
 		return new PeerReviewer(title, peerReviewerString[peerReviewerString.length - 1], firstnames, "", -1);
-	}
-
-	enum DialogType {
-		IMPORT, EXPORT;
 	}
 }

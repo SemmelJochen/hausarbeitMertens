@@ -35,6 +35,10 @@ public class Controller {
 	public void clear() {
 		this.modelContainer.clear();
 	}
+	
+	public FileHandler getFileHandler() {
+		return this.csvHandler;
+	}
 
 	public void run() {
 		this.window = new MainWindow(this);

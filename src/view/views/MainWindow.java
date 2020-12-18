@@ -17,6 +17,7 @@ import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controller.Controller;
+import controller.FileHandler.DialogType;
 import view.components.ContentPane;
 import view.components.ObserverMenuItem;
 import view.views.diagrams.AllocationOfReviews;
@@ -31,6 +32,7 @@ public class MainWindow extends JFrame {
 	private CollaborationAsFirstPeerReviewer diagram2;
 	private CollaborationAsSecondPeerReviewer diagram3;
 	private DetailedPeerReviewerOverview reviewerOverview;
+	private JFileChooser fileChooser;
 
 	/**
 	 * Create the frame.
@@ -40,6 +42,7 @@ public class MainWindow extends JFrame {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setSize(new Dimension(1280, 1000));
 		this.controller = c;
+		this.fileChooser = new JFileChooser();
 		this.setJMenuBar(buildMenuBar());
 		this.buildInitialView();
 		this.setResizable(false);
@@ -93,7 +96,9 @@ public class MainWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainWindow.this.controller.runImport();
+				if (MainWindow.this.chooseFile(DialogType.IMPORT)) {
+					MainWindow.this.controller.runImport();
+				}
 			}
 		});
 		menu.add(menuItem);
@@ -104,11 +109,13 @@ public class MainWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainWindow.this.controller.runExport();
+				if (MainWindow.this.chooseFile(DialogType.EXPORT)) {
+					MainWindow.this.controller.runExport();
+				}
 			}
 		});
 		menu.add(menuItem);
-		
+
 		menuItem = new JMenuItem("Loeschen aller Daten");
 //		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
 		menuItem.addActionListener(new ActionListener() {
@@ -116,18 +123,18 @@ public class MainWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int result = MainWindow.this.showWarningMessage("Moechten Sie wirklich alle Daten loeschen?\n");
-					switch (result) {
-					case JOptionPane.YES_OPTION:
-						// TODO save
-						MainWindow.this.controller.clear();
-						break;
+				switch (result) {
+				case JOptionPane.YES_OPTION:
+					// TODO save
+					MainWindow.this.controller.clear();
+					break;
 
-					case JOptionPane.NO_OPTION:
-						break;
+				case JOptionPane.NO_OPTION:
+					break;
 
-					case JOptionPane.CANCEL_OPTION:
-						break;
-					}
+				case JOptionPane.CANCEL_OPTION:
+					break;
+				}
 			}
 		});
 		menu.add(menuItem);
@@ -196,11 +203,11 @@ public class MainWindow extends JFrame {
 		submenu.add(subMenuItem);
 		subMenuItem = new JMenuItem("Zweitgutacher Zusammenarbeit");
 		subMenuItem.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MainWindow.this.setCurrentlyVisible(MainWindow.this.diagram3);
-				
+
 			}
 		});
 		submenu.add(subMenuItem);
@@ -220,12 +227,13 @@ public class MainWindow extends JFrame {
 				JFileChooser chooser = new JFileChooser();
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("Dozentendatei (.mrtns)", "mrtns");
 				chooser.setFileFilter(filter);
-				if(MainWindow.this.controller.hasSaveFilePath()) {
+				if (MainWindow.this.controller.hasSaveFilePath()) {
 					MainWindow.this.controller.saveDefault();
-				}else {
+				} else {
 					int returnVal = chooser.showSaveDialog(MainWindow.this);
 					if (returnVal == JFileChooser.APPROVE_OPTION) {
-						System.out.println("You chose to save this file: " + chooser.getSelectedFile().getAbsolutePath());
+						System.out
+								.println("You chose to save this file: " + chooser.getSelectedFile().getAbsolutePath());
 						MainWindow.this.controller.save(chooser.getSelectedFile().getAbsolutePath());
 					}
 				}
@@ -258,12 +266,12 @@ public class MainWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					System.out.println("undo");
-					MainWindow.this.controller.undo();
+				System.out.println("undo");
+				MainWindow.this.controller.undo();
 			}
 		});
 		menu.add(oMenuItem);
-		
+
 		oMenuItem = new ObserverMenuItem("Redo"); // Action Listener einfuegen
 		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.META_MASK));
 		this.controller.getCommandController().getRedoStack().addPropertyChangeListener(oMenuItem);
@@ -271,7 +279,7 @@ public class MainWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					MainWindow.this.controller.redo();
+				MainWindow.this.controller.redo();
 			}
 		});
 
@@ -286,9 +294,38 @@ public class MainWindow extends JFrame {
 		String defaultOption = buttonLabels[0];
 		Icon icon = UIManager.getIcon("FileView.hardDriveIcon");
 
-		return JOptionPane.showOptionDialog(this, message,
-				"Warnung", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icon, buttonLabels,
-				defaultOption);
+		return JOptionPane.showOptionDialog(this, message, "Warnung", JOptionPane.YES_NO_CANCEL_OPTION,
+				JOptionPane.WARNING_MESSAGE, icon, buttonLabels, defaultOption);
 	}
 
+	/*
+	 * the method returns false if the dialog gets canceled
+	 * 
+	 * depending on the dialogType it is
+	 */
+	public boolean chooseFile(DialogType dialogType) {
+		int result = 0;
+		FileNameExtensionFilter xmlFilter = new FileNameExtensionFilter("CSV-Dateien (*.csv)", "csv");
+		this.fileChooser.addChoosableFileFilter(xmlFilter);
+		this.fileChooser.setFileFilter(xmlFilter);
+
+		if (dialogType == DialogType.IMPORT) {
+			result = this.fileChooser.showOpenDialog(null);
+		} else if (dialogType == DialogType.EXPORT) {
+			result = this.fileChooser.showSaveDialog(null);
+		}
+
+		if (result == JFileChooser.CANCEL_OPTION) {
+			return false;
+		}
+
+		// JFileChooser.APPROVE_OPTION
+		// unreachable code for the CANCEL_OPTION
+		this.controller.getFileHandler().setFile(this.fileChooser.getSelectedFile());
+		return true;
+	}
+
+	enum DialogType {
+		IMPORT, EXPORT;
+	}
 }
