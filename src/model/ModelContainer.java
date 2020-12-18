@@ -34,17 +34,7 @@ public class ModelContainer implements Externalizable {
 		this.students = new ObservableList<Student>();
 
 	}
-	
-	public void setFirstPeerReviewer(Student student, String key) {
-		student.setFirstPeerReviewerKey(key);
-		this.peerReviewers.get(key).addBachelorThesisAsFirstReviewer(student);
-	}
-	
-	public void setSecondPeerReviewer(Student student, String key) {
-		student.setSecondPeerReviewerKey(key);
-		this.peerReviewers.get(key).addRequested(student);
-	}
-	
+
 	public void putPeerReviewer(PeerReviewer peerReviewer) {
 		String key = peerReviewer.getFirstName() + peerReviewer.getName();
 		PeerReviewer existingPeerReviewer = this.peerReviewers.get(key);
@@ -72,7 +62,7 @@ public class ModelContainer implements Externalizable {
 	public ArrayList<PeerReviewer> getPeerReviewers() {
 		return new ArrayList<PeerReviewer>(peerReviewers.values());
 	}
-	
+
 	public void removePeerReviewer(PeerReviewer p) {
 		String key = p.getFirstName() + p.getName();
 		this.peerReviewers.remove(key);
@@ -81,23 +71,30 @@ public class ModelContainer implements Externalizable {
 	public ObservableList<Student> getStudents() {
 		return this.students;
 	}
-	
+
 	public void updateReviewer(PeerReviewer oldReviewer, PeerReviewer newReviewer) {
 		String key = this.peerReviewers.getKey(oldReviewer);
 		this.peerReviewers.replace(key, newReviewer);
 	}
-	
+
 	public void clear() {
 		this.peerReviewers.clear();
 		this.students.clear();
 	}
-	
+
 	public void updateStudent(Student oldStudent, Student newStudent) {
+		if (!oldStudent.getFirstPeerReviewerKey().equals(newStudent.getFirstPeerReviewerKey())) {
+			this.peerReviewers.get(newStudent.getFirstPeerReviewerKey()).addBachelorThesisAsFirstReviewer(newStudent);
+		}
+		if (!oldStudent.getSecondPeerReviewerKey().equals(newStudent.getSecondPeerReviewerKey())) {
+			this.peerReviewers.get(newStudent.getSecondPeerReviewerKey()).addRequest(newStudent);
+		}
 		int index = this.students.indexOf(oldStudent);
-		if(index >= 0) {
-			this.students.set(index, newStudent);			
+		if (index >= 0) {
+			this.students.set(index, newStudent);
 		}
 	}
+
 	// due to serialisation we need to resolve the singleton on read
 	public Object readResolve() {
 		return getInstance();
@@ -112,26 +109,26 @@ public class ModelContainer implements Externalizable {
 	@Override
 	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
 		this.students = new ObservableList<Student>((ArrayList<Student>) in.readObject());
-		this.peerReviewers = new ObservableHashMap<String, PeerReviewer>((HashMap<String, PeerReviewer>) in.readObject());
+		this.peerReviewers = new ObservableHashMap<String, PeerReviewer>(
+				(HashMap<String, PeerReviewer>) in.readObject());
 	}
-	
-	
+
 	public void addReviewerDataChangeObserver(Observer o) {
 		this.peerReviewers.addObserver(o);
 	}
-	
+
 	public void addStudentDataChangeObserver(Observer o) {
 		this.students.addObserver(o);
 	}
-	
+
 	public void removeStudentDataChangeObserver(Observer o) {
 		this.students.deleteObserver(o);
 	}
-	
+
 	public void removeReviewerDataChangeObserver(Observer o) {
 		this.peerReviewers.deleteObserver(o);
 	}
-	
+
 	public void fireChange() {
 		this.peerReviewers.hasChanged();
 		this.peerReviewers.notifyObservers();
