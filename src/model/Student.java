@@ -10,28 +10,28 @@ public class Student extends Person implements Serializable {
 	private static final long serialVersionUID = 0xBAFFL;
 	private String studentGroup, practicePartner, subject;
 	private String firstPeerReviewerKey;
-	private String secondPeerReviewerKey;
+	private Pair<String, Boolean> secondPeerReviewerKey;
 	private String remark;
 
 	public Student(String name, String firstName, String email, String studentGroup, String practicePartner,
-			String subject, String firstPeerReviewerKey, String secondPeerReviewerKey, String remark) {
+			String subject, String firstPeerReviewerKey, String secondPeerReviewerKey, boolean state, String remark) {
 		super(name, firstName, email);
 		this.studentGroup = studentGroup;
 		this.practicePartner = practicePartner;
 		this.subject = subject;
 		this.firstPeerReviewerKey = firstPeerReviewerKey;
-		this.secondPeerReviewerKey = secondPeerReviewerKey;
+		this.secondPeerReviewerKey = new Pair<>(secondPeerReviewerKey, state);
 		this.remark = remark;
 	}
 
 	public Student(String name, String firstName, String email, String studentGroup, String practicePartner,
 			String subject, String remark) {
-		this(name, firstName, email, studentGroup, practicePartner, subject, "", "", remark);
+		this(name, firstName, email, studentGroup, practicePartner, subject, "", "", false, remark);
 	}
 
 	private Student(Student s) {
 		this(s.getName(), s.getFirstName(), s.getEmail(), s.getStudentGroup(), s.getPracticePartner(), s.getSubject(),
-				s.getFirstPeerReviewerKey(), s.getSecondPeerReviewerKey(), s.getRemark());
+				s.getFirstPeerReviewerKey(), s.getSecondPeerReviewerKey(), s.getSecondPeerReviewerState(), s.getRemark());
 	}
 
 	public String getFirstPeerReviewerKey() {
@@ -43,19 +43,27 @@ public class Student extends Person implements Serializable {
 	}
 
 	public String getSecondPeerReviewerKey() {
-		return this.secondPeerReviewerKey;
+		return this.secondPeerReviewerKey.getKey();
 	}
 
 	public void setSecondPeerReviewerKey(String secondPeerReviewerKey) {
-		this.secondPeerReviewerKey = secondPeerReviewerKey;
+		this.secondPeerReviewerKey = new Pair<String, Boolean>(secondPeerReviewerKey, false);
 	}
-
+	
+	public boolean getSecondPeerReviewerState() {
+		return this.secondPeerReviewerKey.getValue();
+	}
+	
 	public String getStudentGroup() {
 		return this.studentGroup;
 	}
 
 	public void setStudentGroup(String studentGroup) {
 		this.studentGroup = studentGroup;
+	}
+	
+	public void setSecondPeerReviewerState(Boolean state) {
+		this.secondPeerReviewerKey.setValue(state);
 	}
 
 	public String getRemark() {

@@ -40,6 +40,14 @@ public class PeerReviewer extends Person implements Serializable {
 	public void addBachelorThesisAsFirstReviewer(Student student) {
 		this.firstReviewerRoles.add(student);
 	}
+	
+	public void removeBachelorThesisAsFirstReviewer(Student student) {
+		this.firstReviewerRoles.remove(student);
+	}
+		
+	public void removeBachelorThesisAsSecondReviewer(Student student) {
+		this.secondReviewerRoles.remove(student);
+	}
 
 	public void addBachelorThesesAsFirstReviewer(List<Student> students) {
 		for (Student s : students) {
@@ -145,11 +153,11 @@ public class PeerReviewer extends Person implements Serializable {
 		return new PeerReviewer("", "", "", "", -1);
 	}
 	
-	public double getLoad() {
+	public int getLoad() {
 		if(this.capacity < 0) {
 			return 1;
 		}
-		return this.getBachelorThesisesCount() / this.capacity;
+		return (int) (100d * this.getBachelorThesisesCount() / this.capacity);
 	}
 	
 	public boolean isDummy() {

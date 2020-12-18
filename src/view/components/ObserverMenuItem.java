@@ -15,7 +15,6 @@ public class ObserverMenuItem extends JMenuItem implements PropertyChangeListene
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		System.out.println("Hello World");
 		this.setEnabled(!(boolean) evt.getNewValue());
 	}
 }

@@ -74,12 +74,11 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 	}
 
 	private String getLabelText() {
-		return "Auslastung: " + (int) (this.comboBox.getSelectedPeerReviewer().getLoad() * 100) + "% - "
+		return "Auslastung: " +  (this.comboBox.getSelectedPeerReviewer().getLoad()) + "% - "
 				+ this.comboBox.getSelectedPeerReviewer().getSubjects();
 	}
 
 	private void update() {
-		System.out.println(this.comboBox.getSelectedPeerReviewer());
 		this.allReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
 		this.firstReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
 		this.secondReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());

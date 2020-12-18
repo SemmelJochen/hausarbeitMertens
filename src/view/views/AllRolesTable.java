@@ -24,8 +24,6 @@ public class AllRolesTable extends ReducedTable {
 		if(this.selectedPeerReviewer != null) {
 			String key = this.selectedPeerReviewer.getFirstName()+ this.selectedPeerReviewer.getName();
 			if(ModelContainer.getInstance().getPeerReviewer(key) != null) {
-//				this.selectedPeerReviewer.getFirstPeerReviewerRoles()
-				ModelContainer.getInstance().getPeerReviewer(key).printStudents();
 				students.addAll(ModelContainer.getInstance().getPeerReviewer(key).getFirstPeerReviewerRoles());
 				students.addAll(ModelContainer.getInstance().getPeerReviewer(key).getSecondPeerReviewerRoles());							
 			}
