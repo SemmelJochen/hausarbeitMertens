@@ -109,11 +109,4 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 		this.tPane.setTitleAt(SECONDREVIEWERROLE_TAB_ID, "Zweitgutachten");
 		this.tPane.setTitleAt(ASKINGSTUDENTS_TAB_ID, "Anfragende Studenten");
 	}
-	
-	@Override
-	public void setVisible(boolean isVisible) {
-		super.setVisible(isVisible);
-		System.out.println("yeah");
-		this.comboBox.setSelectedPeerReviewer(PeerReviewer.createDummy());
-	}
 }

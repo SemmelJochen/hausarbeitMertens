@@ -175,11 +175,7 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 			this.entries.clear();
 			this.entries.add(PeerReviewer.createDummy());
 			this.entries.addAll(data);
-			if (this.entries.size() > 0) {
-				this.index = 0;
-			} else {
-				this.index = -1;
-			}
+			this.setIndex(0);
 		}
 
 		private int getIndex() {
