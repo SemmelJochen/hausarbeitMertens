@@ -3,11 +3,9 @@ package view.views.tables;
 import static model.table.TableData.newTableData;
 
 import java.util.List;
-import java.util.Observable;
 import java.util.stream.Collectors;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import controller.CommandController;
 import model.ModelContainer;

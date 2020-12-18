@@ -108,7 +108,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		menu.add(menuItem);
-		
+
 		menuItem = new JMenuItem("Loeschen aller Daten");
 //		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
 		menuItem.addActionListener(new ActionListener() {
@@ -116,18 +116,18 @@ public class MainWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int result = MainWindow.this.showWarningMessage("Moechten Sie wirklich alle Daten loeschen?\n");
-					switch (result) {
-					case JOptionPane.YES_OPTION:
-						// TODO save
-						MainWindow.this.controller.clear();
-						break;
+				switch (result) {
+				case JOptionPane.YES_OPTION:
+					// TODO save
+					MainWindow.this.controller.clear();
+					break;
 
-					case JOptionPane.NO_OPTION:
-						break;
+				case JOptionPane.NO_OPTION:
+					break;
 
-					case JOptionPane.CANCEL_OPTION:
-						break;
-					}
+				case JOptionPane.CANCEL_OPTION:
+					break;
+				}
 			}
 		});
 		menu.add(menuItem);
@@ -196,11 +196,11 @@ public class MainWindow extends JFrame {
 		submenu.add(subMenuItem);
 		subMenuItem = new JMenuItem("Zweitgutacher Zusammenarbeit");
 		subMenuItem.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MainWindow.this.setCurrentlyVisible(MainWindow.this.diagram3);
-				
+
 			}
 		});
 		submenu.add(subMenuItem);
@@ -220,14 +220,33 @@ public class MainWindow extends JFrame {
 				JFileChooser chooser = new JFileChooser();
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("Dozentendatei (.mrtns)", "mrtns");
 				chooser.setFileFilter(filter);
-				if(MainWindow.this.controller.hasSaveFilePath()) {
+				if (MainWindow.this.controller.hasSaveFilePath()) {
 					MainWindow.this.controller.saveDefault();
-				}else {
+				} else {
 					int returnVal = chooser.showSaveDialog(MainWindow.this);
 					if (returnVal == JFileChooser.APPROVE_OPTION) {
-						System.out.println("You chose to save this file: " + chooser.getSelectedFile().getAbsolutePath());
+						System.out
+								.println("You chose to save this file: " + chooser.getSelectedFile().getAbsolutePath());
 						MainWindow.this.controller.save(chooser.getSelectedFile().getAbsolutePath());
 					}
+				}
+			}
+		});
+		menu.add(menuItem);
+
+		menuItem = new JMenuItem("Speichern unter");
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("Dozentendatei (.mrtns)", "mrtns");
+				chooser.setFileFilter(filter);
+				int returnVal = chooser.showSaveDialog(MainWindow.this);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					System.out.println("You chose to save this file: " + chooser.getSelectedFile().getAbsolutePath());
+					MainWindow.this.controller.save(chooser.getSelectedFile().getAbsolutePath());
+
 				}
 			}
 		});
@@ -258,12 +277,12 @@ public class MainWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					System.out.println("undo");
-					MainWindow.this.controller.undo();
+				System.out.println("undo");
+				MainWindow.this.controller.undo();
 			}
 		});
 		menu.add(oMenuItem);
-		
+
 		oMenuItem = new ObserverMenuItem("Redo"); // Action Listener einfuegen
 		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.META_MASK));
 		this.controller.getCommandController().getRedoStack().addPropertyChangeListener(oMenuItem);
@@ -271,7 +290,7 @@ public class MainWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					MainWindow.this.controller.redo();
+				MainWindow.this.controller.redo();
 			}
 		});
 
@@ -286,9 +305,8 @@ public class MainWindow extends JFrame {
 		String defaultOption = buttonLabels[0];
 		Icon icon = UIManager.getIcon("FileView.hardDriveIcon");
 
-		return JOptionPane.showOptionDialog(this, message,
-				"Warnung", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icon, buttonLabels,
-				defaultOption);
+		return JOptionPane.showOptionDialog(this, message, "Warnung", JOptionPane.YES_NO_CANCEL_OPTION,
+				JOptionPane.WARNING_MESSAGE, icon, buttonLabels, defaultOption);
 	}
 
 }
