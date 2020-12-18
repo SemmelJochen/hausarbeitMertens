@@ -11,9 +11,9 @@ import model.ModelContainer;
 import model.Student;
 import model.table.StudentColumn;
 
-public class FirstRoleTable extends ReducedTable {
+public class FirstRolesTable extends ReducedTable {
 
-	public FirstRoleTable(CommandController commandController) {
+	public FirstRolesTable(CommandController commandController) {
 		super(commandController);
 	}
 

@@ -144,10 +144,11 @@ public class PeerReviewer extends Person implements Serializable, PropertyChange
 	@Override
 	public boolean equals(Object pObject) {
 		PeerReviewer peerReviewer = (PeerReviewer) pObject;
-		return super.equals(peerReviewer) && this.capacity == peerReviewer.getCapacity()
-				&& this.title.equals(peerReviewer.getTitle())
-				&& this.firstReviewerRoles.equals(peerReviewer.getFirstPeerReviewerRoles())
-				&& this.secondReviewerRoles.equals(peerReviewer.getSecondPeerReviewerRoles());
+		return super.equals(peerReviewer) 
+				&& this.getCapacity() == peerReviewer.getCapacity()
+				&& this.getTitle().equals(peerReviewer.getTitle())
+				&& this.getFirstPeerReviewerRoles().equals(peerReviewer.getFirstPeerReviewerRoles())
+				&& this.getSecondPeerReviewerRoles().equals(peerReviewer.getSecondPeerReviewerRoles());
 	}
 
 	public static PeerReviewer createDummy() {

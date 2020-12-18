@@ -39,8 +39,6 @@ public class MainWindow extends JFrame {
 		this.controller = c;
 		this.setJMenuBar(buildMenuBar());
 		this.buildInitialView();
-		this.appendStudentDataChangeListeners();
-		this.appendReviewerDataChangeListeners();
 		this.setResizable(false);
 	}
 
@@ -50,33 +48,13 @@ public class MainWindow extends JFrame {
 		this.repaint();
 	}
 
-	public void appendStudentDataChangeListeners() {
-		this.controller.appendStudentChangeListeners(this.overview);
-		this.controller.appendStudentChangeListeners(this.diagram1);
-		this.controller.appendStudentChangeListeners(this.diagram2);
-		this.controller.appendStudentChangeListeners(this.diagram3);
-		this.controller.appendStudentChangeListeners(this.reviewerOverview);
+	public void appendDataChangeListeners() {
+		this.controller.appendDataChangeListener(this.overview);
+		this.controller.appendDataChangeListener(this.diagram1);
+		this.controller.appendDataChangeListener(this.diagram2);
+		this.controller.appendDataChangeListener(this.diagram3);
+		this.controller.appendDataChangeListener(this.reviewerOverview);
 
-	}
-
-	public void appendReviewerDataChangeListeners() {
-		this.controller.appendReviewerChangeListeners(this.overview);
-		this.controller.appendReviewerChangeListeners(this.diagram1);
-		this.controller.appendReviewerChangeListeners(this.diagram2);
-		this.controller.appendReviewerChangeListeners(this.diagram3);
-		this.controller.appendReviewerChangeListeners(this.reviewerOverview);
-	}
-	
-	public void removeStudentDataChangeListeners() {
-		this.controller.removeStudentChangeListeners(this.overview);
-		this.controller.removeStudentChangeListeners(this.diagram1);
-
-	}
-
-	public void removeReviewerDataChangeListeners() {
-		this.controller.removeReviewerChangeListeners(this.overview);
-		this.controller.removeReviewerChangeListeners(this.diagram2);
-		this.controller.removeReviewerChangeListeners(this.reviewerOverview);
 	}
 
 	public void createViews() {

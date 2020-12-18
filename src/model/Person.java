@@ -42,14 +42,15 @@ public class Person implements Serializable {
 		return "name: \t\t\t" + this.name + "\nfirstname \t\t" + this.firstName + "\nemail: \t\t\t" + this.email;
 	}
 
+	@Override
 	public boolean equals(Object person) {
 		if(person == null) {
 			return false;
 		}
-		Person persontoCheck = (Person) person;
-		return this.name.equals(persontoCheck.getName()) &&
-				this.firstName.equals(persontoCheck.getFirstName()) &&
-				this.email.equals(persontoCheck.getEmail());
+		Person pToCheck = (Person) person;
+		return this.getName().equals(pToCheck.getName()) &&
+				this.getFirstName().equals(pToCheck.getFirstName()) &&
+				this.getEmail().equals(pToCheck.getEmail());
 	}
 
 	public boolean isDummy() {

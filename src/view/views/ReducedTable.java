@@ -9,8 +9,7 @@ import view.components.Table;
 
 public abstract class ReducedTable extends JPanel {
 
-	@SuppressWarnings("rawtypes")
-	protected TableData tableData;
+	protected TableData<?> tableData;
 	protected Table table;
 	protected PeerReviewer selectedPeerReviewer;
 

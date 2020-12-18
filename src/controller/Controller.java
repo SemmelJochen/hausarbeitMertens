@@ -11,7 +11,6 @@ import java.util.Observer;
 import javax.swing.JOptionPane;
 
 import model.ModelContainer;
-import view.components.ObserverMenuItem;
 import view.views.MainWindow;
 
 public class Controller {
@@ -28,18 +27,9 @@ public class Controller {
 		this.commandController = new CommandController();
 	}
 
-	public void appendStudentChangeListeners(Observer o) {
+	public void appendDataChangeListener(Observer o) {
 		this.modelContainer.addStudentDataChangeObserver(o);
-	}
-
-	public void appendReviewerChangeListeners(Observer o) {
 		this.modelContainer.addReviewerDataChangeObserver(o);
-	}
-	public void removeReviewerChangeListeners(Observer o) {
-		this.modelContainer.removeReviewerDataChangeObserver(o);
-	}
-	public void removeStudentChangeListeners(Observer o) {
-		this.modelContainer.removeStudentDataChangeObserver(o);
 	}
 	
 	public void clear() {
@@ -48,7 +38,8 @@ public class Controller {
 
 	public void run() {
 		this.window = new MainWindow(this);
-
+		this.window.appendDataChangeListeners();
+		
 		// add lister to listen to window close operation
 		this.window.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent winEvt) {
@@ -116,8 +107,6 @@ public class Controller {
 	}
 
 	public void load(String filePath) {
-		this.window.removeStudentDataChangeListeners();
-		this.window.removeReviewerDataChangeListeners();
 		this.filePath = filePath;
 		if (!filePath.endsWith(".mrtns")) {
 			filePath += ".mrtns";
@@ -134,8 +123,7 @@ public class Controller {
 			e.printStackTrace();
 		}
 		this.window.buildInitialView();
-		this.window.appendStudentDataChangeListeners();
-		this.window.appendReviewerDataChangeListeners();
+		this.window.appendDataChangeListeners();
 		this.window.revalidate();
 		this.window.repaint();
 	}

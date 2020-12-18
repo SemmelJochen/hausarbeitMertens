@@ -27,7 +27,7 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 
 	private JTabbedPane tPane = new JTabbedPane();
 	private AllRolesTable allReviews;
-	private FirstRoleTable firstReviews;
+	private FirstRolesTable firstReviews;
 	private SecondRolesTable secondReviews;
 	private RequestedStudentsTable requestedStudents;
 
@@ -38,7 +38,7 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 		this.createTables(commandController);
 		this.subjects = new JLabel("");
 
-		this.fillingTPane();
+		this.initializeTabbedPane();
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -54,14 +54,22 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 		this.setContent(panel);
 	}
 
+	/**
+	 * Observer for the data Model. Should get triggered if values at the Student
+	 * or the PeerReviewer changes
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		this.comboBox.updateComboBoxModel(ModelContainer.getInstance().getPeerReviewers());
 		this.update();
-		this.subjects.revalidate();
-		this.subjects.repaint();
+//		this.subjects.revalidate();
+//		this.subjects.repaint();
 	}
 
+	/**
+	 * PropertyChangeListener for the ComboBox. 
+	 * Gets triggered if the selectedValue in the comboBox changed
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		this.update();
@@ -75,6 +83,11 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 				+ this.comboBox.getSelectedPeerReviewer().getSubjects();
 	}
 
+	/**
+	 * initial update method used for every kind of update.
+	 * It updates the selected PeerReviewer at all tables and
+	 * refreshes their table
+	 */
 	private void update() {
 		this.allReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
 		this.firstReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
@@ -88,13 +101,13 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 	}
 
 	private void createTables(CommandController commandController) {
-		this.firstReviews = new FirstRoleTable(commandController);
+		this.firstReviews = new FirstRolesTable(commandController);
 		this.secondReviews = new SecondRolesTable(commandController);
 		this.requestedStudents = new RequestedStudentsTable(commandController);
 		this.allReviews = new AllRolesTable(commandController);
 	}
 
-	private void fillingTPane() {
+	private void initializeTabbedPane() {
 		this.tPane.add(this.allReviews, ALLREVIEWS_TAB_ID);
 		this.tPane.add(this.firstReviews, FIRSTREVIEWRROLE_TAB_ID);
 		this.tPane.add(this.secondReviews, SECONDREVIEWERROLE_TAB_ID);

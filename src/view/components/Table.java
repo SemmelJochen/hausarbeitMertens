@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.TableModelEvent;
@@ -80,7 +81,7 @@ public class Table extends JPanel implements TableModelListener {
 		//set cell editor for every column
 		TableColumnModel column = this.table.getColumnModel();
 		column.getColumns().asIterator().forEachRemaining(c -> c.setCellEditor(this.cellEditor));
-
+		column.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(getTableContent());			
 		if(withMenu) {

@@ -5,11 +5,17 @@ import java.io.Serializable;
 public class Pair<K, V> implements Serializable {
 	private K k;
 	private V v;
+	
 	public Pair(K k, V v) {
 		this.k = k;
 		this.v = v;
 	}
 	
+	public Pair() {
+		this.k = null;
+		this.v = null;
+	}
+
 	public K getKey() {
 		return this.k;
 	}

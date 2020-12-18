@@ -182,10 +182,12 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 			return index;
 		}
 
-		private void setIndex(int index) {
+		private void setIndex(int newIndex) {
 			int oldIndex = this.index;
-			this.index = index;
-			this.propertyChangeSupport.firePropertyChange("index",oldIndex, index);
+			if(oldIndex != newIndex) {
+				this.index = newIndex;
+				this.propertyChangeSupport.firePropertyChange("index",oldIndex, newIndex);				
+			}
 		}
 
 		public void addPropertyChangeListener(PropertyChangeListener listener) {

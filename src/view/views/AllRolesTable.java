@@ -22,7 +22,7 @@ public class AllRolesTable extends ReducedTable {
 	public void refreshTableData() {
 		List<Student> students = new ArrayList<Student>();
 		if(this.selectedPeerReviewer != null) {
-			String key = this.selectedPeerReviewer.getFirstName()+ this.selectedPeerReviewer.getName();
+			String key = this.selectedPeerReviewer.getFirstName() + this.selectedPeerReviewer.getName();
 			if(ModelContainer.getInstance().getPeerReviewer(key) != null) {
 				students.addAll(ModelContainer.getInstance().getPeerReviewer(key).getFirstPeerReviewerRoles());
 				students.addAll(ModelContainer.getInstance().getPeerReviewer(key).getSecondPeerReviewerRoles());							

@@ -83,9 +83,8 @@ public class ModelContainer implements Externalizable {
 	}
 
 	public void updateStudent(Student oldStudent, Student newStudent) {
-		
-		this.updateFirstPeerReviewer(oldStudent, newStudent);
 		int index = this.students.indexOf(oldStudent);
+		this.updateFirstPeerReviewer(oldStudent, newStudent);
 		if (index >= 0) {
 			this.students.set(index, newStudent);
 		}
@@ -137,8 +136,7 @@ public class ModelContainer implements Externalizable {
 	@Override
 	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
 		this.students = new ObservableList<Student>((ArrayList<Student>) in.readObject());
-		this.peerReviewers = new ObservableHashMap<String, PeerReviewer>(
-				(HashMap<String, PeerReviewer>) in.readObject());
+		this.peerReviewers = new ObservableHashMap<String, PeerReviewer>((HashMap<String, PeerReviewer>) in.readObject());
 	}
 
 	public void addReviewerDataChangeObserver(Observer o) {
@@ -147,21 +145,6 @@ public class ModelContainer implements Externalizable {
 
 	public void addStudentDataChangeObserver(Observer o) {
 		this.students.addObserver(o);
-	}
-
-	public void removeStudentDataChangeObserver(Observer o) {
-		this.students.deleteObserver(o);
-	}
-
-	public void removeReviewerDataChangeObserver(Observer o) {
-		this.peerReviewers.deleteObserver(o);
-	}
-
-	public void fireChange() {
-		this.peerReviewers.hasChanged();
-		this.peerReviewers.notifyObservers();
-		this.students.hasChanged();
-		this.students.notifyObservers();
 	}
 
 	public void removeStudent(Student studentToRemove) {

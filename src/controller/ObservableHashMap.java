@@ -6,7 +6,9 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
 
+@SuppressWarnings("deprecation")
 public class ObservableHashMap<K, V> extends Observable implements Map<K, V> {
+	
 	private HashMap<K, V> map;
 
 	public ObservableHashMap() {
