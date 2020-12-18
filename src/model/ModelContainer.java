@@ -84,10 +84,14 @@ public class ModelContainer implements Externalizable {
 
 	public void updateStudent(Student oldStudent, Student newStudent) {
 		if (!oldStudent.getFirstPeerReviewerKey().equals(newStudent.getFirstPeerReviewerKey())) {
-			this.peerReviewers.get(newStudent.getFirstPeerReviewerKey()).addBachelorThesisAsFirstReviewer(newStudent);
+			if(this.peerReviewers.get(newStudent.getFirstPeerReviewerKey()) != null) {
+				this.peerReviewers.get(newStudent.getFirstPeerReviewerKey()).addBachelorThesisAsFirstReviewer(newStudent);				
+			}
 		}
 		if (!oldStudent.getSecondPeerReviewerKey().equals(newStudent.getSecondPeerReviewerKey())) {
-			this.peerReviewers.get(newStudent.getSecondPeerReviewerKey()).addRequest(newStudent);
+			if(this.peerReviewers.get(newStudent.getSecondPeerReviewerKey()) != null) {
+				this.peerReviewers.get(newStudent.getSecondPeerReviewerKey()).addRequest(newStudent);				
+			}
 		}
 		int index = this.students.indexOf(oldStudent);
 		if (index >= 0) {

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -29,6 +30,7 @@ import controller.StudentAddCommand;
 import controller.StudentRemoveCommand;
 import controller.TableController;
 import model.CustomTableModel;
+import model.ModelContainer;
 import model.PeerReviewer;
 import model.Student;
 import model.StudentColumn;
@@ -154,22 +156,21 @@ public class Table extends JPanel implements TableModelListener {
 		dialogPane.setLayout(new BoxLayout(dialogPane, BoxLayout.Y_AXIS));
 		JLabel label;
 		JPanel rowPanel;
-		JTextField inputField[] = new JTextField[columnNames.length];
+		Object inputFields[] = new Object[columnNames.length];
 		for (int i = 0; i < columnNames.length; i++) {
 			rowPanel = new JPanel();
 			rowPanel.setLayout(new BoxLayout(rowPanel, BoxLayout.X_AXIS));
 
 			label = new JLabel(columnNames[i] + ":", SwingConstants.RIGHT);
 			if(columnNames[i].equals(StudentColumn.FIRST_REVIEWER.getValue()) || columnNames[i].equals(StudentColumn.SECOND_REVIEWER.getValue())) {
-				ReviewerComboBox comboBox = new ReviewerComboBox();
-//				comboBox.getSelectedPeerReviewer();
+				inputFields[i] =  new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
 				rowPanel.add(label);
-				rowPanel.add(comboBox);
+				rowPanel.add((ReviewerComboBox)inputFields[i]);
 			}else {
-				inputField[i] = new JTextField("");
-				inputField[i].setPreferredSize(new Dimension(100, 25));				
+				inputFields[i] = new JTextField("");
+				((JTextField)inputFields[i]).setPreferredSize(new Dimension(100, 25));				
 				rowPanel.add(label);
-				rowPanel.add(inputField[i]);
+				rowPanel.add((JTextField)inputFields[i]);
 			}
 
 			dialogPane.add(rowPanel);
@@ -190,7 +191,16 @@ public class Table extends JPanel implements TableModelListener {
 			public void actionPerformed(ActionEvent e) {
 				String[] entries = new String[columnNames.length];
 				for (int i = 0; i < columnNames.length; i++) {
-					entries[i] = inputField[i].getText();
+					if(inputFields[i] instanceof JTextField) {
+						entries[i] = ((JTextField)inputFields[i]).getText();						
+					}
+					else if(inputFields[i] instanceof ReviewerComboBox) {
+						//if this is the case, the content of the entry handled as a key for a PeerReviewer
+						//Erstgutachter or Zweitgutachter
+						PeerReviewer pr = ((ReviewerComboBox)inputFields[i]).getSelectedPeerReviewer();
+						String key = pr.getFirstName() + pr.getName();
+						entries[i] = key;
+					}
 				}
 				Table.this.submitNewEntry(entries);
 				Table.this.addDialog.dispose();
@@ -220,8 +230,8 @@ public class Table extends JPanel implements TableModelListener {
 			student.setSubject((String) entries[4]);
 			student.setPracticePartner((String) entries[5]);
 			student.setRemark((String) entries[6]);
-			student.setFirstPeerReviewerKey("");
-			student.setSecondPeerReviewerKey("");
+			student.setFirstPeerReviewerKey((String) entries[7]);
+			student.setSecondPeerReviewerKey((String) entries[8]);
 			Table.this.getController().executeDataUpdate(new StudentAddCommand(this, student));
 		}
 		if(this.model.getType() == PeerReviewer.class) {
