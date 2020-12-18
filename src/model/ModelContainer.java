@@ -88,22 +88,60 @@ public class ModelContainer implements Externalizable {
 	}
 
 	public void updateStudent(Student oldStudent, Student newStudent) {
-		
 		int index = this.students.indexOf(oldStudent);
 		
-		this.updateFirstPeerReviewerStudents(oldStudent, newStudent);
-		this.updateSecondPeerReviewerStudents(oldStudent, newStudent);
+		/**
+		 * Students at the peerReviewer are being handled as a whole student.
+		 * The problem is, that if we change values at the "original" list of students, the 
+		 * redundant list at the peer reviewer is not being updated.
+		 * Therefore we look for the changed student at the peerReviewer list and replace it,
+		 * with the changed one.
+		 */
+		this.updateStudentReferences(oldStudent, newStudent);
+		
+		/**
+		 * The same goes in the other direction. If we change the peerReviewer reference at the student,
+		 * we also have to check if the new relation is valid. If it is, we have to delete the reference at the 
+		 * old peerReviewer and add a new reference to the new selected peerReviewer.
+		 */
+		this.updateFirstReviewerRelation(oldStudent, newStudent);
+		this.updateSecondReviewerRelation(oldStudent, newStudent);
 		
 		if (index >= 0) {
 			this.students.set(index, newStudent);
 		}
 	}
 	
+	private void updateStudentReferences(Student oldStudent, Student newStudent) {
+		for(PeerReviewer p : this.peerReviewers.values()) {
+			
+			//update firstRoles list
+			if(p.getFirstPeerReviewerRoles().contains(oldStudent)) {
+				int index = p.getFirstPeerReviewerRoles().indexOf(oldStudent);
+				p.getFirstPeerReviewerRoles().set(index, newStudent);
+			}
+			
+			//update secondRoles list
+			if(p.getSecondPeerReviewerRoles().contains(oldStudent)) {
+				int index = p.getSecondPeerReviewerRoles().indexOf(oldStudent);
+				p.getSecondPeerReviewerRoles().set(index, newStudent);
+			}
+			
+			//update requested list
+			if(p.getRequested().contains(oldStudent)) {
+				int index = p.getRequested().indexOf(oldStudent);
+				p.getRequested().set(index, newStudent);
+			}
+		}
+		
+	}
+
+
 	/*
 	 * replaces the oldStudent by newStudent in SecondPeerReviewer 
 	 * and replaces the SecondPeerReviewer in Student as requested
 	 */
-	private void updateSecondPeerReviewerStudents(Student oldStudent, Student newStudent) {
+	private void updateSecondReviewerRelation(Student oldStudent, Student newStudent) {
 		if (!oldStudent.getSecondPeerReviewerKey().equals(newStudent.getSecondPeerReviewerKey())) {
 			if (this.peerReviewers.get(newStudent.getSecondPeerReviewerKey()) != null) {
 				this.peerReviewers.get(newStudent.getSecondPeerReviewerKey())
@@ -122,7 +160,7 @@ public class ModelContainer implements Externalizable {
 	 * replaces the oldStudent by newStudent in firstPeerReviewer 
 	 * and replaces the firstPeerReviewer in Student
 	 */
-	private void updateFirstPeerReviewerStudents(Student oldStudent, Student newStudent) {
+	private void updateFirstReviewerRelation(Student oldStudent, Student newStudent) {
 		if (!oldStudent.getFirstPeerReviewerKey().equals(newStudent.getFirstPeerReviewerKey())) {
 			if (this.peerReviewers.get(newStudent.getFirstPeerReviewerKey()) != null) {
 				this.peerReviewers.get(newStudent.getFirstPeerReviewerKey())

@@ -48,7 +48,6 @@ public class Table extends JPanel implements TableModelListener {
 	private JTable table;
 	private JButton addButton, removeButton;
 	private JDialog addDialog;
-	private boolean renderMenu;
 
 	public Table(TableData<?> tableData, CommandController commandController, boolean withMenu) {
 		super();
