@@ -37,7 +37,7 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 		super();
 		this.comboBox = new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
 		this.comboBox.addCustomPropertyChangeListener(this);
-		this.creatingTables(commandController);
+		this.createTables(commandController);
 		this.subjects = new JLabel("");
 
 		this.fillingTPane();
@@ -89,7 +89,7 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 		this.requestedStudents.update();
 	}
 
-	private void creatingTables(CommandController commandController) {
+	private void createTables(CommandController commandController) {
 		this.firstReviews = new FirstRoleTable(commandController);
 		this.secondReviews = new SecondRolesTable(commandController);
 		this.requestedStudents = new RequestedStudentsTable(commandController);

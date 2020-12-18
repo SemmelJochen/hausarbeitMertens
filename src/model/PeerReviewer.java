@@ -90,8 +90,8 @@ public class PeerReviewer extends Person implements Serializable {
 		return requested;
 	}
 
-	public void addRequested(Student requested) {
-		this.requested.add(requested);
+	public void addRequest(Student request) {
+		this.requested.add(request);
 	}
 
 	public String getSubjects() {
