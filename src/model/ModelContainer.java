@@ -29,6 +29,11 @@ public class ModelContainer implements Externalizable {
 		return MODELCONTAINER;
 	}
 
+	/*
+	 * because of the private constructor it is not possible to have more 
+	 * than one instance of ModelContainer, which allows us to read the
+	 * ModelContainer at every point of the project
+	 */
 	private ModelContainer() {
 		this.peerReviewers = new ObservableHashMap<String, PeerReviewer>();
 		this.students = new ObservableList<Student>();
@@ -95,8 +100,8 @@ public class ModelContainer implements Externalizable {
 	}
 	
 	/*
-	 * replaces the oldStudent by newStudent in SeconPeerReviewer 
-	 * and replaces the SeconPeerReviewer in Student as requested
+	 * replaces the oldStudent by newStudent in SecondPeerReviewer 
+	 * and replaces the SecondPeerReviewer in Student as requested
 	 */
 	private void updateSecondPeerReviewerStudents(Student oldStudent, Student newStudent) {
 		if (!oldStudent.getSecondPeerReviewerKey().equals(newStudent.getSecondPeerReviewerKey())) {
@@ -114,8 +119,8 @@ public class ModelContainer implements Externalizable {
 		}
 	}
 	/*
-	 * replaces the oldStudent by newStudent in SeconPeerReviewer 
-	 * and replaces the SeconPeerReviewer in Student
+	 * replaces the oldStudent by newStudent in firstPeerReviewer 
+	 * and replaces the firstPeerReviewer in Student
 	 */
 	private void updateFirstPeerReviewerStudents(Student oldStudent, Student newStudent) {
 		if (!oldStudent.getFirstPeerReviewerKey().equals(newStudent.getFirstPeerReviewerKey())) {

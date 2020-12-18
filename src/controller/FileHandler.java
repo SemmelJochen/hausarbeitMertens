@@ -14,9 +14,22 @@ import model.PeerReviewer;
 import model.Student;
 
 public class FileHandler {
-
+	
+	/*
+	 * the fileChooser allows us to select a 
+	 * file with an explorer and saves the file
+	 * int the attribute file.
+	 */
 	private JFileChooser fileChooser;
 	private File file;
+	
+	/*
+	 * the header consists of the first rows of the muster.csv
+	 * and is read during the import
+	 * 
+	 * he is needed to rebuild the header while the Students
+	 * are exported.
+	 */
 	private String[] header;
 
 	public FileHandler() {
@@ -24,6 +37,11 @@ public class FileHandler {
 		this.header = new String[4];
 	}
 
+	/*
+	 * the method returns false if the dialog gets canceled
+	 * 
+	 * depending on the dialogType it is
+	 */
 	public boolean chooseFile(DialogType dialogType) {
 		int result = 0;
 		FileNameExtensionFilter xmlFilter = new FileNameExtensionFilter("CSV-Dateien (*.csv)", "csv");

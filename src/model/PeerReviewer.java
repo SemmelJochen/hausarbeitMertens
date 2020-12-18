@@ -14,9 +14,15 @@ public class PeerReviewer extends Person implements Serializable, PropertyChange
 	private List<Student> firstReviewerRoles;
 	private List<Student> secondReviewerRoles;
 	private String title;
-	private List<Student> requested;
 	private String subjects;
-
+	
+	/*
+	 * The List requested is used to save Students, whose state is 
+	 * "waiting for response" in secondPeerReviewerInformation
+	 * if a student gets accepted by a PeerReviewer the entry will be deleted in the
+	 * list and then appended in secondReviewerRoles.
+	 */
+	private List<Student> requested;
 
 	public PeerReviewer(String title, String name, String firstName, String email, int capacity) {
 		super(name, firstName, email);

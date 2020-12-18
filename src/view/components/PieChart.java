@@ -55,6 +55,10 @@ public class PieChart extends JComponent {
 		}
 	}
 	
+	/*
+	 * the round method reduced the missing accurance, caused by casting the double to an int.
+	 * The graphic will look smoother, but it isn´t a complete solution.
+	 */
 	private int round(double toRound) {
 		if((toRound - (int) toRound) * 10 >= 5) {
 			//mind 0.5

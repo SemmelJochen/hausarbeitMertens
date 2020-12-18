@@ -2,6 +2,11 @@ package controller;
 
 public class CommandController {
 
+	/*
+	 * The CommandController is only for handling Commands
+	 * and shifts the logic away from the common Controller
+	 * to simplify the logic.
+	 */
 	private ObservableCommandStack undoStack, redoStack;
 	
 	public CommandController() {
