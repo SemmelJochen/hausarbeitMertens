@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import controller.CommandController;
-import model.ColumnEditorType;
+import model.CellEditorType;
 import model.ModelContainer;
 import model.Student;
 import model.StudentColumn;
@@ -46,7 +46,8 @@ public class StudentTable extends JPanel {
 				.withColumn(StudentColumn.LASTNAME,
 						students.stream().map(e -> e.getName()).collect(Collectors.toList()))//
 				
-				.withColumn(StudentColumn.E_MAIL, students.stream().map(e -> e.getEmail()).collect(Collectors.toList()))//
+				.withColumn(StudentColumn.E_MAIL, 
+						students.stream().map(e -> e.getEmail()).collect(Collectors.toList()))//
 				
 				.withColumn(StudentColumn.SUBJECT,
 						students.stream().map(e -> e.getSubject()).collect(Collectors.toList()))//
@@ -59,11 +60,11 @@ public class StudentTable extends JPanel {
 				
 				.withColumn(StudentColumn.FIRST_REVIEWER,
 						students.stream().map(e -> e.getFirstPeerReviewerKey()).collect(Collectors.toList()),
-						ColumnEditorType.PEER_REVIEWER_COMBO_BOX)//
+						CellEditorType.PEER_REVIEWER_COMBO_BOX)//
 				
 				.withColumn(StudentColumn.SECOND_REVIEWER,
 						students.stream().map(e -> e.getSecondPeerReviewerKey()).collect(Collectors.toList()),
-						ColumnEditorType.PEER_REVIEWER_COMBO_BOX)//
+						CellEditorType.PEER_REVIEWER_COMBO_BOX)//
 				
 				.withMetaData(students)//
 				

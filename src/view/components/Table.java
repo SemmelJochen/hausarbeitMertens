@@ -69,6 +69,8 @@ public class Table extends JPanel implements TableModelListener {
 		// style the table
 		this.table.setAutoCreateRowSorter(false);
 		this.table.setRowHeight(30);
+		
+		//set cell editor for every column
 		TableColumnModel column = this.table.getColumnModel();
 		column.getColumns().asIterator().forEachRemaining(c -> c.setCellEditor(this.cellEditor));
 
@@ -111,7 +113,7 @@ public class Table extends JPanel implements TableModelListener {
 
 	private JScrollPane getTableContent() {
 		JScrollPane pane = new JScrollPane(this.table);
-		pane.setPreferredSize(new Dimension(1000, 580));
+		pane.setPreferredSize(new Dimension(1000, 720));
 		return pane;
 	}
 
@@ -214,7 +216,6 @@ public class Table extends JPanel implements TableModelListener {
 			reviewer.setCapacity(capacity);
 			Table.this.getController().executeDataUpdate(new PeerReviewerAddCommand(this, reviewer));
 		}
-
 	}
 	
 	public TableController getController() {

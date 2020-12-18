@@ -100,13 +100,12 @@ public class TableController {
 	private Student buildNewStudent(Student student, Object data, String columnName) {
 		StudentColumn column = StudentColumn.getEnumForValue(columnName);
 		Student newStudent = student.clone();
+
 		if (column == StudentColumn.FIRST_REVIEWER) {
-			// TODO findOrCreateNewPeerReviewer
-			// newStudent.getFirstPeerReviewer().setFirstName(firstName);
+			newStudent.setFirstPeerReviewerKey((String) data); 
 		}
 		if (column == StudentColumn.SECOND_REVIEWER) {
-			// TODO findOrCreateNewPeerReviewer
-			// newStudent.getFirstPeerReviewer().setFirstName(firstName);
+			newStudent.setSecondPeerReviewerKey((String) data); 
 		}
 		if (column == StudentColumn.E_MAIL) {
 			newStudent.setEmail((String) data);

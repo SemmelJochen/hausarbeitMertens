@@ -7,7 +7,7 @@ public class TableData<T> {
 	private List<Object>[] data;
 	private List<T> metaData;
 	private String[] columnNames;
-	private ColumnEditorType[] columnTypes;
+	private CellEditorType[] columnTypes;
 	private Class<?> type;
 
 	private TableData(Builder<T> builder) {
@@ -15,7 +15,8 @@ public class TableData<T> {
 		this.data = builder.columns.toArray(data);
 		this.columnNames = new String[builder.columnNames.size()];
 		this.columnNames = builder.columnNames.toArray(columnNames);
-		this.columnTypes = new ColumnEditorType[builder.columnTypes.size()];
+		this.columnTypes = new CellEditorType[builder.columnTypes.size()];
+		this.columnTypes = builder.columnTypes.toArray(columnTypes);
 		this.metaData = builder.metaData;
 		this.type = builder.type;
 	}
@@ -28,8 +29,8 @@ public class TableData<T> {
 		return this.columnNames;
 	}
 	
-	public ColumnEditorType[] getColumnTypes() {
-		return null;
+	public CellEditorType[] getColumnTypes() {
+		return this.columnTypes;
 	}
 
 	public List<Object>[] getContent() {
@@ -61,14 +62,14 @@ public class TableData<T> {
 	public static final class Builder<T> {
 		private List<List<Object>> columns = new ArrayList<List<Object>>();
 		private List<String> columnNames = new ArrayList<String>();
-		private List<ColumnEditorType> columnTypes = new ArrayList<ColumnEditorType>();
+		private List<CellEditorType> columnTypes = new ArrayList<CellEditorType>();
 		private List<T> metaData = new ArrayList<T>();
 		private Class<?> type;
 
 		private Builder() {
 		}
 
-		public Builder<T> withColumn(Column columnName, List<Object> data, ColumnEditorType columnType) {
+		public Builder<T> withColumn(Column columnName, List<Object> data, CellEditorType columnType) {
 			this.columnNames.add(columnName.getValue());
 			this.columnTypes.add(columnType);
 			this.columns.add(data);
@@ -77,7 +78,7 @@ public class TableData<T> {
 		
 		//used for default editor columns
 		public Builder<T> withColumn(Column columnName, List<Object> data ) {
-			return withColumn(columnName, data, ColumnEditorType.CUSTOM_EDITOR);
+			return withColumn(columnName, data, CellEditorType.CUSTOM_TEXT_EDITOR);
 		}
 		
 		public Builder<T> withMetaData(List<T> metaData){

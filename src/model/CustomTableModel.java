@@ -5,15 +5,18 @@ import java.util.List;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
+
 public class CustomTableModel extends AbstractTableModel {
 
 	private String[] columnNames;
 	private List<?> metaData;
+	private CellEditorType[] columnTypes;
 	private List<Object>[] data;
 	private Class<?> type;
 
 	public CustomTableModel(TableData<?> tableData) {
 		this.columnNames = tableData.getColumnNames();
+		this.columnTypes = tableData.getColumnTypes();
 		this.data = tableData.getContent();
 		this.metaData = tableData.getMetaData();
 		this.type = tableData.getType();
@@ -46,6 +49,10 @@ public class CustomTableModel extends AbstractTableModel {
 	
 	public Class<?> getType() {
 		return this.type;
+	}
+	
+	public CellEditorType getColumnType(int col) {
+		return this.columnTypes[col];
 	}
 	
 	/**

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import javax.swing.JPanel;
 
 import controller.CommandController;
-import model.ColumnEditorType;
+import model.CellEditorType;
 import model.Student;
 import model.StudentColumn;
 import model.TableData;
@@ -40,7 +40,7 @@ public class SecondRolesTable extends ReducedTable {
 						students.stream().map(e -> e.getRemark()).collect(Collectors.toList()))//
 				.withColumn(StudentColumn.FIRST_REVIEWER, students.stream()
 						.map(e -> e.getFirstPeerReviewerKey())
-						.collect(Collectors.toList()), ColumnEditorType.PEER_REVIEWER_COMBO_BOX)//
+						.collect(Collectors.toList()), CellEditorType.PEER_REVIEWER_COMBO_BOX)//
 				.withMetaData(students)//
 				
 				.build();
