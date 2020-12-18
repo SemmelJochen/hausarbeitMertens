@@ -1,9 +1,7 @@
 package view.components.table.editors;
 
 import java.awt.Component;
-import java.util.Vector;
 
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 
