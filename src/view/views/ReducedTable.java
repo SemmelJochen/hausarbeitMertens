@@ -9,6 +9,15 @@ import view.components.Table;
 
 public abstract class ReducedTable extends JPanel {
 
+	/*
+	 * The ReducedTable is a table, which don´t show all attributes 
+	 * of a Student or PeerReviewer.
+	 * 
+	 * Which attributes are presented, is definded in the 
+	 * refreshTableData() method in the specific child.
+	 */
+	
+	
 	protected TableData<?> tableData;
 	protected Table table;
 	protected PeerReviewer selectedPeerReviewer;

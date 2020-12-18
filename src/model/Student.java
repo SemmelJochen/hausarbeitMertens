@@ -9,14 +9,17 @@ public class Student extends Person implements Serializable {
 
 	private static final long serialVersionUID = 0xBAFFL;
 	private String studentGroup, practicePartner, subject;
-	private String firstPeerReviewerKey;
-	private Pair<String, Boolean> secondPeerReviewerInformation = new Pair<String, Boolean>();
-	private String remark;
+	private String firstPeerReviewerKey, remark;
 	
-//	private PropertyChangeSupport propertyChangeSupport;
+	/*
+	 * the String represents the key to find the PeerReviewer in the HashMap peerReviewers
+	 * the Boolean represents the current state of the Requesting. True = accepted, false = waiting for response
+	 */
+	private Pair<String, Boolean> secondPeerReviewerInformation = new Pair<String, Boolean>();
 
 	public Student(String name, String firstName, String email, String studentGroup, String practicePartner,
-			String subject, String firstPeerReviewerKey, String secondPeerReviewerKey, Boolean secondPeerReviewerState, String remark) {
+			String subject, String firstPeerReviewerKey, String secondPeerReviewerKey, Boolean secondPeerReviewerState,
+			String remark) {
 		super(name, firstName, email);
 		this.studentGroup = studentGroup;
 		this.practicePartner = practicePartner;
@@ -25,22 +28,23 @@ public class Student extends Person implements Serializable {
 		this.secondPeerReviewerInformation.setKey(secondPeerReviewerKey);
 		this.secondPeerReviewerInformation.setValue(secondPeerReviewerState);
 		this.remark = remark;
-		
-//		this.propertyChangeSupport = new PropertyChangeSupport(this);
+
 	}
 
 	public Student(String name, String firstName, String email, String studentGroup, String practicePartner,
 			String subject, String remark) {
 		this(name, firstName, email, studentGroup, practicePartner, subject, "", "", false, remark);
 	}
-	
+
 	/**
 	 * Constructor used for cloning the class
+	 * 
 	 * @param s Student to clone
 	 */
 	private Student(Student s) {
 		this(s.getName(), s.getFirstName(), s.getEmail(), s.getStudentGroup(), s.getPracticePartner(), s.getSubject(),
-				s.getFirstPeerReviewerKey(), s.getSecondPeerReviewerKey(), s.getSecondPeerReviewerState(), s.getRemark());
+				s.getFirstPeerReviewerKey(), s.getSecondPeerReviewerKey(), s.getSecondPeerReviewerState(),
+				s.getRemark());
 	}
 
 	public String getFirstPeerReviewerKey() {
@@ -48,22 +52,11 @@ public class Student extends Person implements Serializable {
 	}
 
 	public void setFirstPeerReviewerKey(String firstPeerReviewerKey) {
-		
-//		PeerReviewer tmp = ModelContainer.getInstance().getPeerReviewer(firstPeerReviewerKey);
-//		if(tmp != null)
-//		System.out.println("## " + tmp.getFirstName() + " ##");
-//		
-//		Student oldStudent = this.clone();
-//		
-//		this.propertyChangeSupport.addPropertyChangeListener(ModelContainer.getInstance().getPeerReviewer(firstPeerReviewerKey));
 		this.firstPeerReviewerKey = firstPeerReviewerKey;
-//		this.propertyChangeSupport.firePropertyChange("firstReviewer", oldStudent, this);
-//		
-//		System.out.println("new Value:" + this.firstPeerReviewerKey);
 	}
 
 	public String getSecondPeerReviewerKey() {
-		if(this.secondPeerReviewerInformation != null) {			
+		if (this.secondPeerReviewerInformation != null) {
 			return this.secondPeerReviewerInformation.getKey();
 		} else {
 			return null;
@@ -71,23 +64,19 @@ public class Student extends Person implements Serializable {
 	}
 
 	public void setSecondPeerReviewerKey(String secondPeerReviewerKey) {
-		if(this.secondPeerReviewerInformation.getKey() != null) {
-//			this.propertyChangeSupport.firePropertyChange("secondReviewer", this, null);
-//			this.propertyChangeSupport.removePropertyChangeListener(ModelContainer.getInstance().getPeerReviewer(this.secondPeerReviewerKey.getKey()));
+		if (this.secondPeerReviewerInformation.getKey() != null) {
 		}
-//		this.propertyChangeSupport.addPropertyChangeListener(ModelContainer.getInstance().getPeerReviewer(secondPeerReviewerKey));
 		this.secondPeerReviewerInformation.setKey(secondPeerReviewerKey);
-//		this.propertyChangeSupport.firePropertyChange("secondReviewer", null, this);
 	}
-	
+
 	public boolean getSecondPeerReviewerState() {
-		if(this.secondPeerReviewerInformation != null) {
-			return this.secondPeerReviewerInformation.getValue();			
-		}else {
+		if (this.secondPeerReviewerInformation != null) {
+			return this.secondPeerReviewerInformation.getValue();
+		} else {
 			return false;
 		}
 	}
-	
+
 	public String getStudentGroup() {
 		return this.studentGroup;
 	}
@@ -95,7 +84,7 @@ public class Student extends Person implements Serializable {
 	public void setStudentGroup(String studentGroup) {
 		this.studentGroup = studentGroup;
 	}
-	
+
 	public void setSecondPeerReviewerState(boolean state) {
 		this.secondPeerReviewerInformation.setValue(state);
 	}
@@ -127,34 +116,36 @@ public class Student extends Person implements Serializable {
 	@Override
 	public String toString() {
 		return super.toString() + "\nstudent group: \t\t" + this.studentGroup + "\npraxis partner: \t"
-				+ this.practicePartner + "\nsubject: \t\t" + this.subject + "\nGutachter: \t\t" + this.getFirstPeerReviewerKey();
+				+ this.practicePartner + "\nsubject: \t\t" + this.subject + "\nGutachter: \t\t"
+				+ this.getFirstPeerReviewerKey();
 	}
 
 	public Student clone() {
 		return new Student(this);
-	}   
-	
+	}
+
 	@Override
 	public boolean equals(Object o) {
-		if(o == null) {
+		if (o == null) {
 			return false;
 		}
-		if(o instanceof Student) {
+		if (o instanceof Student) {
 			Student studentToCheck = (Student) o;
-			boolean tmp = super.equals(studentToCheck) &&
-					this.studentGroup.equals(studentToCheck.studentGroup) &&
-					this.practicePartner.equals(studentToCheck.practicePartner) &&
-					this.subject.equals(studentToCheck.subject) &&
-					this.firstPeerReviewerKey.equals(studentToCheck.firstPeerReviewerKey) &&
-					this.secondPeerReviewerInformation.getKey().equals(studentToCheck.secondPeerReviewerInformation.getKey()) &&
-					this.secondPeerReviewerInformation.getValue() == studentToCheck.secondPeerReviewerInformation.getValue();
+			boolean tmp = super.equals(studentToCheck) && this.studentGroup.equals(studentToCheck.studentGroup)
+					&& this.practicePartner.equals(studentToCheck.practicePartner)
+					&& this.subject.equals(studentToCheck.subject)
+					&& this.firstPeerReviewerKey.equals(studentToCheck.firstPeerReviewerKey)
+					&& this.secondPeerReviewerInformation.getKey()
+							.equals(studentToCheck.secondPeerReviewerInformation.getKey())
+					&& this.secondPeerReviewerInformation.getValue() == studentToCheck.secondPeerReviewerInformation
+							.getValue();
 			return tmp;
 		} else {
 			return false;
 		}
-		
+
 	}
-	
+
 	public static Student createDummy() {
 		return new Student("", "", "", "", "", "", "");
 	}

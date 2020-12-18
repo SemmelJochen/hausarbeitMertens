@@ -49,6 +49,9 @@ public class ReviewerTable extends JPanel {
 				.withColumn(ReviewerColumn.E_MAIL,
 						firstReviewer.stream().map(e -> e.getEmail()).collect(Collectors.toList()))//
 				
+				.withColumn(ReviewerColumn.SUBJECTS,
+						firstReviewer.stream().map(e -> e.getSubjects()).collect(Collectors.toList()))//
+				
 				.withColumn(ReviewerColumn.CAPACITY,
 						firstReviewer.stream().map(e -> e.getCapacity()).collect(Collectors.toList()))//
 				

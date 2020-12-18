@@ -6,10 +6,16 @@ import javax.swing.JComponent;
 
 public class Slice extends JComponent {
 
-	private boolean isBrighter;
 	private int value;
 	private Color color;
 	private String dozent;
+	
+	/*
+	 * isBrighter is true, if the mouse hovers over the JLabel in the diagram.
+	 * it makes it easier to find the specific slice in the PieChart	 
+	 */
+	private boolean isBrighter;
+	
 
 	public Slice(int value, Color color, String name) {
 		this.isBrighter = false;

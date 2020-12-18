@@ -83,14 +83,22 @@ public class ModelContainer implements Externalizable {
 	}
 
 	public void updateStudent(Student oldStudent, Student newStudent) {
+		
 		int index = this.students.indexOf(oldStudent);
-		this.updateFirstPeerReviewer(oldStudent, newStudent);
+		
+		this.updateFirstPeerReviewerStudents(oldStudent, newStudent);
+		this.updateSecondPeerReviewerStudents(oldStudent, newStudent);
+		
 		if (index >= 0) {
 			this.students.set(index, newStudent);
 		}
 	}
 	
-	private void updateSecondPeerReviewer(Student oldStudent, Student newStudent) {
+	/*
+	 * replaces the oldStudent by newStudent in SeconPeerReviewer 
+	 * and replaces the SeconPeerReviewer in Student as requested
+	 */
+	private void updateSecondPeerReviewerStudents(Student oldStudent, Student newStudent) {
 		if (!oldStudent.getSecondPeerReviewerKey().equals(newStudent.getSecondPeerReviewerKey())) {
 			if (this.peerReviewers.get(newStudent.getSecondPeerReviewerKey()) != null) {
 				this.peerReviewers.get(newStudent.getSecondPeerReviewerKey())
@@ -105,8 +113,11 @@ public class ModelContainer implements Externalizable {
 
 		}
 	}
-	
-	private void updateFirstPeerReviewer(Student oldStudent, Student newStudent) {
+	/*
+	 * replaces the oldStudent by newStudent in SeconPeerReviewer 
+	 * and replaces the SeconPeerReviewer in Student
+	 */
+	private void updateFirstPeerReviewerStudents(Student oldStudent, Student newStudent) {
 		if (!oldStudent.getFirstPeerReviewerKey().equals(newStudent.getFirstPeerReviewerKey())) {
 			if (this.peerReviewers.get(newStudent.getFirstPeerReviewerKey()) != null) {
 				this.peerReviewers.get(newStudent.getFirstPeerReviewerKey())
