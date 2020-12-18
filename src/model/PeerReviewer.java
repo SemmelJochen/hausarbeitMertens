@@ -24,18 +24,18 @@ public class PeerReviewer extends Person implements Serializable, PropertyChange
 	 */
 	private List<Student> requested;
 
-	public PeerReviewer(String title, String name, String firstName, String email, int capacity) {
+	public PeerReviewer(String title, String name, String firstName, String email, int capacity, String subjects) {
 		super(name, firstName, email);
 		this.title = title;
 		this.capacity = capacity;
 		this.firstReviewerRoles = new ArrayList<>();
 		this.secondReviewerRoles = new ArrayList<>();
 		this.requested = new ArrayList<>();
-		this.subjects = "";
+		this.subjects = subjects;
 	}
 
 	private PeerReviewer(PeerReviewer p) {
-		this(p.getTitle(), p.getName(), p.getFirstName(), p.getEmail(), p.getCapacity());
+		this(p.getTitle(), p.getName(), p.getFirstName(), p.getEmail(), p.getCapacity(), p.getSubjects());
 	}
 
 	public void setCapacity(int capacity) {
@@ -158,7 +158,7 @@ public class PeerReviewer extends Person implements Serializable, PropertyChange
 	}
 
 	public static PeerReviewer createDummy() {
-		return new PeerReviewer("", "", "", "", -1);
+		return new PeerReviewer("", "", "", "", -1, "");
 	}
 
 	public int getLoad() {
@@ -197,5 +197,9 @@ public class PeerReviewer extends Person implements Serializable, PropertyChange
 			this.removeBachelorThesisAsFirstReviewer((Student) evt.getOldValue());
 			this.addBachelorThesisAsFirstReviewer((Student) evt.getNewValue());
 		}
+	}
+
+	public void declineRequest(Student student) {
+		this.requested.remove(student);		
 	}
 }

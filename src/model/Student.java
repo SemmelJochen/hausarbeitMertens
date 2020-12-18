@@ -9,7 +9,7 @@ public class Student extends Person implements Serializable {
 
 	public static final String ACCEPTED_STATE = "angenommen";
 	public static final String REJECTED_STATE = "abgelehnt";
-	public static final String REQUESTED_STATE = "ausstehend";
+	public static final String PENDING_STATE = "ausstehend";
 	private static final long serialVersionUID = 0xBAFFL;
 	private String studentGroup, practicePartner, subject;
 	private String firstPeerReviewerKey, remark;
@@ -37,7 +37,7 @@ public class Student extends Person implements Serializable {
 
 	public Student(String name, String firstName, String email, String studentGroup, String practicePartner,
 			String subject, String remark) {
-		this(name, firstName, email, studentGroup, practicePartner, subject, "", "", REQUESTED_STATE, remark);
+		this(name, firstName, email, studentGroup, practicePartner, subject, "", "", PENDING_STATE, remark);
 	}
 
 	/**

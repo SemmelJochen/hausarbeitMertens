@@ -15,7 +15,7 @@ import view.components.Table;
 public class CustomComboBoxEditor implements ICellEditor {
 
 	private Table table;
-	private String[] values = { Student.ACCEPTED_STATE, Student.REQUESTED_STATE, Student.REJECTED_STATE };
+	private String[] values = { Student.ACCEPTED_STATE, Student.PENDING_STATE, Student.REJECTED_STATE };
 	private JComboBox<String> editor = new JComboBox<String>(values);
 	private int col, row;
 

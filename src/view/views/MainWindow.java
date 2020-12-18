@@ -115,7 +115,7 @@ public class MainWindow extends JFrame {
 		});
 		menu.add(menuItem);
 
-		menuItem = new JMenuItem("Loeschen aller Daten");
+		menuItem = new JMenuItem("Alle Daten loeschen");
 //		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
 		menuItem.addActionListener(new ActionListener() {
 
@@ -145,7 +145,7 @@ public class MainWindow extends JFrame {
 
 		// add Uebersicht menu
 		submenu = new JMenu("Uebersicht");
-		subMenuItem = new JMenuItem("Studentenuebersicht");
+		subMenuItem = new JMenuItem("Studenten");
 		subMenuItem.addActionListener(new ActionListener() {
 
 			@Override
@@ -155,7 +155,8 @@ public class MainWindow extends JFrame {
 			}
 		});
 		submenu.add(subMenuItem);
-		subMenuItem = new JMenuItem("Gutachter Detailansicht");
+		
+		subMenuItem = new JMenuItem("Gutachter");
 		subMenuItem.addActionListener(new ActionListener() {
 
 			@Override
@@ -165,6 +166,18 @@ public class MainWindow extends JFrame {
 			}
 		});
 		submenu.add(subMenuItem);
+		
+		subMenuItem = new JMenuItem("Freie Studenten");
+		subMenuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.overview.setActiveTab(Overview.FREESTUDENTS_TAB_ID);
+				MainWindow.this.setCurrentlyVisible(MainWindow.this.overview);
+			}
+		});
+		submenu.add(subMenuItem);
+		
 		menu.add(submenu);
 
 		// add G-Einsicht
@@ -276,7 +289,7 @@ public class MainWindow extends JFrame {
 		menu.add(menuItem);
 
 		menu.addSeparator();
-		oMenuItem = new ObserverMenuItem("Undo"); // Action Listener einfuegen
+		oMenuItem = new ObserverMenuItem("Rueckgaengig"); // Action Listener einfuegen
 		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.META_MASK));
 		this.controller.getCommandController().getUndoStack().addPropertyChangeListener(oMenuItem);
 		oMenuItem.addActionListener(new ActionListener() {
@@ -289,7 +302,7 @@ public class MainWindow extends JFrame {
 		});
 		menu.add(oMenuItem);
 
-		oMenuItem = new ObserverMenuItem("Redo"); // Action Listener einfuegen
+		oMenuItem = new ObserverMenuItem("Wiederholen"); // Action Listener einfuegen
 		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.META_MASK));
 		this.controller.getCommandController().getRedoStack().addPropertyChangeListener(oMenuItem);
 		oMenuItem.addActionListener(new ActionListener() {
@@ -307,11 +320,11 @@ public class MainWindow extends JFrame {
 	}
 
 	public int showWarningMessage(String message) {
-		String[] buttonLabels = new String[] { "Ja", "Nein", "Abbrechen" };
-		String defaultOption = buttonLabels[0];
+		String[] buttonLabels = new String[] { "Trotzdem schließen",  "Abbrechen" };
+		String defaultOption = buttonLabels[1];
 		Icon icon = UIManager.getIcon("FileView.hardDriveIcon");
 
-		return JOptionPane.showOptionDialog(this, message, "Warnung", JOptionPane.YES_NO_CANCEL_OPTION,
+		return JOptionPane.showOptionDialog(this, message, "Warnung", JOptionPane.OK_CANCEL_OPTION,
 				JOptionPane.WARNING_MESSAGE, icon, buttonLabels, defaultOption);
 	}
 

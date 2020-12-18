@@ -157,6 +157,6 @@ public class FileHandler {
 			i++;
 		}
 		firstnames = firstnames.trim();
-		return new PeerReviewer(title, peerReviewerString[peerReviewerString.length - 1], firstnames, "", -1);
+		return new PeerReviewer(title, peerReviewerString[peerReviewerString.length - 1], firstnames, "", -1, "");
 	}
 }

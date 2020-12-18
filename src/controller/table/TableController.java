@@ -57,6 +57,13 @@ public class TableController {
 		this.backfireChangesToModel(reviewer, newReviewer);
 	}
 	
+	public void undoPeerReviewerUpdate(Pair<Object, Object> data, String columnName) {
+		PeerReviewer reviewer = (PeerReviewer) data.getKey();
+		PeerReviewer newReviewer = this.buildNewPeerReviewer(reviewer, data.getValue(), columnName);
+		
+		this.backfireChangesToModel(newReviewer, reviewer);
+	}
+	
 	public void updateStudent(Pair<Object, Object> data, String columnName) {
 		Student student = (Student) data.getKey();
 		Student newStudent = this.buildNewStudent(student, data.getValue(), columnName);
@@ -64,12 +71,6 @@ public class TableController {
 		this.backfireChangesToModel(student, newStudent);
 	}
 	
-	public void undoPeerReviewerUpdate(Pair<Object, Object> data, String columnName) {
-		PeerReviewer reviewer = (PeerReviewer) data.getKey();
-		PeerReviewer newReviewer = this.buildNewPeerReviewer(reviewer, data.getValue(), columnName);
-
-		this.backfireChangesToModel(newReviewer, reviewer);
-	}
 	
 	public void undoStudentUpdate(Pair<Object, Object> data, String columnName) {
 		Student student = (Student) data.getKey();
@@ -81,6 +82,7 @@ public class TableController {
 	private PeerReviewer buildNewPeerReviewer(PeerReviewer reviewer, Object data, String columnName) {
 		ReviewerColumn column = ReviewerColumn.getEnumForValue(columnName);
 		PeerReviewer newReviewer = reviewer.clone();
+		
 		if (column == ReviewerColumn.CAPACITY) {
 			newReviewer.setCapacity((int) Integer.parseInt((String) data));
 		}
@@ -94,6 +96,7 @@ public class TableController {
 			newReviewer.setName((String) data);
 		}
 		if( column == ReviewerColumn.SUBJECTS) {
+			System.out.println("changing subjects");
 			newReviewer.setSubjects((String) data);
 		}
 		if (column == ReviewerColumn.TITLE) {

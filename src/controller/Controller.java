@@ -31,11 +31,11 @@ public class Controller {
 		this.modelContainer.addStudentDataChangeObserver(o);
 		this.modelContainer.addReviewerDataChangeObserver(o);
 	}
-	
+
 	public void clear() {
 		this.modelContainer.clear();
 	}
-	
+
 	public FileHandler getFileHandler() {
 		return this.csvHandler;
 	}
@@ -43,7 +43,7 @@ public class Controller {
 	public void run() {
 		this.window = new MainWindow(this);
 		this.window.appendDataChangeListeners();
-		
+
 		// add lister to listen to window close operation
 		this.window.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent winEvt) {
@@ -54,33 +54,22 @@ public class Controller {
 	}
 
 	private void handleClose() {
-		if (this.hasUnsavedData()) {
-			int message = window.showWarningMessage("Moechten Sie speichern, bevor Sie das Programm schliessen ?\n");
-			switch (message) {
-			case JOptionPane.YES_OPTION:
-				// TODO save
-				this.window.dispose();
-				break;
+		int message = window.showWarningMessage(
+				"Es koennte ungespeicherte Datenbestaende geben. Moechten sie trotzdem fortfahren ?\n");
+		switch (message) {
+		case JOptionPane.OK_OPTION:
+			this.window.dispose();
+			break;
 
-			case JOptionPane.NO_OPTION:
-				this.window.dispose();
-				break;
-
-			case JOptionPane.CANCEL_OPTION:
-				break;
-			}
+		case JOptionPane.CANCEL_OPTION:
+			break;
 		}
 	}
 
-	private boolean hasUnsavedData() {
-		// TODO check if there's still something unsaved
-		return true;
-	}
-	
 	public boolean hasSaveFilePath() {
-		if(this.filePath != null) {
+		if (this.filePath != null) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}

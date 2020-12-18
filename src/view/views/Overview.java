@@ -33,7 +33,7 @@ public class Overview extends ContentPane implements Observer {
 		this.freeStudents = new FreeStudents(commandController);
 		
 		tPane.add(this.studentTab, STUDENT_TAB_ID);
-		tPane.setTitleAt(STUDENT_TAB_ID, "Student");
+		tPane.setTitleAt(STUDENT_TAB_ID, "Studenten");
 		
 		tPane.add(this.reviewerTab, REVIEWER_TAB_ID);
 		tPane.setTitleAt(REVIEWER_TAB_ID, "Gutachter");
@@ -51,8 +51,6 @@ public class Overview extends ContentPane implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-
-//		this.freeStudents.(this.getFreeStudents());
 		this.freeStudents.update();
 		this.reviewerTab.update();
 		this.studentTab.update();

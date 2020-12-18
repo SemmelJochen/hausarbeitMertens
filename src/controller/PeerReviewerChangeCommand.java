@@ -17,7 +17,7 @@ public class PeerReviewerChangeCommand implements Command {
 
 	@Override
 	public void undo() {
-		this.table.getController().undoPeerReviewerUpdate(new Pair<Object, Object>(data.getKey(), data.getValue()), columnName);
+		this.table.getController().undoPeerReviewerUpdate(this.data, this.columnName);
 		
 	}
 
