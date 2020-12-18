@@ -49,7 +49,7 @@ public class RequestedStudentsTable extends ReducedTable {
 				.withColumn(StudentColumn.REMARK,
 						students.stream().map(e -> e.getRemark()).collect(Collectors.toList()))//
 
-				.withColumn(StudentColumn.STATE,
+				.withColumn(StudentColumn.SECOND_REVIEWER_STATE,
 						students.stream().map(e -> e.getSecondPeerReviewerState()).collect(Collectors.toList()),
 						CellEditorType.CUSTOM_COMBO_BOX_EDITOR)//
 

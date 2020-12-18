@@ -3,11 +3,9 @@ package view.views.tables;
 import static model.table.TableData.newTableData;
 
 import java.util.List;
-import java.util.Observable;
 import java.util.stream.Collectors;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import controller.CommandController;
 import model.ModelContainer;
@@ -57,11 +55,11 @@ public class StudentTable extends JPanel {
 				.withColumn(StudentColumn.REMARK,
 						students.stream().map(e -> e.getRemark()).collect(Collectors.toList()))//
 				
-				.withColumn(StudentColumn.FIRST_REVIEWER,
+				.withColumn(StudentColumn.FIRST_REVIEWER_KEY,
 						students.stream().map(e -> e.getFirstPeerReviewerKey()).collect(Collectors.toList()),
 						CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)//
 				
-				.withColumn(StudentColumn.SECOND_REVIEWER,
+				.withColumn(StudentColumn.SECOND_REVIEWER_KEY,
 						students.stream().map(e -> e.getSecondPeerReviewerKey()).collect(Collectors.toList()),
 						CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)//
 				

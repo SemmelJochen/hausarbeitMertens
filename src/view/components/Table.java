@@ -167,8 +167,8 @@ public class Table extends JPanel implements TableModelListener {
 			rowPanel.setLayout(new BoxLayout(rowPanel, BoxLayout.X_AXIS));
 
 			label = new JLabel(columnNames[i] + ":", SwingConstants.RIGHT);
-			if (columnNames[i].equals(StudentColumn.FIRST_REVIEWER.getValue())
-					|| columnNames[i].equals(StudentColumn.SECOND_REVIEWER.getValue())) {
+			if (columnNames[i].equals(StudentColumn.FIRST_REVIEWER_KEY.getValue())
+					|| columnNames[i].equals(StudentColumn.SECOND_REVIEWER_KEY.getValue())) {
 				inputFields[i] = new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
 				rowPanel.add(label);
 				rowPanel.add((ReviewerComboBox) inputFields[i]);

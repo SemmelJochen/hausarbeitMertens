@@ -44,11 +44,11 @@ public class FreeStudents extends ReducedTable {
 				.withColumn(StudentColumn.REMARK,
 						students.stream().map(e -> e.getRemark()).collect(Collectors.toList()))//
 				
-				.withColumn(StudentColumn.FIRST_REVIEWER,
+				.withColumn(StudentColumn.FIRST_REVIEWER_KEY,
 						students.stream().map(e -> e.getFirstPeerReviewerKey()).collect(Collectors.toList()),
 						CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)//
 				
-				.withColumn(StudentColumn.SECOND_REVIEWER,
+				.withColumn(StudentColumn.SECOND_REVIEWER_KEY,
 						students.stream().map(e -> e.getSecondPeerReviewerKey()).collect(Collectors.toList()),
 						CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)//
 				

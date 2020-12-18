@@ -42,7 +42,7 @@ public class SecondRolesTable extends ReducedTable {
 						students.stream().map(e -> e.getPracticePartner()).collect(Collectors.toList()))//
 				.withColumn(StudentColumn.REMARK,
 						students.stream().map(e -> e.getRemark()).collect(Collectors.toList()))//
-				.withColumn(StudentColumn.FIRST_REVIEWER, students.stream()
+				.withColumn(StudentColumn.FIRST_REVIEWER_KEY, students.stream()
 						.map(e -> e.getFirstPeerReviewerKey())
 						.collect(Collectors.toList()), CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)//
 				.withMetaData(students)//

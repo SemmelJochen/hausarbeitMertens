@@ -106,11 +106,14 @@ public class TableController {
 		StudentColumn column = StudentColumn.getEnumForValue(columnName);
 		Student newStudent = student.clone();
 
-		if (column == StudentColumn.FIRST_REVIEWER) {
+		if (column == StudentColumn.FIRST_REVIEWER_KEY) {
 			newStudent.setFirstPeerReviewerKey((String) data); 
 		}
-		if (column == StudentColumn.SECOND_REVIEWER) {
+		if (column == StudentColumn.SECOND_REVIEWER_KEY) {
 			newStudent.setSecondPeerReviewerKey((String) data); 
+		}
+		if(column == StudentColumn.SECOND_REVIEWER_STATE) {
+			newStudent.setSecondPeerReviewerState((String) data); 
 		}
 		if (column == StudentColumn.E_MAIL) {
 			newStudent.setEmail((String) data);
