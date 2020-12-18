@@ -22,6 +22,7 @@ public class TableController {
 	}
 	
 	public void backfireChangesToModel(Person oldPerson, Person newPerson) {
+
 		if (oldPerson instanceof PeerReviewer) {
 			ModelContainer.getInstance().updateReviewer((PeerReviewer) oldPerson, (PeerReviewer) newPerson);
 		} else if (oldPerson instanceof Student) {
