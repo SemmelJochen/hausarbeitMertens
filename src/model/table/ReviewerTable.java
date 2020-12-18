@@ -1,4 +1,4 @@
-package view.views;
+package model.table;
 
 import static model.table.TableData.newTableData;
 
@@ -12,8 +12,6 @@ import javax.swing.JScrollPane;
 import controller.CommandController;
 import model.ModelContainer;
 import model.PeerReviewer;
-import model.table.ReviewerColumn;
-import model.table.TableData;
 import view.components.Table;
 
 public class ReviewerTable extends JPanel {

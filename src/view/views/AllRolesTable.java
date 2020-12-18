@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import controller.CommandController;
 import model.ModelContainer;
 import model.Student;
+import model.table.ReducedTable;
 import model.table.StudentColumn;
 
 public class AllRolesTable extends ReducedTable {

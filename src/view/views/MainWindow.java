@@ -19,6 +19,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import controller.Controller;
 import view.components.ContentPane;
 import view.components.ObserverMenuItem;
+import view.views.diagrams.Diagram1;
+import view.views.diagrams.Diagram2;
+import view.views.diagrams.Diagram3;
 
 public class MainWindow extends JFrame {
 

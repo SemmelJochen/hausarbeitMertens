@@ -12,6 +12,9 @@ import javax.swing.JTabbedPane;
 
 import controller.CommandController;
 import model.ModelContainer;
+import model.table.FirstRolesTable;
+import model.table.RequestedStudentsTable;
+import model.table.SecondRolesTable;
 import view.components.ContentPane;
 import view.components.ReviewerComboBox;
 

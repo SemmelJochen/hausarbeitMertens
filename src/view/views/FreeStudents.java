@@ -10,6 +10,7 @@ import controller.CommandController;
 import model.ModelContainer;
 import model.Student;
 import model.table.CellEditorType;
+import model.table.ReducedTable;
 import model.table.StudentColumn;
 
 public class FreeStudents extends ReducedTable {
