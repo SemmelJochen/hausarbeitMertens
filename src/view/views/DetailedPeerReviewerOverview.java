@@ -2,7 +2,6 @@ package view.views;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -13,8 +12,6 @@ import javax.swing.JTabbedPane;
 
 import controller.CommandController;
 import model.ModelContainer;
-import model.PeerReviewer;
-import model.Student;
 import view.components.ContentPane;
 import view.components.ReviewerComboBox;
 
@@ -29,10 +26,10 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 	private JLabel subjects;
 
 	private JTabbedPane tPane = new JTabbedPane();
-	private ReducedTable allReviews;
-	private ReducedTable firstReviews;
-	private ReducedTable secondReviews;
-	private ReducedTable requestedStudents;
+	private AllRolesTable allReviews;
+	private FirstRoleTable firstReviews;
+	private SecondRolesTable secondReviews;
+	private RequestedStudentsTable requestedStudents;
 
 	public DetailedPeerReviewerOverview(CommandController commandController) {
 		super();
