@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import controller.CommandController;
+import controller.commandController.CommandController;
 import model.ModelContainer;
 import view.components.ContentPane;
 import view.components.ReviewerComboBox;

@@ -1,4 +1,4 @@
-package controller;
+package controller.commandController;
 
 import model.Student;
 import view.components.Table;

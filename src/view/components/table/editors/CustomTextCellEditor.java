@@ -10,8 +10,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableCellEditor;
 
-import controller.PeerReviewerChangeCommand;
-import controller.StudentChangeCommand;
+import controller.commandController.PeerReviewerChangeCommand;
+import controller.commandController.StudentChangeCommand;
 import model.Pair;
 import model.PeerReviewer;
 import model.Student;

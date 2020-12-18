@@ -1,7 +1,7 @@
 package controller.table;
 
-import controller.Command;
-import controller.CommandController;
+import controller.commandController.Command;
+import controller.commandController.CommandController;
 import model.ModelContainer;
 import model.Pair;
 import model.PeerReviewer;

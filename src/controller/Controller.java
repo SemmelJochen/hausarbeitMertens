@@ -10,6 +10,7 @@ import java.util.Observer;
 
 import javax.swing.JOptionPane;
 
+import controller.commandController.CommandController;
 import model.ModelContainer;
 import view.views.MainWindow;
 

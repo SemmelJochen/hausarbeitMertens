@@ -5,7 +5,7 @@ import java.util.Observer;
 
 import javax.swing.JTabbedPane;
 
-import controller.CommandController;
+import controller.commandController.CommandController;
 import model.ModelContainer;
 import model.Student;
 import view.components.ContentPane;

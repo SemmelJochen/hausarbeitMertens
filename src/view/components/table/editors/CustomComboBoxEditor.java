@@ -5,7 +5,7 @@ import java.awt.Component;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 
-import controller.StudentChangeCommand;
+import controller.commandController.StudentChangeCommand;
 import model.Pair;
 import model.Student;
 import model.table.CustomTableModel;
