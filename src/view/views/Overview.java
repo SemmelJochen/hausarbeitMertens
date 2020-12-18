@@ -50,24 +50,11 @@ public class Overview extends ContentPane implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 
-		this.freeStudents.setList(this.getFreeStudents());
+//		this.freeStudents.(this.getFreeStudents());
 		this.freeStudents.update();
 		this.reviewerTab.update();
 		this.studentTab.update();
 		
 	}
-	
-	private ArrayList<Student> getFreeStudents(){
-		ArrayList<Student> freeStudents = new ArrayList<>();
-		for (Student student : ModelContainer.getInstance().getStudents()) {
-			if (student.getFirstPeerReviewerKey().isBlank()) {
-				freeStudents.add(student);
-			}
-		}
-		return freeStudents;
-	}
-	
-	
-
 
 }

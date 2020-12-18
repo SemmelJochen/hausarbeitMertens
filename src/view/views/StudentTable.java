@@ -29,7 +29,7 @@ public class StudentTable extends JPanel {
 
 	public JPanel buildTable(CommandController commandController) {
 		refreshTableData();
-		table = new Table(tableData, commandController);
+		table = new Table(tableData, commandController, true);
 		return table;
 	}
 

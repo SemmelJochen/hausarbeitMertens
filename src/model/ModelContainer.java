@@ -83,16 +83,10 @@ public class ModelContainer implements Externalizable {
 	}
 	
 	public void updateStudent(Student oldStudent, Student newStudent) {
-//		System.out.println(oldStudent);
-//		System.out.println();
-//		System.out.println(newStudent);
 		int index = this.students.indexOf(oldStudent);
-//		System.out.println("--------------------------");
-//		for(Student s: this.students) {
-//			if(s.getFirstName().equals("Josua"))
-//			System.out.println(s);
-//		}
-		this.students.set(index, newStudent);
+		if(index >= 0) {
+			this.students.set(index, newStudent);			
+		}
 	}
 	// due to serialisation we need to resolve the singleton on read
 	public Object readResolve() {

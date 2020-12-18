@@ -29,6 +29,7 @@ import controller.TableController;
 import model.CustomTableModel;
 import model.PeerReviewer;
 import model.Student;
+import model.StudentColumn;
 import model.TableData;
 
 public class Table extends JPanel implements TableModelListener {
@@ -39,8 +40,9 @@ public class Table extends JPanel implements TableModelListener {
 	private JTable table;
 	private JButton addButton, removeButton;
 	private JDialog addDialog;
+	private boolean renderMenu;
 
-	public Table(TableData<?> tableData, CommandController commandController) {
+	public Table(TableData<?> tableData, CommandController commandController, boolean withMenu) {
 		super();
 		// insert data into the tablemodel and create a table
 		this.model = new CustomTableModel(tableData);
@@ -75,8 +77,10 @@ public class Table extends JPanel implements TableModelListener {
 		column.getColumns().asIterator().forEachRemaining(c -> c.setCellEditor(this.cellEditor));
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(getTableContent());
-		this.add(getButtonPanel());
+		this.add(getTableContent());			
+		if(withMenu) {
+			this.add(getButtonPanel());
+		}
 
 	}
 
@@ -142,17 +146,17 @@ public class Table extends JPanel implements TableModelListener {
 			rowPanel.setLayout(new BoxLayout(rowPanel, BoxLayout.X_AXIS));
 
 			label = new JLabel(columnNames[i] + ":", SwingConstants.RIGHT);
-//			if(columnNames[i].equals(StudentColumn.FIRST_REVIEWER.getValue()) || columnNames[i].equals(StudentColumn.SECOND_REVIEWER.getValue())) {
-//				ReviewerComboBox comboBox = new ReviewerComboBox();
-////				comboBox.getSelectedPeerReviewer();
-//				rowPanel.add(label);
-//				rowPanel.add(comboBox);
-//			}else {
+			if(columnNames[i].equals(StudentColumn.FIRST_REVIEWER.getValue()) || columnNames[i].equals(StudentColumn.SECOND_REVIEWER.getValue())) {
+				ReviewerComboBox comboBox = new ReviewerComboBox();
+//				comboBox.getSelectedPeerReviewer();
+				rowPanel.add(label);
+				rowPanel.add(comboBox);
+			}else {
 				inputField[i] = new JTextField("");
 				inputField[i].setPreferredSize(new Dimension(100, 25));				
 				rowPanel.add(label);
 				rowPanel.add(inputField[i]);
-//			}
+			}
 
 			dialogPane.add(rowPanel);
 		}
@@ -194,7 +198,7 @@ public class Table extends JPanel implements TableModelListener {
 	private void submitNewEntry(Object[] entries) {
 		
 		if(this.model.getType() == Student.class) {
-			Student student = new Student("","","","","","","");
+			Student student = Student.createDummy();
 			student.setStudentGroup((String) entries[0]);
 			student.setFirstName((String)entries[1]);
 			student.setName((String) entries[2]);

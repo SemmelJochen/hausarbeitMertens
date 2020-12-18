@@ -1,17 +1,15 @@
 package view.views;
 
-import static model.TableData.newTableData;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.swing.JPanel;
+import static model.TableData.newTableData;
 
 import controller.CommandController;
+import model.ModelContainer;
 import model.Student;
 import model.StudentColumn;
-import model.TableData;
-import view.components.Table;
 
 public class AllRolesTable extends ReducedTable {
 
@@ -22,6 +20,17 @@ public class AllRolesTable extends ReducedTable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void refreshTableData() {
+		List<Student> students = new ArrayList<Student>();
+		if(this.selectedPeerReviewer != null) {
+			String key = this.selectedPeerReviewer.getFirstName()+ this.selectedPeerReviewer.getName();
+			if(ModelContainer.getInstance().getPeerReviewer(key) != null) {
+//				this.selectedPeerReviewer.getFirstPeerReviewerRoles()
+				ModelContainer.getInstance().getPeerReviewer(key).printStudents();
+				students.addAll(ModelContainer.getInstance().getPeerReviewer(key).getFirstPeerReviewerRoles());
+				students.addAll(ModelContainer.getInstance().getPeerReviewer(key).getSecondPeerReviewerRoles());							
+			}
+		}
+		
 		this.tableData = newTableData()
 				.withColumn(StudentColumn.STUDENT_GROUP,
 						students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//
@@ -37,6 +46,7 @@ public class AllRolesTable extends ReducedTable {
 				.withColumn(StudentColumn.REMARK,
 						students.stream().map(e -> e.getRemark()).collect(Collectors.toList()))//
 				.withMetaData(students)//
+				.withType(Student.class)//
 				.build();
 	}
 }

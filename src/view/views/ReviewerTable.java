@@ -29,7 +29,7 @@ public class ReviewerTable extends JPanel {
 	public JPanel buildTable(CommandController commandController) {
 		refreshTableData();
 
-		table = new Table(tableData, commandController);
+		table = new Table(tableData, commandController, true);
 		return table;
 	}
 
@@ -39,16 +39,23 @@ public class ReviewerTable extends JPanel {
 		this.tableData = newTableData()
 				.withColumn(ReviewerColumn.TITLE,
 						firstReviewer.stream().map(e -> e.getTitle()).collect(Collectors.toList()))//
+				
 				.withColumn(ReviewerColumn.FIRSTNAME,
 						firstReviewer.stream().map(e -> e.getFirstName()).collect(Collectors.toList()))//
+				
 				.withColumn(ReviewerColumn.LASTNAME,
 						firstReviewer.stream().map(e -> e.getName()).collect(Collectors.toList()))//
+				
 				.withColumn(ReviewerColumn.E_MAIL,
 						firstReviewer.stream().map(e -> e.getEmail()).collect(Collectors.toList()))//
+				
 				.withColumn(ReviewerColumn.CAPACITY,
 						firstReviewer.stream().map(e -> e.getCapacity()).collect(Collectors.toList()))//
+				
 				.withMetaData(firstReviewer)//
+				
 				.withType(PeerReviewer.class)//
+				
 				.build();
 	}
 

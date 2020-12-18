@@ -55,6 +55,7 @@ public class MainWindow extends JFrame {
 		this.controller.appendStudentChangeListeners(this.diagram1);
 		this.controller.appendStudentChangeListeners(this.diagram2);
 		this.controller.appendStudentChangeListeners(this.diagram3);
+		this.controller.appendStudentChangeListeners(this.reviewerOverview);
 
 	}
 

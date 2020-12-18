@@ -43,6 +43,9 @@ public class Person implements Serializable {
 	}
 
 	public boolean equals(Object person) {
+		if(person == null) {
+			return false;
+		}
 		Person persontoCheck = (Person) person;
 		return this.name.equals(persontoCheck.getName()) &&
 				this.firstName.equals(persontoCheck.getFirstName()) &&

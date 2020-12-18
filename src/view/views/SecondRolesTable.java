@@ -2,17 +2,15 @@ package view.views;
 
 import static model.TableData.newTableData;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.swing.JPanel;
-
 import controller.CommandController;
 import model.CellEditorType;
+import model.ModelContainer;
 import model.Student;
 import model.StudentColumn;
-import model.TableData;
-import view.components.Table;
 
 public class SecondRolesTable extends ReducedTable {
 
@@ -24,6 +22,13 @@ public class SecondRolesTable extends ReducedTable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void refreshTableData() {
+		List<Student> students = new ArrayList<Student>();
+		if(this.selectedPeerReviewer != null) {
+			String key = this.selectedPeerReviewer.getFirstName()+ this.selectedPeerReviewer.getName();
+			if(ModelContainer.getInstance().getPeerReviewer(key) != null) {
+				students = ModelContainer.getInstance().getPeerReviewer(key).getSecondPeerReviewerRoles();							
+			}
+		}
 		this.tableData = newTableData()
 				.withColumn(StudentColumn.STUDENT_GROUP,
 						students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//

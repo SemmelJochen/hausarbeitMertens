@@ -31,7 +31,7 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 	private ReducedTable allReviews;
 	private ReducedTable firstReviews;
 	private ReducedTable secondReviews;
-	private ReducedTable askingStudents;
+	private ReducedTable requestedStudents;
 
 	public DetailedPeerReviewerOverview(CommandController commandController) {
 		super();
@@ -78,40 +78,21 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 	}
 
 	private void update() {
-
-		ArrayList<Student> allStudents = this.getAllStudents();
-		ArrayList<Student> askingStudents = this.getAskingStudents();
-
-		this.allReviews.setList(allStudents);
-		this.firstReviews.setList(this.comboBox.getSelectedPeerReviewer().getFirstPeerReviewerRoles());
-		this.secondReviews.setList(this.comboBox.getSelectedPeerReviewer().getSecondPeerReviewerRoles());
-		this.askingStudents.setList(askingStudents);
+		this.allReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
+		this.firstReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
+		this.secondReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
+		this.requestedStudents.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
 
 		this.allReviews.update();
 		this.firstReviews.update();
 		this.secondReviews.update();
-		this.askingStudents.update();
-	}
-
-	private ArrayList<Student> getAskingStudents() {
-		ArrayList<Student> askingStudents = new ArrayList<Student>();
-		for (Student student : this.comboBox.getSelectedPeerReviewer().getRequested()) {
-			askingStudents.add(student);
-		}
-		return askingStudents;
-	}
-
-	private ArrayList<Student> getAllStudents() {
-		ArrayList<Student> allStudents = new ArrayList<Student>();
-		allStudents.addAll(this.comboBox.getSelectedPeerReviewer().getFirstPeerReviewerRoles());
-		allStudents.addAll(this.comboBox.getSelectedPeerReviewer().getSecondPeerReviewerRoles());
-		return allStudents;
+		this.requestedStudents.update();
 	}
 
 	private void creatingTables(CommandController commandController) {
 		this.firstReviews = new FirstRoleTable(commandController);
 		this.secondReviews = new SecondRolesTable(commandController);
-		this.askingStudents = new FreeStudents(commandController);
+		this.requestedStudents = new RequestedStudentsTable(commandController);
 		this.allReviews = new AllRolesTable(commandController);
 	}
 
@@ -119,7 +100,7 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 		this.tPane.add(this.allReviews, ALLREVIEWS_TAB_ID);
 		this.tPane.add(this.firstReviews, FIRSTREVIEWRROLE_TAB_ID);
 		this.tPane.add(this.secondReviews, SECONDREVIEWERROLE_TAB_ID);
-		this.tPane.add(this.askingStudents, ASKINGSTUDENTS_TAB_ID);
+		this.tPane.add(this.requestedStudents, ASKINGSTUDENTS_TAB_ID);
 
 		this.tPane.setTitleAt(ALLREVIEWS_TAB_ID, "Alle Gutachten");
 		this.tPane.setTitleAt(FIRSTREVIEWRROLE_TAB_ID, "Erstgutachten");

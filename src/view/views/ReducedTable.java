@@ -1,12 +1,9 @@
 package view.views;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JPanel;
 
 import controller.CommandController;
-import model.Student;
+import model.PeerReviewer;
 import model.TableData;
 import view.components.Table;
 
@@ -15,18 +12,16 @@ public abstract class ReducedTable extends JPanel {
 	@SuppressWarnings("rawtypes")
 	protected TableData tableData;
 	protected Table table;
-	protected List<Student> students;
+	protected PeerReviewer selectedPeerReviewer;
 
 	public ReducedTable(CommandController commandController) {
 		super();
-		this.students = new ArrayList<Student>();
 		this.add(buildTable(commandController));
 	}
 
 	public JPanel buildTable(CommandController commandController) {
 		refreshTableData();
-
-		table = new Table(tableData, commandController);
+		table = new Table(tableData, commandController, false);
 		return table;
 	}
 
@@ -37,7 +32,7 @@ public abstract class ReducedTable extends JPanel {
 		this.table.refreshData(tableData);
 	}
 	
-	public void setList(List<Student> students) {
-		this.students = students;
+	public void updateSelectedPeerReviewer(PeerReviewer p) {
+		this.selectedPeerReviewer = p;
 	}
 }
