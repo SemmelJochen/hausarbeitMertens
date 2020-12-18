@@ -33,16 +33,16 @@ public class Diagram2 extends ContentPane implements Observer, PropertyChangeLis
 		super();
 		this.reviewerComboBox = new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
 		this.reviewerComboBox.addCustomPropertyChangeListener(this);
-		
+
 		List<Slice> sliceData = createSliceData();
 		this.pieChart = new PieChart(sliceData, new Dimension(600, 600));
 		this.legend = new PieChartLegend(sliceData, this.pieChart);
-		
+
 		JPanel content = new JPanel();
 		content.add(this.reviewerComboBox);
 		content.add(this.legend);
 		content.add(this.pieChart);
-		
+
 		this.setHeader("Zusammenarbeit als Erstgutachter");
 		this.setContent(content);
 	}
@@ -50,25 +50,28 @@ public class Diagram2 extends ContentPane implements Observer, PropertyChangeLis
 	public List<Slice> createSliceData() {
 		List<Slice> slices = new ArrayList<Slice>();
 		PeerReviewer mertens = this.reviewerComboBox.getSelectedPeerReviewer();
-		if(mertens == null) {
+		if (mertens == null) {
 			return slices;
 		}
-		
+
 		HashMap<String, Integer> result = new HashMap<String, Integer>();
-		for(Student student: mertens.getFirstPeerReviewerRoles()) {
-			PeerReviewer secondPeerReviewer = ModelContainer.getInstance().getPeerReviewer(student.getSecondPeerReviewerKey());
-			String key = secondPeerReviewer.getFirstName() + " " + secondPeerReviewer.getName();
-			if(result.get(key) == null){
-				result.put(key, 1);
-			}else {
-				result.put(key, result.get(key) + 1);
+		for (Student student : mertens.getFirstPeerReviewerRoles()) {
+			PeerReviewer secondPeerReviewer = ModelContainer.getInstance()
+					.getPeerReviewer(student.getSecondPeerReviewerKey());
+			if (secondPeerReviewer != null) {
+				String key = secondPeerReviewer.getFirstName() + " " + secondPeerReviewer.getName();
+				if (result.get(key) == null) {
+					result.put(key, 1);
+				} else {
+					result.put(key, result.get(key) + 1);
+				}
 			}
 		}
-		
+
 		Set<String> keySet = result.keySet();
-		for(String key: keySet) {
-			slices.add(new Slice(result.get(key), 
-					new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)), 
+		for (String key : keySet) {
+			slices.add(new Slice(result.get(key),
+					new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)),
 					key));
 		}
 		return slices;
@@ -84,13 +87,13 @@ public class Diagram2 extends ContentPane implements Observer, PropertyChangeLis
 	public void propertyChange(PropertyChangeEvent evt) {
 		this.update();
 	}
-	
+
 	private void update() {
 		List<Slice> updatedSlices = createSliceData();
 		this.pieChart.udateSlices(updatedSlices);
 		this.legend.updateLegend(updatedSlices);
 	}
-	
+
 	@Override
 	public void setVisible(boolean isVisible) {
 		super.setVisible(isVisible);
