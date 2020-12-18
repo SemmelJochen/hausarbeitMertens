@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.swing.JPanel;
 
-import controller.CommandController;
+import controller.commandController.CommandController;
 import model.ModelContainer;
 import model.Student;
 import model.table.CellEditorType;

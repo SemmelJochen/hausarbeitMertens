@@ -1,4 +1,4 @@
-package controller;
+package controller.commandController;
 
 import model.PeerReviewer;
 import view.components.Table;

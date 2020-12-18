@@ -25,11 +25,11 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import controller.CommandController;
-import controller.PeerReviewerAddCommand;
-import controller.PeerReviewerRemoveCommand;
-import controller.StudentAddCommand;
-import controller.StudentRemoveCommand;
+import controller.commandController.CommandController;
+import controller.commandController.PeerReviewerAddCommand;
+import controller.commandController.PeerReviewerRemoveCommand;
+import controller.commandController.StudentAddCommand;
+import controller.commandController.StudentRemoveCommand;
 import controller.table.TableController;
 import model.ModelContainer;
 import model.PeerReviewer;

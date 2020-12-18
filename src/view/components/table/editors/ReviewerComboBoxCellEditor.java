@@ -4,7 +4,7 @@ import java.awt.Component;
 
 import javax.swing.JTable;
 
-import controller.StudentChangeCommand;
+import controller.commandController.StudentChangeCommand;
 import model.ModelContainer;
 import model.Pair;
 import model.PeerReviewer;

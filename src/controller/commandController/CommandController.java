@@ -1,4 +1,4 @@
-package controller;
+package controller.commandController;
 
 public class CommandController {
 

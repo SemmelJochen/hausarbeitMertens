@@ -2,7 +2,7 @@ package view.views.tables;
 
 import javax.swing.JPanel;
 
-import controller.CommandController;
+import controller.commandController.CommandController;
 import model.PeerReviewer;
 import model.table.TableData;
 import view.components.Table;
