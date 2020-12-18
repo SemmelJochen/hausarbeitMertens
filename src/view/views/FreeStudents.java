@@ -10,8 +10,8 @@ import controller.CommandController;
 import model.ModelContainer;
 import model.Student;
 import model.table.CellEditorType;
-import model.table.ReducedTable;
-import model.table.StudentColumn;
+import view.views.tables.ReducedTable;
+import view.views.tables.StudentColumn;
 
 public class FreeStudents extends ReducedTable {
 

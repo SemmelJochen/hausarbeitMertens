@@ -1,4 +1,4 @@
-package model.table;
+package view.views.tables;
 
 import static model.table.TableData.newTableData;
 
@@ -9,10 +9,12 @@ import java.util.stream.Collectors;
 import controller.CommandController;
 import model.ModelContainer;
 import model.Student;
+import model.table.CellEditorType;
 
-public class FirstRolesTable extends ReducedTable {
+public class SecondRolesTable extends ReducedTable {
 
-	public FirstRolesTable(CommandController commandController) {
+
+	public SecondRolesTable(CommandController commandController) {
 		super(commandController);
 	}
 
@@ -21,12 +23,11 @@ public class FirstRolesTable extends ReducedTable {
 	public void refreshTableData() {
 		List<Student> students = new ArrayList<Student>();
 		if(this.selectedPeerReviewer != null) {
-			String key = this.selectedPeerReviewer.getFirstName() + this.selectedPeerReviewer.getName();
+			String key = this.selectedPeerReviewer.getFirstName()+ this.selectedPeerReviewer.getName();
 			if(ModelContainer.getInstance().getPeerReviewer(key) != null) {
-				students = ModelContainer.getInstance().getPeerReviewer(key).getFirstPeerReviewerRoles();							
+				students = ModelContainer.getInstance().getPeerReviewer(key).getSecondPeerReviewerRoles();							
 			}
 		}
-		
 		this.tableData = newTableData()
 				.withColumn(StudentColumn.STUDENT_GROUP,
 						students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//
@@ -41,9 +42,9 @@ public class FirstRolesTable extends ReducedTable {
 						students.stream().map(e -> e.getPracticePartner()).collect(Collectors.toList()))//
 				.withColumn(StudentColumn.REMARK,
 						students.stream().map(e -> e.getRemark()).collect(Collectors.toList()))//
-				.withColumn(StudentColumn.SECOND_REVIEWER, students.stream()
-						.map(e -> e.getSecondPeerReviewerKey())
-						.collect(Collectors.toList()))//
+				.withColumn(StudentColumn.FIRST_REVIEWER, students.stream()
+						.map(e -> e.getFirstPeerReviewerKey())
+						.collect(Collectors.toList()), CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)//
 				.withMetaData(students)//
 				.withType(Student.class)//
 				.build();

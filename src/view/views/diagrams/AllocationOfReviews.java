@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.ModelContainer;
@@ -16,13 +15,13 @@ import view.components.PieChart;
 import view.components.PieChartLegend;
 import view.components.Slice;
 
-public class Diagram1 extends ContentPane implements Observer {
+public class AllocationOfReviews extends ContentPane implements Observer {
 
 	private static final long serialVersionUID = 57267L;
 	private PieChart pieChart;
 	private PieChartLegend legend;
 
-	public Diagram1() {
+	public AllocationOfReviews() {
 		super();
 		List<Slice> sliceData = createSliceData();
 		this.pieChart = new PieChart(sliceData, new Dimension(600, 600));

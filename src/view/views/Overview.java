@@ -9,10 +9,10 @@ import javax.swing.JTabbedPane;
 import controller.CommandController;
 import model.ModelContainer;
 import model.Student;
-import model.table.ReducedTable;
-import model.table.ReviewerTable;
-import model.table.StudentTable;
 import view.components.ContentPane;
+import view.views.tables.ReducedTable;
+import view.views.tables.ReviewerTable;
+import view.views.tables.StudentTable;
 
 public class Overview extends ContentPane implements Observer {
 

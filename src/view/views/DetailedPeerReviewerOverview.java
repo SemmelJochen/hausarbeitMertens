@@ -12,11 +12,12 @@ import javax.swing.JTabbedPane;
 
 import controller.CommandController;
 import model.ModelContainer;
-import model.table.FirstRolesTable;
-import model.table.RequestedStudentsTable;
-import model.table.SecondRolesTable;
 import view.components.ContentPane;
 import view.components.ReviewerComboBox;
+import view.views.tables.AllRolesTable;
+import view.views.tables.FirstRolesTable;
+import view.views.tables.RequestedStudentsTable;
+import view.views.tables.SecondRolesTable;
 
 public class DetailedPeerReviewerOverview extends ContentPane implements Observer, PropertyChangeListener {
 

@@ -1,4 +1,4 @@
-package model.table;
+package view.views.tables;
 
 import static model.table.TableData.newTableData;
 
@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import controller.CommandController;
 import model.ModelContainer;
 import model.Student;
+import model.table.CellEditorType;
 
 public class RequestedStudentsTable extends ReducedTable {
 

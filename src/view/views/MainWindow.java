@@ -19,17 +19,17 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import controller.Controller;
 import view.components.ContentPane;
 import view.components.ObserverMenuItem;
-import view.views.diagrams.Diagram1;
-import view.views.diagrams.Diagram2;
-import view.views.diagrams.Diagram3;
+import view.views.diagrams.AllocationOfReviews;
+import view.views.diagrams.CollaborationAsFirstPeerReviewer;
+import view.views.diagrams.CollaborationAsSecondPeerReviewer;
 
 public class MainWindow extends JFrame {
 
 	private Controller controller;
 	private Overview overview;
-	private Diagram1 diagram1;
-	private Diagram2 diagram2;
-	private Diagram3 diagram3;
+	private AllocationOfReviews diagram1;
+	private CollaborationAsFirstPeerReviewer diagram2;
+	private CollaborationAsSecondPeerReviewer diagram3;
 	private DetailedPeerReviewerOverview reviewerOverview;
 
 	/**
@@ -62,9 +62,9 @@ public class MainWindow extends JFrame {
 
 	public void createViews() {
 		this.overview = new Overview(this.controller.getCommandController());
-		this.diagram1 = new Diagram1();
-		this.diagram2 = new Diagram2();
-		this.diagram3 = new Diagram3();
+		this.diagram1 = new AllocationOfReviews();
+		this.diagram2 = new CollaborationAsFirstPeerReviewer();
+		this.diagram3 = new CollaborationAsSecondPeerReviewer();
 		this.reviewerOverview = new DetailedPeerReviewerOverview(this.controller.getCommandController());
 	}
 

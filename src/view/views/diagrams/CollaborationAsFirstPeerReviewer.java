@@ -2,38 +2,48 @@ package view.views.diagrams;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Set;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.ModelContainer;
 import model.PeerReviewer;
 import model.Student;
+import view.components.ContentPane;
 import view.components.PieChart;
 import view.components.PieChartLegend;
 import view.components.ReviewerComboBox;
 import view.components.Slice;
 
-public class Diagram3 extends Diagram2 {
+public class CollaborationAsFirstPeerReviewer extends ContentPane implements Observer, PropertyChangeListener {
 
-	public Diagram3() {
+	protected ReviewerComboBox reviewerComboBox;
+	protected PieChart pieChart;
+	protected PieChartLegend legend;
+
+	public CollaborationAsFirstPeerReviewer() {
 		super();
 		this.reviewerComboBox = new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
 		this.reviewerComboBox.addCustomPropertyChangeListener(this);
-		
+
 		List<Slice> sliceData = createSliceData();
 		this.pieChart = new PieChart(sliceData, new Dimension(600, 600));
 		this.legend = new PieChartLegend(sliceData, this.pieChart);
-		
+
 		JPanel content = new JPanel();
 		content.add(this.reviewerComboBox);
 		content.add(this.legend);
 		content.add(this.pieChart);
-		
-		this.setHeader("Zusammenarbeit als Zweitgutachter");
+
+		this.setHeader("Zusammenarbeit als Erstgutachter");
 		this.setContent(content);
 	}
 
@@ -45,14 +55,16 @@ public class Diagram3 extends Diagram2 {
 		}
 
 		HashMap<String, Integer> result = new HashMap<String, Integer>();
-		for (Student student : mertens.getSecondPeerReviewerRoles()) {
-			PeerReviewer firstPeerReviewer = ModelContainer.getInstance()
-					.getPeerReviewer(student.getFirstPeerReviewerKey());
-			String key = firstPeerReviewer.getFirstName() + " " + firstPeerReviewer.getName();
-			if (result.get(key) == null) {
-				result.put(key, 1);
-			} else {
-				result.put(key, result.get(key) + 1);
+		for (Student student : mertens.getFirstPeerReviewerRoles()) {
+			PeerReviewer secondPeerReviewer = ModelContainer.getInstance()
+					.getPeerReviewer(student.getSecondPeerReviewerKey());
+			if (secondPeerReviewer != null) {
+				String key = secondPeerReviewer.getFirstName() + " " + secondPeerReviewer.getName();
+				if (result.get(key) == null) {
+					result.put(key, 1);
+				} else {
+					result.put(key, result.get(key) + 1);
+				}
 			}
 		}
 
@@ -65,4 +77,20 @@ public class Diagram3 extends Diagram2 {
 		return slices;
 	}
 
+	@Override
+	public void update(Observable o, Object arg) {
+		this.reviewerComboBox.updateComboBoxModel(ModelContainer.getInstance().getPeerReviewers());
+		this.update();
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		this.update();
+	}
+
+	private void update() {
+		List<Slice> updatedSlices = createSliceData();
+		this.pieChart.udateSlices(updatedSlices);
+		this.legend.updateLegend(updatedSlices);
+	}
 }

@@ -36,9 +36,9 @@ import model.PeerReviewer;
 import model.Student;
 import model.table.CellEditorType;
 import model.table.CustomTableModel;
-import model.table.StudentColumn;
 import model.table.TableData;
 import view.components.table.editors.CustomCellEditor;
+import view.views.tables.StudentColumn;
 
 public class Table extends JPanel implements TableModelListener {
 
