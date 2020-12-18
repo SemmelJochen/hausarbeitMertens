@@ -35,6 +35,16 @@ public class ModelContainer implements Externalizable {
 
 	}
 	
+	public void setFirstPeerReviewer(Student student, String key) {
+		student.setFirstPeerReviewerKey(key);
+		this.peerReviewers.get(key).addBachelorThesisAsFirstReviewer(student);
+	}
+	
+	public void setSecondPeerReviewer(Student student, String key) {
+		student.setSecondPeerReviewerKey(key);
+		this.peerReviewers.get(key).addRequested(student);
+	}
+	
 	public void putPeerReviewer(PeerReviewer peerReviewer) {
 		String key = peerReviewer.getFirstName() + peerReviewer.getName();
 		PeerReviewer existingPeerReviewer = this.peerReviewers.get(key);

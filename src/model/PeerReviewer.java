@@ -90,8 +90,8 @@ public class PeerReviewer extends Person implements Serializable {
 		return requested;
 	}
 
-	public void setRequested(List<Student> requested) {
-		this.requested = requested;
+	public void addRequested(Student requested) {
+		this.requested.add(requested);
 	}
 
 	public String getSubjects() {
@@ -167,5 +167,9 @@ public class PeerReviewer extends Person implements Serializable {
 			return 0;
 		}
 		return this.capacity - this.getBachelorThesisesCount();
+	}
+
+	public void removeRequest(Student student) {
+		this.requested.remove(student);		
 	}
 }
