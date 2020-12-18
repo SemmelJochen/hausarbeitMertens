@@ -320,7 +320,7 @@ public class MainWindow extends JFrame {
 	}
 
 	public int showWarningMessage(String message) {
-		String[] buttonLabels = new String[] { "Trotzdem schließen",  "Abbrechen" };
+		String[] buttonLabels = new String[] { "Trotzdem schliessen",  "Abbrechen" };
 		String defaultOption = buttonLabels[1];
 		Icon icon = UIManager.getIcon("FileView.hardDriveIcon");
 
