@@ -47,7 +47,7 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 		return this.selectedPeerReviewer;
 	}
 	
-	private void setSelectedPeerReviewer(PeerReviewer p) {
+	public void setSelectedPeerReviewer(PeerReviewer p) {
 		PeerReviewer oldValue = this.selectedPeerReviewer;
 		this.selectedPeerReviewer = p;
 		this.propertyChangeSupport.firePropertyChange("peerReviewer", oldValue, p);
@@ -65,15 +65,21 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 
 	class ReviewerListCellRenderer extends BasicComboBoxRenderer {
 
+		@Override
 		public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
 				boolean cellHasFocus) {
 
+			
 			super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
 			if (value != null) {
 				String name = (((PeerReviewer) value).getFirstName() + " " + ((PeerReviewer) value).getName());
 				int freeReviews = (((PeerReviewer) value).getFreeReviews());
+				if(name.length() > 1) {
 				setText(name + " - " + freeReviews);
+				}else {
+					setText(" - ");
+				}
 
 			}
 			return this;
@@ -93,7 +99,9 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 
 		public ReviewerComboBoxModel(ArrayList<PeerReviewer> entries) {
 			super();
-			this.entries = entries;
+			this.entries = new ArrayList<PeerReviewer>();
+			this.entries.add(PeerReviewer.createDummy());
+			this.entries.addAll(entries);
 			if (entries.size() > 0) {
 				this.setIndex(0);
 			}
@@ -165,6 +173,7 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 
 		public void updateData(List<PeerReviewer> data) {
 			this.entries.clear();
+			this.entries.add(PeerReviewer.createDummy());
 			this.entries.addAll(data);
 			if (this.entries.size() > 0) {
 				this.index = 0;

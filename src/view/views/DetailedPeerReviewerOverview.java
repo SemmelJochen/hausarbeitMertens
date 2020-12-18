@@ -13,6 +13,7 @@ import javax.swing.JTabbedPane;
 
 import controller.CommandController;
 import model.ModelContainer;
+import model.PeerReviewer;
 import model.Student;
 import view.components.ContentPane;
 import view.components.ReviewerComboBox;
@@ -78,6 +79,7 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 	}
 
 	private void update() {
+		System.out.println(this.comboBox.getSelectedPeerReviewer());
 		this.allReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
 		this.firstReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
 		this.secondReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
@@ -106,5 +108,12 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 		this.tPane.setTitleAt(FIRSTREVIEWRROLE_TAB_ID, "Erstgutachten");
 		this.tPane.setTitleAt(SECONDREVIEWERROLE_TAB_ID, "Zweitgutachten");
 		this.tPane.setTitleAt(ASKINGSTUDENTS_TAB_ID, "Anfragende Studenten");
+	}
+	
+	@Override
+	public void setVisible(boolean isVisible) {
+		super.setVisible(isVisible);
+		System.out.println("yeah");
+		this.comboBox.setSelectedPeerReviewer(PeerReviewer.createDummy());
 	}
 }
