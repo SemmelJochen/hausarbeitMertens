@@ -82,8 +82,8 @@ public class Table extends JPanel implements TableModelListener {
 
 	private JPanel getButtonPanel() {
 		JPanel buttonPanel = new JPanel();
-		this.addButton = new JButton("Hinzufügen");
-		this.removeButton = new JButton("Löschen");
+		this.addButton = new JButton("Hinzufuegen");
+		this.removeButton = new JButton("Loeschen");
 		this.removeButton.setEnabled(this.model.hasData());
 		this.addButton.addActionListener(new ActionListener() {
 
@@ -128,7 +128,7 @@ public class Table extends JPanel implements TableModelListener {
 
 	private JDialog buildDialog() {
 		this.addDialog = new JDialog();
-		this.addDialog.setTitle("Datensatz hinzufügen");
+		this.addDialog.setTitle("Datensatz hinzufuegen");
 		this.addDialog.setModalityType(ModalityType.APPLICATION_MODAL);
 		this.addDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		String[] columnNames = this.model.getColumnnNames();

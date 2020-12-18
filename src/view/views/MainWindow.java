@@ -127,7 +127,7 @@ public class MainWindow extends JFrame {
 		});
 		menu.add(menuItem);
 		
-		menuItem = new JMenuItem("Lösche alle Daten");
+		menuItem = new JMenuItem("Lï¿½sche alle Daten");
 //		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
 		menuItem.addActionListener(new ActionListener() {
 
@@ -283,7 +283,7 @@ public class MainWindow extends JFrame {
 		menu.add(oMenuItem);
 		
 		oMenuItem = new ObserverMenuItem("Redo"); // Action Listener einfuegen
-		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.META_MASK));
+		oMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.META_MASK));
 		this.controller.getCommandController().getRedoStack().addPropertyChangeListener(oMenuItem);
 		oMenuItem.addActionListener(new ActionListener() {
 
