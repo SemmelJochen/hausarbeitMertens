@@ -1,4 +1,4 @@
-package model;
+package model.table;
 
 public interface Column {
 

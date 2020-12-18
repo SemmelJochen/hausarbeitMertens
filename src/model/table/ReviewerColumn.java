@@ -1,4 +1,4 @@
-package model;
+package model.table;
 
 public enum ReviewerColumn implements Column {
 

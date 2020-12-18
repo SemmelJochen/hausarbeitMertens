@@ -1,15 +1,15 @@
 package view.views;
 
+import static model.table.TableData.newTableData;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static model.TableData.newTableData;
-
 import controller.CommandController;
 import model.ModelContainer;
 import model.Student;
-import model.StudentColumn;
+import model.table.StudentColumn;
 
 public class AllRolesTable extends ReducedTable {
 

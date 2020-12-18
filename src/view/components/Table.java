@@ -28,13 +28,14 @@ import controller.PeerReviewerAddCommand;
 import controller.PeerReviewerRemoveCommand;
 import controller.StudentAddCommand;
 import controller.StudentRemoveCommand;
-import controller.TableController;
-import model.CustomTableModel;
+import controller.table.TableController;
 import model.ModelContainer;
 import model.PeerReviewer;
 import model.Student;
-import model.StudentColumn;
-import model.TableData;
+import model.table.CustomTableModel;
+import model.table.StudentColumn;
+import model.table.TableData;
+import view.components.table.editors.CustomCellEditor;
 
 public class Table extends JPanel implements TableModelListener {
 

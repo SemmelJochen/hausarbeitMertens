@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 import controller.CommandController;
 import model.PeerReviewer;
-import model.TableData;
+import model.table.TableData;
 import view.components.Table;
 
 public abstract class ReducedTable extends JPanel {

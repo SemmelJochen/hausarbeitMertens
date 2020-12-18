@@ -1,4 +1,4 @@
-package view.components;
+package view.components.table.editors;
 
 import java.awt.Component;
 import java.awt.event.KeyEvent;
@@ -12,10 +12,12 @@ import javax.swing.table.TableCellEditor;
 
 import controller.PeerReviewerChangeCommand;
 import controller.StudentChangeCommand;
-import model.CustomTableModel;
 import model.Pair;
 import model.PeerReviewer;
 import model.Student;
+import model.table.CustomTableModel;
+import view.components.ICellEditor;
+import view.components.Table;
 
 public class CustomTextCellEditor implements ICellEditor {
 

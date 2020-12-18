@@ -1,14 +1,17 @@
-package view.components;
+package view.components.table.editors;
 
 import java.awt.Component;
 
 import javax.swing.JTable;
 
 import controller.StudentChangeCommand;
-import model.CustomTableModel;
 import model.ModelContainer;
 import model.Pair;
 import model.PeerReviewer;
+import model.table.CustomTableModel;
+import view.components.ICellEditor;
+import view.components.ReviewerComboBox;
+import view.components.Table;
 
 public class ReviewerComboBoxCellEditor implements ICellEditor {
 

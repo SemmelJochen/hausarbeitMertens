@@ -1,9 +1,10 @@
-package model;
+package model.table;
 
 public enum StudentColumn implements Column {
 
 	LASTNAME("Nachname"), FIRSTNAME("Vorname"), STUDENT_GROUP("Studentengruppe"), PRACTICE_PARTNER("Praxispartner"),
-	SUBJECT("Thema"), FIRST_REVIEWER("Erstgutachter"), SECOND_REVIEWER("Zweitgutachter"), E_MAIL("E-Mail"), REMARK("Bemerkung");
+	SUBJECT("Thema"), FIRST_REVIEWER("Erstgutachter"), SECOND_REVIEWER("Zweitgutachter"), E_MAIL("E-Mail"), REMARK("Bemerkung"),
+	STATE("Zustand");
 
 	private String value;
 

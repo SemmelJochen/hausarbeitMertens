@@ -1,12 +1,14 @@
-package controller;
+package controller.table;
 
+import controller.Command;
+import controller.CommandController;
 import model.ModelContainer;
 import model.Pair;
 import model.PeerReviewer;
 import model.Person;
-import model.ReviewerColumn;
 import model.Student;
-import model.StudentColumn;
+import model.table.ReviewerColumn;
+import model.table.StudentColumn;
 import view.components.Table;
 
 public class TableController {

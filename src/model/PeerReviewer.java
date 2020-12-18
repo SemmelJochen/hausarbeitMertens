@@ -15,6 +15,7 @@ public class PeerReviewer extends Person implements Serializable {
 	private List<Student> requested;
 	private String subjects;
 
+
 	public PeerReviewer(String title, String name, String firstName, String email, int capacity) {
 		super(name, firstName, email);
 		this.title = title;

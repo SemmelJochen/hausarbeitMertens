@@ -1,16 +1,16 @@
 package view.views;
 
-import static model.TableData.newTableData;
+import static model.table.TableData.newTableData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import controller.CommandController;
-import model.CellEditorType;
 import model.ModelContainer;
 import model.Student;
-import model.StudentColumn;
+import model.table.CellEditorType;
+import model.table.StudentColumn;
 
 public class SecondRolesTable extends ReducedTable {
 
@@ -45,7 +45,7 @@ public class SecondRolesTable extends ReducedTable {
 						students.stream().map(e -> e.getRemark()).collect(Collectors.toList()))//
 				.withColumn(StudentColumn.FIRST_REVIEWER, students.stream()
 						.map(e -> e.getFirstPeerReviewerKey())
-						.collect(Collectors.toList()), CellEditorType.PEER_REVIEWER_COMBO_BOX)//
+						.collect(Collectors.toList()), CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)//
 				.withMetaData(students)//
 				
 				.build();

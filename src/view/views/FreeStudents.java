@@ -1,16 +1,16 @@
 package view.views;
 
-import static model.TableData.newTableData;
+import static model.table.TableData.newTableData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import controller.CommandController;
-import model.CellEditorType;
 import model.ModelContainer;
 import model.Student;
-import model.StudentColumn;
+import model.table.CellEditorType;
+import model.table.StudentColumn;
 
 public class FreeStudents extends ReducedTable {
 
@@ -45,11 +45,11 @@ public class FreeStudents extends ReducedTable {
 				
 				.withColumn(StudentColumn.FIRST_REVIEWER,
 						students.stream().map(e -> e.getFirstPeerReviewerKey()).collect(Collectors.toList()),
-						CellEditorType.PEER_REVIEWER_COMBO_BOX)//
+						CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)//
 				
 				.withColumn(StudentColumn.SECOND_REVIEWER,
 						students.stream().map(e -> e.getSecondPeerReviewerKey()).collect(Collectors.toList()),
-						CellEditorType.PEER_REVIEWER_COMBO_BOX)//
+						CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)//
 				
 				.withType(Student.class)//
 				

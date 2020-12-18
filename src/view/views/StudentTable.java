@@ -1,6 +1,6 @@
 package view.views;
 
-import static model.TableData.newTableData;
+import static model.table.TableData.newTableData;
 
 import java.util.List;
 import java.util.Observable;
@@ -10,11 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import controller.CommandController;
-import model.CellEditorType;
 import model.ModelContainer;
 import model.Student;
-import model.StudentColumn;
-import model.TableData;
+import model.table.CellEditorType;
+import model.table.StudentColumn;
+import model.table.TableData;
 import view.components.Table;
 
 public class StudentTable extends JPanel {
@@ -60,11 +60,11 @@ public class StudentTable extends JPanel {
 				
 				.withColumn(StudentColumn.FIRST_REVIEWER,
 						students.stream().map(e -> e.getFirstPeerReviewerKey()).collect(Collectors.toList()),
-						CellEditorType.PEER_REVIEWER_COMBO_BOX)//
+						CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)//
 				
 				.withColumn(StudentColumn.SECOND_REVIEWER,
 						students.stream().map(e -> e.getSecondPeerReviewerKey()).collect(Collectors.toList()),
-						CellEditorType.PEER_REVIEWER_COMBO_BOX)//
+						CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)//
 				
 				.withMetaData(students)//
 				
