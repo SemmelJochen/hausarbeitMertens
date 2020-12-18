@@ -51,8 +51,8 @@ public class CustomCellEditor extends AbstractCellEditor implements TableCellEdi
 				.equals(CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)) {
 			this.editor = new ReviewerComboBoxCellEditor(this.table);
 		} else if (((CustomTableModel) t.getModel()).getColumnType(column)
-				.equals(CellEditorType.CUSTOM_CHECK_BOX_EDITOR)) {
-			this.editor = new CustomCheckBoxEditor(this.table);
+				.equals(CellEditorType.CUSTOM_COMBO_BOX_EDITOR)) {
+			this.editor = new CustomComboBoxEditor(this.table);
 		} 
 		
 		if(this.editor == null) {

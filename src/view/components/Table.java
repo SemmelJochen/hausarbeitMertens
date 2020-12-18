@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -33,6 +34,7 @@ import controller.table.TableController;
 import model.ModelContainer;
 import model.PeerReviewer;
 import model.Student;
+import model.table.CellEditorType;
 import model.table.CustomTableModel;
 import model.table.StudentColumn;
 import model.table.TableData;
@@ -95,8 +97,8 @@ public class Table extends JPanel implements TableModelListener {
 		this.addButton = new JButton("Hinzufuegen");
 		this.removeButton = new JButton("Loeschen");
 		this.removeButton.setEnabled(this.model.hasData());
-		
-		//handle click on add button
+
+		// handle click on add button
 		this.addButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -104,21 +106,22 @@ public class Table extends JPanel implements TableModelListener {
 				Table.this.openDialog();
 			}
 		});
-		
-		//handle click on remove button
+
+		// handle click on remove button
 		this.removeButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = Table.this.getTableRef().getSelectedRow();
 				if (selectedRow >= 0) {
-					if(Table.this.model.getType() == PeerReviewer.class) {
+					if (Table.this.model.getType() == PeerReviewer.class) {
 						PeerReviewer peerReviewer = (PeerReviewer) Table.this.model.getMetaDataForRow(selectedRow);
-						Table.this.getController().executeDataUpdate(new PeerReviewerRemoveCommand(Table.this, peerReviewer));
+						Table.this.getController()
+								.executeDataUpdate(new PeerReviewerRemoveCommand(Table.this, peerReviewer));
 					}
-					if(Table.this.model.getType() == Student.class) {
+					if (Table.this.model.getType() == Student.class) {
 						Student student = (Student) Table.this.model.getMetaDataForRow(selectedRow);
-						Table.this.getController().executeDataUpdate(new StudentRemoveCommand(Table.this, student));						
+						Table.this.getController().executeDataUpdate(new StudentRemoveCommand(Table.this, student));
 					}
 				}
 			}
@@ -164,15 +167,16 @@ public class Table extends JPanel implements TableModelListener {
 			rowPanel.setLayout(new BoxLayout(rowPanel, BoxLayout.X_AXIS));
 
 			label = new JLabel(columnNames[i] + ":", SwingConstants.RIGHT);
-			if(columnNames[i].equals(StudentColumn.FIRST_REVIEWER.getValue()) || columnNames[i].equals(StudentColumn.SECOND_REVIEWER.getValue())) {
-				inputFields[i] =  new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
+			if (columnNames[i].equals(StudentColumn.FIRST_REVIEWER.getValue())
+					|| columnNames[i].equals(StudentColumn.SECOND_REVIEWER.getValue())) {
+				inputFields[i] = new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
 				rowPanel.add(label);
-				rowPanel.add((ReviewerComboBox)inputFields[i]);
-			}else {
+				rowPanel.add((ReviewerComboBox) inputFields[i]);
+			} else {
 				inputFields[i] = new JTextField("");
-				((JTextField)inputFields[i]).setPreferredSize(new Dimension(100, 25));				
+				((JTextField) inputFields[i]).setPreferredSize(new Dimension(100, 25));
 				rowPanel.add(label);
-				rowPanel.add((JTextField)inputFields[i]);
+				rowPanel.add((JTextField) inputFields[i]);
 			}
 
 			dialogPane.add(rowPanel);
@@ -193,13 +197,13 @@ public class Table extends JPanel implements TableModelListener {
 			public void actionPerformed(ActionEvent e) {
 				String[] entries = new String[columnNames.length];
 				for (int i = 0; i < columnNames.length; i++) {
-					if(inputFields[i] instanceof JTextField) {
-						entries[i] = ((JTextField)inputFields[i]).getText();						
-					}
-					else if(inputFields[i] instanceof ReviewerComboBox) {
-						//if this is the case, the content of the entry handled as a key for a PeerReviewer
-						//Erstgutachter or Zweitgutachter
-						PeerReviewer pr = ((ReviewerComboBox)inputFields[i]).getSelectedPeerReviewer();
+					if (inputFields[i] instanceof JTextField) {
+						entries[i] = ((JTextField) inputFields[i]).getText();
+					} else if (inputFields[i] instanceof ReviewerComboBox) {
+						// if this is the case, the content of the entry handled as a key for a
+						// PeerReviewer
+						// Erstgutachter or Zweitgutachter
+						PeerReviewer pr = ((ReviewerComboBox) inputFields[i]).getSelectedPeerReviewer();
 						String key = pr.getFirstName() + pr.getName();
 						entries[i] = key;
 					}
@@ -222,11 +226,11 @@ public class Table extends JPanel implements TableModelListener {
 	}
 
 	private void submitNewEntry(Object[] entries) {
-		
-		if(this.model.getType() == Student.class) {
+
+		if (this.model.getType() == Student.class) {
 			Student student = Student.createDummy();
 			student.setStudentGroup((String) entries[0]);
-			student.setFirstName((String)entries[1]);
+			student.setFirstName((String) entries[1]);
 			student.setName((String) entries[2]);
 			student.setEmail((String) entries[3]);
 			student.setSubject((String) entries[4]);
@@ -236,18 +240,19 @@ public class Table extends JPanel implements TableModelListener {
 			student.setSecondPeerReviewerKey((String) entries[8]);
 			Table.this.getController().executeDataUpdate(new StudentAddCommand(this, student));
 		}
-		if(this.model.getType() == PeerReviewer.class) {
+		if (this.model.getType() == PeerReviewer.class) {
 			PeerReviewer reviewer = PeerReviewer.createDummy();
 			reviewer.setTitle((String) entries[0]);
-			reviewer.setFirstName((String)entries[1]);
+			reviewer.setFirstName((String) entries[1]);
 			reviewer.setName((String) entries[2]);
 			reviewer.setEmail((String) entries[3]);
-			int capacity = (((String)entries[4]).isBlank() ? 0 : Integer.parseInt((String) entries[4]));
+			reviewer.setSubjects((String) entries[4]);
+			int capacity = (((String) entries[5]).isBlank() ? 0 : Integer.parseInt((String) entries[5]));
 			reviewer.setCapacity(capacity);
 			Table.this.getController().executeDataUpdate(new PeerReviewerAddCommand(this, reviewer));
 		}
 	}
-	
+
 	public TableController getController() {
 		return this.controller;
 	}

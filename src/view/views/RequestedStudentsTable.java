@@ -22,13 +22,10 @@ public class RequestedStudentsTable extends ReducedTable {
 	@Override
 	public void refreshTableData() {
 		List<Student> students = new ArrayList<Student>();
-		if (this.selectedPeerReviewer != null) {
+		if (this.selectedPeerReviewer != null && !this.selectedPeerReviewer.isDummy() ) {
 			String key = this.selectedPeerReviewer.getFirstName() + this.selectedPeerReviewer.getName();
 			if(ModelContainer.getInstance().getPeerReviewer(key) != null) {
 				students = ModelContainer.getInstance().getPeerReviewer(key).getRequested();				
-			}else {
-				System.out.println("FRONG");
-				System.out.println(key);
 			}
 		}
 
@@ -55,7 +52,7 @@ public class RequestedStudentsTable extends ReducedTable {
 
 				.withColumn(StudentColumn.STATE,
 						students.stream().map(e -> e.getSecondPeerReviewerState()).collect(Collectors.toList()),
-						CellEditorType.CUSTOM_CHECK_BOX_EDITOR)//
+						CellEditorType.CUSTOM_COMBO_BOX_EDITOR)//
 
 				.withMetaData(students)//
 

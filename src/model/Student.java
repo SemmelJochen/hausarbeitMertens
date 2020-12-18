@@ -7,18 +7,22 @@ import java.io.Serializable;
  */
 public class Student extends Person implements Serializable {
 
+	public static final String ACCEPTED_STATE = "angenommen";
+	public static final String REJECTED_STATE = "abgelehnt";
+	public static final String REQUESTED_STATE = "ausstehend";
 	private static final long serialVersionUID = 0xBAFFL;
 	private String studentGroup, practicePartner, subject;
 	private String firstPeerReviewerKey, remark;
-	
+
 	/*
-	 * the String represents the key to find the PeerReviewer in the HashMap peerReviewers
-	 * the Boolean represents the current state of the Requesting. True = accepted, false = waiting for response
+	 * the String represents the key to find the PeerReviewer in the HashMap
+	 * peerReviewers the Boolean represents the current state of the Requesting.
+	 * True = accepted, false = waiting for response
 	 */
-	private Pair<String, Boolean> secondPeerReviewerInformation = new Pair<String, Boolean>();
+	private Pair<String, String> secondPeerReviewerInformation = new Pair<String, String>();
 
 	public Student(String name, String firstName, String email, String studentGroup, String practicePartner,
-			String subject, String firstPeerReviewerKey, String secondPeerReviewerKey, Boolean secondPeerReviewerState,
+			String subject, String firstPeerReviewerKey, String secondPeerReviewerKey, String secondPeerReviewerState,
 			String remark) {
 		super(name, firstName, email);
 		this.studentGroup = studentGroup;
@@ -33,7 +37,7 @@ public class Student extends Person implements Serializable {
 
 	public Student(String name, String firstName, String email, String studentGroup, String practicePartner,
 			String subject, String remark) {
-		this(name, firstName, email, studentGroup, practicePartner, subject, "", "", false, remark);
+		this(name, firstName, email, studentGroup, practicePartner, subject, "", "", REQUESTED_STATE, remark);
 	}
 
 	/**
@@ -69,11 +73,11 @@ public class Student extends Person implements Serializable {
 		this.secondPeerReviewerInformation.setKey(secondPeerReviewerKey);
 	}
 
-	public boolean getSecondPeerReviewerState() {
+	public String getSecondPeerReviewerState() {
 		if (this.secondPeerReviewerInformation != null) {
 			return this.secondPeerReviewerInformation.getValue();
 		} else {
-			return false;
+			return null;
 		}
 	}
 
@@ -85,7 +89,7 @@ public class Student extends Person implements Serializable {
 		this.studentGroup = studentGroup;
 	}
 
-	public void setSecondPeerReviewerState(boolean state) {
+	public void setSecondPeerReviewerState(String state) {
 		this.secondPeerReviewerInformation.setValue(state);
 	}
 
@@ -137,8 +141,8 @@ public class Student extends Person implements Serializable {
 					&& this.firstPeerReviewerKey.equals(studentToCheck.firstPeerReviewerKey)
 					&& this.secondPeerReviewerInformation.getKey()
 							.equals(studentToCheck.secondPeerReviewerInformation.getKey())
-					&& this.secondPeerReviewerInformation.getValue() == studentToCheck.secondPeerReviewerInformation
-							.getValue();
+					&& this.secondPeerReviewerInformation.getValue()
+							.equals(studentToCheck.secondPeerReviewerInformation.getValue());
 			return tmp;
 		} else {
 			return false;

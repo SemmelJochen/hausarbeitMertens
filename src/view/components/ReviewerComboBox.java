@@ -12,6 +12,7 @@ import javax.swing.JList;
 import javax.swing.MutableComboBoxModel;
 import javax.swing.event.ListDataListener;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 
 import model.PeerReviewer;
 
@@ -29,9 +30,10 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 	public ReviewerComboBox(ArrayList<PeerReviewer> reviewerData) {
 		this.comboBoxModel = new ReviewerComboBoxModel();
 		this.comboBoxModel.addPropertyChangeListener(this);
+		this.setUI(new BasicComboBoxUI());
 
 		this.comboBoxRenderer = new ReviewerListCellRenderer();
-		this.selectedPeerReviewer = new PeerReviewer("", "", "", "", -1);
+		this.selectedPeerReviewer = PeerReviewer.createDummy();
 		this.propertyChangeSupport = new PropertyChangeSupport(this.selectedPeerReviewer);
 		this.setModel(this.comboBoxModel);
 		this.setRenderer(this.comboBoxRenderer);
@@ -175,7 +177,9 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 			this.entries.clear();
 			this.entries.add(PeerReviewer.createDummy());
 			this.entries.addAll(data);
-			this.setIndex(0);
+			if(this.index > this.entries.size()) {
+				this.setIndex(0);
+			}
 		}
 
 		private int getIndex() {

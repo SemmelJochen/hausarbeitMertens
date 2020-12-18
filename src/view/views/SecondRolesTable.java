@@ -47,7 +47,7 @@ public class SecondRolesTable extends ReducedTable {
 						.map(e -> e.getFirstPeerReviewerKey())
 						.collect(Collectors.toList()), CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)//
 				.withMetaData(students)//
-				
+				.withType(Student.class)//
 				.build();
 	}
 }

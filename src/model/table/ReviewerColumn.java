@@ -3,7 +3,7 @@ package model.table;
 public enum ReviewerColumn implements Column {
 
 	LASTNAME("Nachname"), FIRSTNAME("Vorname"), TITLE("Titel"), CAPACITY("Kapazitaet"), CONCATED_NAME("Name"),
-	E_MAIL("E-Mail"), FIRST_REVIEWER("Erstgutachter"), SECOND_REVIEWER("Zweitgutachter"), SUBJECTS("themen");
+	E_MAIL("E-Mail"), FIRST_REVIEWER("Erstgutachter"), SECOND_REVIEWER("Zweitgutachter"), SUBJECTS("Themen");
 
 	private String value;
 

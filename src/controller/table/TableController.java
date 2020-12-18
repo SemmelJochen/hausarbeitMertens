@@ -92,6 +92,9 @@ public class TableController {
 		if (column == ReviewerColumn.LASTNAME) {
 			newReviewer.setName((String) data);
 		}
+		if( column == ReviewerColumn.SUBJECTS) {
+			newReviewer.setSubjects((String) data);
+		}
 		if (column == ReviewerColumn.TITLE) {
 			newReviewer.setTitle((String) data);
 		}

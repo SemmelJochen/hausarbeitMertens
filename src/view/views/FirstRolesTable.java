@@ -46,6 +46,7 @@ public class FirstRolesTable extends ReducedTable {
 						.map(e -> e.getSecondPeerReviewerKey())
 						.collect(Collectors.toList()))//
 				.withMetaData(students)//
+				.withType(Student.class)//
 				.build();
 	}
 }

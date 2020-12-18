@@ -61,9 +61,8 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 	@Override
 	public void update(Observable o, Object arg) {
 		this.comboBox.updateComboBoxModel(ModelContainer.getInstance().getPeerReviewers());
+
 		this.update();
-//		this.subjects.revalidate();
-//		this.subjects.repaint();
 	}
 
 	/**
@@ -72,6 +71,11 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
+		this.allReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
+		this.firstReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
+		this.secondReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
+		this.requestedStudents.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
+
 		this.update();
 		this.subjects.setText(this.getLabelText());
 		this.subjects.revalidate();
@@ -89,11 +93,6 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 	 * refreshes their table
 	 */
 	private void update() {
-		this.allReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
-		this.firstReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
-		this.secondReviews.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
-		this.requestedStudents.updateSelectedPeerReviewer(this.comboBox.getSelectedPeerReviewer());
-
 		this.allReviews.update();
 		this.firstReviews.update();
 		this.secondReviews.update();

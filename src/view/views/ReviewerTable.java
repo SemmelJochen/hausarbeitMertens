@@ -18,7 +18,7 @@ import view.components.Table;
 
 public class ReviewerTable extends JPanel {
 
-	private TableData tableData;
+	private TableData<?> tableData;
 	private Table table;
 
 	public ReviewerTable(CommandController commandController) {
