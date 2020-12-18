@@ -51,6 +51,10 @@ public class CustomTableModel extends AbstractTableModel {
 		return this.type;
 	}
 	
+	public Object getMetaDataForRow(int row) {
+		return this.metaData.get(row);
+	}
+	
 	public CellEditorType getColumnType(int col) {
 		return this.columnTypes[col];
 	}

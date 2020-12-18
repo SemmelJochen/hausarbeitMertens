@@ -24,7 +24,9 @@ import javax.swing.table.TableColumnModel;
 
 import controller.CommandController;
 import controller.PeerReviewerAddCommand;
+import controller.PeerReviewerRemoveCommand;
 import controller.StudentAddCommand;
+import controller.StudentRemoveCommand;
 import controller.TableController;
 import model.CustomTableModel;
 import model.PeerReviewer;
@@ -89,6 +91,8 @@ public class Table extends JPanel implements TableModelListener {
 		this.addButton = new JButton("Hinzufuegen");
 		this.removeButton = new JButton("Loeschen");
 		this.removeButton.setEnabled(this.model.hasData());
+		
+		//handle click on add button
 		this.addButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -96,12 +100,22 @@ public class Table extends JPanel implements TableModelListener {
 				Table.this.openDialog();
 			}
 		});
+		
+		//handle click on remove button
 		this.removeButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (Table.this.getTableRef().getSelectedRow() >= 0) {
-
+				int selectedRow = Table.this.getTableRef().getSelectedRow();
+				if (selectedRow >= 0) {
+					if(Table.this.model.getType() == PeerReviewer.class) {
+						PeerReviewer peerReviewer = (PeerReviewer) Table.this.model.getMetaDataForRow(selectedRow);
+						Table.this.getController().executeDataUpdate(new PeerReviewerRemoveCommand(Table.this, peerReviewer));
+					}
+					if(Table.this.model.getType() == Student.class) {
+						Student student = (Student) Table.this.model.getMetaDataForRow(selectedRow);
+						Table.this.getController().executeDataUpdate(new StudentRemoveCommand(Table.this, student));						
+					}
 				}
 			}
 		});
