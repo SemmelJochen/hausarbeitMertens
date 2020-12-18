@@ -128,7 +128,7 @@ public class MainWindow extends JFrame {
 		});
 		menu.add(menuItem);
 		
-		menuItem = new JMenuItem("L�sche alle Daten");
+		menuItem = new JMenuItem("Loeschen aller Daten");
 //		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
 		menuItem.addActionListener(new ActionListener() {
 
@@ -194,7 +194,7 @@ public class MainWindow extends JFrame {
 
 		// add menu for diagramms
 		submenu = new JMenu("Diagramme");
-		subMenuItem = new JMenuItem("Diagramm 1");
+		subMenuItem = new JMenuItem("Verteilung der Gutachten");
 		subMenuItem.addActionListener(new ActionListener() {
 
 			@Override
@@ -203,7 +203,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		submenu.add(subMenuItem);
-		subMenuItem = new JMenuItem("Diagramm 2");
+		subMenuItem = new JMenuItem("Erstgutachter Zusammenarbeit");
 		subMenuItem.addActionListener(new ActionListener() {
 
 			@Override
@@ -213,7 +213,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		submenu.add(subMenuItem);
-		subMenuItem = new JMenuItem("Diagramm 3");
+		subMenuItem = new JMenuItem("Zweitgutacher Zusammenarbeit");
 		subMenuItem.addActionListener(new ActionListener() {
 			
 			@Override

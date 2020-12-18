@@ -1,13 +1,15 @@
 package model;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PeerReviewer extends Person implements Serializable {
+public class PeerReviewer extends Person implements Serializable, PropertyChangeListener {
 
 	private static final long serialVersionUID = 0xAFFEL;
-	
+
 	private int capacity;
 	private List<Student> firstReviewerRoles;
 	private List<Student> secondReviewerRoles;
@@ -41,11 +43,11 @@ public class PeerReviewer extends Person implements Serializable {
 	public void addBachelorThesisAsFirstReviewer(Student student) {
 		this.firstReviewerRoles.add(student);
 	}
-	
+
 	public void removeBachelorThesisAsFirstReviewer(Student student) {
 		this.firstReviewerRoles.remove(student);
 	}
-		
+
 	public void removeBachelorThesisAsSecondReviewer(Student student) {
 		this.secondReviewerRoles.remove(student);
 	}
@@ -73,16 +75,16 @@ public class PeerReviewer extends Person implements Serializable {
 	public String getTitle() {
 		return this.title;
 	}
-	
+
 	public void requestAsSecondPeerReviewer(Student s) {
 		this.requested.add(s);
 	}
-	
+
 	public void acceptRequest(Student s) {
 		this.secondReviewerRoles.add(s);
 		this.requested.remove(s);
 	}
-	
+
 	public List<Student> getFirstPeerReviewerRoles() {
 		return this.firstReviewerRoles;
 	}
@@ -111,7 +113,6 @@ public class PeerReviewer extends Person implements Serializable {
 		this.subjects = subjects;
 	}
 
-	
 	@Override
 	public String toString() {
 		return super.toString() + "\ntitle: \t\t\t" + this.title + "\ncapacity: \t\t" + this.capacity;
@@ -139,46 +140,55 @@ public class PeerReviewer extends Person implements Serializable {
 	public PeerReviewer clone() {
 		return new PeerReviewer(this);
 	}
-	
+
 	@Override
 	public boolean equals(Object pObject) {
 		PeerReviewer peerReviewer = (PeerReviewer) pObject;
-		return super.equals(peerReviewer) &&
-				this.capacity == peerReviewer.getCapacity() &&
-				this.title.equals(peerReviewer.getTitle()) &&
-				this.firstReviewerRoles.equals(peerReviewer.getFirstPeerReviewerRoles()) &&
-				this.secondReviewerRoles.equals(peerReviewer.getSecondPeerReviewerRoles());
+		return super.equals(peerReviewer) && this.capacity == peerReviewer.getCapacity()
+				&& this.title.equals(peerReviewer.getTitle())
+				&& this.firstReviewerRoles.equals(peerReviewer.getFirstPeerReviewerRoles())
+				&& this.secondReviewerRoles.equals(peerReviewer.getSecondPeerReviewerRoles());
 	}
-	
+
 	public static PeerReviewer createDummy() {
 		return new PeerReviewer("", "", "", "", -1);
 	}
-	
+
 	public int getLoad() {
-		if(this.capacity < 0) {
-			return 1;
+		if (this.capacity < 0) {
+			return 100;
 		}
 		return (int) (100d * this.getBachelorThesisesCount() / this.capacity);
 	}
-	
+
 	public boolean isDummy() {
-		return super.isDummy() &&
-				this.firstReviewerRoles.isEmpty() &&
-				this.secondReviewerRoles.isEmpty() &&
-				this.requested.isEmpty() &&
-				this.capacity == -1 &&
-				this.title.equals("");
-				
+		return super.isDummy() && this.firstReviewerRoles.isEmpty() && this.secondReviewerRoles.isEmpty()
+				&& this.requested.isEmpty() && this.capacity == -1 && this.title.equals("");
+
 	}
-	
+
 	public int getFreeReviews() {
-		if(this.capacity < 0) {
+		if (this.capacity < 0) {
 			return 0;
 		}
 		return this.capacity - this.getBachelorThesisesCount();
 	}
 
 	public void removeRequest(Student student) {
-		this.requested.remove(student);		
+		this.requested.remove(student);
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		System.out.println(evt.getPropertyName());
+		System.out.println();
+		System.out.println(evt.getOldValue());
+		System.out.println("-----------------------");
+		System.out.println(evt.getNewValue());
+
+		if (evt.getPropertyName().equals("firstReviewer")) {
+			this.removeBachelorThesisAsFirstReviewer((Student) evt.getOldValue());
+			this.addBachelorThesisAsFirstReviewer((Student) evt.getNewValue());
+		}
 	}
 }

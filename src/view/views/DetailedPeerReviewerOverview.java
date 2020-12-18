@@ -106,6 +106,6 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 		this.tPane.setTitleAt(ALLREVIEWS_TAB_ID, "Alle Gutachten");
 		this.tPane.setTitleAt(FIRSTREVIEWRROLE_TAB_ID, "Erstgutachten");
 		this.tPane.setTitleAt(SECONDREVIEWERROLE_TAB_ID, "Zweitgutachten");
-		this.tPane.setTitleAt(ASKINGSTUDENTS_TAB_ID, "Anfragende Studenten");
+		this.tPane.setTitleAt(ASKINGSTUDENTS_TAB_ID, "Anfragende");
 	}
 }

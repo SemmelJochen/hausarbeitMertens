@@ -93,10 +93,4 @@ public class Diagram2 extends ContentPane implements Observer, PropertyChangeLis
 		this.pieChart.udateSlices(updatedSlices);
 		this.legend.updateLegend(updatedSlices);
 	}
-
-	@Override
-	public void setVisible(boolean isVisible) {
-		super.setVisible(isVisible);
-		this.reviewerComboBox.setSelectedPeerReviewer(PeerReviewer.createDummy());
-	}
 }

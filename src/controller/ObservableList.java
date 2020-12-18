@@ -158,6 +158,14 @@ public class ObservableList<E> extends Observable implements List<E> {
 		this.list.clear();
 		this.setChanged();
 		this.notifyObservers();
-
+	}
+	
+	public E get(E e) {
+		for(int i = 0; i < this.size(); i++) {
+			if(this.get(i).equals(e)) {
+				return e;
+			}
+		}
+		return null;
 	}
 }

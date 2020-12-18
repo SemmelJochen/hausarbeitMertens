@@ -30,7 +30,7 @@ public class Diagram1 extends ContentPane implements Observer {
 		JPanel content = new JPanel();
 		content.add(legend);
 		content.add(pieChart);
-		this.setHeader("Anzahl der Bachelorthesen eines Dozenten relativ zu allen Thesen");
+		this.setHeader("Anzahl der Gutachten eines Dozenten relativ zu allen Gutachten");
 		this.setContent(content);
 	}
 

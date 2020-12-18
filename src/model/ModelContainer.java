@@ -83,32 +83,43 @@ public class ModelContainer implements Externalizable {
 	}
 
 	public void updateStudent(Student oldStudent, Student newStudent) {
-		if (!oldStudent.getFirstPeerReviewerKey().equals(newStudent.getFirstPeerReviewerKey())) {
-			System.out.println(this.peerReviewers.get(newStudent.getFirstPeerReviewerKey()));
-			if(this.peerReviewers.get(newStudent.getFirstPeerReviewerKey()) != null) {
-				this.peerReviewers.get(newStudent.getFirstPeerReviewerKey()).addBachelorThesisAsFirstReviewer(newStudent);				
-			}else {
-				this.peerReviewers.get(oldStudent.getFirstPeerReviewerKey()).removeBachelorThesisAsFirstReviewer(newStudent);
-			}
-			
-			if(this.peerReviewers.get(oldStudent.getFirstPeerReviewerKey()) != null) {
-				this.peerReviewers.get(oldStudent.getFirstPeerReviewerKey()).addBachelorThesisAsFirstReviewer(oldStudent);				
-			}
-		}
-		if (!oldStudent.getSecondPeerReviewerKey().equals(newStudent.getSecondPeerReviewerKey())) {
-			if(this.peerReviewers.get(newStudent.getSecondPeerReviewerKey()) != null) {
-				this.peerReviewers.get(newStudent.getSecondPeerReviewerKey()).addBachelorThesisAsSecondReviewer(newStudent);				
-			}else {
-				this.peerReviewers.get(oldStudent.getSecondPeerReviewerKey()).removeBachelorThesisAsSecondReviewer(oldStudent);
-			}
-			
-			if(this.peerReviewers.get(oldStudent.getSecondPeerReviewerKey()) != null) {
-				this.peerReviewers.get(oldStudent.getSecondPeerReviewerKey()).addBachelorThesisAsSecondReviewer(oldStudent);				
-			}
-		}
+		
+		this.updateFirstPeerReviewer(oldStudent, newStudent);
 		int index = this.students.indexOf(oldStudent);
 		if (index >= 0) {
 			this.students.set(index, newStudent);
+		}
+	}
+	
+	private void updateSecondPeerReviewer(Student oldStudent, Student newStudent) {
+		if (!oldStudent.getSecondPeerReviewerKey().equals(newStudent.getSecondPeerReviewerKey())) {
+			if (this.peerReviewers.get(newStudent.getSecondPeerReviewerKey()) != null) {
+				this.peerReviewers.get(newStudent.getSecondPeerReviewerKey())
+						.addRequest(newStudent);
+				if (!oldStudent.getSecondPeerReviewerKey().isBlank())
+					this.peerReviewers.get(oldStudent.getSecondPeerReviewerKey())
+							.removeBachelorThesisAsSecondReviewer(oldStudent);
+			} else {
+				this.peerReviewers.get(oldStudent.getSecondPeerReviewerKey())
+						.removeBachelorThesisAsSecondReviewer(newStudent);
+			}
+
+		}
+	}
+	
+	private void updateFirstPeerReviewer(Student oldStudent, Student newStudent) {
+		if (!oldStudent.getFirstPeerReviewerKey().equals(newStudent.getFirstPeerReviewerKey())) {
+			if (this.peerReviewers.get(newStudent.getFirstPeerReviewerKey()) != null) {
+				this.peerReviewers.get(newStudent.getFirstPeerReviewerKey())
+						.addBachelorThesisAsFirstReviewer(newStudent);
+				if (!oldStudent.getFirstPeerReviewerKey().isBlank())
+					this.peerReviewers.get(oldStudent.getFirstPeerReviewerKey())
+							.removeBachelorThesisAsFirstReviewer(oldStudent);
+			} else {
+				this.peerReviewers.get(oldStudent.getFirstPeerReviewerKey())
+						.removeBachelorThesisAsFirstReviewer(newStudent);
+			}
+
 		}
 	}
 

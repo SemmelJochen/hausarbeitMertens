@@ -24,8 +24,11 @@ public class RequestedStudentsTable extends ReducedTable {
 		List<Student> students = new ArrayList<Student>();
 		if (this.selectedPeerReviewer != null) {
 			String key = this.selectedPeerReviewer.getFirstName() + this.selectedPeerReviewer.getName();
-			if (ModelContainer.getInstance().getPeerReviewer(key) != null) {
-				students = ModelContainer.getInstance().getPeerReviewer(key).getRequested();
+			if(ModelContainer.getInstance().getPeerReviewer(key) != null) {
+				students = ModelContainer.getInstance().getPeerReviewer(key).getRequested();				
+			}else {
+				System.out.println("FRONG");
+				System.out.println(key);
 			}
 		}
 
