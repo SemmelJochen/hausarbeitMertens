@@ -105,7 +105,7 @@ public class MainWindow extends JFrame {
 		menuBar.add(menu);
 
 		// create submenu
-		menuItem = new JMenuItem("Importiere");
+		menuItem = new JMenuItem("Importieren");
 //		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
 		menuItem.addActionListener(new ActionListener() {
 
@@ -116,7 +116,7 @@ public class MainWindow extends JFrame {
 		});
 		menu.add(menuItem);
 
-		menuItem = new JMenuItem("Exportiere");
+		menuItem = new JMenuItem("Exportieren");
 //		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
 		menuItem.addActionListener(new ActionListener() {
 
@@ -167,7 +167,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		submenu.add(subMenuItem);
-		subMenuItem = new JMenuItem("Gutachteruebersicht");
+		subMenuItem = new JMenuItem("Gutachter Detailansicht");
 		subMenuItem.addActionListener(new ActionListener() {
 
 			@Override

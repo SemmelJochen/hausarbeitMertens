@@ -104,7 +104,7 @@ public class FileHandler {
 			String seperator = ";";
 			for (Student student : students) {
 				writer.append(student.getName() + ", " + student.getFirstName() + seperator + student.getStudentGroup()
-						+ seperator + student.getPracticePartner() + seperator + student.getStudentGroup() + seperator
+						+ seperator + student.getPracticePartner() + seperator + student.getSubject() + seperator
 						+ this.createPeerReviewerStringForWriting(ModelContainer.getInstance().getPeerReviewer(student.getFirstPeerReviewerKey())) + seperator
 						+ this.createPeerReviewerStringForWriting(ModelContainer.getInstance().getPeerReviewer(student.getSecondPeerReviewerKey())) + seperator
 						+ student.getRemark());
@@ -117,6 +117,9 @@ public class FileHandler {
 	}
 
 	private String createPeerReviewerStringForWriting(PeerReviewer peerReviewer) {
+		if(peerReviewer == null) {
+			return "";
+		}
 		return peerReviewer.getTitle() + " " + peerReviewer.getFirstName() + " " + peerReviewer.getName();
 	}
 
