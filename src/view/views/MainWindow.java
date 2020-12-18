@@ -17,7 +17,6 @@ import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controller.Controller;
-import controller.FileHandler.DialogType;
 import view.components.ContentPane;
 import view.components.ObserverMenuItem;
 import view.views.diagrams.AllocationOfReviews;
