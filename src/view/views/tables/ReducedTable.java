@@ -7,17 +7,21 @@ import model.PeerReviewer;
 import model.table.TableData;
 import view.components.Table;
 
+/**
+ * The ReducedTable is a table, which packs the update method and basic styling
+ * into one place. It also provides a "smaller" version of the normal table. The
+ * opportunity to add or remove entries is cutted. On the other hand it also
+ * provides functionality. It provides a ComboBox in which you can select
+ * different peerReviewers.
+ * 
+ * Which attributes are presented, is defined in the refreshTableData() method
+ * in the specific child.
+ * 
+ * @author felix
+ *
+ */
 public abstract class ReducedTable extends JPanel {
 
-	/*
-	 * The ReducedTable is a table, which don´t show all attributes 
-	 * of a Student or PeerReviewer.
-	 * 
-	 * Which attributes are presented, is definded in the 
-	 * refreshTableData() method in the specific child.
-	 */
-	
-	
 	protected TableData<?> tableData;
 	protected Table table;
 	protected PeerReviewer selectedPeerReviewer;
@@ -33,14 +37,21 @@ public abstract class ReducedTable extends JPanel {
 		return table;
 	}
 
+	/**
+	 * abstract method to update the table.
+	 */
 	public abstract void refreshTableData();
 
 	public void update() {
 		refreshTableData();
 		this.table.refreshData(tableData);
 	}
-	
-	public void updateSelectedPeerReviewer(PeerReviewer p) {
-		this.selectedPeerReviewer = p;
+
+	/**
+	 * 
+	 * @param peerReviewer
+	 */
+	public void updateSelectedPeerReviewer(PeerReviewer peerReviewer) {
+		this.selectedPeerReviewer = peerReviewer;
 	}
 }

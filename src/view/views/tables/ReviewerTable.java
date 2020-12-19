@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import controller.commandController.CommandController;
 import model.ModelContainer;
 import model.PeerReviewer;
+import model.table.ReviewerColumn;
 import model.table.TableData;
 import view.components.Table;
 
@@ -36,26 +37,26 @@ public class ReviewerTable extends JPanel {
 		this.tableData = newTableData()
 				.withColumn(ReviewerColumn.TITLE,
 						firstReviewer.stream().map(e -> e.getTitle()).collect(Collectors.toList()))//
-				
+
 				.withColumn(ReviewerColumn.FIRSTNAME,
 						firstReviewer.stream().map(e -> e.getFirstName()).collect(Collectors.toList()))//
-				
+
 				.withColumn(ReviewerColumn.LASTNAME,
 						firstReviewer.stream().map(e -> e.getName()).collect(Collectors.toList()))//
-				
+
 				.withColumn(ReviewerColumn.E_MAIL,
 						firstReviewer.stream().map(e -> e.getEmail()).collect(Collectors.toList()))//
-				
+
 				.withColumn(ReviewerColumn.SUBJECTS,
 						firstReviewer.stream().map(e -> e.getSubjects()).collect(Collectors.toList()))//
-				
+
 				.withColumn(ReviewerColumn.CAPACITY,
 						firstReviewer.stream().map(e -> e.getCapacity()).collect(Collectors.toList()))//
-				
+
 				.withMetaData(firstReviewer)//
-				
+
 				.withType(PeerReviewer.class)//
-				
+
 				.build();
 	}
 

@@ -14,6 +14,12 @@ import controller.commandController.CommandController;
 import model.ModelContainer;
 import view.views.MainWindow;
 
+/**
+ * main controller. not perfectly, but it works.
+ * 
+ * @author josua
+ *
+ */
 public class Controller {
 
 	private FileHandler csvHandler;
@@ -93,7 +99,6 @@ public class Controller {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void saveDefault() {

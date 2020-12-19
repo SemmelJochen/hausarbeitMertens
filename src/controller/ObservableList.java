@@ -15,7 +15,7 @@ public class ObservableList<E> extends Observable implements List<E> {
 	public ObservableList() {
 		this.list = new ArrayList<E>();
 	}
-	
+
 	public ObservableList(Collection<? extends E> c) {
 		this.list = new ArrayList<E>(c);
 	}
@@ -159,10 +159,10 @@ public class ObservableList<E> extends Observable implements List<E> {
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
+
 	public E get(E e) {
-		for(int i = 0; i < this.size(); i++) {
-			if(this.get(i).equals(e)) {
+		for (int i = 0; i < this.size(); i++) {
+			if (this.get(i).equals(e)) {
 				return e;
 			}
 		}

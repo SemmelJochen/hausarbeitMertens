@@ -9,7 +9,6 @@ import controller.commandController.StudentChangeCommand;
 import model.Pair;
 import model.Student;
 import model.table.CustomTableModel;
-import view.components.ICellEditor;
 import view.components.Table;
 
 public class CustomComboBoxEditor implements ICellEditor {
@@ -31,7 +30,7 @@ public class CustomComboBoxEditor implements ICellEditor {
 
 			Pair<Object, Object> data = model.getDataAt(row, col);
 			String columnName = model.getColumnName(col);
-			
+
 			this.table.getController().executeDataUpdate(new StudentChangeCommand(this.table, data, columnName));
 		}
 		return this.editor.getSelectedItem();
@@ -43,7 +42,7 @@ public class CustomComboBoxEditor implements ICellEditor {
 		this.row = row;
 
 		this.editor.setSelectedItem((String) value);
-		
+
 		return this.editor;
 	}
 

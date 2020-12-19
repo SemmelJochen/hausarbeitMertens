@@ -9,8 +9,7 @@ public class ObserverMenuItem extends JMenuItem implements PropertyChangeListene
 
 	public ObserverMenuItem(String title) {
 		super(title);
-		
-		this.setEnabled(false);		
+		this.setEnabled(false);
 	}
 
 	@Override

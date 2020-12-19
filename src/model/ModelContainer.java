@@ -14,8 +14,8 @@ import controller.ObservableList;
 public class ModelContainer implements Externalizable {
 	/**
 	 * we use Externalizable instead of Serializable because we use ObservableLists
-	 * and Maps. Since those are not Serializable and PropertyChangeSupport doesnt
-	 * directly work for Lists, we write our own custom serialize methods. To do
+	 * and Maps. Since those are not Serializable and PropertyChangeSupport doesn't
+	 * directly work for Lists, we write our own custom serialise methods. To do
 	 * that, we convert the ObservaleLists to normal lists, when saving. And when
 	 * loading we do this operation backwards.
 	 */
@@ -88,7 +88,7 @@ public class ModelContainer implements Externalizable {
 	}
 
 	/**
-	 * Method to update any changes at the student
+	 * Method to update any changes at the student.
 	 * 
 	 * @param oldStudent
 	 * @param newStudent
@@ -121,7 +121,8 @@ public class ModelContainer implements Externalizable {
 	}
 
 	/**
-	 * handle state changes 
+	 * handle second peerReviewer state changes.
+	 * 
 	 * @param oldStudent
 	 * @param newStudent
 	 */
@@ -136,6 +137,13 @@ public class ModelContainer implements Externalizable {
 		}
 	}
 
+	/**
+	 * used to update the students at the peerReviewer, if a student in the student
+	 * list changed.
+	 * 
+	 * @param oldStudent
+	 * @param newStudent
+	 */
 	private void updateStudentReferences(Student oldStudent, Student newStudent) {
 		for (PeerReviewer p : this.peerReviewers.values()) {
 
@@ -157,7 +165,6 @@ public class ModelContainer implements Externalizable {
 				p.getRequested().set(index, newStudent);
 			}
 		}
-
 	}
 
 	/*
@@ -175,7 +182,6 @@ public class ModelContainer implements Externalizable {
 				this.peerReviewers.get(oldStudent.getSecondPeerReviewerKey())
 						.removeBachelorThesisAsSecondReviewer(newStudent);
 			}
-
 		}
 	}
 
@@ -195,7 +201,6 @@ public class ModelContainer implements Externalizable {
 				this.peerReviewers.get(oldStudent.getFirstPeerReviewerKey())
 						.removeBachelorThesisAsFirstReviewer(newStudent);
 			}
-
 		}
 	}
 
@@ -204,12 +209,18 @@ public class ModelContainer implements Externalizable {
 		return getInstance();
 	}
 
+	/**
+	 * method to write modelContainer to an OutputStream.
+	 */
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		out.writeObject(new ArrayList<Student>(this.students));
 		out.writeObject(new HashMap<String, PeerReviewer>(this.peerReviewers.convertToHashMap()));
 	}
 
+	/**
+	 * method to read data from an InputStream
+	 */
 	@Override
 	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
 		this.students = new ObservableList<Student>((ArrayList<Student>) in.readObject());

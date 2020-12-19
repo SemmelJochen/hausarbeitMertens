@@ -2,8 +2,10 @@ package model;
 
 import java.io.Serializable;
 
-/*
- * TODO: add remark
+/**
+ * 
+ * @author josua
+ *
  */
 public class Student extends Person implements Serializable {
 

@@ -15,12 +15,12 @@ public class PeerReviewer extends Person implements Serializable, PropertyChange
 	private List<Student> secondReviewerRoles;
 	private String title;
 	private String subjects;
-	
+
 	/*
-	 * The List requested is used to save Students, whose state is 
-	 * "waiting for response" in secondPeerReviewerInformation
-	 * if a student gets accepted by a PeerReviewer the entry will be deleted in the
-	 * list and then appended in secondReviewerRoles.
+	 * The List requested is used to save Students, whose state is
+	 * "waiting for response" in secondPeerReviewerInformation if a student gets
+	 * accepted by a PeerReviewer the entry will be deleted in the list and then
+	 * appended in secondReviewerRoles.
 	 */
 	private List<Student> requested;
 
@@ -122,25 +122,6 @@ public class PeerReviewer extends Person implements Serializable, PropertyChange
 	@Override
 	public String toString() {
 		return super.toString() + "\ntitle: \t\t\t" + this.title + "\ncapacity: \t\t" + this.capacity;
-
-	}
-
-	public void printStudents() {
-		System.out.println("firstBachelorThesises:\n");
-		for (Student student : this.firstReviewerRoles) {
-			System.out.println(student);
-			System.out.println("");
-		}
-		this.printSecondStudents();
-		System.out.println("-----------------------------------");
-	}
-
-	private void printSecondStudents() {
-		System.out.println("secondBachelorThesises:\n");
-		for (Student student : this.secondReviewerRoles) {
-			System.out.println(student);
-			System.out.println("");
-		}
 	}
 
 	public PeerReviewer clone() {
@@ -150,8 +131,7 @@ public class PeerReviewer extends Person implements Serializable, PropertyChange
 	@Override
 	public boolean equals(Object pObject) {
 		PeerReviewer peerReviewer = (PeerReviewer) pObject;
-		return super.equals(peerReviewer) 
-				&& this.getCapacity() == peerReviewer.getCapacity()
+		return super.equals(peerReviewer) && this.getCapacity() == peerReviewer.getCapacity()
 				&& this.getTitle().equals(peerReviewer.getTitle())
 				&& this.getFirstPeerReviewerRoles().equals(peerReviewer.getFirstPeerReviewerRoles())
 				&& this.getSecondPeerReviewerRoles().equals(peerReviewer.getSecondPeerReviewerRoles());
@@ -187,12 +167,6 @@ public class PeerReviewer extends Person implements Serializable, PropertyChange
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		System.out.println(evt.getPropertyName());
-		System.out.println();
-		System.out.println(evt.getOldValue());
-		System.out.println("-----------------------");
-		System.out.println(evt.getNewValue());
-
 		if (evt.getPropertyName().equals("firstReviewer")) {
 			this.removeBachelorThesisAsFirstReviewer((Student) evt.getOldValue());
 			this.addBachelorThesisAsFirstReviewer((Student) evt.getNewValue());
@@ -200,6 +174,6 @@ public class PeerReviewer extends Person implements Serializable, PropertyChange
 	}
 
 	public void declineRequest(Student student) {
-		this.requested.remove(student);		
+		this.requested.remove(student);
 	}
 }

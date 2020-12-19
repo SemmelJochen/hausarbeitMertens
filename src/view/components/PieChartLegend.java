@@ -13,24 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class PieChartLegend extends JPanel {
-	
-	private List<Slice> slices;
+
 	private PieChart chart;
-	
+
 	public PieChartLegend(List<Slice> slices, PieChart chart) {
-//		this.slices = slices;
 		this.chart = chart;
-		
 		this.updateLegend(slices);
-		
 	}
-	
-	public void updateSliceData(List<Slice> updatedSlices) {
-		this.slices = updatedSlices;
-		this.revalidate();
-		this.repaint();
-	}
-	
+
 	public void updateLegend(List<Slice> updatedSlices) {
 		this.removeAll();
 		BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
@@ -40,16 +30,17 @@ public class PieChartLegend extends JPanel {
 			JPanel legendElement = new JPanel();
 			legendElement.setLayout(new BoxLayout(legendElement, BoxLayout.X_AXIS));
 			legendElement.add(new BulletPoint(slice.getColor()));
-			
+
 			JLabel peerReviewerName = new JLabel(slice.getName() + " - " + slice.getValue());
 			peerReviewerName.setPreferredSize(new Dimension(250, 30));
-			
+
 			peerReviewerName.addMouseListener(new MouseAdapter() {
 
 				public void mouseEntered(MouseEvent event) {
 					List<Slice> slices = updatedSlices;
 					for (int i = 0; i < slices.size(); i++) {
-						if (peerReviewerName.getText().contains(slices.get(i).getName() + " - " + slices.get(i).getValue())) {
+						if (peerReviewerName.getText()
+								.contains(slices.get(i).getName() + " - " + slices.get(i).getValue())) {
 							slices.get(i).setIsBrighter(true);
 						}
 					}
@@ -59,7 +50,8 @@ public class PieChartLegend extends JPanel {
 				public void mouseExited(MouseEvent event) {
 					List<Slice> slices = updatedSlices;
 					for (int i = 0; i < slices.size(); i++) {
-						if (peerReviewerName.getText().contains(slices.get(i).getName() + " - " + slices.get(i).getValue())) {
+						if (peerReviewerName.getText()
+								.contains(slices.get(i).getName() + " - " + slices.get(i).getValue())) {
 							slices.get(i).setIsBrighter(false);
 						}
 					}
@@ -71,7 +63,7 @@ public class PieChartLegend extends JPanel {
 			this.setAlignmentX(LEFT_ALIGNMENT);
 		}
 	}
-	
+
 	class BulletPoint extends JComponent {
 
 		private Color color;

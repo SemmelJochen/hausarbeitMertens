@@ -11,6 +11,7 @@ import controller.commandController.CommandController;
 import model.ModelContainer;
 import model.Student;
 import model.table.CellEditorType;
+import model.table.StudentColumn;
 import model.table.TableData;
 import view.components.Table;
 
@@ -36,37 +37,36 @@ public class StudentTable extends JPanel {
 		this.tableData = newTableData()
 				.withColumn(StudentColumn.STUDENT_GROUP,
 						students.stream().map(e -> e.getStudentGroup()).collect(Collectors.toList()))//
-				
+
 				.withColumn(StudentColumn.FIRSTNAME,
 						students.stream().map(e -> e.getFirstName()).collect(Collectors.toList()))//
-				
+
 				.withColumn(StudentColumn.LASTNAME,
 						students.stream().map(e -> e.getName()).collect(Collectors.toList()))//
-				
-				.withColumn(StudentColumn.E_MAIL, 
-						students.stream().map(e -> e.getEmail()).collect(Collectors.toList()))//
-				
+
+				.withColumn(StudentColumn.E_MAIL, students.stream().map(e -> e.getEmail()).collect(Collectors.toList()))//
+
 				.withColumn(StudentColumn.SUBJECT,
 						students.stream().map(e -> e.getSubject()).collect(Collectors.toList()))//
-				
+
 				.withColumn(StudentColumn.PRACTICE_PARTNER,
 						students.stream().map(e -> e.getPracticePartner()).collect(Collectors.toList()))//
-				
+
 				.withColumn(StudentColumn.REMARK,
 						students.stream().map(e -> e.getRemark()).collect(Collectors.toList()))//
-				
+
 				.withColumn(StudentColumn.FIRST_REVIEWER_KEY,
 						students.stream().map(e -> e.getFirstPeerReviewerKey()).collect(Collectors.toList()),
 						CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)//
-				
+
 				.withColumn(StudentColumn.SECOND_REVIEWER_KEY,
 						students.stream().map(e -> e.getSecondPeerReviewerKey()).collect(Collectors.toList()),
 						CellEditorType.PEER_REVIEWER_COMBO_BOX_EDITOR)//
-				
+
 				.withMetaData(students)//
-				
+
 				.withType(Student.class)//
-				
+
 				.build();
 	}
 

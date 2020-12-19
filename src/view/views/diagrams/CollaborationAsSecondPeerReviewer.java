@@ -23,16 +23,16 @@ public class CollaborationAsSecondPeerReviewer extends CollaborationAsFirstPeerR
 		super();
 		this.reviewerComboBox = new ReviewerComboBox(ModelContainer.getInstance().getPeerReviewers());
 		this.reviewerComboBox.addCustomPropertyChangeListener(this);
-		
+
 		List<Slice> sliceData = createSliceData();
 		this.pieChart = new PieChart(sliceData, new Dimension(600, 600));
 		this.legend = new PieChartLegend(sliceData, this.pieChart);
-		
+
 		JPanel content = new JPanel();
 		content.add(this.reviewerComboBox);
 		content.add(this.legend);
 		content.add(this.pieChart);
-		
+
 		this.setHeader("Zusammenarbeit als Zweitgutachter");
 		this.setContent(content);
 	}
@@ -48,11 +48,13 @@ public class CollaborationAsSecondPeerReviewer extends CollaborationAsFirstPeerR
 		for (Student student : mertens.getSecondPeerReviewerRoles()) {
 			PeerReviewer firstPeerReviewer = ModelContainer.getInstance()
 					.getPeerReviewer(student.getFirstPeerReviewerKey());
-			String key = firstPeerReviewer.getFirstName() + " " + firstPeerReviewer.getName();
-			if (result.get(key) == null) {
-				result.put(key, 1);
-			} else {
-				result.put(key, result.get(key) + 1);
+			if (firstPeerReviewer != null && !firstPeerReviewer.isDummy()) {
+				String key = firstPeerReviewer.getFirstName() + firstPeerReviewer.getName();
+				if (result.get(key) == null) {
+					result.put(key, 1);
+				} else {
+					result.put(key, result.get(key) + 1);
+				}
 			}
 		}
 

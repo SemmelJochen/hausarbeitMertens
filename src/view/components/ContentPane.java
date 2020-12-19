@@ -14,13 +14,13 @@ public class ContentPane extends JPanel {
 	private JPanel header = new JPanel();
 	private JPanel content = new JPanel();
 
-	// constructor for initialize the component with no content
+	// constructor for initialise the component with no content
 	public ContentPane() {
 		// create new window with no content (empty panel)
 		this("", new JPanel());
 	}
 
-	// constructor for initialize component with content
+	// constructor for initialise component with content
 	public ContentPane(String title, Component contentComponent) {
 		super();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

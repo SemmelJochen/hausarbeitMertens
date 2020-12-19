@@ -28,7 +28,7 @@ public class TableData<T> {
 	public String[] getColumnNames() {
 		return this.columnNames;
 	}
-	
+
 	public CellEditorType[] getColumnTypes() {
 		return this.columnTypes;
 	}
@@ -36,11 +36,11 @@ public class TableData<T> {
 	public List<Object>[] getContent() {
 		return this.data;
 	}
-	
-	public List<T> getMetaData(){
+
+	public List<T> getMetaData() {
 		return this.metaData;
 	}
-	
+
 	public Class<?> getType() {
 		return this.type;
 	}
@@ -58,7 +58,6 @@ public class TableData<T> {
 	/**
 	 * Builder to build {@link TableData}.
 	 */
-
 	public static final class Builder<T> {
 		private List<List<Object>> columns = new ArrayList<List<Object>>();
 		private List<String> columnNames = new ArrayList<String>();
@@ -75,13 +74,13 @@ public class TableData<T> {
 			this.columns.add(data);
 			return this;
 		}
-		
-		//used for default editor columns
-		public Builder<T> withColumn(Column columnName, List<Object> data ) {
+
+		// used for default editor columns
+		public Builder<T> withColumn(Column columnName, List<Object> data) {
 			return withColumn(columnName, data, CellEditorType.CUSTOM_TEXT_EDITOR);
 		}
-		
-		public Builder<T> withMetaData(List<T> metaData){
+
+		public Builder<T> withMetaData(List<T> metaData) {
 			this.metaData = metaData;
 			return this;
 		}

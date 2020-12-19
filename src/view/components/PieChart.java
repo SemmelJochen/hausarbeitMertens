@@ -54,14 +54,14 @@ public class PieChart extends JComponent {
 			curValue += slices.get(i).getValue();
 		}
 	}
-	
+
 	/*
-	 * the round method reduced the missing accurance, caused by casting the double to an int.
-	 * The graphic will look smoother, but it isn´t a complete solution.
+	 * the round method reduced the missing accurance, caused by casting the double
+	 * to an int. The graphic will look smoother, but it isnï¿½t a complete solution.
 	 */
 	private int round(double toRound) {
-		if((toRound - (int) toRound) * 10 >= 5) {
-			//mind 0.5
+		if ((toRound - (int) toRound) * 10 >= 5) {
+			// mind 0.5
 			return (int) (toRound + 1);
 		}
 		return (int) toRound;

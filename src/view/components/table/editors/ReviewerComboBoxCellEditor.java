@@ -9,7 +9,6 @@ import model.ModelContainer;
 import model.Pair;
 import model.PeerReviewer;
 import model.table.CustomTableModel;
-import view.components.ICellEditor;
 import view.components.ReviewerComboBox;
 import view.components.Table;
 
@@ -44,7 +43,7 @@ public class ReviewerComboBoxCellEditor implements ICellEditor {
 		this.col = column;
 		PeerReviewer val = (PeerReviewer) ModelContainer.getInstance().getPeerReviewer((String) value);
 		this.editor.setSelectedItem(val);
+
 		return this.editor;
 	}
-
 }
