@@ -12,6 +12,7 @@ import view.views.tables.ReducedTable;
 import view.views.tables.ReviewerTable;
 import view.views.tables.StudentTable;
 
+@SuppressWarnings("deprecation")
 public class Overview extends ContentPane implements Observer {
 
 	// final tab ids for references
@@ -37,7 +38,7 @@ public class Overview extends ContentPane implements Observer {
 		tPane.setTitleAt(REVIEWER_TAB_ID, "Gutachter");
 
 		tPane.add(this.freeStudents, FREESTUDENTS_TAB_ID);
-		tPane.setTitleAt(FREESTUDENTS_TAB_ID, "freie Studenten");
+		tPane.setTitleAt(FREESTUDENTS_TAB_ID, "Freie Studenten");
 
 		this.setHeader("Gesamtuebersicht");
 		this.setContent(tPane);
