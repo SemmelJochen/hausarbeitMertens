@@ -1,4 +1,4 @@
-package view.components;
+package view.components.reviewercombobox;
 
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;

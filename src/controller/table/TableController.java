@@ -1,7 +1,7 @@
 package controller.table;
 
-import controller.commandController.Command;
-import controller.commandController.CommandController;
+import controller.command.Command;
+import controller.command.CommandController;
 import model.ModelContainer;
 import model.Pair;
 import model.PeerReviewer;
@@ -9,7 +9,7 @@ import model.Person;
 import model.Student;
 import model.table.ReviewerColumn;
 import model.table.StudentColumn;
-import view.components.Table;
+import view.components.table.Table;
 
 public class TableController {
 

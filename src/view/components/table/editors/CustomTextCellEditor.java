@@ -5,13 +5,13 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import controller.commandController.PeerReviewerChangeCommand;
-import controller.commandController.StudentChangeCommand;
+import controller.command.PeerReviewerChangeCommand;
+import controller.command.StudentChangeCommand;
 import model.Pair;
 import model.PeerReviewer;
 import model.Student;
 import model.table.CustomTableModel;
-import view.components.Table;
+import view.components.table.Table;
 
 public class CustomTextCellEditor implements ICellEditor {
 

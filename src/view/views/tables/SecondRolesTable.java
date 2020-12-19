@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import controller.commandController.CommandController;
+import controller.command.CommandController;
 import model.ModelContainer;
 import model.Student;
 import model.table.CellEditorType;

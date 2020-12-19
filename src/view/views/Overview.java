@@ -5,7 +5,7 @@ import java.util.Observer;
 
 import javax.swing.JTabbedPane;
 
-import controller.commandController.CommandController;
+import controller.command.CommandController;
 import view.components.ContentPane;
 import view.views.tables.FreeStudents;
 import view.views.tables.ReducedTable;

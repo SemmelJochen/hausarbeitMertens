@@ -4,13 +4,13 @@ import java.awt.Component;
 
 import javax.swing.JTable;
 
-import controller.commandController.StudentChangeCommand;
+import controller.command.StudentChangeCommand;
 import model.ModelContainer;
 import model.Pair;
 import model.PeerReviewer;
 import model.table.CustomTableModel;
-import view.components.ReviewerComboBox;
-import view.components.Table;
+import view.components.reviewercombobox.ReviewerComboBox;
+import view.components.table.Table;
 
 public class ReviewerComboBoxCellEditor implements ICellEditor {
 

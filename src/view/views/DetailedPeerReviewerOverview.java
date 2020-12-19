@@ -10,10 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import controller.commandController.CommandController;
+import controller.command.CommandController;
 import model.ModelContainer;
 import view.components.ContentPane;
-import view.components.ReviewerComboBox;
+import view.components.reviewercombobox.ReviewerComboBox;
 import view.views.tables.AllRolesTable;
 import view.views.tables.FirstRolesTable;
 import view.views.tables.RequestedStudentsTable;

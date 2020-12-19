@@ -1,7 +1,7 @@
-package controller.commandController;
+package controller.command;
 
 import model.PeerReviewer;
-import view.components.Table;
+import view.components.table.Table;
 
 public class PeerReviewerRemoveCommand implements Command {
 

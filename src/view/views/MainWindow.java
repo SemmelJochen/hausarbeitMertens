@@ -287,7 +287,6 @@ public class MainWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("undo");
 				MainWindow.this.controller.undo();
 			}
 		});
@@ -312,7 +311,7 @@ public class MainWindow extends JFrame {
 	}
 
 	public int showWarningMessage(String message) {
-		String[] buttonLabels = new String[] { "Trotzdem schliessen",  "Abbrechen" };
+		String[] buttonLabels = new String[] { "Trotzdem schliessen", "Abbrechen" };
 		String defaultOption = buttonLabels[1];
 		Icon icon = UIManager.getIcon("FileView.hardDriveIcon");
 
@@ -321,7 +320,7 @@ public class MainWindow extends JFrame {
 	}
 
 	/*
-	 * the method returns false if the dialog gets canceled
+	 * the method returns false if the dialog gets cancelled
 	 * 
 	 * depending on the dialogType it is
 	 */

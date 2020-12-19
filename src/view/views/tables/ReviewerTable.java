@@ -7,12 +7,12 @@ import java.util.stream.Collectors;
 
 import javax.swing.JPanel;
 
-import controller.commandController.CommandController;
+import controller.command.CommandController;
 import model.ModelContainer;
 import model.PeerReviewer;
 import model.table.ReviewerColumn;
 import model.table.TableData;
-import view.components.Table;
+import view.components.table.Table;
 
 public class ReviewerTable extends JPanel {
 

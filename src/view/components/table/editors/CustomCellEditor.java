@@ -11,7 +11,7 @@ import javax.swing.table.TableCellEditor;
 
 import model.table.CellEditorType;
 import model.table.CustomTableModel;
-import view.components.Table;
+import view.components.table.Table;
 
 /**
  * CustomCellEditor is used for every cell. It is a logical editor that decides

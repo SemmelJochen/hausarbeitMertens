@@ -1,7 +1,7 @@
-package controller.commandController;
+package controller.command;
 
 import model.Student;
-import view.components.Table;
+import view.components.table.Table;
 
 public class StudentRemoveCommand implements Command {
 

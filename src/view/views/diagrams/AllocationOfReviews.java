@@ -11,9 +11,9 @@ import javax.swing.JPanel;
 
 import model.ModelContainer;
 import view.components.ContentPane;
-import view.components.PieChart;
-import view.components.PieChartLegend;
-import view.components.Slice;
+import view.components.piechart.PieChart;
+import view.components.piechart.PieChartLegend;
+import view.components.piechart.Slice;
 
 public class AllocationOfReviews extends ContentPane implements Observer {
 

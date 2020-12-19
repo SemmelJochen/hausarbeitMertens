@@ -1,7 +1,7 @@
-package controller.commandController;
+package controller.command;
 
 import model.Pair;
-import view.components.Table;
+import view.components.table.Table;
 
 public class PeerReviewerChangeCommand implements Command {
 

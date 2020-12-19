@@ -12,10 +12,10 @@ import javax.swing.JPanel;
 import model.ModelContainer;
 import model.PeerReviewer;
 import model.Student;
-import view.components.PieChart;
-import view.components.PieChartLegend;
-import view.components.ReviewerComboBox;
-import view.components.Slice;
+import view.components.piechart.PieChart;
+import view.components.piechart.PieChartLegend;
+import view.components.piechart.Slice;
+import view.components.reviewercombobox.ReviewerComboBox;
 
 public class CollaborationAsSecondPeerReviewer extends CollaborationAsFirstPeerReviewer {
 

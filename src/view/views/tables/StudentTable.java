@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 
 import javax.swing.JPanel;
 
-import controller.commandController.CommandController;
+import controller.command.CommandController;
 import model.ModelContainer;
 import model.Student;
 import model.table.CellEditorType;
 import model.table.StudentColumn;
 import model.table.TableData;
-import view.components.Table;
+import view.components.table.Table;
 
 public class StudentTable extends JPanel {
 

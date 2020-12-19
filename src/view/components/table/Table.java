@@ -1,4 +1,4 @@
-package view.components;
+package view.components.table;
 
 import java.awt.Component;
 import java.awt.Dialog.ModalityType;
@@ -23,11 +23,11 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import controller.commandController.CommandController;
-import controller.commandController.PeerReviewerAddCommand;
-import controller.commandController.PeerReviewerRemoveCommand;
-import controller.commandController.StudentAddCommand;
-import controller.commandController.StudentRemoveCommand;
+import controller.command.CommandController;
+import controller.command.PeerReviewerAddCommand;
+import controller.command.PeerReviewerRemoveCommand;
+import controller.command.StudentAddCommand;
+import controller.command.StudentRemoveCommand;
 import controller.table.TableController;
 import model.ModelContainer;
 import model.PeerReviewer;
@@ -35,6 +35,7 @@ import model.Student;
 import model.table.CustomTableModel;
 import model.table.StudentColumn;
 import model.table.TableData;
+import view.components.reviewercombobox.ReviewerComboBox;
 import view.components.table.editors.CustomCellEditor;
 
 public class Table extends JPanel implements TableModelListener {

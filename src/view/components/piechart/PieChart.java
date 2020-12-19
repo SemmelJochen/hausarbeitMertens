@@ -1,4 +1,4 @@
-package view.components;
+package view.components.piechart;
 
 import java.awt.Dimension;
 import java.awt.Graphics;

@@ -5,11 +5,11 @@ import java.awt.Component;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 
-import controller.commandController.StudentChangeCommand;
+import controller.command.StudentChangeCommand;
 import model.Pair;
 import model.Student;
 import model.table.CustomTableModel;
-import view.components.Table;
+import view.components.table.Table;
 
 public class CustomComboBoxEditor implements ICellEditor {
 

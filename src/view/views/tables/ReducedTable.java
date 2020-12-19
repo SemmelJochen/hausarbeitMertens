@@ -2,10 +2,10 @@ package view.views.tables;
 
 import javax.swing.JPanel;
 
-import controller.commandController.CommandController;
+import controller.command.CommandController;
 import model.PeerReviewer;
 import model.table.TableData;
-import view.components.Table;
+import view.components.table.Table;
 
 /**
  * The ReducedTable is a table, which packs the update method and basic styling
