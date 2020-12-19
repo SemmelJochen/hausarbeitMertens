@@ -1,6 +1,4 @@
-package view.views.tables;
-
-import model.table.Column;
+package model.table;
 
 public enum ReviewerColumn implements Column {
 

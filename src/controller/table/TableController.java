@@ -7,9 +7,9 @@ import model.Pair;
 import model.PeerReviewer;
 import model.Person;
 import model.Student;
+import model.table.ReviewerColumn;
+import model.table.StudentColumn;
 import view.components.Table;
-import view.views.tables.ReviewerColumn;
-import view.views.tables.StudentColumn;
 
 public class TableController {
 

@@ -20,7 +20,6 @@ public class FileHandler {
 	 * file with an explorer and saves the file
 	 * int the attribute file.
 	 */
-	private JFileChooser fileChooser;
 	private File file;
 	
 	/*
@@ -33,7 +32,6 @@ public class FileHandler {
 	private String[] header;
 
 	public FileHandler() {
-		this.fileChooser = new JFileChooser();
 		this.header = new String[4];
 	}
 	
