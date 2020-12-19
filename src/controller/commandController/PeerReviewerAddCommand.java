@@ -7,10 +7,12 @@ public class PeerReviewerAddCommand implements Command {
 
 	private PeerReviewer peerReviewerToAdd;
 	private Table table;
+
 	public PeerReviewerAddCommand(Table t, PeerReviewer p) {
 		this.peerReviewerToAdd = p;
 		this.table = t;
 	}
+
 	@Override
 	public void undo() {
 		this.table.getController().removePeerReviewer(this.peerReviewerToAdd);

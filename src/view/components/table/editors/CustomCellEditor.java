@@ -11,11 +11,19 @@ import javax.swing.table.TableCellEditor;
 
 import model.table.CellEditorType;
 import model.table.CustomTableModel;
-import view.components.ICellEditor;
 import view.components.Table;
 
+/**
+ * CustomCellEditor is used for every cell. It is a logical editor that decides
+ * which cell get which type of editor. Therefore we created the ICellEditor, as
+ * a generic way of using our own editors.
+ * 
+ * @author josua
+ *
+ */
 public class CustomCellEditor extends AbstractCellEditor implements TableCellEditor {
 
+	private static final long serialVersionUID = 1L;
 	private ICellEditor editor;
 	private Table table;
 
@@ -32,7 +40,7 @@ public class CustomCellEditor extends AbstractCellEditor implements TableCellEdi
 			}
 			if (e instanceof KeyEvent) {
 				KeyEvent ke = (KeyEvent) e;
-				 return ke.getKeyCode() == KeyEvent.VK_ENTER;
+				return ke.getKeyCode() == KeyEvent.VK_ENTER;
 			}
 		}
 		return false;
@@ -53,9 +61,9 @@ public class CustomCellEditor extends AbstractCellEditor implements TableCellEdi
 		} else if (((CustomTableModel) t.getModel()).getColumnType(column)
 				.equals(CellEditorType.CUSTOM_COMBO_BOX_EDITOR)) {
 			this.editor = new CustomComboBoxEditor(this.table);
-		} 
-		
-		if(this.editor == null) {
+		}
+
+		if (this.editor == null) {
 			return null;
 		}
 		return this.editor.getTableCellEditorComponent(t, value, isSelected, row, column);

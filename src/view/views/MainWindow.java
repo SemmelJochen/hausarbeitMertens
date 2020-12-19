@@ -80,7 +80,6 @@ public class MainWindow extends JFrame {
 		JMenu menu, submenu;
 		JMenuItem menuItem, subMenuItem;
 		ObserverMenuItem oMenuItem;
-
 		// Create the File bar.
 		menuBar = new JMenuBar();
 
@@ -90,7 +89,6 @@ public class MainWindow extends JFrame {
 
 		// create submenu
 		menuItem = new JMenuItem("Importieren");
-//		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
 		menuItem.addActionListener(new ActionListener() {
 
 			@Override
@@ -103,7 +101,6 @@ public class MainWindow extends JFrame {
 		menu.add(menuItem);
 
 		menuItem = new JMenuItem("Exportieren");
-//		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
 		menuItem.addActionListener(new ActionListener() {
 
 			@Override
@@ -116,7 +113,6 @@ public class MainWindow extends JFrame {
 		menu.add(menuItem);
 
 		menuItem = new JMenuItem("Alle Daten loeschen");
-//		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
 		menuItem.addActionListener(new ActionListener() {
 
 			@Override
@@ -155,7 +151,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		submenu.add(subMenuItem);
-		
+
 		subMenuItem = new JMenuItem("Gutachter");
 		subMenuItem.addActionListener(new ActionListener() {
 
@@ -166,7 +162,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		submenu.add(subMenuItem);
-		
+
 		subMenuItem = new JMenuItem("Freie Studenten");
 		subMenuItem.addActionListener(new ActionListener() {
 
@@ -177,10 +173,10 @@ public class MainWindow extends JFrame {
 			}
 		});
 		submenu.add(subMenuItem);
-		
+
 		menu.add(submenu);
 
-		// add G-Einsicht
+		// add Gutachter
 		menuItem = new JMenuItem("Gutachtereinsicht");
 		menuItem.addActionListener(new ActionListener() {
 
@@ -244,8 +240,6 @@ public class MainWindow extends JFrame {
 				} else {
 					int returnVal = chooser.showSaveDialog(MainWindow.this);
 					if (returnVal == JFileChooser.APPROVE_OPTION) {
-						System.out
-								.println("You chose to save this file: " + chooser.getSelectedFile().getAbsolutePath());
 						MainWindow.this.controller.save(chooser.getSelectedFile().getAbsolutePath());
 					}
 				}
@@ -263,9 +257,7 @@ public class MainWindow extends JFrame {
 				chooser.setFileFilter(filter);
 				int returnVal = chooser.showSaveDialog(MainWindow.this);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					System.out.println("You chose to save this file: " + chooser.getSelectedFile().getAbsolutePath());
 					MainWindow.this.controller.save(chooser.getSelectedFile().getAbsolutePath());
-
 				}
 			}
 		});
@@ -281,7 +273,6 @@ public class MainWindow extends JFrame {
 				chooser.setFileFilter(filter);
 				int returnVal = chooser.showOpenDialog(MainWindow.this);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					System.out.println("You chose to open this file: " + chooser.getSelectedFile().getAbsolutePath());
 					MainWindow.this.controller.load(chooser.getSelectedFile().getAbsolutePath());
 				}
 			}
@@ -314,13 +305,14 @@ public class MainWindow extends JFrame {
 		});
 
 		menu.add(oMenuItem);
+
 		menuBar.add(menu);
 
 		return menuBar;
 	}
 
 	public int showWarningMessage(String message) {
-		String[] buttonLabels = new String[] { "Trotzdem schließen",  "Abbrechen" };
+		String[] buttonLabels = new String[] { "Trotzdem schliessen",  "Abbrechen" };
 		String defaultOption = buttonLabels[1];
 		Icon icon = UIManager.getIcon("FileView.hardDriveIcon");
 

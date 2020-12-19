@@ -1,12 +1,16 @@
 package model;
 
 import java.io.Serializable;
-
+/**
+ * 
+ * @author josua
+ *
+ */
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = 0xDADAL;
 	private String name, firstName, email;
-	
+
 	public Person(String name, String firstName, String email) {
 		this.name = name;
 		this.firstName = firstName;
@@ -36,7 +40,7 @@ public class Person implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "name: \t\t\t" + this.name + "\nfirstname \t\t" + this.firstName + "\nemail: \t\t\t" + this.email;
@@ -44,18 +48,15 @@ public class Person implements Serializable {
 
 	@Override
 	public boolean equals(Object person) {
-		if(person == null) {
+		if (person == null) {
 			return false;
 		}
 		Person pToCheck = (Person) person;
-		return this.getName().equals(pToCheck.getName()) &&
-				this.getFirstName().equals(pToCheck.getFirstName()) &&
-				this.getEmail().equals(pToCheck.getEmail());
+		return this.getName().equals(pToCheck.getName()) && this.getFirstName().equals(pToCheck.getFirstName())
+				&& this.getEmail().equals(pToCheck.getEmail());
 	}
 
 	public boolean isDummy() {
-		return this.name.equals("") &&
-				this.firstName.equals("") &&
-				this.email.equals("");
+		return this.name.equals("") && this.firstName.equals("") && this.email.equals("");
 	}
 }

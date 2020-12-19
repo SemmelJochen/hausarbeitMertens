@@ -8,8 +8,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -34,7 +32,6 @@ import controller.table.TableController;
 import model.ModelContainer;
 import model.PeerReviewer;
 import model.Student;
-import model.table.CellEditorType;
 import model.table.CustomTableModel;
 import model.table.StudentColumn;
 import model.table.TableData;
@@ -53,9 +50,9 @@ public class Table extends JPanel implements TableModelListener {
 		super();
 		// insert data into the tablemodel and create a table
 		this.model = new CustomTableModel(tableData);
-		this.controller = new TableController(this, commandController);
+		this.controller = new TableController(commandController);
 		this.cellEditor = new CustomCellEditor(this);
-		
+
 		this.table = new JTable(this.model) {
 			// make columns fit to its content
 			@Override
@@ -68,24 +65,24 @@ public class Table extends JPanel implements TableModelListener {
 				return component;
 			}
 		};
-		
+
 		// prevent unauthorised actions
 		this.table.getTableHeader().setReorderingAllowed(false);
 		this.table.setCellSelectionEnabled(true);
 		this.table.setCellEditor(this.cellEditor);
 		this.table.getModel().addTableModelListener(this);
-		
+
 		// style the table
 		this.table.setAutoCreateRowSorter(false);
 		this.table.setRowHeight(30);
-		
-		//set cell editor for every column
+
+		// set cell editor for every column
 		TableColumnModel column = this.table.getColumnModel();
 		column.getColumns().asIterator().forEachRemaining(c -> c.setCellEditor(this.cellEditor));
 		column.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(getTableContent());			
-		if(withMenu) {
+		this.add(getTableContent());
+		if (withMenu) {
 			this.add(getButtonPanel());
 		}
 

@@ -163,13 +163,11 @@ public class ReviewerComboBox extends JComboBox<PeerReviewer> implements Propert
 		@Override
 		public void insertElementAt(PeerReviewer item, int index) {
 			this.entries.add(index, item);
-
 		}
 
 		@Override
 		public void removeElementAt(int index) {
 			this.entries.remove(index);
-
 		}
 
 		public void updateData(List<PeerReviewer> data) {

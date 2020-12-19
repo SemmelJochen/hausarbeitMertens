@@ -13,29 +13,25 @@ public class ObservableCommandStack {
 		this.commands = new Stack<>();
 		this.propertyChangeSupport = new PropertyChangeSupport(this.commands);
 	}
-	
-	public void add (Command command) {
+
+	public void add(Command command) {
 		boolean oldValue = this.isEmpty();
 		this.commands.add(command);
 		this.propertyChangeSupport.firePropertyChange("isEmpty", oldValue, this.isEmpty());
-//		this.setChanged();
-//		this.notifyAll();
 	}
-	
+
 	public Command pop() {
 		boolean oldValue = this.isEmpty();
 		Command command = this.commands.pop();
 		this.propertyChangeSupport.firePropertyChange("isEmpty", oldValue, this.isEmpty());
-//		this.setChanged();
-//		this.notifyAll();
-		
+
 		return command;
 	}
-	
+
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		this.propertyChangeSupport.addPropertyChangeListener(listener);
 	}
-	
+
 	public boolean isEmpty() {
 		return this.commands.isEmpty();
 	}

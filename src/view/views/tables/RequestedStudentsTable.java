@@ -22,10 +22,10 @@ public class RequestedStudentsTable extends ReducedTable {
 	@Override
 	public void refreshTableData() {
 		List<Student> students = new ArrayList<Student>();
-		if (this.selectedPeerReviewer != null && !this.selectedPeerReviewer.isDummy() ) {
+		if (this.selectedPeerReviewer != null && !this.selectedPeerReviewer.isDummy()) {
 			String key = this.selectedPeerReviewer.getFirstName() + this.selectedPeerReviewer.getName();
-			if(ModelContainer.getInstance().getPeerReviewer(key) != null) {
-				students = ModelContainer.getInstance().getPeerReviewer(key).getRequested();				
+			if (ModelContainer.getInstance().getPeerReviewer(key) != null) {
+				students = ModelContainer.getInstance().getPeerReviewer(key).getRequested();
 			}
 		}
 

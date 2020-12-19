@@ -7,34 +7,36 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.ModelContainer;
 import model.PeerReviewer;
 import model.Student;
 
+/**
+ * 
+ * @author felix
+ *
+ */
 public class FileHandler {
-	
+
 	/*
-	 * the fileChooser allows us to select a 
-	 * file with an explorer and saves the file
-	 * int the attribute file.
+	 * the fileChooser allows us to select a file with an explorer and saves the
+	 * file int the attribute file.
 	 */
 	private File file;
-	
+
 	/*
-	 * the header consists of the first rows of the muster.csv
-	 * and is read during the import
+	 * the header consists of the first rows of the muster.csv and is read during
+	 * the import
 	 * 
-	 * he is needed to rebuild the header while the Students
-	 * are exported.
+	 * he is needed to rebuild the header while the Students are exported.
 	 */
 	private String[] header;
 
 	public FileHandler() {
 		this.header = new String[4];
 	}
-	
+
 	public void setFile(File file) {
 		this.file = file;
 	}
@@ -67,7 +69,7 @@ public class FileHandler {
 					}
 					key = secondPeerReviewer.getFirstName() + secondPeerReviewer.getName();
 					student.setSecondPeerReviewerKey(key);
-					
+
 					modelContainer.addStudent(student);
 				} else {
 					this.header[i] = line;
@@ -94,9 +96,12 @@ public class FileHandler {
 			for (Student student : students) {
 				writer.append(student.getName() + ", " + student.getFirstName() + seperator + student.getStudentGroup()
 						+ seperator + student.getPracticePartner() + seperator + student.getSubject() + seperator
-						+ this.createPeerReviewerStringForWriting(ModelContainer.getInstance().getPeerReviewer(student.getFirstPeerReviewerKey())) + seperator
-						+ this.createPeerReviewerStringForWriting(ModelContainer.getInstance().getPeerReviewer(student.getSecondPeerReviewerKey())) + seperator
-						+ student.getRemark());
+						+ this.createPeerReviewerStringForWriting(
+								ModelContainer.getInstance().getPeerReviewer(student.getFirstPeerReviewerKey()))
+						+ seperator
+						+ this.createPeerReviewerStringForWriting(
+								ModelContainer.getInstance().getPeerReviewer(student.getSecondPeerReviewerKey()))
+						+ seperator + student.getRemark());
 				writer.append(System.lineSeparator());
 			}
 			writer.flush();
@@ -106,7 +111,7 @@ public class FileHandler {
 	}
 
 	private String createPeerReviewerStringForWriting(PeerReviewer peerReviewer) {
-		if(peerReviewer == null) {
+		if (peerReviewer == null) {
 			return "";
 		}
 		return peerReviewer.getTitle() + " " + peerReviewer.getFirstName() + " " + peerReviewer.getName();

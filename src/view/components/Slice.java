@@ -9,13 +9,12 @@ public class Slice extends JComponent {
 	private int value;
 	private Color color;
 	private String dozent;
-	
+
 	/*
-	 * isBrighter is true, if the mouse hovers over the JLabel in the diagram.
-	 * it makes it easier to find the specific slice in the PieChart	 
+	 * isBrighter is true, if the mouse hovers over the JLabel in the diagram. it
+	 * makes it easier to find the specific slice in the PieChart
 	 */
 	private boolean isBrighter;
-	
 
 	public Slice(int value, Color color, String name) {
 		this.isBrighter = false;
@@ -29,7 +28,7 @@ public class Slice extends JComponent {
 	}
 
 	public Color getColor() {
-		if(this.isBrighter) {
+		if (this.isBrighter) {
 			return this.color.brighter();
 		}
 		return this.color;
@@ -42,11 +41,11 @@ public class Slice extends JComponent {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
+
 	public void setIsBrighter(boolean isBrighter) {
 		this.isBrighter = isBrighter;
 	}
-	
+
 	public void updateValue(int value) {
 		this.value = value;
 	}

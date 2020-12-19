@@ -6,9 +6,16 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
 
+/**
+ * same principle as a normal HashMap. Just observable.
+ * @author josua
+ *
+ * @param <K> - key
+ * @param <V> - value
+ */
 @SuppressWarnings("deprecation")
 public class ObservableHashMap<K, V> extends Observable implements Map<K, V> {
-	
+
 	private HashMap<K, V> map;
 
 	public ObservableHashMap() {
@@ -38,13 +45,13 @@ public class ObservableHashMap<K, V> extends Observable implements Map<K, V> {
 	public boolean containsValue(Object value) {
 		return this.map.containsValue(value);
 	}
-	
+
 	public K getKey(Object value) {
 		K key = null;
 		for (Entry<K, V> entry : this.map.entrySet()) {
-            if (entry.getValue().equals(value)) {
-            	key = entry.getKey();
-            }
+			if (entry.getValue().equals(value)) {
+				key = entry.getKey();
+			}
 		}
 		return key;
 	}

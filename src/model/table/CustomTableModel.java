@@ -7,7 +7,6 @@ import javax.swing.table.AbstractTableModel;
 
 import model.Pair;
 
-
 public class CustomTableModel extends AbstractTableModel {
 
 	private String[] columnNames;
@@ -36,7 +35,7 @@ public class CustomTableModel extends AbstractTableModel {
 	public String getColumnName(int col) {
 		return this.columnNames[col];
 	}
-	
+
 	public String[] getColumnnNames() {
 		return this.columnNames;
 	}
@@ -44,28 +43,29 @@ public class CustomTableModel extends AbstractTableModel {
 	public Object getValueAt(int row, int col) {
 		return this.data[col].get(row);
 	}
-	
+
 	public boolean hasData() {
 		return this.data.length > 0;
 	}
-	
+
 	public Class<?> getType() {
 		return this.type;
 	}
-	
+
 	public Object getMetaDataForRow(int row) {
 		return this.metaData.get(row);
 	}
-	
+
 	public CellEditorType getColumnType(int col) {
 		return this.columnTypes[col];
 	}
-	
+
 	/**
 	 * 
 	 * @param row
 	 * @param col
-	 * @return   firstObject returns the metaData object and second the value that changed
+	 * @return firstObject returns the metaData object and second the value that
+	 *         changed
 	 */
 	public Pair<Object, Object> getDataAt(int row, int col) {
 		return new Pair<Object, Object>(this.metaData.get(row), this.data[col].get(row));
@@ -82,7 +82,7 @@ public class CustomTableModel extends AbstractTableModel {
 	}
 
 	public void updateData(TableData<?> tableData) {
-		for(List<Object> l : this.data) {
+		for (List<Object> l : this.data) {
 			l.clear();
 		}
 		this.data = tableData.getContent();

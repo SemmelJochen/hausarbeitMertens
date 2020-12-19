@@ -19,13 +19,15 @@ import view.views.tables.FirstRolesTable;
 import view.views.tables.RequestedStudentsTable;
 import view.views.tables.SecondRolesTable;
 
+@SuppressWarnings("deprecation")
 public class DetailedPeerReviewerOverview extends ContentPane implements Observer, PropertyChangeListener {
 
+	private static final long serialVersionUID = 1L;
 	public static final int ALLREVIEWS_TAB_ID = 0;
 	public static final int FIRSTREVIEWRROLE_TAB_ID = 1;
 	public static final int SECONDREVIEWERROLE_TAB_ID = 2;
 	public static final int ASKINGSTUDENTS_TAB_ID = 3;
-	
+
 	private ReviewerComboBox comboBox;
 	private JLabel subjects;
 
@@ -59,8 +61,8 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 	}
 
 	/**
-	 * Observer for the data Model. Should get triggered if values at the Student
-	 * or the PeerReviewer changes
+	 * Observer for the data Model. Should get triggered if values at the Student or
+	 * the PeerReviewer changes
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
@@ -70,8 +72,8 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 	}
 
 	/**
-	 * PropertyChangeListener for the ComboBox. 
-	 * Gets triggered if the selectedValue in the comboBox changed
+	 * PropertyChangeListener for the ComboBox. Gets triggered if the selectedValue
+	 * in the comboBox changed
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -87,14 +89,13 @@ public class DetailedPeerReviewerOverview extends ContentPane implements Observe
 	}
 
 	private String getLabelText() {
-		return "Auslastung: " +  (this.comboBox.getSelectedPeerReviewer().getLoad()) + "% - "
+		return "Auslastung: " + (this.comboBox.getSelectedPeerReviewer().getLoad()) + "% - "
 				+ this.comboBox.getSelectedPeerReviewer().getSubjects();
 	}
 
 	/**
-	 * initial update method used for every kind of update.
-	 * It updates the selected PeerReviewer at all tables and
-	 * refreshes their table
+	 * initial update method used for every kind of update. It updates the selected
+	 * PeerReviewer at all tables and refreshes their table
 	 */
 	private void update() {
 		this.allReviews.update();

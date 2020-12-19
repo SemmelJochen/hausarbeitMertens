@@ -23,5 +23,4 @@ public enum ReviewerColumn implements Column {
 		}
 		return null;
 	}
-
 }
