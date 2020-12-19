@@ -11,10 +11,7 @@ import model.ModelContainer;
 import model.Student;
 import model.table.CellEditorType;
 import model.table.StudentColumn;
-<<<<<<< HEAD:src/view/views/FreeStudents.java
-import view.views.tables.ReducedTable;
-=======
->>>>>>> master:src/view/views/tables/FreeStudents.java
+
 
 public class FreeStudents extends ReducedTable {
 
