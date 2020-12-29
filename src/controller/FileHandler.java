@@ -50,7 +50,7 @@ public class FileHandler {
 			br = new BufferedReader(new FileReader(this.file));
 			int i = 0;
 			String line = br.readLine();
-			while (line != null) {
+			while (line != null ) {
 				if (i >= this.header.length) {
 					Student student = this.newStudent(line);
 					PeerReviewer firstPeerReviewer = this.newFirstPeerReviewer(line);
@@ -130,7 +130,10 @@ public class FileHandler {
 	}
 
 	public PeerReviewer newFirstPeerReviewer(String line) {
-		String[] peerReviewerString = line.split(";")[4].split(" ");
+		if(line.split(";").length <= 4) {
+			return PeerReviewer.createDummy();
+		}
+			String[] peerReviewerString = line.split(";")[4].split(" ");
 		if (peerReviewerString.length == 1) {
 			return PeerReviewer.createDummy();
 		}
@@ -138,6 +141,9 @@ public class FileHandler {
 	}
 
 	public PeerReviewer newSecondPeerReviewer(String line) {
+		if(line.split(";").length <= 5) {
+			return PeerReviewer.createDummy();
+		}
 		String[] peerReviewerString = line.split(";")[5].split(" ");
 		if (peerReviewerString.length == 1) {
 			return PeerReviewer.createDummy();
