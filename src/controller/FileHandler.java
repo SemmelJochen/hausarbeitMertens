@@ -89,6 +89,9 @@ public class FileHandler {
 		ObservableList<Student> students = ModelContainer.getInstance().getStudents();
 		FileWriter writer;
 		try {
+			if(!this.file.getAbsolutePath().contains(".csv")) {
+				this.file = new File(this.file.getAbsolutePath().concat(".csv"));	
+			}
 			writer = new FileWriter(this.file);
 			for (int i = 0; i < this.header.length; i++) {
 				writer.append(this.header[i]);
