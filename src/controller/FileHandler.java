@@ -26,15 +26,17 @@ public class FileHandler {
 	private File file;
 
 	/*
-	 * the header consists of the first rows of the muster.csv and is read during
-	 * the import
-	 * 
-	 * he is needed to rebuild the header while the Students are exported.
+	 * the header consists of the first rows of the muster.csv and is fixed for all cases
 	 */
 	private String[] header;
 
 	public FileHandler() {
-		this.header = new String[4];
+		this.header = new String[5];
+		this.header[0] = ";;;;;;";
+		this.header[1] = "Name, Vorname;\"Studien-";
+		this.header[2] = "gruppe\";Praxispartner;Themenvorschlag Bachelor Thesis;\"Dozent";
+		this.header[3] = "1. Gutachten\";\"Dozent";
+		this.header[4] = "2. Gutachten\";Bemerkung";
 	}
 
 	public void setFile(File file) {
@@ -50,29 +52,30 @@ public class FileHandler {
 			br = new BufferedReader(new FileReader(this.file));
 			int i = 0;
 			String line = br.readLine();
-			while (line != null ) {
+			while (line != null) {
 				if (i >= this.header.length) {
-					Student student = this.newStudent(line);
-					PeerReviewer firstPeerReviewer = this.newFirstPeerReviewer(line);
-					PeerReviewer secondPeerReviewer = this.newSecondPeerReviewer(line);
+					if (line.split(";").length != 0) {
+						Student student = this.newStudent(line);
+						PeerReviewer firstPeerReviewer = this.newFirstPeerReviewer(line);
+						PeerReviewer secondPeerReviewer = this.newSecondPeerReviewer(line);
 
-					if (!firstPeerReviewer.isDummy()) {
-						firstPeerReviewer.addBachelorThesisAsFirstReviewer(student);
-						modelContainer.putPeerReviewer(firstPeerReviewer);
+						if (!firstPeerReviewer.isDummy()) {
+							firstPeerReviewer.addBachelorThesisAsFirstReviewer(student);
+							modelContainer.putPeerReviewer(firstPeerReviewer);
+						}
+						String key = firstPeerReviewer.getFirstName() + firstPeerReviewer.getName();
+						student.setFirstPeerReviewerKey(key);
+
+						if (!secondPeerReviewer.isDummy()) {
+							secondPeerReviewer.addBachelorThesisAsSecondReviewer(student);
+							modelContainer.putPeerReviewer(secondPeerReviewer);
+						}
+						key = secondPeerReviewer.getFirstName() + secondPeerReviewer.getName();
+						student.setSecondPeerReviewerKey(key);
+
+						modelContainer.addStudent(student);
 					}
-					String key = firstPeerReviewer.getFirstName() + firstPeerReviewer.getName();
-					student.setFirstPeerReviewerKey(key);
-
-					if (!secondPeerReviewer.isDummy()) {
-						secondPeerReviewer.addBachelorThesisAsSecondReviewer(student);
-						modelContainer.putPeerReviewer(secondPeerReviewer);
-					}
-					key = secondPeerReviewer.getFirstName() + secondPeerReviewer.getName();
-					student.setSecondPeerReviewerKey(key);
-
-					modelContainer.addStudent(student);
 				} else {
-					this.header[i] = line;
 					i++;
 				}
 				line = br.readLine();
@@ -118,7 +121,11 @@ public class FileHandler {
 	}
 
 	public Student newStudent(String line) {
+		System.out.println("Test: " + line);
 		String[] entries = line.split(";");
+		if (entries.length == 0) {
+			return Student.createDummy();
+		}
 		String[] names = entries[0].split(", ");
 		if (names.length == 1) {
 			return Student.createDummy();
@@ -130,10 +137,10 @@ public class FileHandler {
 	}
 
 	public PeerReviewer newFirstPeerReviewer(String line) {
-		if(line.split(";").length <= 4) {
+		if (line.split(";").length <= 4) {
 			return PeerReviewer.createDummy();
 		}
-			String[] peerReviewerString = line.split(";")[4].split(" ");
+		String[] peerReviewerString = line.split(";")[4].split(" ");
 		if (peerReviewerString.length == 1) {
 			return PeerReviewer.createDummy();
 		}
@@ -141,7 +148,7 @@ public class FileHandler {
 	}
 
 	public PeerReviewer newSecondPeerReviewer(String line) {
-		if(line.split(";").length <= 5) {
+		if (line.split(";").length <= 5) {
 			return PeerReviewer.createDummy();
 		}
 		String[] peerReviewerString = line.split(";")[5].split(" ");
